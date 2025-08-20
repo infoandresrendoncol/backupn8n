@@ -1,0 +1,70 @@
+{
+  "active": false,
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Create an account",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-08-20T22:21:34.261Z",
+  "id": "QNDLbvsult0Yt0Cu",
+  "isArchived": false,
+  "meta": null,
+  "name": "My workflow 2",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "18662dd7-e0de-4025-bb24-d2be39300032",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "resource": "account",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.activeCampaign",
+      "typeVersion": 1,
+      "position": [
+        208,
+        0
+      ],
+      "id": "cc6ec08f-e8f2-40bc-a6ff-063e39d47724",
+      "name": "Create an account",
+      "disabled": true
+    }
+  ],
+  "pinData": {},
+  "repo_name": "backupn8n",
+  "repo_owner": "infoandresrendoncol",
+  "repo_path": "backup/",
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "createdAt": "2025-08-20T22:21:34.263Z",
+      "updatedAt": "2025-08-20T22:21:34.263Z",
+      "role": "workflow:owner",
+      "workflowId": "QNDLbvsult0Yt0Cu",
+      "projectId": "4KmSbENK2cGxsjaf"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-08-20T22:22:15.000Z",
+  "versionId": "f65a34df-fde3-41c8-8b1d-f0ae360ef31c"
+}
