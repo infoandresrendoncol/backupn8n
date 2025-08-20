@@ -1,0 +1,43 @@
+{
+  "active": false,
+  "connections": {},
+  "createdAt": "2025-08-20T22:12:44.578Z",
+  "id": "QYo4e9LBeFGpaIvN",
+  "isArchived": true,
+  "meta": null,
+  "name": "My workflow",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "8007210d-abd7-4113-8a35-20b5b33e0fcf",
+      "name": "When clicking ‘Execute workflow’"
+    }
+  ],
+  "pinData": {},
+  "repo_name": "backupn8n",
+  "repo_owner": "infoandresrendoncol",
+  "repo_path": "backup/",
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "createdAt": "2025-08-20T22:12:44.581Z",
+      "updatedAt": "2025-08-20T22:12:44.581Z",
+      "role": "workflow:owner",
+      "workflowId": "QYo4e9LBeFGpaIvN",
+      "projectId": "4KmSbENK2cGxsjaf"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-08-20T22:21:24.000Z",
+  "versionId": "af4b408e-f080-422d-b796-87d05883295a"
+}
