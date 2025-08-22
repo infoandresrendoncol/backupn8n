@@ -94,12 +94,12 @@
   "id": "N19CG9UISKfeOJzt",
   "isArchived": false,
   "meta": null,
-  "name": "WEBHOOK HOTMART - FLODESK",
+  "name": "WORKSHOP GRAL - WEBHOOK HOTMART - FLODESK",
   "nodes": [
     {
       "parameters": {
         "httpMethod": "POST",
-        "path": "hotmart-webhooks-compra",
+        "path": "hotmart-webhooks-compra-workshop-gral",
         "options": {}
       },
       "type": "n8n-nodes-base.webhook",
@@ -630,6 +630,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2025-08-20T22:47:03.000Z",
-  "versionId": "2b1e6510-eff1-4bb6-a373-327d76168251"
+  "updatedAt": "2025-08-21T13:25:16.000Z",
+  "versionId": "66ea5ecb-e11f-41cb-8cc2-8cf565763d81"
 }
