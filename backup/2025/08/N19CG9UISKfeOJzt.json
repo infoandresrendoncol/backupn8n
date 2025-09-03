@@ -288,7 +288,7 @@
         },
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n    \"email\": \"{{ $('Webhook').item.json.body.data.buyer.email }}\",\n    \"segment_ids\": [\n       \"688c61d75a3c0ab7e9f9213a\"\n    ]\n}",
+        "jsonBody": "={\n    \"email\": \"{{ $('Webhook').item.json.body.data.buyer.email }}\",\n    \"segment_ids\": [\n       \"688d4d02acdaf02183013c66\"\n    ]\n}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
@@ -630,6 +630,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2025-08-21T13:25:16.000Z",
-  "versionId": "66ea5ecb-e11f-41cb-8cc2-8cf565763d81"
+  "updatedAt": "2025-09-02T14:54:10.000Z",
+  "versionId": "d5f93f1a-a631-4120-baad-f92b5bb6109d"
 }
