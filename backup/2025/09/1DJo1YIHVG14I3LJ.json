@@ -1,0 +1,461 @@
+{
+  "active": true,
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "BUSQUEDA EN FLODESK",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Append row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "EXISTE FLODESK?1": {
+      "main": [
+        [
+          {
+            "node": "CREA E INSERTA EN SEGMENTO",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "INSERTA EN SEGMENTO",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "BUSQUEDA EN FLODESK": {
+      "main": [
+        [
+          {
+            "node": "EXISTE FLODESK?1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-09-03T15:37:02.511Z",
+  "id": "1DJo1YIHVG14I3LJ",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "REGISTRO LALA",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "lala-rg-09-25",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -192,
+        16
+      ],
+      "id": "396917d5-0834-4c95-acca-c922b81647b3",
+      "name": "Webhook",
+      "webhookId": "784f84a9-78cb-467a-8c92-bbc20d02a08a"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "ff9f56d5-3bdc-45e2-b7f3-5fec484a6f1c",
+              "leftValue": "={{ $json.error.status }}",
+              "rightValue": 404,
+              "operator": {
+                "type": "number",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        256,
+        96
+      ],
+      "id": "d62f3e8c-f110-4932-b037-36706c330fa7",
+      "name": "EXISTE FLODESK?1"
+    },
+    {
+      "parameters": {
+        "url": "=https://api.flodesk.com/v1/subscribers/{{ $('Webhook').item.json.body.contact.email }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "User-Agent",
+              "value": "n8n"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        32,
+        96
+      ],
+      "id": "e7a18f3f-f693-4c2d-8169-a6d42c01f9b1",
+      "name": "BUSQUEDA EN FLODESK",
+      "retryOnFail": false,
+      "maxTries": 5,
+      "waitBetweenTries": 5000,
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "kKUglU2e7wIB487O",
+          "name": "FLODESK"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.flodesk.com/v1/subscribers",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "User-Agent",
+              "value": "n8n"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n    \"email\": \"{{ $('Webhook').item.json.body.contact.email }}\",\n    \"segment_ids\": [\n       \"688d4d02acdaf02183013c66\"\n    ]\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        480,
+        0
+      ],
+      "id": "0ba9f70d-ad92-4a9a-84f8-0b7edc1385d0",
+      "name": "CREA E INSERTA EN SEGMENTO",
+      "retryOnFail": true,
+      "maxTries": 5,
+      "waitBetweenTries": 5000,
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "kKUglU2e7wIB487O",
+          "name": "FLODESK"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.flodesk.com/v1/subscribers/{{ $json.id }}/segments",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "User-Agent",
+              "value": "n8n"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n    \"segment_ids\": [\n       \"688d4d02acdaf02183013c66\"\n    ]\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        480,
+        192
+      ],
+      "id": "b19da6ff-0812-4eb7-ae7c-55249198657d",
+      "name": "INSERTA EN SEGMENTO",
+      "retryOnFail": true,
+      "maxTries": 5,
+      "waitBetweenTries": 5000,
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "kKUglU2e7wIB487O",
+          "name": "FLODESK"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1msyrCK5kSrDVclUbZPGHUJjDSi4AonsQ8lc5G4vKbYg",
+          "mode": "list",
+          "cachedResultName": "Pastelera Insuperables UTM - Origen de Leads SEPT 2025",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1msyrCK5kSrDVclUbZPGHUJjDSi4AonsQ8lc5G4vKbYg/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "LEADS UTM",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1msyrCK5kSrDVclUbZPGHUJjDSi4AonsQ8lc5G4vKbYg/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "EMAIL": "={{ $json.body.contact.email }}",
+            "CAMPAÑA": "={{ $json.body.formValues[2].value }}",
+            "FUENTE": "={{ $json.body.formValues[3].value }}",
+            "MEDIO": "={{ $json.body.formValues[4].value }}",
+            "TERMINO": "={{ $json.body.formValues[6].value }}",
+            "CONTENIDO": "={{ $json.body.formValues[5].value }}",
+            "¿Con cuál situación te identificas mejor?": "={{ $json.body.formValues[1].value }}",
+            "Fecha": "={{ $now.format('yyyy-MM-dd HH:mm:ss') }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "EMAIL",
+              "displayName": "EMAIL",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "CAMPAÑA",
+              "displayName": "CAMPAÑA",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "FUENTE",
+              "displayName": "FUENTE",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "MEDIO",
+              "displayName": "MEDIO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "TERMINO",
+              "displayName": "TERMINO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "CONTENIDO",
+              "displayName": "CONTENIDO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "¿Con cuál situación te identificas mejor?",
+              "displayName": "¿Con cuál situación te identificas mejor?",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Fecha",
+              "displayName": "Fecha",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        48,
+        -112
+      ],
+      "id": "c7a8c8c9-c4b0-4025-a0f0-7056da2dc4fe",
+      "name": "Append row in sheet",
+      "retryOnFail": true,
+      "maxTries": 5,
+      "waitBetweenTries": 5000,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "RVzGPXmtbwg7e3zT",
+          "name": "SHEET INFO.ANDRES"
+        }
+      }
+    }
+  ],
+  "pinData": {
+    "Webhook": [
+      {
+        "json": {
+          "headers": {
+            "host": "contenedor1-n8n.vqn37t.easypanel.host",
+            "user-agent": "System Webhooks",
+            "content-length": "870",
+            "accept": "text/html, image/gif, image/jpeg, */*; q=0.2",
+            "cache-control": "no-cache",
+            "content-type": "application/json; charset=UTF-8",
+            "pragma": "no-cache",
+            "x-forwarded-for": "13.222.14.4",
+            "x-forwarded-host": "contenedor1-n8n.vqn37t.easypanel.host",
+            "x-forwarded-port": "443",
+            "x-forwarded-proto": "https",
+            "x-forwarded-server": "08c32a3763b4",
+            "x-real-ip": "13.222.14.4",
+            "x-webhook-id": "wh_z23w5lygu",
+            "x-webhook-signature": "0fba868be08226fcb80e1c7da4ae9275fae92842891f05053c075492ddddf49f6276b4d686b45c5f3da349b83b69142e493eb9852dbbe93d6f6cf2f7d4276ad4",
+            "x-webhook-source": "lalapastelerahotmart-6.funnels.mastertools.com",
+            "x-webhook-topic": "form_submitted",
+            "accept-encoding": "gzip"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "website": {
+              "id": 1333743,
+              "subdomain": "lalapastelerahotmart-6",
+              "systemDomain": "lalapastelerahotmart-6.funnels.mastertools.com",
+              "domain": "lalapastelera.com"
+            },
+            "contact": {
+              "id": 4766,
+              "name": "",
+              "email": "test@gmail.com",
+              "phone": null,
+              "note": null,
+              "address": null,
+              "city": null,
+              "state": null,
+              "zip": null,
+              "country": null,
+              "companyName": null,
+              "createdOn": 1742588132,
+              "properties": [],
+              "tags": [],
+              "subscribed": false,
+              "subscriberLists": []
+            },
+            "formName": "Formulario 4 Dic",
+            "formValues": [
+              {
+                "value": "test@gmail.com",
+                "field": "E-mail"
+              },
+              {
+                "value": "Tengo un emprendimiento de pastelería y quiero mejorar mis técnicas y ventas.",
+                "field": "¿Qué situación te identifica más en este momento?"
+              },
+              {
+                "value": "",
+                "field": "UTM Campaign"
+              },
+              {
+                "value": "",
+                "field": "UTM Source"
+              },
+              {
+                "value": "",
+                "field": "UTM Medium"
+              },
+              {
+                "value": "",
+                "field": "UTM Content"
+              },
+              {
+                "value": "",
+                "field": "UTM Term"
+              },
+              {
+                "value": "16539",
+                "field": "idIntegration"
+              }
+            ]
+          },
+          "webhookUrl": "https://contenedor1-n8n.vqn37t.easypanel.host/webhook/lala-rg-09-25",
+          "executionMode": "production"
+        }
+      }
+    ]
+  },
+  "repo_name": "backupn8n",
+  "repo_owner": "infoandresrendoncol",
+  "repo_path": "backup/",
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "createdAt": "2025-09-03T15:37:02.519Z",
+      "updatedAt": "2025-09-03T15:37:02.519Z",
+      "role": "workflow:owner",
+      "workflowId": "1DJo1YIHVG14I3LJ",
+      "projectId": "4KmSbENK2cGxsjaf"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2025-09-03T16:02:14.000Z",
+  "versionId": "d683386f-4a56-473f-9db8-5e5793cc3c26"
+}
