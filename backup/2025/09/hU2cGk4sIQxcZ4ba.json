@@ -1,0 +1,31 @@
+{
+  "active": false,
+  "connections": {},
+  "createdAt": "2025-09-13T18:42:19.813Z",
+  "id": "hU2cGk4sIQxcZ4ba",
+  "isArchived": false,
+  "meta": null,
+  "name": "Eventos de Checkout - Ac. Pastelera",
+  "nodes": [],
+  "pinData": {},
+  "repo_name": "backupn8n",
+  "repo_owner": "infoandresrendoncol",
+  "repo_path": "backup/",
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "createdAt": "2025-09-13T18:42:19.818Z",
+      "updatedAt": "2025-09-13T18:42:19.818Z",
+      "role": "workflow:owner",
+      "workflowId": "hU2cGk4sIQxcZ4ba",
+      "projectId": "4KmSbENK2cGxsjaf"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-09-13T18:42:19.000Z",
+  "versionId": "9b4ea0e2-b21b-4f1e-b9b6-edfa59997deb"
+}
