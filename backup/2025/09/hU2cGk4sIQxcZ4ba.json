@@ -1,18 +1,957 @@
 {
-  "active": false,
-  "connections": {},
+  "active": true,
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "Espera de pago",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Completada/aprobada",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Completada/aprobada",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Cancelada",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Abandono de carrito",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Vencida",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
   "createdAt": "2025-09-13T18:42:19.813Z",
   "id": "hU2cGk4sIQxcZ4ba",
   "isArchived": false,
-  "meta": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
   "name": "Eventos de Checkout - Ac. Pastelera",
-  "nodes": [],
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "=info-checkout-academia-0925",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        32
+      ],
+      "id": "8911fccd-a2cc-4ee6-a7b2-ce33a2e3a0ff",
+      "name": "Webhook",
+      "webhookId": "355ee1af-39d4-414a-b682-22a5cf423853"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.body.event }}",
+                    "rightValue": "PURCHASE_BILLET_PRINTED",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "26888965-7100-40a1-a8b3-eef968b28b2a"
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "84306705-0989-4d36-b59a-f5972aebfeb8",
+                    "leftValue": "={{ $json.body.event }}",
+                    "rightValue": "PURCHASE_COMPLETE",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "7c52240a-4074-4ae3-90b9-f1000c18948a",
+                    "leftValue": "={{ $json.body.event }}",
+                    "rightValue": "PURCHASE_APPROVED",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "5aee3900-62ec-49db-95f7-2414abffbb70",
+                    "leftValue": "={{ $json.body.event }}",
+                    "rightValue": "PURCHASE_CANCELED",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "46cbfbb2-61e7-49af-b098-78314696d446",
+                    "leftValue": "={{ $json.body.event }}",
+                    "rightValue": "PURCHASE_OUT_OF_SHOPPING_CART",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "ec18ffb3-1644-45dc-8f3a-a6238c654d83",
+                    "leftValue": "={{ $json.body.event }}",
+                    "rightValue": "PURCHASE_DELAYED",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        288,
+        -32
+      ],
+      "id": "06378f51-3b34-4c82-996e-c57a73dc605a",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "https://docs.google.com/spreadsheets/d/1OtbxMYwbPCxTrLCQ3sll1hPa_Nm-nhlEEd5nFt8kKgM/edit?gid=0#gid=0",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 960431768,
+          "mode": "list",
+          "cachedResultName": "Espera de pago / Compra atrasada",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1OtbxMYwbPCxTrLCQ3sll1hPa_Nm-nhlEEd5nFt8kKgM/edit#gid=960431768"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Fecha ": "={{ $json.body.data.product.warranty_date }}",
+            "Códigos de la transacción": "={{ $json.body.data.purchase.transaction }}",
+            "Estado": "={{ $json.body.data.purchase.status }}",
+            "Email": "={{ $json.body.data.buyer.email }}",
+            "Teléfono ": "={{ $json.body.data.buyer.checkout_phone }}",
+            "Pais": "={{ $json.body.data.buyer.address.country }}",
+            "Nombre": "={{ $json.body.data.buyer.name }}",
+            "Método de pago": "={{ $json.body.data.purchase.payment.type }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Fecha ",
+              "displayName": "Fecha ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Estado",
+              "displayName": "Estado",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Códigos de la transacción",
+              "displayName": "Códigos de la transacción",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Método de pago",
+              "displayName": "Método de pago",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Nombre",
+              "displayName": "Nombre",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Teléfono ",
+              "displayName": "Teléfono ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Pais",
+              "displayName": "Pais",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Estado del contacto",
+              "displayName": "Estado del contacto",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Resultado",
+              "displayName": "Resultado",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Observación",
+              "displayName": "Observación",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        560,
+        -288
+      ],
+      "id": "db7515f9-c2a5-42bf-b111-938b94b8aa5a",
+      "name": "Espera de pago",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "R31ACEuQOmKqG1CQ",
+          "name": "Google Sheets Wildersmx"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "https://docs.google.com/spreadsheets/d/1OtbxMYwbPCxTrLCQ3sll1hPa_Nm-nhlEEd5nFt8kKgM/edit?gid=960431768#gid=960431768",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 142436313,
+          "mode": "list",
+          "cachedResultName": "Compra Completada / Aprobada",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1OtbxMYwbPCxTrLCQ3sll1hPa_Nm-nhlEEd5nFt8kKgM/edit#gid=142436313"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Fecha ": "={{ $json.body.data.product.warranty_date }}",
+            "Método de pago": "={{ $json.body.data.purchase.payment.type }}",
+            "Estado": "={{ $json.body.data.purchase.status }}",
+            "Códigos de la transacción": "={{ $json.body.data.purchase.transaction }}",
+            "Nombre": "={{ $json.body.data.buyer.name }}",
+            "Email": "={{ $json.body.data.buyer.email }}",
+            "Teléfono ": "={{ $json.body.data.buyer.checkout_phone }}",
+            "Pais": "={{ $json.body.data.buyer.address.country }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Fecha ",
+              "displayName": "Fecha ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Estado",
+              "displayName": "Estado",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Códigos de la transacción",
+              "displayName": "Códigos de la transacción",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Método de pago",
+              "displayName": "Método de pago",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Nombre",
+              "displayName": "Nombre",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Teléfono ",
+              "displayName": "Teléfono ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Pais",
+              "displayName": "Pais",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Observación",
+              "displayName": "Observación",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        560,
+        -128
+      ],
+      "id": "981834dd-a8ab-4e4e-a24e-e54a79a46021",
+      "name": "Completada/aprobada",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "R31ACEuQOmKqG1CQ",
+          "name": "Google Sheets Wildersmx"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "https://docs.google.com/spreadsheets/d/1OtbxMYwbPCxTrLCQ3sll1hPa_Nm-nhlEEd5nFt8kKgM/edit",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 47055195,
+          "mode": "list",
+          "cachedResultName": "Compra cancelada",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1OtbxMYwbPCxTrLCQ3sll1hPa_Nm-nhlEEd5nFt8kKgM/edit#gid=47055195"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Fecha ": "={{ $json.body.data.product.warranty_date }}",
+            "Nombre": "={{ $json.body.data.buyer.name }}",
+            "Email": "={{ $json.body.data.buyer.email }}",
+            "Teléfono ": "={{ $json.body.data.buyer.checkout_phone }}",
+            "Pais": "={{ $json.body.data.buyer.address.country }}",
+            "Estado": "={{ $json.body.data.purchase.status }}",
+            "Códigos de la transacción": "={{ $json.body.data.purchase.transaction }}",
+            "Método de pago": "={{ $json.body.data.purchase.payment.type }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Fecha ",
+              "displayName": "Fecha ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Estado",
+              "displayName": "Estado",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Códigos de la transacción",
+              "displayName": "Códigos de la transacción",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Método de pago",
+              "displayName": "Método de pago",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Nombre",
+              "displayName": "Nombre",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Teléfono ",
+              "displayName": "Teléfono ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Pais",
+              "displayName": "Pais",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Estado del contacto",
+              "displayName": "Estado del contacto",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Resultado",
+              "displayName": "Resultado",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Observación",
+              "displayName": "Observación",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        560,
+        48
+      ],
+      "id": "c3935137-0111-466c-a6fc-7e8e41919513",
+      "name": "Cancelada",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "R31ACEuQOmKqG1CQ",
+          "name": "Google Sheets Wildersmx"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "https://docs.google.com/spreadsheets/d/1OtbxMYwbPCxTrLCQ3sll1hPa_Nm-nhlEEd5nFt8kKgM/edit",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Abandono de carrito",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1OtbxMYwbPCxTrLCQ3sll1hPa_Nm-nhlEEd5nFt8kKgM/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Nombre": "={{ $json.body.data.buyer.name }}",
+            "Email": "={{ $json.body.data.buyer.email }}",
+            "Teléfono ": "={{ $json.body.data.buyer.phone }}",
+            "Pais": "={{ $json.body.data.checkout_country.name }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Fecha ",
+              "displayName": "Fecha ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Nombre",
+              "displayName": "Nombre",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Teléfono ",
+              "displayName": "Teléfono ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Pais",
+              "displayName": "Pais",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Estado del contacto",
+              "displayName": "Estado del contacto",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Resultado",
+              "displayName": "Resultado",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Observación",
+              "displayName": "Observación",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        560,
+        208
+      ],
+      "id": "a37683bb-7d99-4a49-a285-bd990d282bcc",
+      "name": "Abandono de carrito",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "R31ACEuQOmKqG1CQ",
+          "name": "Google Sheets Wildersmx"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "https://docs.google.com/spreadsheets/d/1OtbxMYwbPCxTrLCQ3sll1hPa_Nm-nhlEEd5nFt8kKgM/edit",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 215798762,
+          "mode": "list",
+          "cachedResultName": "Compra Vencida",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1OtbxMYwbPCxTrLCQ3sll1hPa_Nm-nhlEEd5nFt8kKgM/edit#gid=215798762"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Fecha ": "={{ $json.body.data.product.warranty_date }}",
+            "Nombre": "={{ $json.body.data.buyer.name }}",
+            "Teléfono ": "={{ $json.body.data.buyer.checkout_phone }}",
+            "Pais": "={{ $json.body.data.buyer.address.country }}",
+            "Email": "={{ $json.body.data.buyer.email }}",
+            "Estado": "={{ $json.body.data.purchase.status }}",
+            "Códigos de la transacción": "={{ $json.body.data.purchase.transaction }}",
+            "Método de pago": "={{ $json.body.data.purchase.payment.type }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Fecha ",
+              "displayName": "Fecha ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Estado",
+              "displayName": "Estado",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Códigos de la transacción",
+              "displayName": "Códigos de la transacción",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Método de pago",
+              "displayName": "Método de pago",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Nombre",
+              "displayName": "Nombre",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Teléfono ",
+              "displayName": "Teléfono ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Pais",
+              "displayName": "Pais",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Estado del contacto",
+              "displayName": "Estado del contacto",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Resultado",
+              "displayName": "Resultado",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Observación",
+              "displayName": "Observación",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        560,
+        352
+      ],
+      "id": "6dd7e9ed-4aab-4c15-b577-581884809abf",
+      "name": "Vencida",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "R31ACEuQOmKqG1CQ",
+          "name": "Google Sheets Wildersmx"
+        }
+      }
+    }
+  ],
   "pinData": {},
   "repo_name": "backupn8n",
   "repo_owner": "infoandresrendoncol",
   "repo_path": "backup/",
   "settings": {
-    "executionOrder": "v1"
+    "executionOrder": "v1",
+    "callerPolicy": "workflowsFromSameOwner"
   },
   "shared": [
     {
@@ -25,7 +964,7 @@
   ],
   "staticData": null,
   "tags": [],
-  "triggerCount": 0,
-  "updatedAt": "2025-09-13T18:42:19.000Z",
-  "versionId": "9b4ea0e2-b21b-4f1e-b9b6-edfa59997deb"
+  "triggerCount": 1,
+  "updatedAt": "2025-09-16T16:49:20.000Z",
+  "versionId": "f592315b-6ca6-4cdc-a33b-d78f9a462113"
 }
