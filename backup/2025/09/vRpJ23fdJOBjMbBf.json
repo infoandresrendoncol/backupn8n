@@ -1,0 +1,1130 @@
+{
+  "active": false,
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "Espera de pago",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Completada/aprobada",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Completada/aprobada",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Cancelada",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Abandono de carrito",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Vencida",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-09-24T16:04:44.003Z",
+  "id": "vRpJ23fdJOBjMbBf",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Eventos de Checkout - Academia pastelera",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "e04046b0-9405-406d-b6a4-aead2fff6011",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        32
+      ],
+      "id": "cab80616-c9fd-41c5-867b-ee79903b6071",
+      "name": "Webhook",
+      "webhookId": "e04046b0-9405-406d-b6a4-aead2fff6011"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.body.event }}",
+                    "rightValue": "PURCHASE_BILLET_PRINTED",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "26888965-7100-40a1-a8b3-eef968b28b2a"
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "84306705-0989-4d36-b59a-f5972aebfeb8",
+                    "leftValue": "={{ $json.body.event }}",
+                    "rightValue": "PURCHASE_COMPLETE",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "7c52240a-4074-4ae3-90b9-f1000c18948a",
+                    "leftValue": "={{ $json.body.event }}",
+                    "rightValue": "PURCHASE_APPROVED",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "5aee3900-62ec-49db-95f7-2414abffbb70",
+                    "leftValue": "={{ $json.body.event }}",
+                    "rightValue": "PURCHASE_CANCELED",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "46cbfbb2-61e7-49af-b098-78314696d446",
+                    "leftValue": "={{ $json.body.event }}",
+                    "rightValue": "PURCHASE_OUT_OF_SHOPPING_CART",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "ec18ffb3-1644-45dc-8f3a-a6238c654d83",
+                    "leftValue": "={{ $json.body.event }}",
+                    "rightValue": "PURCHASE_DELAYED",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        288,
+        -32
+      ],
+      "id": "7457ed3e-d5c8-4aa7-bd60-fc720dc38751",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "https://docs.google.com/spreadsheets/d/1OtbxMYwbPCxTrLCQ3sll1hPa_Nm-nhlEEd5nFt8kKgM/edit?gid=0#gid=0",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 960431768,
+          "mode": "list",
+          "cachedResultName": "Espera de pago / Compra atrasada",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1OtbxMYwbPCxTrLCQ3sll1hPa_Nm-nhlEEd5nFt8kKgM/edit#gid=960431768"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Fecha ": "={{ $json.body.data.product.warranty_date }}",
+            "Códigos de la transacción": "={{ $json.body.data.purchase.transaction }}",
+            "Estado": "={{ $json.body.data.purchase.status }}",
+            "Email": "={{ $json.body.data.buyer.email }}",
+            "Teléfono ": "={{ $json.body.data.buyer.checkout_phone }}",
+            "Pais": "={{ $json.body.data.buyer.address.country }}",
+            "Nombre": "={{ $json.body.data.buyer.name }}",
+            "Método de pago": "={{ $json.body.data.purchase.payment.type }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Fecha ",
+              "displayName": "Fecha ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Estado",
+              "displayName": "Estado",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Códigos de la transacción",
+              "displayName": "Códigos de la transacción",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Método de pago",
+              "displayName": "Método de pago",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Nombre",
+              "displayName": "Nombre",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Teléfono ",
+              "displayName": "Teléfono ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Pais",
+              "displayName": "Pais",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Estado del contacto",
+              "displayName": "Estado del contacto",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Resultado",
+              "displayName": "Resultado",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Observación",
+              "displayName": "Observación",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        560,
+        -288
+      ],
+      "id": "71f2d788-1e7f-494d-a6fb-87941da169d6",
+      "name": "Espera de pago",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "R31ACEuQOmKqG1CQ",
+          "name": "Google Sheets Wildersmx"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "https://docs.google.com/spreadsheets/d/1OtbxMYwbPCxTrLCQ3sll1hPa_Nm-nhlEEd5nFt8kKgM/edit?gid=960431768#gid=960431768",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 142436313,
+          "mode": "list",
+          "cachedResultName": "Compra Completada / Aprobada",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1OtbxMYwbPCxTrLCQ3sll1hPa_Nm-nhlEEd5nFt8kKgM/edit#gid=142436313"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Fecha ": "={{ $json.body.data.product.warranty_date }}",
+            "Método de pago": "={{ $json.body.data.purchase.payment.type }}",
+            "Estado": "={{ $json.body.data.purchase.status }}",
+            "Códigos de la transacción": "={{ $json.body.data.purchase.transaction }}",
+            "Nombre": "={{ $json.body.data.buyer.name }}",
+            "Email": "={{ $json.body.data.buyer.email }}",
+            "Teléfono ": "={{ $json.body.data.buyer.checkout_phone }}",
+            "Pais": "={{ $json.body.data.buyer.address.country }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Fecha ",
+              "displayName": "Fecha ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Estado",
+              "displayName": "Estado",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Códigos de la transacción",
+              "displayName": "Códigos de la transacción",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Método de pago",
+              "displayName": "Método de pago",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Nombre",
+              "displayName": "Nombre",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Teléfono ",
+              "displayName": "Teléfono ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Pais",
+              "displayName": "Pais",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Observación",
+              "displayName": "Observación",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        560,
+        -128
+      ],
+      "id": "8cb3bde4-c3cb-4927-9a44-a02098e3bd7a",
+      "name": "Completada/aprobada",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "R31ACEuQOmKqG1CQ",
+          "name": "Google Sheets Wildersmx"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "https://docs.google.com/spreadsheets/d/1OtbxMYwbPCxTrLCQ3sll1hPa_Nm-nhlEEd5nFt8kKgM/edit",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 47055195,
+          "mode": "list",
+          "cachedResultName": "Compra cancelada",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1OtbxMYwbPCxTrLCQ3sll1hPa_Nm-nhlEEd5nFt8kKgM/edit#gid=47055195"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Fecha ": "={{ $json.body.data.product.warranty_date }}",
+            "Nombre": "={{ $json.body.data.buyer.name }}",
+            "Email": "={{ $json.body.data.buyer.email }}",
+            "Teléfono ": "={{ $json.body.data.buyer.checkout_phone }}",
+            "Pais": "={{ $json.body.data.buyer.address.country }}",
+            "Estado": "={{ $json.body.data.purchase.status }}",
+            "Códigos de la transacción": "={{ $json.body.data.purchase.transaction }}",
+            "Método de pago": "={{ $json.body.data.purchase.payment.type }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Fecha ",
+              "displayName": "Fecha ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Estado",
+              "displayName": "Estado",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Códigos de la transacción",
+              "displayName": "Códigos de la transacción",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Método de pago",
+              "displayName": "Método de pago",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Nombre",
+              "displayName": "Nombre",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Teléfono ",
+              "displayName": "Teléfono ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Pais",
+              "displayName": "Pais",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Estado del contacto",
+              "displayName": "Estado del contacto",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Resultado",
+              "displayName": "Resultado",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Observación",
+              "displayName": "Observación",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        560,
+        48
+      ],
+      "id": "e5daa4a5-8b21-40f1-9d07-19cc6bb1bbee",
+      "name": "Cancelada",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "R31ACEuQOmKqG1CQ",
+          "name": "Google Sheets Wildersmx"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "https://docs.google.com/spreadsheets/d/1OtbxMYwbPCxTrLCQ3sll1hPa_Nm-nhlEEd5nFt8kKgM/edit",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Abandono de carrito",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1OtbxMYwbPCxTrLCQ3sll1hPa_Nm-nhlEEd5nFt8kKgM/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Nombre": "={{ $json.body.data.buyer.name }}",
+            "Email": "={{ $json.body.data.buyer.email }}",
+            "Teléfono ": "={{ $json.body.data.buyer.phone }}",
+            "Pais": "={{ $json.body.data.checkout_country.name }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Fecha ",
+              "displayName": "Fecha ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Nombre",
+              "displayName": "Nombre",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Teléfono ",
+              "displayName": "Teléfono ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Pais",
+              "displayName": "Pais",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Estado del contacto",
+              "displayName": "Estado del contacto",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Resultado",
+              "displayName": "Resultado",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Observación",
+              "displayName": "Observación",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        560,
+        208
+      ],
+      "id": "f76e6eb6-f90f-4eeb-880b-a02c05b8e91b",
+      "name": "Abandono de carrito",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "R31ACEuQOmKqG1CQ",
+          "name": "Google Sheets Wildersmx"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "https://docs.google.com/spreadsheets/d/1OtbxMYwbPCxTrLCQ3sll1hPa_Nm-nhlEEd5nFt8kKgM/edit",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 215798762,
+          "mode": "list",
+          "cachedResultName": "Compra Vencida",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1OtbxMYwbPCxTrLCQ3sll1hPa_Nm-nhlEEd5nFt8kKgM/edit#gid=215798762"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Fecha ": "={{ $json.body.data.product.warranty_date }}",
+            "Nombre": "={{ $json.body.data.buyer.name }}",
+            "Teléfono ": "={{ $json.body.data.buyer.checkout_phone }}",
+            "Pais": "={{ $json.body.data.buyer.address.country }}",
+            "Email": "={{ $json.body.data.buyer.email }}",
+            "Estado": "={{ $json.body.data.purchase.status }}",
+            "Códigos de la transacción": "={{ $json.body.data.purchase.transaction }}",
+            "Método de pago": "={{ $json.body.data.purchase.payment.type }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Fecha ",
+              "displayName": "Fecha ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Estado",
+              "displayName": "Estado",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Códigos de la transacción",
+              "displayName": "Códigos de la transacción",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Método de pago",
+              "displayName": "Método de pago",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Nombre",
+              "displayName": "Nombre",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Teléfono ",
+              "displayName": "Teléfono ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Pais",
+              "displayName": "Pais",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Estado del contacto",
+              "displayName": "Estado del contacto",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Resultado",
+              "displayName": "Resultado",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Observación",
+              "displayName": "Observación",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        560,
+        352
+      ],
+      "id": "affbafe4-60d7-4d1b-b9bb-0df18b0aae8b",
+      "name": "Vencida",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "R31ACEuQOmKqG1CQ",
+          "name": "Google Sheets Wildersmx"
+        }
+      },
+      "onError": "continueRegularOutput"
+    }
+  ],
+  "pinData": {
+    "Webhook": [
+      {
+        "json": {
+          "headers": {
+            "host": "contenedor1-n8n.vqn37t.easypanel.host",
+            "user-agent": "Jodd HTTP",
+            "content-length": "2282",
+            "content-type": "application/json",
+            "x-forwarded-for": "52.55.126.241",
+            "x-forwarded-host": "contenedor1-n8n.vqn37t.easypanel.host",
+            "x-forwarded-port": "443",
+            "x-forwarded-proto": "https",
+            "x-forwarded-server": "08c32a3763b4",
+            "x-hotmart-hottok": "LPcR3CoMbuGaTwZnxmswMkN3c2Ccsy6e4d1d59-9797-47d4-a5c1-0ec38e17da1c",
+            "x-real-ip": "52.55.126.241",
+            "accept-encoding": "gzip"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "data": {
+              "product": {
+                "support_email": "support@hotmart.com.br",
+                "has_co_production": false,
+                "name": "Produto test postback2",
+                "warranty_date": "2017-12-27T00:00:00Z",
+                "is_physical_product": false,
+                "id": 0,
+                "ucode": "fb056612-bcc6-4217-9e6d-2a5d1110ac2f",
+                "content": {
+                  "has_physical_products": true,
+                  "products": [
+                    {
+                      "name": "How to Make Clear Ice",
+                      "is_physical_product": false,
+                      "id": 4774438,
+                      "ucode": "559fef42-3406-4d82-b775-d09bd33936b1"
+                    },
+                    {
+                      "name": "Organizador de Poeira",
+                      "is_physical_product": true,
+                      "id": 4999597,
+                      "ucode": "099e7644-b7d1-43d6-82a9-ec6be0118a4b"
+                    }
+                  ]
+                }
+              },
+              "commissions": [
+                {
+                  "currency_value": "BRL",
+                  "source": "MARKETPLACE",
+                  "value": 149.5
+                },
+                {
+                  "currency_value": "BRL",
+                  "source": "PRODUCER",
+                  "value": 1350.5
+                }
+              ],
+              "purchase": {
+                "original_offer_price": {
+                  "currency_value": "BRL",
+                  "value": 1500
+                },
+                "checkout_country": {
+                  "iso": "BR",
+                  "name": "Brasil"
+                },
+                "sckPaymentLink": "sckPaymentLinkTest",
+                "order_bump": {
+                  "parent_purchase_transaction": "HP02316330308193",
+                  "is_order_bump": true
+                },
+                "approved_date": 1511783346000,
+                "offer": {
+                  "code": "test",
+                  "coupon_code": "SHHUHA"
+                },
+                "is_funnel": false,
+                "event_tickets": {
+                  "amount": 1758030709493
+                },
+                "order_date": 1511783344000,
+                "price": {
+                  "currency_value": "BRL",
+                  "value": 1500
+                },
+                "buyer_ip": "00.00.00.00",
+                "payment": {
+                  "installments_number": 12,
+                  "type": "CREDIT_CARD"
+                },
+                "full_price": {
+                  "currency_value": "BRL",
+                  "value": 1500
+                },
+                "business_model": "I",
+                "transaction": "HP16015479281022",
+                "status": "DELAYED"
+              },
+              "affiliates": [
+                {
+                  "affiliate_code": "Q58388177J",
+                  "name": "Affiliate name"
+                }
+              ],
+              "producer": {
+                "legal_nature": "Pessoa Física",
+                "document": "12345678965",
+                "name": "Producer Test Name"
+              },
+              "subscription": {
+                "subscriber": {
+                  "code": "I9OT62C3"
+                },
+                "plan": {
+                  "name": "plano de teste",
+                  "id": 123
+                },
+                "status": "ACTIVE"
+              },
+              "buyer": {
+                "checkout_phone_code": "999999999",
+                "address": {
+                  "zipcode": "38400123",
+                  "country": "Brasil",
+                  "number": "10",
+                  "address": "Avenida Francisco Galassi",
+                  "city": "Uberlândia",
+                  "state": "Minas Gerais",
+                  "neighborhood": "Tubalina",
+                  "complement": "Perto do shopping",
+                  "country_iso": "BR"
+                },
+                "document": "69526128664",
+                "name": "Teste Comprador",
+                "last_name": "Comprador",
+                "checkout_phone": "99999999900",
+                "first_name": "Teste",
+                "email": "testeComprador271101postman15@example.com",
+                "document_type": "CPF"
+              }
+            },
+            "hottok": "LPcR3CoMbuGaTwZnxmswMkN3c2Ccsy6e4d1d59-9797-47d4-a5c1-0ec38e17da1c",
+            "id": "344b4bda-3564-4904-a472-67dde755cf49",
+            "creation_date": 1758030709510,
+            "event": "PURCHASE_DELAYED",
+            "version": "2.0.0"
+          },
+          "webhookUrl": "https://contenedor1-n8n.vqn37t.easypanel.host/webhook-test/info-checkout-academia-0925",
+          "executionMode": "test"
+        }
+      }
+    ]
+  },
+  "repo_name": "backupn8n",
+  "repo_owner": "infoandresrendoncol",
+  "repo_path": "backup/",
+  "settings": {
+    "executionOrder": "v1",
+    "callerPolicy": "workflowsFromSameOwner"
+  },
+  "shared": [
+    {
+      "createdAt": "2025-09-24T16:04:44.007Z",
+      "updatedAt": "2025-09-24T16:04:44.007Z",
+      "role": "workflow:owner",
+      "workflowId": "vRpJ23fdJOBjMbBf",
+      "projectId": "4KmSbENK2cGxsjaf"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2025-09-24T16:38:51.000Z",
+  "versionId": "fd1add60-2dec-4bf4-ae34-4e4844b5f7b8"
+}
