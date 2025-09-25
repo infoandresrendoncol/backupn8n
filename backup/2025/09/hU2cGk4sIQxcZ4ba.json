@@ -55,6 +55,13 @@
             "type": "main",
             "index": 0
           }
+        ],
+        [
+          {
+            "node": "Vencida",
+            "type": "main",
+            "index": 0
+          }
         ]
       ]
     }
@@ -65,12 +72,12 @@
   "meta": {
     "templateCredsSetupCompleted": true
   },
-  "name": "Eventos de Checkout - Ac. Pastelera",
+  "name": "Eventos de Checkout - S&E",
   "nodes": [
     {
       "parameters": {
         "httpMethod": "POST",
-        "path": "=info-checkout-academia-0925",
+        "path": "=info-checkout-s&e-0925",
         "options": {}
       },
       "type": "n8n-nodes-base.webhook",
@@ -223,6 +230,29 @@
                 ],
                 "combinator": "and"
               }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "a237eb54-128a-4902-adee-7e7b2de59f1d",
+                    "leftValue": "={{ $json.body.event }}",
+                    "rightValue": "PURCHASE_EXPIRE",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
             }
           ]
         },
@@ -242,7 +272,7 @@
         "operation": "append",
         "documentId": {
           "__rl": true,
-          "value": "https://docs.google.com/spreadsheets/d/1OtbxMYwbPCxTrLCQ3sll1hPa_Nm-nhlEEd5nFt8kKgM/edit?gid=0#gid=0",
+          "value": "=https://docs.google.com/spreadsheets/d/1P2EpOlcnRRh5cVBeFlgUN14j-jolaixcfhqCfUV1sXY/edit?gid=215798762#gid=215798762",
           "mode": "url"
         },
         "sheetName": {
@@ -250,7 +280,7 @@
           "value": 960431768,
           "mode": "list",
           "cachedResultName": "Espera de pago / Compra atrasada",
-          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1OtbxMYwbPCxTrLCQ3sll1hPa_Nm-nhlEEd5nFt8kKgM/edit#gid=960431768"
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1P2EpOlcnRRh5cVBeFlgUN14j-jolaixcfhqCfUV1sXY/edit#gid=960431768"
         },
         "columns": {
           "mappingMode": "defineBelow",
@@ -392,8 +422,8 @@
       "name": "Espera de pago",
       "credentials": {
         "googleSheetsOAuth2Api": {
-          "id": "R31ACEuQOmKqG1CQ",
-          "name": "Google Sheets Wildersmx"
+          "id": "RVzGPXmtbwg7e3zT",
+          "name": "SHEET INFO.ANDRES"
         }
       },
       "onError": "continueRegularOutput"
@@ -403,7 +433,7 @@
         "operation": "append",
         "documentId": {
           "__rl": true,
-          "value": "https://docs.google.com/spreadsheets/d/1OtbxMYwbPCxTrLCQ3sll1hPa_Nm-nhlEEd5nFt8kKgM/edit?gid=960431768#gid=960431768",
+          "value": "=https://docs.google.com/spreadsheets/d/1P2EpOlcnRRh5cVBeFlgUN14j-jolaixcfhqCfUV1sXY/edit?gid=215798762#gid=215798762",
           "mode": "url"
         },
         "sheetName": {
@@ -522,10 +552,13 @@
       ],
       "id": "981834dd-a8ab-4e4e-a24e-e54a79a46021",
       "name": "Completada/aprobada",
+      "retryOnFail": true,
+      "maxTries": 5,
+      "waitBetweenTries": 5000,
       "credentials": {
         "googleSheetsOAuth2Api": {
-          "id": "R31ACEuQOmKqG1CQ",
-          "name": "Google Sheets Wildersmx"
+          "id": "RVzGPXmtbwg7e3zT",
+          "name": "SHEET INFO.ANDRES"
         }
       },
       "onError": "continueRegularOutput"
@@ -535,7 +568,7 @@
         "operation": "append",
         "documentId": {
           "__rl": true,
-          "value": "https://docs.google.com/spreadsheets/d/1OtbxMYwbPCxTrLCQ3sll1hPa_Nm-nhlEEd5nFt8kKgM/edit",
+          "value": "=https://docs.google.com/spreadsheets/d/1P2EpOlcnRRh5cVBeFlgUN14j-jolaixcfhqCfUV1sXY/edit?gid=215798762#gid=215798762",
           "mode": "url"
         },
         "sheetName": {
@@ -543,7 +576,7 @@
           "value": 47055195,
           "mode": "list",
           "cachedResultName": "Compra cancelada",
-          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1OtbxMYwbPCxTrLCQ3sll1hPa_Nm-nhlEEd5nFt8kKgM/edit#gid=47055195"
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1P2EpOlcnRRh5cVBeFlgUN14j-jolaixcfhqCfUV1sXY/edit#gid=47055195"
         },
         "columns": {
           "mappingMode": "defineBelow",
@@ -674,8 +707,8 @@
       "name": "Cancelada",
       "credentials": {
         "googleSheetsOAuth2Api": {
-          "id": "R31ACEuQOmKqG1CQ",
-          "name": "Google Sheets Wildersmx"
+          "id": "RVzGPXmtbwg7e3zT",
+          "name": "SHEET INFO.ANDRES"
         }
       },
       "onError": "continueRegularOutput"
@@ -685,7 +718,7 @@
         "operation": "append",
         "documentId": {
           "__rl": true,
-          "value": "https://docs.google.com/spreadsheets/d/1OtbxMYwbPCxTrLCQ3sll1hPa_Nm-nhlEEd5nFt8kKgM/edit",
+          "value": "=https://docs.google.com/spreadsheets/d/1P2EpOlcnRRh5cVBeFlgUN14j-jolaixcfhqCfUV1sXY/edit?gid=215798762#gid=215798762",
           "mode": "url"
         },
         "sheetName": {
@@ -693,7 +726,7 @@
           "value": "gid=0",
           "mode": "list",
           "cachedResultName": "Abandono de carrito",
-          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1OtbxMYwbPCxTrLCQ3sll1hPa_Nm-nhlEEd5nFt8kKgM/edit#gid=0"
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1P2EpOlcnRRh5cVBeFlgUN14j-jolaixcfhqCfUV1sXY/edit#gid=0"
         },
         "columns": {
           "mappingMode": "defineBelow",
@@ -793,8 +826,8 @@
       "name": "Abandono de carrito",
       "credentials": {
         "googleSheetsOAuth2Api": {
-          "id": "R31ACEuQOmKqG1CQ",
-          "name": "Google Sheets Wildersmx"
+          "id": "RVzGPXmtbwg7e3zT",
+          "name": "SHEET INFO.ANDRES"
         }
       },
       "onError": "continueRegularOutput"
@@ -804,7 +837,7 @@
         "operation": "append",
         "documentId": {
           "__rl": true,
-          "value": "https://docs.google.com/spreadsheets/d/1OtbxMYwbPCxTrLCQ3sll1hPa_Nm-nhlEEd5nFt8kKgM/edit",
+          "value": "=https://docs.google.com/spreadsheets/d/1P2EpOlcnRRh5cVBeFlgUN14j-jolaixcfhqCfUV1sXY/edit?gid=215798762#gid=215798762",
           "mode": "url"
         },
         "sheetName": {
@@ -812,19 +845,18 @@
           "value": 215798762,
           "mode": "list",
           "cachedResultName": "Compra Vencida",
-          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1OtbxMYwbPCxTrLCQ3sll1hPa_Nm-nhlEEd5nFt8kKgM/edit#gid=215798762"
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1P2EpOlcnRRh5cVBeFlgUN14j-jolaixcfhqCfUV1sXY/edit#gid=215798762"
         },
         "columns": {
           "mappingMode": "defineBelow",
           "value": {
             "Fecha ": "={{ $json.body.data.product.warranty_date }}",
-            "Nombre": "={{ $json.body.data.buyer.name }}",
-            "Teléfono ": "={{ $json.body.data.buyer.checkout_phone }}",
-            "Pais": "={{ $json.body.data.buyer.address.country }}",
-            "Email": "={{ $json.body.data.buyer.email }}",
             "Estado": "={{ $json.body.data.purchase.status }}",
             "Códigos de la transacción": "={{ $json.body.data.purchase.transaction }}",
-            "Método de pago": "={{ $json.body.data.purchase.payment.type }}"
+            "Nombre": "={{ $json.body.data.buyer.name }}",
+            "Email": "={{ $json.body.data.buyer.email }}",
+            "Teléfono ": "={{ $json.body.data.buyer.checkout_phone }}",
+            "Pais": "={{ $json.body.data.buyer.address.country }}"
           },
           "matchingColumns": [],
           "schema": [
@@ -943,169 +975,14 @@
       "name": "Vencida",
       "credentials": {
         "googleSheetsOAuth2Api": {
-          "id": "R31ACEuQOmKqG1CQ",
-          "name": "Google Sheets Wildersmx"
+          "id": "RVzGPXmtbwg7e3zT",
+          "name": "SHEET INFO.ANDRES"
         }
       },
       "onError": "continueRegularOutput"
     }
   ],
-  "pinData": {
-    "Webhook": [
-      {
-        "json": {
-          "headers": {
-            "host": "contenedor1-n8n.vqn37t.easypanel.host",
-            "user-agent": "Jodd HTTP",
-            "content-length": "2282",
-            "content-type": "application/json",
-            "x-forwarded-for": "52.55.126.241",
-            "x-forwarded-host": "contenedor1-n8n.vqn37t.easypanel.host",
-            "x-forwarded-port": "443",
-            "x-forwarded-proto": "https",
-            "x-forwarded-server": "08c32a3763b4",
-            "x-hotmart-hottok": "LPcR3CoMbuGaTwZnxmswMkN3c2Ccsy6e4d1d59-9797-47d4-a5c1-0ec38e17da1c",
-            "x-real-ip": "52.55.126.241",
-            "accept-encoding": "gzip"
-          },
-          "params": {},
-          "query": {},
-          "body": {
-            "data": {
-              "product": {
-                "support_email": "support@hotmart.com.br",
-                "has_co_production": false,
-                "name": "Produto test postback2",
-                "warranty_date": "2017-12-27T00:00:00Z",
-                "is_physical_product": false,
-                "id": 0,
-                "ucode": "fb056612-bcc6-4217-9e6d-2a5d1110ac2f",
-                "content": {
-                  "has_physical_products": true,
-                  "products": [
-                    {
-                      "name": "How to Make Clear Ice",
-                      "is_physical_product": false,
-                      "id": 4774438,
-                      "ucode": "559fef42-3406-4d82-b775-d09bd33936b1"
-                    },
-                    {
-                      "name": "Organizador de Poeira",
-                      "is_physical_product": true,
-                      "id": 4999597,
-                      "ucode": "099e7644-b7d1-43d6-82a9-ec6be0118a4b"
-                    }
-                  ]
-                }
-              },
-              "commissions": [
-                {
-                  "currency_value": "BRL",
-                  "source": "MARKETPLACE",
-                  "value": 149.5
-                },
-                {
-                  "currency_value": "BRL",
-                  "source": "PRODUCER",
-                  "value": 1350.5
-                }
-              ],
-              "purchase": {
-                "original_offer_price": {
-                  "currency_value": "BRL",
-                  "value": 1500
-                },
-                "checkout_country": {
-                  "iso": "BR",
-                  "name": "Brasil"
-                },
-                "sckPaymentLink": "sckPaymentLinkTest",
-                "order_bump": {
-                  "parent_purchase_transaction": "HP02316330308193",
-                  "is_order_bump": true
-                },
-                "approved_date": 1511783346000,
-                "offer": {
-                  "code": "test",
-                  "coupon_code": "SHHUHA"
-                },
-                "is_funnel": false,
-                "event_tickets": {
-                  "amount": 1758030709493
-                },
-                "order_date": 1511783344000,
-                "price": {
-                  "currency_value": "BRL",
-                  "value": 1500
-                },
-                "buyer_ip": "00.00.00.00",
-                "payment": {
-                  "installments_number": 12,
-                  "type": "CREDIT_CARD"
-                },
-                "full_price": {
-                  "currency_value": "BRL",
-                  "value": 1500
-                },
-                "business_model": "I",
-                "transaction": "HP16015479281022",
-                "status": "DELAYED"
-              },
-              "affiliates": [
-                {
-                  "affiliate_code": "Q58388177J",
-                  "name": "Affiliate name"
-                }
-              ],
-              "producer": {
-                "legal_nature": "Pessoa Física",
-                "document": "12345678965",
-                "name": "Producer Test Name"
-              },
-              "subscription": {
-                "subscriber": {
-                  "code": "I9OT62C3"
-                },
-                "plan": {
-                  "name": "plano de teste",
-                  "id": 123
-                },
-                "status": "ACTIVE"
-              },
-              "buyer": {
-                "checkout_phone_code": "999999999",
-                "address": {
-                  "zipcode": "38400123",
-                  "country": "Brasil",
-                  "number": "10",
-                  "address": "Avenida Francisco Galassi",
-                  "city": "Uberlândia",
-                  "state": "Minas Gerais",
-                  "neighborhood": "Tubalina",
-                  "complement": "Perto do shopping",
-                  "country_iso": "BR"
-                },
-                "document": "69526128664",
-                "name": "Teste Comprador",
-                "last_name": "Comprador",
-                "checkout_phone": "99999999900",
-                "first_name": "Teste",
-                "email": "testeComprador271101postman15@example.com",
-                "document_type": "CPF"
-              }
-            },
-            "hottok": "LPcR3CoMbuGaTwZnxmswMkN3c2Ccsy6e4d1d59-9797-47d4-a5c1-0ec38e17da1c",
-            "id": "344b4bda-3564-4904-a472-67dde755cf49",
-            "creation_date": 1758030709510,
-            "event": "PURCHASE_DELAYED",
-            "version": "2.0.0"
-          },
-          "webhookUrl": "https://contenedor1-n8n.vqn37t.easypanel.host/webhook-test/info-checkout-academia-0925",
-          "executionMode": "test"
-        }
-      }
-    ]
-  },
+  "pinData": {},
   "repo_name": "backupn8n",
   "repo_owner": "infoandresrendoncol",
   "repo_path": "backup/",
@@ -1125,6 +1002,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2025-09-18T02:23:06.000Z",
-  "versionId": "e99eac7d-5b87-4c42-b9e0-7f4471ea64a1"
+  "updatedAt": "2025-09-24T16:38:26.000Z",
+  "versionId": "138e1c98-a049-4f80-a1da-3cdf484b2b48"
 }
