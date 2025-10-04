@@ -1,0 +1,179 @@
+{
+  "active": true,
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-10-03T14:25:15.404Z",
+  "id": "Cd02XFlGZlgxgpcV",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "REGISTRO FR - UdeA - 10/25",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "2e1c5657-2711-4916-9db1-ac6fd61eff09",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -192,
+        16
+      ],
+      "id": "500a33b5-3e73-4ada-9be3-c76240aa8743",
+      "name": "Webhook",
+      "webhookId": "2e1c5657-2711-4916-9db1-ac6fd61eff09"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "=https://docs.google.com/spreadsheets/d/1TkUqntfrO4f2BfRs_D_ABKSxcHpt3u8jy487zn0jhkg/edit",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "UTMs",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1TkUqntfrO4f2BfRs_D_ABKSxcHpt3u8jy487zn0jhkg/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "EMAIL": "={{ $json.body.formValues[0].value }}",
+            "FUENTE": "={{ $json.body.formValues[3].value }}",
+            "CAMPAÑA": "={{ $json.body.formValues[2].value }}",
+            "MEDIO": "={{ $json.body.formValues[4].value }}",
+            "TERMINO": "={{ $json.body.formValues[6].value }}",
+            "CONTENIDO": "={{ $json.body.formValues[5].value }}",
+            "¿Con cuál situación te identificas mejor?": "={{ $json.body.formValues[1].value }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "EMAIL",
+              "displayName": "EMAIL",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "CAMPAÑA",
+              "displayName": "CAMPAÑA",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "FUENTE",
+              "displayName": "FUENTE",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "MEDIO",
+              "displayName": "MEDIO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "TERMINO",
+              "displayName": "TERMINO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "CONTENIDO",
+              "displayName": "CONTENIDO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "¿Con cuál situación te identificas mejor?",
+              "displayName": "¿Con cuál situación te identificas mejor?",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        176,
+        16
+      ],
+      "id": "8cbc50ec-9172-426d-9f78-98befe45e0bb",
+      "name": "Append row in sheet",
+      "retryOnFail": true,
+      "maxTries": 5,
+      "waitBetweenTries": 5000,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "RVzGPXmtbwg7e3zT",
+          "name": "SHEET INFO.ANDRES"
+        }
+      },
+      "onError": "continueRegularOutput"
+    }
+  ],
+  "pinData": {},
+  "repo_name": "backupn8n",
+  "repo_owner": "infoandresrendoncol",
+  "repo_path": "backup/",
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "createdAt": "2025-10-03T14:25:15.410Z",
+      "updatedAt": "2025-10-03T14:25:15.410Z",
+      "role": "workflow:owner",
+      "workflowId": "Cd02XFlGZlgxgpcV",
+      "projectId": "4KmSbENK2cGxsjaf"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2025-10-03T14:37:09.000Z",
+  "versionId": "48bdb994-08e0-4bd2-b0ff-dc2a53ddabb5"
+}
