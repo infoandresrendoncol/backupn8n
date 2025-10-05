@@ -13,6 +13,11 @@
             "node": "Append row in sheet",
             "type": "main",
             "index": 0
+          },
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
           }
         ]
       ]
@@ -335,6 +340,25 @@
           "name": "SHEET INFO.ANDRES"
         }
       }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://pixel.vkdigital.com.br/lead/webhook?oid=plbUx6Rfz3xbqDFkUyHR",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"id_lancamento\": \"lYC0rFuHOPldDtRETXni\",\n  \"email\": \"{{ $json.body.formValues[0].value }}\",\n  \"url\": \"https://federicoymarialuisa.com/black-friday/registro\",\n  \"utm_campaign\": \"{{ $json.body.formValues[1].value }}\",\n  \"utm_source\": \"{{ $json.body.formValues[2].value }}\",\n  \"utm_term\": \"{{ $json.body.formValues[4].value }}\",\n  \"utm_medium\": \"{{ $json.body.formValues[3].value }}\",\n  \"utm_content\": \"{{ $json.body.formValues[5].value }}\",\n  \"vk_source\": \"{{ $json.body.formValues[7].value }}\",\n  \"vk_ad_id\": \"{{ $json.body.formValues[6].value }}\"\n} ",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -208,
+        256
+      ],
+      "id": "9c9a3cd9-3733-436e-b3ed-08f146f57d29",
+      "name": "HTTP Request",
+      "alwaysOutputData": false
     }
   ],
   "pinData": {},
@@ -356,6 +380,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2025-10-03T23:25:38.000Z",
-  "versionId": "c1d393f1-7c21-4ef6-8152-9c2bb0329344"
+  "updatedAt": "2025-10-04T21:37:15.000Z",
+  "versionId": "f179c40b-d1b5-4dc7-9aa6-7d3af1b0461f"
 }
