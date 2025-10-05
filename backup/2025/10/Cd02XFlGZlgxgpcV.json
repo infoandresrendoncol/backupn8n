@@ -8,6 +8,11 @@
             "node": "Append row in sheet",
             "type": "main",
             "index": 0
+          },
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
           }
         ]
       ]
@@ -61,7 +66,7 @@
             "MEDIO": "={{ $json.body.formValues[4].value }}",
             "TERMINO": "={{ $json.body.formValues[6].value }}",
             "CONTENIDO": "={{ $json.body.formValues[5].value }}",
-            "¿Con cuál situación te identificas mejor?": "={{ $json.body.formValues[1].value }}"
+            "Pregunta de cualificación": "={{ $json.body.formValues[1].value }}"
           },
           "matchingColumns": [],
           "schema": [
@@ -121,13 +126,24 @@
               "removed": false
             },
             {
-              "id": "¿Con cuál situación te identificas mejor?",
-              "displayName": "¿Con cuál situación te identificas mejor?",
+              "id": "Pregunta de cualificación",
+              "displayName": "Pregunta de cualificación",
               "required": false,
               "defaultMatch": false,
               "display": true,
               "type": "string",
-              "canBeUsedToMatch": true
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "FECHA ",
+              "displayName": "FECHA ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
             }
           ],
           "attemptToConvertTypes": false,
@@ -153,6 +169,24 @@
         }
       },
       "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://pixel.vkdigital.com.br/lead/webhook?oid=1HgYIfjRGiYsAM7VJ85g",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"id_lancamento\": \"v71tgc9Ctxa4mP0LFnEy\",\n  \"email\": \"{{ $json.body.formValues[0].value }}\",\n  \"url\": \"https://udea.cursofuturosresidentes.com/rumbo-residencia-UdeA/registro\",\n  \"utm_campaign\": \"{{ $json.body.formValues[2].value }}\",\n  \"utm_source\": \"{{ $json.body.formValues[3].value }}\",\n  \"utm_term\": \"{{ $json.body.formValues[5].value }}\",\n  \"utm_medium\": \"{{ $json.body.formValues[4].value }}\",\n  \"utm_content\": \"{{ $json.body.formValues[6].value }}\",\n  \"vk_source\": \"{{ $json.body.formValues[8].value }}\",\n  \"vk_ad_id\": \"{{ $json.body.formValues[7].value }}\"\n} ",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        32,
+        176
+      ],
+      "id": "fb43ae63-0536-434c-bb7c-6fba6bafa243",
+      "name": "HTTP Request"
     }
   ],
   "pinData": {},
@@ -174,6 +208,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2025-10-03T14:37:09.000Z",
-  "versionId": "48bdb994-08e0-4bd2-b0ff-dc2a53ddabb5"
+  "updatedAt": "2025-10-04T21:53:49.000Z",
+  "versionId": "d08a7c25-9797-4911-b79c-a05a14cffb26"
 }
