@@ -165,7 +165,7 @@
         },
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n    \"email\": \"{{ $('Webhook').item.json.body.contact.email }}\",\n    \"segment_ids\": [\n       \"68e5c078740f9e6ef440ad00\"\n    ]\n}",
+        "jsonBody": "={\n    \"email\": \"{{ $('Webhook').item.json.body.contact.email }}\",\n    \"segment_ids\": [\n       \"68e90be0aa4150d673b8fdb0\"\n    ]\n}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
@@ -204,7 +204,7 @@
         },
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n    \"segment_ids\": [\n       \"68e5c078740f9e6ef440ad00\"\n    ]\n}",
+        "jsonBody": "={\n    \"segment_ids\": [\n       \"68e90be0aa4150d673b8fdb0\"\n    ]\n}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
@@ -389,6 +389,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2025-10-09T00:09:05.000Z",
-  "versionId": "75cf7a2a-becd-48d1-b2d7-56d7e5d12e58"
+  "updatedAt": "2025-10-10T14:05:25.000Z",
+  "versionId": "e6051edb-576d-4941-8cb6-6ce1207acfa9"
 }
