@@ -1,5 +1,5 @@
 {
-  "active": false,
+  "active": true,
   "connections": {
     "Webhook": {
       "main": [
@@ -128,7 +128,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        256,
+        272,
         16
       ],
       "id": "d02955da-902a-4d14-8f39-775080354320",
@@ -165,7 +165,7 @@
         },
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n    \"email\": \"{{ $('Webhook').item.json.body.contact.email }}\",\n    \"segment_ids\": [\n       \"68e90be0aa4150d673b8fdb0\"\n    ]\n}",
+        "jsonBody": "={\n    \"email\": \"{{ $('Webhook').item.json.body.contact.email }}\",\n    \"segment_ids\": [\n       \"68ec3aecd0c4eb79eb5aae3b\"\n    ]\n}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
@@ -204,7 +204,7 @@
         },
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n    \"segment_ids\": [\n       \"68e90be0aa4150d673b8fdb0\"\n    ]\n}",
+        "jsonBody": "={\n    \"segment_ids\": [\n       \"68ec3aecd0c4eb79eb5aae3b\"\n    ]\n}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
@@ -238,8 +238,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        96,
-        192
+        272,
+        240
       ],
       "id": "7b2d6c0a-69bd-43b0-bcc0-099a7648dba6",
       "name": "HTTP Request"
@@ -354,7 +354,7 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        256,
+        272,
         -208
       ],
       "id": "6bd9b8c4-0a90-47ba-9fb7-84b862193200",
@@ -389,6 +389,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2025-10-14T17:24:10.000Z",
-  "versionId": "c54fede1-8b82-41d3-b9f1-96d089cf96b2"
+  "updatedAt": "2025-10-15T14:56:13.000Z",
+  "versionId": "cba41d7d-769d-4845-acc0-f78b396a2271"
 }
