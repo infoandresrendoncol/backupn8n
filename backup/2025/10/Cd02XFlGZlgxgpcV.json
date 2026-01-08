@@ -1,5 +1,198 @@
 {
   "active": true,
+  "activeVersion": {
+    "updatedAt": "2026-01-07T17:04:30.904Z",
+    "createdAt": "2026-01-07T17:04:30.904Z",
+    "versionId": "d08a7c25-9797-4911-b79c-a05a14cffb26",
+    "workflowId": "Cd02XFlGZlgxgpcV",
+    "nodes": [
+      {
+        "parameters": {
+          "httpMethod": "POST",
+          "path": "2e1c5657-2711-4916-9db1-ac6fd61eff09",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.webhook",
+        "typeVersion": 2.1,
+        "position": [
+          -192,
+          16
+        ],
+        "id": "500a33b5-3e73-4ada-9be3-c76240aa8743",
+        "name": "Webhook",
+        "webhookId": "2e1c5657-2711-4916-9db1-ac6fd61eff09"
+      },
+      {
+        "parameters": {
+          "operation": "append",
+          "documentId": {
+            "__rl": true,
+            "value": "=https://docs.google.com/spreadsheets/d/1TkUqntfrO4f2BfRs_D_ABKSxcHpt3u8jy487zn0jhkg/edit",
+            "mode": "url"
+          },
+          "sheetName": {
+            "__rl": true,
+            "value": "gid=0",
+            "mode": "list",
+            "cachedResultName": "UTMs",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1TkUqntfrO4f2BfRs_D_ABKSxcHpt3u8jy487zn0jhkg/edit#gid=0"
+          },
+          "columns": {
+            "mappingMode": "defineBelow",
+            "value": {
+              "EMAIL": "={{ $json.body.formValues[0].value }}",
+              "FUENTE": "={{ $json.body.formValues[3].value }}",
+              "CAMPAÑA": "={{ $json.body.formValues[2].value }}",
+              "MEDIO": "={{ $json.body.formValues[4].value }}",
+              "TERMINO": "={{ $json.body.formValues[6].value }}",
+              "CONTENIDO": "={{ $json.body.formValues[5].value }}",
+              "Pregunta de cualificación": "={{ $json.body.formValues[1].value }}"
+            },
+            "matchingColumns": [],
+            "schema": [
+              {
+                "id": "EMAIL",
+                "displayName": "EMAIL",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "CAMPAÑA",
+                "displayName": "CAMPAÑA",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "FUENTE",
+                "displayName": "FUENTE",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "MEDIO",
+                "displayName": "MEDIO",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "TERMINO",
+                "displayName": "TERMINO",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "CONTENIDO",
+                "displayName": "CONTENIDO",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "Pregunta de cualificación",
+                "displayName": "Pregunta de cualificación",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "FECHA ",
+                "displayName": "FECHA ",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              }
+            ],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": false
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.googleSheets",
+        "typeVersion": 4.7,
+        "position": [
+          176,
+          16
+        ],
+        "id": "8cbc50ec-9172-426d-9f78-98befe45e0bb",
+        "name": "Append row in sheet",
+        "retryOnFail": true,
+        "maxTries": 5,
+        "waitBetweenTries": 5000,
+        "credentials": {
+          "googleSheetsOAuth2Api": {
+            "id": "RVzGPXmtbwg7e3zT",
+            "name": "SHEET INFO.ANDRES"
+          }
+        },
+        "onError": "continueRegularOutput"
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "https://pixel.vkdigital.com.br/lead/webhook?oid=1HgYIfjRGiYsAM7VJ85g",
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "={\n  \"id_lancamento\": \"v71tgc9Ctxa4mP0LFnEy\",\n  \"email\": \"{{ $json.body.formValues[0].value }}\",\n  \"url\": \"https://udea.cursofuturosresidentes.com/rumbo-residencia-UdeA/registro\",\n  \"utm_campaign\": \"{{ $json.body.formValues[2].value }}\",\n  \"utm_source\": \"{{ $json.body.formValues[3].value }}\",\n  \"utm_term\": \"{{ $json.body.formValues[5].value }}\",\n  \"utm_medium\": \"{{ $json.body.formValues[4].value }}\",\n  \"utm_content\": \"{{ $json.body.formValues[6].value }}\",\n  \"vk_source\": \"{{ $json.body.formValues[8].value }}\",\n  \"vk_ad_id\": \"{{ $json.body.formValues[7].value }}\"\n} ",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          32,
+          176
+        ],
+        "id": "fb43ae63-0536-434c-bb7c-6fba6bafa243",
+        "name": "HTTP Request"
+      }
+    ],
+    "connections": {
+      "Webhook": {
+        "main": [
+          [
+            {
+              "node": "Append row in sheet",
+              "type": "main",
+              "index": 0
+            },
+            {
+              "node": "HTTP Request",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "authors": "system migration",
+    "name": null,
+    "description": null,
+    "autosaved": false
+  },
+  "activeVersionId": "d08a7c25-9797-4911-b79c-a05a14cffb26",
   "connections": {
     "Webhook": {
       "main": [
@@ -198,8 +391,8 @@
   },
   "shared": [
     {
-      "createdAt": "2025-10-03T14:25:15.410Z",
       "updatedAt": "2025-10-03T14:25:15.410Z",
+      "createdAt": "2025-10-03T14:25:15.410Z",
       "role": "workflow:owner",
       "workflowId": "Cd02XFlGZlgxgpcV",
       "projectId": "4KmSbENK2cGxsjaf"
