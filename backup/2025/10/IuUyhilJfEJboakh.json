@@ -1,5 +1,370 @@
 {
   "active": true,
+  "activeVersion": {
+    "updatedAt": "2026-01-07T17:04:30.904Z",
+    "createdAt": "2026-01-07T17:04:30.904Z",
+    "versionId": "f179c40b-d1b5-4dc7-9aa6-7d3af1b0461f",
+    "workflowId": "IuUyhilJfEJboakh",
+    "nodes": [
+      {
+        "parameters": {
+          "httpMethod": "POST",
+          "path": "6e9d539e-daa7-4e4e-b1c9-d297110c2408",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.webhook",
+        "typeVersion": 2.1,
+        "position": [
+          -192,
+          16
+        ],
+        "id": "59c28c39-126d-479e-84f8-320b765fbd64",
+        "name": "Webhook",
+        "webhookId": "6e9d539e-daa7-4e4e-b1c9-d297110c2408"
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 2
+            },
+            "conditions": [
+              {
+                "id": "ff9f56d5-3bdc-45e2-b7f3-5fec484a6f1c",
+                "leftValue": "={{ $json.error.status }}",
+                "rightValue": 404,
+                "operator": {
+                  "type": "number",
+                  "operation": "equals"
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.2,
+        "position": [
+          256,
+          96
+        ],
+        "id": "6f7e6d97-f27a-4574-82e4-001d97a74f4b",
+        "name": "EXISTE FLODESK?1"
+      },
+      {
+        "parameters": {
+          "url": "=https://api.flodesk.com/v1/subscribers/{{ $('Webhook').item.json.body.contact.email }}",
+          "authentication": "genericCredentialType",
+          "genericAuthType": "httpHeaderAuth",
+          "sendHeaders": true,
+          "headerParameters": {
+            "parameters": [
+              {
+                "name": "User-Agent",
+                "value": "N8N"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          32,
+          96
+        ],
+        "id": "e6da0b93-bfdd-4358-94e9-fed290fdbf5f",
+        "name": "BUSQUEDA EN FLODESK",
+        "retryOnFail": false,
+        "maxTries": 5,
+        "waitBetweenTries": 5000,
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "Os1TILqyW1gq3WfI",
+            "name": "FLODESK F&M"
+          },
+          "httpBasicAuth": {
+            "id": "QvDqcChg1nnswrDt",
+            "name": "FLODESK F&M"
+          }
+        },
+        "onError": "continueRegularOutput"
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "https://api.flodesk.com/v1/subscribers",
+          "authentication": "genericCredentialType",
+          "genericAuthType": "httpHeaderAuth",
+          "sendHeaders": true,
+          "headerParameters": {
+            "parameters": [
+              {
+                "name": "User-Agent",
+                "value": "N8N"
+              }
+            ]
+          },
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "={\n    \"email\": \"{{ $('Webhook').item.json.body.contact.email }}\",\n    \"segment_ids\": [\n       \"68dc7a6e9a3f78e859747f6f\"\n    ]\n}",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          480,
+          0
+        ],
+        "id": "bff557e1-e8f2-424d-a500-885eeaf5c6b2",
+        "name": "CREA E INSERTA EN SEGMENTO",
+        "retryOnFail": true,
+        "maxTries": 5,
+        "waitBetweenTries": 5000,
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "Os1TILqyW1gq3WfI",
+            "name": "FLODESK F&M"
+          }
+        },
+        "onError": "continueRegularOutput"
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "=https://api.flodesk.com/v1/subscribers/{{ $json.id }}/segments",
+          "authentication": "genericCredentialType",
+          "genericAuthType": "httpHeaderAuth",
+          "sendHeaders": true,
+          "headerParameters": {
+            "parameters": [
+              {
+                "name": "User-Agent",
+                "value": "N8N"
+              }
+            ]
+          },
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "={\n    \"segment_ids\": [\n       \"68dc7a6e9a3f78e859747f6f\"\n    ]\n}",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          480,
+          192
+        ],
+        "id": "22cdf50c-5356-4bff-9799-d7ddd5b4d738",
+        "name": "INSERTA EN SEGMENTO",
+        "retryOnFail": true,
+        "maxTries": 5,
+        "waitBetweenTries": 5000,
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "Os1TILqyW1gq3WfI",
+            "name": "FLODESK F&M"
+          }
+        },
+        "onError": "continueRegularOutput"
+      },
+      {
+        "parameters": {
+          "operation": "append",
+          "documentId": {
+            "__rl": true,
+            "value": "=https://docs.google.com/spreadsheets/d/1jCdrV6SsKx2qU9DOIrInvMbm-zXx5ZAo42lT5kkJ_F0/edit?gid=0#gid=0",
+            "mode": "url"
+          },
+          "sheetName": {
+            "__rl": true,
+            "value": "gid=0",
+            "mode": "list",
+            "cachedResultName": "UTMs",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1jCdrV6SsKx2qU9DOIrInvMbm-zXx5ZAo42lT5kkJ_F0/edit#gid=0"
+          },
+          "columns": {
+            "mappingMode": "defineBelow",
+            "value": {
+              "EMAIL": "={{ $json.body.formValues[0].value }}",
+              "CONTENIDO": "={{ $json.body.formValues[5].value }}",
+              "TERMINO": "={{ $json.body.formValues[4].value }}",
+              "CAMPAÑA": "={{ $json.body.formValues[1].value }}",
+              "FUENTE": "={{ $json.body.formValues[2].value }}",
+              "MEDIO": "={{ $json.body.formValues[3].value }}"
+            },
+            "matchingColumns": [],
+            "schema": [
+              {
+                "id": "EMAIL",
+                "displayName": "EMAIL",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "CAMPAÑA",
+                "displayName": "CAMPAÑA",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "FUENTE",
+                "displayName": "FUENTE",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "MEDIO",
+                "displayName": "MEDIO",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "TERMINO",
+                "displayName": "TERMINO",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "CONTENIDO",
+                "displayName": "CONTENIDO",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "¿Con cuál situación te identificas mejor?",
+                "displayName": "¿Con cuál situación te identificas mejor?",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": true
+              }
+            ],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": false
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.googleSheets",
+        "typeVersion": 4.7,
+        "position": [
+          48,
+          -112
+        ],
+        "id": "4dd6dbf2-56a2-4638-a1db-945d9ccca532",
+        "name": "Append row in sheet",
+        "retryOnFail": true,
+        "maxTries": 5,
+        "waitBetweenTries": 5000,
+        "credentials": {
+          "googleSheetsOAuth2Api": {
+            "id": "RVzGPXmtbwg7e3zT",
+            "name": "SHEET INFO.ANDRES"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "https://pixel.vkdigital.com.br/lead/webhook?oid=plbUx6Rfz3xbqDFkUyHR",
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "={\n  \"id_lancamento\": \"lYC0rFuHOPldDtRETXni\",\n  \"email\": \"{{ $json.body.formValues[0].value }}\",\n  \"url\": \"https://federicoymarialuisa.com/black-friday/registro\",\n  \"utm_campaign\": \"{{ $json.body.formValues[1].value }}\",\n  \"utm_source\": \"{{ $json.body.formValues[2].value }}\",\n  \"utm_term\": \"{{ $json.body.formValues[4].value }}\",\n  \"utm_medium\": \"{{ $json.body.formValues[3].value }}\",\n  \"utm_content\": \"{{ $json.body.formValues[5].value }}\",\n  \"vk_source\": \"{{ $json.body.formValues[7].value }}\",\n  \"vk_ad_id\": \"{{ $json.body.formValues[6].value }}\"\n} ",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          -208,
+          256
+        ],
+        "id": "9c9a3cd9-3733-436e-b3ed-08f146f57d29",
+        "name": "HTTP Request",
+        "alwaysOutputData": false
+      }
+    ],
+    "connections": {
+      "Webhook": {
+        "main": [
+          [
+            {
+              "node": "BUSQUEDA EN FLODESK",
+              "type": "main",
+              "index": 0
+            },
+            {
+              "node": "Append row in sheet",
+              "type": "main",
+              "index": 0
+            },
+            {
+              "node": "HTTP Request",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "EXISTE FLODESK?1": {
+        "main": [
+          [
+            {
+              "node": "CREA E INSERTA EN SEGMENTO",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "INSERTA EN SEGMENTO",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "BUSQUEDA EN FLODESK": {
+        "main": [
+          [
+            {
+              "node": "EXISTE FLODESK?1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "authors": "system migration",
+    "name": null,
+    "description": null,
+    "autosaved": false
+  },
+  "activeVersionId": "f179c40b-d1b5-4dc7-9aa6-7d3af1b0461f",
   "connections": {
     "Webhook": {
       "main": [
@@ -370,8 +735,8 @@
   },
   "shared": [
     {
-      "createdAt": "2025-10-03T17:20:41.468Z",
       "updatedAt": "2025-10-03T17:20:41.468Z",
+      "createdAt": "2025-10-03T17:20:41.468Z",
       "role": "workflow:owner",
       "workflowId": "IuUyhilJfEJboakh",
       "projectId": "4KmSbENK2cGxsjaf"
