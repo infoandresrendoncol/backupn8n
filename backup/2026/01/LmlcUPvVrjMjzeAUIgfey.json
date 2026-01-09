@@ -3,16 +3,84 @@
   "activeVersion": null,
   "activeVersionId": null,
   "connections": {
-    "Webhook": {
+    "Info Hotmart": {
+      "main": [
+        [
+          {
+            "node": "Consulta Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Consulta Email": {
+      "main": [
+        [
+          {
+            "node": "¿Cliente no existe?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Crear cliente": {
+      "main": [
+        [
+          {
+            "node": "Get many rows",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Cargar venta": {
       "main": [
         [
           {
             "node": "Tipo de transacción",
             "type": "main",
             "index": 0
-          },
+          }
+        ]
+      ]
+    },
+    "¿Cliente no existe?": {
+      "main": [
+        [
           {
-            "node": "Execute a SQL query",
+            "node": "Crear cliente",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Get many rows",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Asignación de comisiones": {
+      "main": [
+        [
+          {
+            "node": "Cargar venta",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get many rows": {
+      "main": [
+        [
+          {
+            "node": "Asignación de comisiones",
             "type": "main",
             "index": 0
           }
@@ -28,22 +96,6 @@
   },
   "name": "My workflow 4",
   "nodes": [
-    {
-      "parameters": {
-        "httpMethod": "POST",
-        "path": "hotmart-ventas-global",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.webhook",
-      "typeVersion": 2.1,
-      "position": [
-        0,
-        0
-      ],
-      "id": "563c039b-7052-4bae-b481-0b70793bdf43",
-      "name": "Webhook",
-      "webhookId": "7e71da5f-b86d-4848-9d4b-a6f02fd9c2ba"
-    },
     {
       "parameters": {
         "rules": {
@@ -99,29 +151,235 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3.4,
       "position": [
-        416,
-        0
+        1440,
+        -80
       ],
       "id": "6fd447f5-c6db-42d7-bcac-b6a0cdcc79c1",
       "name": "Tipo de transacción"
     },
     {
       "parameters": {
-        "operation": "executeQuery",
-        "query": "SELECT * FROM mapeo_clientes LIMIT 1;",
+        "httpMethod": "POST",
+        "path": "hotmart-ventas-global",
         "options": {}
       },
-      "type": "n8n-nodes-base.postgres",
-      "typeVersion": 2.6,
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "563c039b-7052-4bae-b481-0b70793bdf43",
+      "name": "Info Hotmart",
+      "webhookId": "7e71da5f-b86d-4848-9d4b-a6f02fd9c2ba"
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "tableId": "clientes",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "email",
+              "condition": "eq",
+              "keyValue": "={{ $json.body.data.buyer.email }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
       "position": [
         208,
-        128
+        0
       ],
-      "id": "1d69b354-f56c-4ad8-b5b6-0ca9877a25b2",
-      "name": "Execute a SQL query",
+      "id": "d96e7a04-b491-42bb-952d-e46ae0317ccf",
+      "name": "Consulta Email",
+      "alwaysOutputData": true,
       "credentials": {
-        "postgres": {
-          "id": "VTMFjimKNUiXQNsm",
+        "supabaseApi": {
+          "id": "MrnzEgGfGVHsVNPD",
+          "name": "Supabase BE"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "tableId": "clientes",
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "email"
+            },
+            {
+              "fieldId": "email",
+              "fieldValue": "={{ $('Info Hotmart').item.json.body.data.buyer.email }}"
+            },
+            {
+              "fieldId": "nombre",
+              "fieldValue": "={{ $('Info Hotmart').item.json.body.data.buyer.name }}"
+            },
+            {
+              "fieldId": "pais",
+              "fieldValue": "={{ $('Info Hotmart').item.json.body.data.buyer.address.country }}"
+            },
+            {
+              "fieldId": "productor_id",
+              "fieldValue": "={{ $('Info Hotmart').item.json.body.data.producer.document }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        656,
+        -144
+      ],
+      "id": "2b648437-68e1-4532-8510-c27942aefad2",
+      "name": "Crear cliente",
+      "credentials": {
+        "supabaseApi": {
+          "id": "MrnzEgGfGVHsVNPD",
+          "name": "Supabase BE"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "tableId": "ventas_hotmart",
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "id_transaccion",
+              "fieldValue": "={{ $('Info Hotmart').item.json.body.data.purchase.transaction }}"
+            },
+            {
+              "fieldId": "email_cliente",
+              "fieldValue": "={{ $('Info Hotmart').item.json.body.data.buyer.email }}"
+            },
+            {
+              "fieldId": "producto_id",
+              "fieldValue": "={{ $('Info Hotmart').item.json.body.data.product.id }}"
+            },
+            {
+              "fieldId": "producto_nombre",
+              "fieldValue": "={{ $('Info Hotmart').item.json.body.data.product.name }}"
+            },
+            {
+              "fieldId": "monto_total",
+              "fieldValue": "={{ $('Info Hotmart').item.json.body.data.purchase.original_offer_price.value }}"
+            },
+            {
+              "fieldId": "comision_cliente",
+              "fieldValue": "={{ $('Info Hotmart').item.json.body.data.purchase.original_offer_price.value - $json.comision_andres }}"
+            },
+            {
+              "fieldId": "comision_andres",
+              "fieldValue": "={{ $json.comision_andres }}"
+            },
+            {
+              "fieldId": "comision_mariana",
+              "fieldValue": "={{ $json.comision_mariana }}"
+            },
+            {
+              "fieldId": "comision_wilder",
+              "fieldValue": "={{ $json.comision_wilder }}"
+            },
+            {
+              "fieldId": "pais_comprador",
+              "fieldValue": "={{ $('Info Hotmart').item.json.body.data.purchase.checkout_country.name }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        1216,
+        -128
+      ],
+      "id": "f7e972df-42b4-42bb-95bb-8da2f20bdbcd",
+      "name": "Cargar venta",
+      "credentials": {
+        "supabaseApi": {
+          "id": "MrnzEgGfGVHsVNPD",
+          "name": "Supabase BE"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "d7cbeaa7-e8e0-4738-97ed-3df8beef1041",
+              "leftValue": "={{ $node[\"Consulta Email\"].json.length || Object.keys($node[\"Consulta Email\"].json).length }}",
+              "rightValue": 0,
+              "operator": {
+                "type": "number",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        432,
+        0
+      ],
+      "id": "1588429b-51f3-446b-8704-40f70ec18bdf",
+      "name": "¿Cliente no existe?"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        976,
+        -160
+      ],
+      "id": "2903c886-4ed1-43cd-b8ea-708aa34e6aa7",
+      "name": "Asignación de comisiones"
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "tableId": "mapeo_clientes",
+        "matchType": "allFilters",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "productor_id",
+              "condition": "eq",
+              "keyValue": "={{ $('Info Hotmart').item.json.body.data.producer.document }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        864,
+        16
+      ],
+      "id": "21b7889e-25a9-4bf9-ae84-4022fa12b1a7",
+      "name": "Get many rows",
+      "credentials": {
+        "supabaseApi": {
+          "id": "MrnzEgGfGVHsVNPD",
           "name": "Supabase BE"
         }
       }
@@ -147,6 +405,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2026-01-07T23:25:32.432Z",
-  "versionId": "87922423-307b-4925-a571-d140aad60853"
+  "updatedAt": "2026-01-08T22:36:20.953Z",
+  "versionId": "d53bc263-558a-4c6e-a45f-fb13f2808a84"
 }
