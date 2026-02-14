@@ -1,0 +1,88 @@
+{
+  "active": false,
+  "activeVersion": null,
+  "activeVersionId": null,
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Insert rows in a table",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2026-01-28T19:40:02.343Z",
+  "id": "LoM1YQV_O0qjfSSTUuIrX",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "My workflow 6",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -368,
+        16
+      ],
+      "id": "18d56d90-ee22-4634-a6e7-cf80222166bd",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "mode": "list",
+          "value": ""
+        }
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        -160,
+        16
+      ],
+      "id": "cdd2eecb-5dfa-4809-81ab-f78cdc705eb7",
+      "name": "Insert rows in a table",
+      "credentials": {
+        "postgres": {
+          "id": "UpurbfBGTv1lTVwy",
+          "name": "BD POSTGRES VPS"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "repo_name": "backupn8n",
+  "repo_owner": "infoandresrendoncol",
+  "repo_path": "backup/",
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false
+  },
+  "shared": [
+    {
+      "updatedAt": "2026-01-28T19:40:02.347Z",
+      "createdAt": "2026-01-28T19:40:02.347Z",
+      "role": "workflow:owner",
+      "workflowId": "LoM1YQV_O0qjfSSTUuIrX",
+      "projectId": "4KmSbENK2cGxsjaf"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2026-01-28T19:41:45.095Z",
+  "versionId": "72bce81d-5972-4d98-b6c6-13050c39e3e8"
+}
