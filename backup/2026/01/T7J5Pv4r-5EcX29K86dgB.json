@@ -1,0 +1,689 @@
+{
+  "active": true,
+  "activeVersion": {
+    "updatedAt": "2026-01-21T00:00:17.000Z",
+    "createdAt": "2026-01-20T23:46:46.738Z",
+    "versionId": "04d83bda-4c52-44e7-aa4c-f4e18baec3f9",
+    "workflowId": "T7J5Pv4r-5EcX29K86dgB",
+    "nodes": [
+      {
+        "parameters": {
+          "rule": {
+            "interval": [
+              {
+                "triggerAtHour": 5
+              }
+            ]
+          }
+        },
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "typeVersion": 1.3,
+        "position": [
+          -320,
+          0
+        ],
+        "id": "301517b2-d28b-4aa1-b62d-6aa0e23b6c41",
+        "name": "Día siguiente 5:00 am"
+      },
+      {
+        "parameters": {
+          "operation": "getAll",
+          "tableId": "cuentas_publicitarias_meta"
+        },
+        "type": "n8n-nodes-base.supabase",
+        "typeVersion": 1,
+        "position": [
+          -112,
+          0
+        ],
+        "id": "87a6e13f-8535-4c88-9e9e-810ab910ecf9",
+        "name": "Buscar Cuentas Publicitarias",
+        "credentials": {
+          "supabaseApi": {
+            "id": "MrnzEgGfGVHsVNPD",
+            "name": "Supabase BE"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "graphApiVersion": "v23.0",
+          "node": "=act_{{ $json.id_cuenta_ads }}/insights",
+          "options": {
+            "queryParameters": {
+              "parameter": [
+                {
+                  "name": "level",
+                  "value": "campaign"
+                },
+                {
+                  "name": "fields",
+                  "value": "account_id,campaign_id,campaign_name,objective,spend,clicks,video_p75_watched_actions,impressions,ctr,cpm,actions"
+                },
+                {
+                  "name": "access_token",
+                  "value": "EAAMLtoYApwoBQTStKUHePZB8cg7N19oQy8rKFVrRjOyZAINgbQAXAHB2R8nnLKc6nD86UbhyrC6n6DQemr71Pz303U9cYoUEhsw6ZCrDklHt8OlnX0UCgEhJeSScSpePZBbCf1UZAt39RgeIF3vmQbONvPT0ZAxn3ho84lAyZCzM6ZAEX0tXC22ZB4E0a3Xfy7wKg"
+                },
+                {
+                  "name": "date_preset",
+                  "value": "yesterday"
+                }
+              ]
+            }
+          }
+        },
+        "type": "n8n-nodes-base.facebookGraphApi",
+        "typeVersion": 1,
+        "position": [
+          96,
+          0
+        ],
+        "id": "61dbd59e-c637-42a9-9bd4-bc865605f19f",
+        "name": "Buscar Info en Meta",
+        "credentials": {
+          "facebookGraphApi": {
+            "id": "ynh4i2xLfKE74JQc",
+            "name": "Facebook Ads - DATA"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "fieldToSplitOut": "data",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.splitOut",
+        "typeVersion": 1,
+        "position": [
+          304,
+          0
+        ],
+        "id": "9c0cec69-8f09-4b3e-ae2f-4fc66826c918",
+        "name": "Separar info por campaña"
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "50c31197-6687-4e4c-87dc-665a656a4ba1",
+                "name": "campaña_id",
+                "value": "={{ $json.campaign_id }}",
+                "type": "string"
+              },
+              {
+                "id": "19fb14c8-f113-4a88-aa34-936d09840352",
+                "name": "nombre_campaña",
+                "value": "={{ $json.campaign_name }}",
+                "type": "string"
+              },
+              {
+                "id": "2e1544d4-746e-4cb9-a875-9b1d91d7e151",
+                "name": "tipo_campaña",
+                "value": "={{ \n  ({\n    'OUTCOME_SALES': 'Ventas',\n    'OUTCOME_MESSAGES': 'Mensajes',\n    'OUTCOME_LEADS': 'Leads',\n    'OUTCOME_TRAFFIC': 'Tráfico',\n    'OUTCOME_AWARENESS': 'Reconocimiento'\n  })[$json.objective] || $json.objective \n}}",
+                "type": "string"
+              },
+              {
+                "id": "68de5675-4ff9-4ba4-9b7d-f1f45e4a05c8",
+                "name": "gasto_total",
+                "value": "={{ $json.spend }}",
+                "type": "number"
+              },
+              {
+                "id": "e5749603-5695-49cc-8fe3-666e24a9cb36",
+                "name": "clics",
+                "value": "={{ $json.clicks }}",
+                "type": "number"
+              },
+              {
+                "id": "f91a72ca-04a0-4b0f-b1c3-98df61433b20",
+                "name": "impresiones",
+                "value": "={{ $json.impressions }}",
+                "type": "number"
+              },
+              {
+                "id": "01a45d07-7796-4d72-9dc3-4773bca5f6d3",
+                "name": "ctr",
+                "value": "={{ $json.ctr / 100}}",
+                "type": "number"
+              },
+              {
+                "id": "7d9724ca-d517-41a4-b959-f4a2a1b1071e",
+                "name": "cpm",
+                "value": "={{ $json.cpm }}",
+                "type": "number"
+              },
+              {
+                "id": "8785d0c7-aacc-4af3-a721-a4471acb2912",
+                "name": "resultados",
+                "value": "={{ \n  (() => {\n    const obj = $json.objective;\n    const actions = $json.actions || [];\n    \n    // Este diccionario es el \"Traductor\"\n    const mapping = {\n      // Si el objetivo es Ventas -> Busca Compras\n      'OUTCOME_SALES': 'web_in_store_purchase', \n      \n      // Si el objetivo es Mensajes -> Busca Conversaciones nuevas\n      'OUTCOME_MESSAGES': 'onsite_conversion.total_messaging_connection',\n      \n      // Si el objetivo es Tráfico -> Busca Clics en el enlace\n      'OUTCOME_TRAFFIC': 'link_click',\n      \n      // Si el objetivo es Leads (Clientes potenciales) -> Busca Clientes potenciales\n      'OUTCOME_LEADS': 'lead',\n      \n      // Si el objetivo es Interacción (Engagement) -> Busca Interacciones con el post\n      'OUTCOME_ENGAGEMENT': 'post_engagement'\n    };\n\n    const targetAction = mapping[obj];\n\n    // Buscamos en la lista de acciones de esa campaña específica\n    const result = actions.find(a => a.action_type === targetAction);\n    \n    // Si lo encuentra, devuelve el número. Si no existe esa acción ese día, devuelve 0.\n    return result ? Number(result.value) : 0;\n  })()\n}}",
+                "type": "number"
+              },
+              {
+                "id": "305d654a-b5d6-40d3-87f8-9ec61119b66f",
+                "name": "gasto_productor",
+                "value": "={{ \n  (() => {\n    const nombre = $json.campaign_name;\n    const gastoTotal = Number($json.spend);\n\n    if (nombre.includes('[P100]')) {\n      return gastoTotal.toFixed(2);\n    } else {\n      // Si no tiene la etiqueta [P100], se asume 50/50\n      return (gastoTotal * 0.50).toFixed(2);\n    }\n  })()\n}}",
+                "type": "number"
+              },
+              {
+                "id": "0e387d2a-d919-41a4-a2f7-9c2190f9dd23",
+                "name": "gasto_be_online",
+                "value": "={{ \n  (() => {\n    const nombre = $json.campaign_name;\n    const gastoTotal = Number($json.spend);\n\n    if (nombre.includes('[P100]')) {\n      return 0;\n    } else {\n      // Si no tiene la etiqueta [P100], se asume 50/50\n      return (gastoTotal * 0.50).toFixed(2);\n    }\n  })()\n}}",
+                "type": "number"
+              },
+              {
+                "id": "456b9232-38dd-46f7-b0d6-45b0e58bae50",
+                "name": "costo_por_resultado",
+                "value": "={{ \n  (() => {\n    // 1. Buscamos el resultado (usando la lógica que ya conocemos)\n    const obj = $json.objective;\n    const actions = $json.actions || [];\n    const mapping = {\n      'OUTCOME_SALES': 'web_in_store_purchase',\n      'OUTCOME_MESSAGES': 'onsite_conversion.total_messaging_connection',\n      'OUTCOME_LEADS': 'lead',\n      'OUTCOME_TRAFFIC': 'link_click'\n    };\n    \n    const action = actions.find(a => a.action_type === mapping[obj]);\n    const numResultados = action ? Number(action.value) : 0;\n    const gasto = Number($json.spend) || 0;\n\n    // 2. Calculamos el costo\n    // Si hubo resultados, divide gasto/resultados. Si no, el costo es el gasto total.\n    return numResultados > 0 ? (gasto / numResultados).toFixed(2) : gasto.toFixed(2);\n  })()\n}}",
+                "type": "number"
+              },
+              {
+                "id": "ed2c9580-66a3-47cc-8f62-3e5d031f255f",
+                "name": "fecha_gasto",
+                "value": "={{ $today.minus({ days: 1 }).toFormat('yyyy-MM-dd') }}",
+                "type": "string"
+              },
+              {
+                "id": "a45a58c5-62b8-48c0-8a4b-1679e22407f2",
+                "name": "video_view_75",
+                "value": "={{ $json.video_p75_watched_actions[0].value }}",
+                "type": "number"
+              },
+              {
+                "id": "995e8c49-3530-4bbe-a704-2a90fc3b2156",
+                "name": "page_view",
+                "value": "={{ $json.actions.find(a => a.action_type === 'landing_page_view')?.value || 0 }}",
+                "type": "number"
+              },
+              {
+                "id": "2347442c-f257-46f7-b89a-938362094b6a",
+                "name": "pagos_iniciados",
+                "value": "={{ $json.actions.find(a => a.action_type === 'initiate_checkout')?.value || 0 }}",
+                "type": "number"
+              },
+              {
+                "id": "c61e3e21-08f9-43f7-9629-267f4f53938e",
+                "name": "visitas_instagram",
+                "value": "={{ $json.actions.find(a => a.action_type === 'instagram_profile_visit')?.value || 0 }}",
+                "type": "number"
+              },
+              {
+                "id": "d17edd9c-08d8-407f-9dde-eec6556d49da",
+                "name": "id_cuenta_ads",
+                "value": "={{ $json.account_id }}",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          512,
+          0
+        ],
+        "id": "c8d4a585-1e6f-4bc4-8b7c-4de4dde74288",
+        "name": "Seleccionar Datos"
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "http://contenedor1_supabase_kong:8000/rest/v1/gasto_marketing_fb",
+          "sendHeaders": true,
+          "headerParameters": {
+            "parameters": [
+              {
+                "name": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyAgCiAgICAicm9sZSI6ICJhbm9uIiwKICAgICJpc3MiOiAic3VwYWJhc2UtZGVtbyIsCiAgICAiaWF0IjogMTY0MTc2OTIwMCwKICAgICJleHAiOiAxNzk5NTM1NjAwCn0.dc_X5iR_VP_qT0zsiyj_I_OZ2T9FtRU2BBNWN8Bu4GE"
+              },
+              {
+                "name": "apikey",
+                "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyAgCiAgICAicm9sZSI6ICJhbm9uIiwKICAgICJpc3MiOiAic3VwYWJhc2UtZGVtbyIsCiAgICAiaWF0IjogMTY0MTc2OTIwMCwKICAgICJleHAiOiAxNzk5NTM1NjAwCn0.dc_X5iR_VP_qT0zsiyj_I_OZ2T9FtRU2BBNWN8Bu4GE"
+              },
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              }
+            ]
+          },
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "={{ JSON.stringify($('Seleccionar Datos').all().map(item => item.json)) }}",
+          "options": {
+            "response": {
+              "response": {
+                "responseFormat": "json"
+              }
+            }
+          }
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.3,
+        "position": [
+          720,
+          0
+        ],
+        "id": "4683b7d2-dd41-45cb-bb83-34e9f1e1134f",
+        "name": "Crear fila con info",
+        "onError": "continueRegularOutput"
+      }
+    ],
+    "connections": {
+      "Día siguiente 5:00 am": {
+        "main": [
+          [
+            {
+              "node": "Buscar Cuentas Publicitarias",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Buscar Cuentas Publicitarias": {
+        "main": [
+          [
+            {
+              "node": "Buscar Info en Meta",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Buscar Info en Meta": {
+        "main": [
+          [
+            {
+              "node": "Separar info por campaña",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Separar info por campaña": {
+        "main": [
+          [
+            {
+              "node": "Seleccionar Datos",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Seleccionar Datos": {
+        "main": [
+          [
+            {
+              "node": "Crear fila con info",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "authors": "BE Online",
+    "name": "Version 04d83bda",
+    "description": "",
+    "autosaved": false
+  },
+  "activeVersionId": "04d83bda-4c52-44e7-aa4c-f4e18baec3f9",
+  "connections": {
+    "Día siguiente 5:00 am": {
+      "main": [
+        [
+          {
+            "node": "Buscar Cuentas Publicitarias",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Buscar Cuentas Publicitarias": {
+      "main": [
+        [
+          {
+            "node": "Buscar Info en Meta",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Buscar Info en Meta": {
+      "main": [
+        [
+          {
+            "node": "Separar info por campaña",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Separar info por campaña": {
+      "main": [
+        [
+          {
+            "node": "Seleccionar Datos",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Seleccionar Datos": {
+      "main": [
+        [
+          {
+            "node": "Crear fila con info",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2026-01-15T19:15:15.013Z",
+  "id": "T7J5Pv4r-5EcX29K86dgB",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Flujo Meta Ads",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAtHour": 5
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        -320,
+        0
+      ],
+      "id": "301517b2-d28b-4aa1-b62d-6aa0e23b6c41",
+      "name": "Día siguiente 5:00 am"
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "tableId": "cuentas_publicitarias_meta"
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        -112,
+        0
+      ],
+      "id": "87a6e13f-8535-4c88-9e9e-810ab910ecf9",
+      "name": "Buscar Cuentas Publicitarias",
+      "credentials": {
+        "supabaseApi": {
+          "id": "MrnzEgGfGVHsVNPD",
+          "name": "Supabase BE"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "graphApiVersion": "v23.0",
+        "node": "=act_{{ $json.id_cuenta_ads }}/insights",
+        "options": {
+          "queryParameters": {
+            "parameter": [
+              {
+                "name": "level",
+                "value": "campaign"
+              },
+              {
+                "name": "fields",
+                "value": "account_id,campaign_id,campaign_name,objective,spend,clicks,video_p75_watched_actions,impressions,ctr,cpm,actions"
+              },
+              {
+                "name": "access_token",
+                "value": "EAAMLtoYApwoBQTStKUHePZB8cg7N19oQy8rKFVrRjOyZAINgbQAXAHB2R8nnLKc6nD86UbhyrC6n6DQemr71Pz303U9cYoUEhsw6ZCrDklHt8OlnX0UCgEhJeSScSpePZBbCf1UZAt39RgeIF3vmQbONvPT0ZAxn3ho84lAyZCzM6ZAEX0tXC22ZB4E0a3Xfy7wKg"
+              },
+              {
+                "name": "date_preset",
+                "value": "yesterday"
+              }
+            ]
+          }
+        }
+      },
+      "type": "n8n-nodes-base.facebookGraphApi",
+      "typeVersion": 1,
+      "position": [
+        96,
+        0
+      ],
+      "id": "61dbd59e-c637-42a9-9bd4-bc865605f19f",
+      "name": "Buscar Info en Meta",
+      "credentials": {
+        "facebookGraphApi": {
+          "id": "ynh4i2xLfKE74JQc",
+          "name": "Facebook Ads - DATA"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "data",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        304,
+        0
+      ],
+      "id": "9c0cec69-8f09-4b3e-ae2f-4fc66826c918",
+      "name": "Separar info por campaña"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "50c31197-6687-4e4c-87dc-665a656a4ba1",
+              "name": "campaña_id",
+              "value": "={{ $json.campaign_id }}",
+              "type": "string"
+            },
+            {
+              "id": "19fb14c8-f113-4a88-aa34-936d09840352",
+              "name": "nombre_campaña",
+              "value": "={{ $json.campaign_name }}",
+              "type": "string"
+            },
+            {
+              "id": "2e1544d4-746e-4cb9-a875-9b1d91d7e151",
+              "name": "tipo_campaña",
+              "value": "={{ \n  ({\n    'OUTCOME_SALES': 'Ventas',\n    'OUTCOME_MESSAGES': 'Mensajes',\n    'OUTCOME_LEADS': 'Leads',\n    'OUTCOME_TRAFFIC': 'Tráfico',\n    'OUTCOME_AWARENESS': 'Reconocimiento'\n  })[$json.objective] || $json.objective \n}}",
+              "type": "string"
+            },
+            {
+              "id": "68de5675-4ff9-4ba4-9b7d-f1f45e4a05c8",
+              "name": "gasto_total",
+              "value": "={{ $json.spend }}",
+              "type": "number"
+            },
+            {
+              "id": "e5749603-5695-49cc-8fe3-666e24a9cb36",
+              "name": "clics",
+              "value": "={{ $json.clicks }}",
+              "type": "number"
+            },
+            {
+              "id": "f91a72ca-04a0-4b0f-b1c3-98df61433b20",
+              "name": "impresiones",
+              "value": "={{ $json.impressions }}",
+              "type": "number"
+            },
+            {
+              "id": "01a45d07-7796-4d72-9dc3-4773bca5f6d3",
+              "name": "ctr",
+              "value": "={{ $json.ctr / 100}}",
+              "type": "number"
+            },
+            {
+              "id": "7d9724ca-d517-41a4-b959-f4a2a1b1071e",
+              "name": "cpm",
+              "value": "={{ $json.cpm }}",
+              "type": "number"
+            },
+            {
+              "id": "8785d0c7-aacc-4af3-a721-a4471acb2912",
+              "name": "resultados",
+              "value": "={{ \n  (() => {\n    const obj = $json.objective;\n    const actions = $json.actions || [];\n    \n    // Este diccionario es el \"Traductor\"\n    const mapping = {\n      // Si el objetivo es Ventas -> Busca Compras\n      'OUTCOME_SALES': 'web_in_store_purchase', \n      \n      // Si el objetivo es Mensajes -> Busca Conversaciones nuevas\n      'OUTCOME_MESSAGES': 'onsite_conversion.total_messaging_connection',\n      \n      // Si el objetivo es Tráfico -> Busca Clics en el enlace\n      'OUTCOME_TRAFFIC': 'link_click',\n      \n      // Si el objetivo es Leads (Clientes potenciales) -> Busca Clientes potenciales\n      'OUTCOME_LEADS': 'lead',\n      \n      // Si el objetivo es Interacción (Engagement) -> Busca Interacciones con el post\n      'OUTCOME_ENGAGEMENT': 'post_engagement'\n    };\n\n    const targetAction = mapping[obj];\n\n    // Buscamos en la lista de acciones de esa campaña específica\n    const result = actions.find(a => a.action_type === targetAction);\n    \n    // Si lo encuentra, devuelve el número. Si no existe esa acción ese día, devuelve 0.\n    return result ? Number(result.value) : 0;\n  })()\n}}",
+              "type": "number"
+            },
+            {
+              "id": "305d654a-b5d6-40d3-87f8-9ec61119b66f",
+              "name": "gasto_productor",
+              "value": "={{ \n  (() => {\n    const nombre = $json.campaign_name;\n    const gastoTotal = Number($json.spend);\n\n    if (nombre.includes('[P100]')) {\n      return gastoTotal.toFixed(2);\n    } else {\n      // Si no tiene la etiqueta [P100], se asume 50/50\n      return (gastoTotal * 0.50).toFixed(2);\n    }\n  })()\n}}",
+              "type": "number"
+            },
+            {
+              "id": "0e387d2a-d919-41a4-a2f7-9c2190f9dd23",
+              "name": "gasto_be_online",
+              "value": "={{ \n  (() => {\n    const nombre = $json.campaign_name;\n    const gastoTotal = Number($json.spend);\n\n    if (nombre.includes('[P100]')) {\n      return 0;\n    } else {\n      // Si no tiene la etiqueta [P100], se asume 50/50\n      return (gastoTotal * 0.50).toFixed(2);\n    }\n  })()\n}}",
+              "type": "number"
+            },
+            {
+              "id": "456b9232-38dd-46f7-b0d6-45b0e58bae50",
+              "name": "costo_por_resultado",
+              "value": "={{ \n  (() => {\n    // 1. Buscamos el resultado (usando la lógica que ya conocemos)\n    const obj = $json.objective;\n    const actions = $json.actions || [];\n    const mapping = {\n      'OUTCOME_SALES': 'web_in_store_purchase',\n      'OUTCOME_MESSAGES': 'onsite_conversion.total_messaging_connection',\n      'OUTCOME_LEADS': 'lead',\n      'OUTCOME_TRAFFIC': 'link_click'\n    };\n    \n    const action = actions.find(a => a.action_type === mapping[obj]);\n    const numResultados = action ? Number(action.value) : 0;\n    const gasto = Number($json.spend) || 0;\n\n    // 2. Calculamos el costo\n    // Si hubo resultados, divide gasto/resultados. Si no, el costo es el gasto total.\n    return numResultados > 0 ? (gasto / numResultados).toFixed(2) : gasto.toFixed(2);\n  })()\n}}",
+              "type": "number"
+            },
+            {
+              "id": "ed2c9580-66a3-47cc-8f62-3e5d031f255f",
+              "name": "fecha_gasto",
+              "value": "={{ $today.minus({ days: 1 }).toFormat('yyyy-MM-dd') }}",
+              "type": "string"
+            },
+            {
+              "id": "a45a58c5-62b8-48c0-8a4b-1679e22407f2",
+              "name": "video_view_75",
+              "value": "={{ $json.video_p75_watched_actions[0].value }}",
+              "type": "number"
+            },
+            {
+              "id": "995e8c49-3530-4bbe-a704-2a90fc3b2156",
+              "name": "page_view",
+              "value": "={{ $json.actions.find(a => a.action_type === 'landing_page_view')?.value || 0 }}",
+              "type": "number"
+            },
+            {
+              "id": "2347442c-f257-46f7-b89a-938362094b6a",
+              "name": "pagos_iniciados",
+              "value": "={{ $json.actions.find(a => a.action_type === 'initiate_checkout')?.value || 0 }}",
+              "type": "number"
+            },
+            {
+              "id": "c61e3e21-08f9-43f7-9629-267f4f53938e",
+              "name": "visitas_instagram",
+              "value": "={{ $json.actions.find(a => a.action_type === 'instagram_profile_visit')?.value || 0 }}",
+              "type": "number"
+            },
+            {
+              "id": "d17edd9c-08d8-407f-9dde-eec6556d49da",
+              "name": "id_cuenta_ads",
+              "value": "={{ $json.account_id }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        512,
+        0
+      ],
+      "id": "c8d4a585-1e6f-4bc4-8b7c-4de4dde74288",
+      "name": "Seleccionar Datos"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://contenedor1_supabase_kong:8000/rest/v1/gasto_marketing_fb",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyAgCiAgICAicm9sZSI6ICJhbm9uIiwKICAgICJpc3MiOiAic3VwYWJhc2UtZGVtbyIsCiAgICAiaWF0IjogMTY0MTc2OTIwMCwKICAgICJleHAiOiAxNzk5NTM1NjAwCn0.dc_X5iR_VP_qT0zsiyj_I_OZ2T9FtRU2BBNWN8Bu4GE"
+            },
+            {
+              "name": "apikey",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyAgCiAgICAicm9sZSI6ICJhbm9uIiwKICAgICJpc3MiOiAic3VwYWJhc2UtZGVtbyIsCiAgICAiaWF0IjogMTY0MTc2OTIwMCwKICAgICJleHAiOiAxNzk5NTM1NjAwCn0.dc_X5iR_VP_qT0zsiyj_I_OZ2T9FtRU2BBNWN8Bu4GE"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify($('Seleccionar Datos').all().map(item => item.json)) }}",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        720,
+        0
+      ],
+      "id": "4683b7d2-dd41-45cb-bb83-34e9f1e1134f",
+      "name": "Crear fila con info",
+      "onError": "continueRegularOutput"
+    }
+  ],
+  "pinData": {},
+  "repo_name": "backupn8n",
+  "repo_owner": "infoandresrendoncol",
+  "repo_path": "backup/",
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false
+  },
+  "shared": [
+    {
+      "updatedAt": "2026-01-15T19:15:15.020Z",
+      "createdAt": "2026-01-15T19:15:15.020Z",
+      "role": "workflow:owner",
+      "workflowId": "T7J5Pv4r-5EcX29K86dgB",
+      "projectId": "4KmSbENK2cGxsjaf"
+    }
+  ],
+  "staticData": {
+    "node:Día siguiente 5:00 am": {
+      "recurrenceRules": []
+    }
+  },
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2026-01-20T23:46:46.737Z",
+  "versionId": "04d83bda-4c52-44e7-aa4c-f4e18baec3f9"
+}
