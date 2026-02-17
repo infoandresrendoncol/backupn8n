@@ -1,9 +1,9 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2026-02-14T18:42:23.000Z",
-    "createdAt": "2026-02-14T18:42:05.260Z",
-    "versionId": "b49265e0-ea96-4aa0-aab3-eef02852afd1",
+    "updatedAt": "2026-02-16T21:24:56.000Z",
+    "createdAt": "2026-02-16T21:21:41.229Z",
+    "versionId": "f875018d-31c7-49a0-9f8e-9ff42b8a059c",
     "workflowId": "L0m8n85rFPC9CD6X",
     "nodes": [
       {
@@ -160,6 +160,8 @@
         "parameters": {
           "method": "DELETE",
           "url": "=https://api.flodesk.com/v1/subscribers/{{ $json.email }}/segments",
+          "authentication": "genericCredentialType",
+          "genericAuthType": "httpBasicAuth",
           "sendBody": true,
           "specifyBody": "json",
           "jsonBody": "{\n  \"segment_ids\": [\"6980f9c59cc5305073f73f08\"]\n}",
@@ -173,6 +175,12 @@
         ],
         "id": "d04aa045-30a3-44a7-bcc2-0559449519a3",
         "name": "HTTP Request",
+        "credentials": {
+          "httpBasicAuth": {
+            "id": "QvDqcChg1nnswrDt",
+            "name": "FLODESK ALEX"
+          }
+        },
         "onError": "continueRegularOutput"
       }
     ],
@@ -211,11 +219,11 @@
       }
     },
     "authors": "BE Online",
-    "name": "Version b49265e0",
+    "name": "Version f875018d",
     "description": "",
     "autosaved": true
   },
-  "activeVersionId": "b49265e0-ea96-4aa0-aab3-eef02852afd1",
+  "activeVersionId": "f875018d-31c7-49a0-9f8e-9ff42b8a059c",
   "connections": {
     "Webhook": {
       "main": [
@@ -412,6 +420,8 @@
       "parameters": {
         "method": "DELETE",
         "url": "=https://api.flodesk.com/v1/subscribers/{{ $json.email }}/segments",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
         "sendBody": true,
         "specifyBody": "json",
         "jsonBody": "{\n  \"segment_ids\": [\"6980f9c59cc5305073f73f08\"]\n}",
@@ -425,6 +435,12 @@
       ],
       "id": "d04aa045-30a3-44a7-bcc2-0559449519a3",
       "name": "HTTP Request",
+      "credentials": {
+        "httpBasicAuth": {
+          "id": "QvDqcChg1nnswrDt",
+          "name": "FLODESK ALEX"
+        }
+      },
       "onError": "continueRegularOutput"
     }
   ],
@@ -568,7 +584,7 @@
                 "last_name": "Comprador",
                 "checkout_phone": "99999999900",
                 "first_name": "Teste",
-                "email": "testeComprador271101postman15@example.com",
+                "email": "marianaecheverri0206@outlook.com",
                 "document_type": "CPF"
               }
             },
@@ -603,6 +619,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2026-02-14T18:42:05.259Z",
-  "versionId": "b49265e0-ea96-4aa0-aab3-eef02852afd1"
+  "updatedAt": "2026-02-16T21:23:18.309Z",
+  "versionId": "f875018d-31c7-49a0-9f8e-9ff42b8a059c"
 }
