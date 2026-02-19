@@ -1,9 +1,9 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2026-02-14T18:18:27.000Z",
-    "createdAt": "2026-02-14T18:18:21.370Z",
-    "versionId": "f5029f70-4836-4a5d-8ea9-0884171854c1",
+    "updatedAt": "2026-02-18T17:55:47.000Z",
+    "createdAt": "2026-02-18T17:55:28.240Z",
+    "versionId": "7e56f7a6-1272-4614-9338-56adeba79136",
     "workflowId": "R3dLE3SaA6y3mXFq",
     "nodes": [
       {
@@ -94,7 +94,7 @@
             "value": {
               "EMAIL": "={{ $json.body.submission.fields.Correo }}",
               "TELEFONO": "={{ $json.body.submission.fields.Celular }}",
-              "PREGUNTA CUALIFICACIÓN": "={{ $json.body.submission.fields[\"¿Qué tan cerca estás de cumplir tu sueño de ver tu libro publicado y disponible para lectores reales?\"][0] }}",
+              "PREGUNTA CUALIFICACIÓN": "={{ $json.Pregunta_cualificacion }}",
               "CAMPAÑA": "={{ $json.body.submission.fields[\"UTM Campaign\"] }}",
               "FUENTE": "={{ $json.body.submission.fields[\"UTM Source\"] }}",
               "MEDIO": "={{ $json.body.submission.fields[\"UTM Medium\"] }}",
@@ -215,6 +215,29 @@
             "name": "SHEET INFO.ANDRES"
           }
         }
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "f6ade06f-bf89-4342-b4e7-3190542b019e",
+                "name": "Pregunta_cualificacion",
+                "value": "={{ $json.body.submission.fields[\"¿Qué tan cerca estás de cumplir tu sueño de ver tu libro publicado y disponible para lectores reales?\"] }}",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          16,
+          16
+        ],
+        "id": "ba12705f-a9e3-4fc4-8f51-3a280b6a8fb5",
+        "name": "Edit Fields"
       }
     ],
     "connections": {
@@ -222,17 +245,12 @@
         "main": [
           [
             {
-              "node": "Conteo de leads",
-              "type": "main",
-              "index": 0
-            },
-            {
               "node": "Agregar a Flodesk",
               "type": "main",
               "index": 0
             },
             {
-              "node": "Agregar contacto Unnichat",
+              "node": "Edit Fields",
               "type": "main",
               "index": 0
             }
@@ -243,30 +261,36 @@
         "main": [
           []
         ]
+      },
+      "Edit Fields": {
+        "main": [
+          [
+            {
+              "node": "Conteo de leads",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
       }
     },
     "authors": "BE Online",
-    "name": "Version f5029f70",
+    "name": "Version 7e56f7a6",
     "description": "",
     "autosaved": true
   },
-  "activeVersionId": "f5029f70-4836-4a5d-8ea9-0884171854c1",
+  "activeVersionId": "7e56f7a6-1272-4614-9338-56adeba79136",
   "connections": {
     "Webhook": {
       "main": [
         [
-          {
-            "node": "Conteo de leads",
-            "type": "main",
-            "index": 0
-          },
           {
             "node": "Agregar a Flodesk",
             "type": "main",
             "index": 0
           },
           {
-            "node": "Agregar contacto Unnichat",
+            "node": "Edit Fields",
             "type": "main",
             "index": 0
           }
@@ -276,6 +300,17 @@
     "Agregar a Flodesk": {
       "main": [
         []
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Conteo de leads",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     }
   },
@@ -375,7 +410,7 @@
           "value": {
             "EMAIL": "={{ $json.body.submission.fields.Correo }}",
             "TELEFONO": "={{ $json.body.submission.fields.Celular }}",
-            "PREGUNTA CUALIFICACIÓN": "={{ $json.body.submission.fields[\"¿Qué tan cerca estás de cumplir tu sueño de ver tu libro publicado y disponible para lectores reales?\"][0] }}",
+            "PREGUNTA CUALIFICACIÓN": "={{ $json.Pregunta_cualificacion }}",
             "CAMPAÑA": "={{ $json.body.submission.fields[\"UTM Campaign\"] }}",
             "FUENTE": "={{ $json.body.submission.fields[\"UTM Source\"] }}",
             "MEDIO": "={{ $json.body.submission.fields[\"UTM Medium\"] }}",
@@ -496,6 +531,29 @@
           "name": "SHEET INFO.ANDRES"
         }
       }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "f6ade06f-bf89-4342-b4e7-3190542b019e",
+              "name": "Pregunta_cualificacion",
+              "value": "={{ $json.body.submission.fields[\"¿Qué tan cerca estás de cumplir tu sueño de ver tu libro publicado y disponible para lectores reales?\"] }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        16,
+        16
+      ],
+      "id": "ba12705f-a9e3-4fc4-8f51-3a280b6a8fb5",
+      "name": "Edit Fields"
     }
   ],
   "pinData": {
@@ -503,56 +561,53 @@
       {
         "json": {
           "headers": {
-            "host": "n8n.vqn37t.easypanel.host",
+            "host": "contenedor1-n8n.vqn37t.easypanel.host",
             "user-agent": "AtomiForm/1.0",
-            "content-length": "1037",
+            "content-length": "1477",
             "accept": "application/json, text/plain, */*",
             "accept-encoding": "gzip, compress, deflate, br",
             "content-type": "application/json",
             "x-form-id": "1039c18d-24fd-4985-8452-b00fc70355a9",
-            "x-forwarded-for": "172.18.0.1",
-            "x-forwarded-host": "n8n.vqn37t.easypanel.host",
+            "x-forwarded-for": "24.199.100.93",
+            "x-forwarded-host": "contenedor1-n8n.vqn37t.easypanel.host",
             "x-forwarded-port": "443",
             "x-forwarded-proto": "https",
-            "x-forwarded-server": "ce644d491c46",
-            "x-real-ip": "172.18.0.1",
+            "x-forwarded-server": "730fdd9182ea",
+            "x-real-ip": "24.199.100.93",
             "x-webhook-id": "13c2c6e3-7530-448c-b34c-1631d194f53a"
           },
           "params": {},
           "query": {},
           "body": {
             "event": "form_submission",
-            "id": "d859b400-ccbe-40b3-8280-88e88d512cb7",
+            "id": "e01e43ba-655c-4df5-8094-5fa907d0a80c",
             "form": {
               "id": "1039c18d-24fd-4985-8452-b00fc70355a9",
               "name": "Formulario Reto: Escribe, Publica y vende tu libro"
             },
             "submission": {
-              "submittedAt": "2026-02-13T21:14:34.475Z",
+              "submittedAt": "2026-02-18T17:20:09.237Z",
               "fields": {
-                "Correo": "wilders2013@gmail.com",
-                "Celular": "+573001234567",
-                "¿Qué tan cerca estás de cumplir tu sueño de ver tu libro publicado y disponible para lectores reales?": [
-                  "No tengo intención de escribir ni publicar un libro en este momento."
-                ],
-                "UTM Campaign": "lanzamiento_libros_2026",
-                "UTM Source": "google",
-                "UTM Medium": "cpc",
-                "UTM Content": "boton_rojo",
-                "UTM Term": "como_escribir_un_libro"
+                "Correo": "newtime28082024@gmail.com",
+                "¿Qué tan cerca estás de cumplir tu sueño de ver tu libro publicado y disponible para lectores reales?": "Ya escribí parte de mi libro, pero no sé cómo seguir o cómo hacerlo llegar a lectores reales.",
+                "UTM Campaign": "00 - [AUTO] - A+ [IMG06 - ADE 03/26]",
+                "UTM Source": "metaads",
+                "UTM Medium": "Facebook_Mobile_Feed",
+                "UTM Content": "IMG06 - ADE 03/26",
+                "UTM Term": "120239337001200724"
               },
               "metadata": {
                 "page": {
                   "id": "6tFbiqGFthcyuVuOkI7b",
-                  "url": "https://www.autordeexito.com/ADE-registro?utm_source=google&utm_medium=cpc&utm_campaign=lanzamiento_libros_2026&utm_content=boton_rojo&utm_term=como_escribir_un_libro",
+                  "url": "https://www.autordeexito.com/ADE-registro?utm_source=metaads&utm_medium=Facebook_Mobile_Feed&utm_campaign=00+-+%5BAUTO%5D+-+A%2B+%5BIMG06+-+ADE+03%2F26%5D&utm_content=IMG06+-+ADE+03%2F26&vk_source=metaads&vk_ad_id=120239337001210724&fbclid=IwZXh0bgNhZW0BMABhZGlkAastCj931ERzcnRjBmFwcF9pZAwzNTA2ODU1MzE3MjgAAR67LVCKY90AwBMOmxTGljRyNGZZh0FhBJlqg1AG3A_Amym5e_JHySJjBcbXyw_aem_qjs3btF2ffDe5llH8LJZfQ&utm_id=120239332657450724&utm_term=120239337001200724",
                   "name": "ADE-registro"
                 },
-                "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
-                "ip": "190.68.204.57"
+                "userAgent": "Mozilla/5.0 (Linux; Android 15; V2343 Build/AP3A.240905.015.A2_SCNONFC; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/145.0.7632.52 Mobile Safari/537.36 [FB_IAB/FB4A;FBAV/548.1.0.51.64;IABMV/1;]",
+                "ip": "2803:e5e3:2a03:1400:dfd0:13c2:1dae:add2"
               }
             }
           },
-          "webhookUrl": "https://n8n.vqn37t.easypanel.host/webhook/registro-alexandra-ADE",
+          "webhookUrl": "https://contenedor1-n8n.vqn37t.easypanel.host/webhook/registro-alexandra-ADE",
           "executionMode": "production"
         }
       }
@@ -577,6 +632,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2026-02-14T18:18:21.369Z",
-  "versionId": "f5029f70-4836-4a5d-8ea9-0884171854c1"
+  "updatedAt": "2026-02-18T17:55:28.239Z",
+  "versionId": "7e56f7a6-1272-4614-9338-56adeba79136"
 }
