@@ -1,0 +1,590 @@
+{
+  "active": true,
+  "activeVersion": {
+    "updatedAt": "2026-02-20T14:51:08.000Z",
+    "createdAt": "2026-02-20T14:51:07.187Z",
+    "versionId": "ec2e6258-0a5d-4a6f-8ba3-7510f5f9a900",
+    "workflowId": "3E5pLUrbDOal5rnl",
+    "nodes": [
+      {
+        "parameters": {
+          "httpMethod": "POST",
+          "path": "80094f15-2054-4c6b-a05b-2804bdeca189",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.webhook",
+        "typeVersion": 2.1,
+        "position": [
+          -192,
+          16
+        ],
+        "id": "9d121bed-3c68-45c1-9b16-e11139ab5226",
+        "name": "Webhook",
+        "webhookId": "80094f15-2054-4c6b-a05b-2804bdeca189"
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "=https://api.flodesk.com/v1/subscribers/",
+          "authentication": "genericCredentialType",
+          "genericAuthType": "httpBasicAuth",
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "={\n  \"email\": \"{{ $json.body.lead.email }}\",\n  \"segment_ids\": [\"6980f9c59cc5305073f73f08\"]\n}",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          272,
+          16
+        ],
+        "id": "4db663c8-3fc8-403d-94c1-864a92b8d37c",
+        "name": "Agregar a Flodesk",
+        "retryOnFail": false,
+        "maxTries": 5,
+        "waitBetweenTries": 5000,
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "hSaP4d59L4OoJOce",
+            "name": "Flodesk Alex"
+          },
+          "httpBasicAuth": {
+            "id": "QvDqcChg1nnswrDt",
+            "name": "FLODESK ALEX"
+          }
+        },
+        "onError": "continueRegularOutput"
+      },
+      {
+        "parameters": {
+          "operation": "append",
+          "documentId": {
+            "__rl": true,
+            "value": "https://docs.google.com/spreadsheets/d/1cRXbAmRmFEs5TebO4tWc0_s3Er4VC-Wyq-Ie9LGQXYA",
+            "mode": "url"
+          },
+          "sheetName": {
+            "__rl": true,
+            "value": "gid=0",
+            "mode": "list",
+            "cachedResultName": "UTMs",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1cRXbAmRmFEs5TebO4tWc0_s3Er4VC-Wyq-Ie9LGQXYA/edit#gid=0"
+          },
+          "columns": {
+            "mappingMode": "defineBelow",
+            "value": {
+              "EMAIL": "={{ $('Webhook').item.json.body.lead.email }}",
+              "TELEFONO": "=",
+              "PREGUNTA CUALIFICACIÓN": "=",
+              "CAMPAÑA": "={{ $json.Campaing }}",
+              "FUENTE": "=",
+              "MEDIO": "=",
+              "TERMINO": "=",
+              "CONTENIDO": "={{ $json.body.submission.fields[\"UTM Content\"] }}",
+              "IP": "=",
+              "FECHA": "={{ $json.Fecha_registro }}"
+            },
+            "matchingColumns": [],
+            "schema": [
+              {
+                "id": "EMAIL",
+                "displayName": "EMAIL",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "TELEFONO",
+                "displayName": "TELEFONO",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "FECHA",
+                "displayName": "FECHA",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "CAMPAÑA",
+                "displayName": "CAMPAÑA",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "FUENTE",
+                "displayName": "FUENTE",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "MEDIO",
+                "displayName": "MEDIO",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "TERMINO",
+                "displayName": "TERMINO",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "CONTENIDO",
+                "displayName": "CONTENIDO",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "PREGUNTA CUALIFICACIÓN",
+                "displayName": "PREGUNTA CUALIFICACIÓN",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "IP",
+                "displayName": "IP",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              }
+            ],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": false
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.googleSheets",
+        "typeVersion": 4.7,
+        "position": [
+          256,
+          -256
+        ],
+        "id": "11888967-59aa-49fa-b746-0a462b596d6f",
+        "name": "Conteo de leads",
+        "credentials": {
+          "googleSheetsOAuth2Api": {
+            "id": "RVzGPXmtbwg7e3zT",
+            "name": "SHEET INFO.ANDRES"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "f6ade06f-bf89-4342-b4e7-3190542b019e",
+                "name": "Campaing",
+                "value": "=Afiliado",
+                "type": "string"
+              },
+              {
+                "id": "ccad610e-dc1e-4dea-ae8e-ed57273625e3",
+                "name": "Fecha_registro",
+                "value": "={{ $now.setZone('America/Bogota').format('yyyy-MM-dd HH:mm:ss') }}",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          0,
+          -144
+        ],
+        "id": "763344fa-e494-498c-a172-fc39f46d5ea5",
+        "name": "Edit Fields"
+      }
+    ],
+    "connections": {
+      "Webhook": {
+        "main": [
+          [
+            {
+              "node": "Agregar a Flodesk",
+              "type": "main",
+              "index": 0
+            },
+            {
+              "node": "Edit Fields",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Agregar a Flodesk": {
+        "main": [
+          []
+        ]
+      },
+      "Edit Fields": {
+        "main": [
+          [
+            {
+              "node": "Conteo de leads",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "authors": "BE Online",
+    "name": "Version ec2e6258",
+    "description": "",
+    "autosaved": false
+  },
+  "activeVersionId": "ec2e6258-0a5d-4a6f-8ba3-7510f5f9a900",
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Agregar a Flodesk",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Agregar a Flodesk": {
+      "main": [
+        []
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Conteo de leads",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2026-02-20T14:34:55.198Z",
+  "id": "3E5pLUrbDOal5rnl",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Alexandra - Registro - ADE Afiliados",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "80094f15-2054-4c6b-a05b-2804bdeca189",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -192,
+        16
+      ],
+      "id": "9d121bed-3c68-45c1-9b16-e11139ab5226",
+      "name": "Webhook",
+      "webhookId": "80094f15-2054-4c6b-a05b-2804bdeca189"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.flodesk.com/v1/subscribers/",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"email\": \"{{ $json.body.lead.email }}\",\n  \"segment_ids\": [\"6980f9c59cc5305073f73f08\"]\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        272,
+        16
+      ],
+      "id": "4db663c8-3fc8-403d-94c1-864a92b8d37c",
+      "name": "Agregar a Flodesk",
+      "retryOnFail": false,
+      "maxTries": 5,
+      "waitBetweenTries": 5000,
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "hSaP4d59L4OoJOce",
+          "name": "Flodesk Alex"
+        },
+        "httpBasicAuth": {
+          "id": "QvDqcChg1nnswrDt",
+          "name": "FLODESK ALEX"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "https://docs.google.com/spreadsheets/d/1cRXbAmRmFEs5TebO4tWc0_s3Er4VC-Wyq-Ie9LGQXYA",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "UTMs",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1cRXbAmRmFEs5TebO4tWc0_s3Er4VC-Wyq-Ie9LGQXYA/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "EMAIL": "={{ $('Webhook').item.json.body.lead.email }}",
+            "TELEFONO": "=",
+            "PREGUNTA CUALIFICACIÓN": "=",
+            "CAMPAÑA": "={{ $json.Campaing }}",
+            "FUENTE": "=",
+            "MEDIO": "=",
+            "TERMINO": "=",
+            "CONTENIDO": "={{ $json.body.submission.fields[\"UTM Content\"] }}",
+            "IP": "=",
+            "FECHA": "={{ $json.Fecha_registro }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "EMAIL",
+              "displayName": "EMAIL",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "TELEFONO",
+              "displayName": "TELEFONO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "FECHA",
+              "displayName": "FECHA",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "CAMPAÑA",
+              "displayName": "CAMPAÑA",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "FUENTE",
+              "displayName": "FUENTE",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "MEDIO",
+              "displayName": "MEDIO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "TERMINO",
+              "displayName": "TERMINO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "CONTENIDO",
+              "displayName": "CONTENIDO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "PREGUNTA CUALIFICACIÓN",
+              "displayName": "PREGUNTA CUALIFICACIÓN",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "IP",
+              "displayName": "IP",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        256,
+        -256
+      ],
+      "id": "11888967-59aa-49fa-b746-0a462b596d6f",
+      "name": "Conteo de leads",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "RVzGPXmtbwg7e3zT",
+          "name": "SHEET INFO.ANDRES"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "f6ade06f-bf89-4342-b4e7-3190542b019e",
+              "name": "Campaing",
+              "value": "=Afiliado",
+              "type": "string"
+            },
+            {
+              "id": "ccad610e-dc1e-4dea-ae8e-ed57273625e3",
+              "name": "Fecha_registro",
+              "value": "={{ $now.setZone('America/Bogota').format('yyyy-MM-dd HH:mm:ss') }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        0,
+        -144
+      ],
+      "id": "763344fa-e494-498c-a172-fc39f46d5ea5",
+      "name": "Edit Fields"
+    }
+  ],
+  "pinData": {
+    "Webhook": [
+      {
+        "json": {
+          "headers": {
+            "host": "contenedor1-n8n.vqn37t.easypanel.host",
+            "user-agent": "Ruby",
+            "content-length": "51",
+            "accept": "*/*",
+            "accept-encoding": "gzip;q=1.0,deflate;q=0.6,identity;q=0.3",
+            "content-type": "application/json",
+            "x-forwarded-for": "54.80.203.102",
+            "x-forwarded-host": "contenedor1-n8n.vqn37t.easypanel.host",
+            "x-forwarded-port": "443",
+            "x-forwarded-proto": "https",
+            "x-forwarded-server": "730fdd9182ea",
+            "x-newrelic-id": "VgABVVRVCxAHU1lRBAgCUVQ=",
+            "x-newrelic-transaction": "PxQBB1NaXQUABlNUB1MEBVwAFB8EBw8RVU4aVAtdBVBVB1oDUFUKUgEDVENKQVpRCVRSUQdTFTs=",
+            "x-real-ip": "54.80.203.102"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "lead": {
+              "email": "wilder1234@gmail.com"
+            },
+            "tags": []
+          },
+          "webhookUrl": "https://contenedor1-n8n.vqn37t.easypanel.host/webhook/80094f15-2054-4c6b-a05b-2804bdeca189",
+          "executionMode": "production"
+        }
+      }
+    ]
+  },
+  "repo_name": "backupn8n",
+  "repo_owner": "infoandresrendoncol",
+  "repo_path": "backup/",
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false
+  },
+  "shared": [
+    {
+      "updatedAt": "2026-02-20T14:34:55.205Z",
+      "createdAt": "2026-02-20T14:34:55.205Z",
+      "role": "workflow:owner",
+      "workflowId": "3E5pLUrbDOal5rnl",
+      "projectId": "4KmSbENK2cGxsjaf"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2026-02-20T16:02:49.930Z",
+  "versionId": "ec2e6258-0a5d-4a6f-8ba3-7510f5f9a900"
+}
