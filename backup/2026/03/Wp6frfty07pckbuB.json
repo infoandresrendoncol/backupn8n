@@ -1,0 +1,584 @@
+{
+  "active": true,
+  "activeVersion": {
+    "updatedAt": "2026-03-27T18:19:00.000Z",
+    "createdAt": "2026-03-27T18:18:54.498Z",
+    "versionId": "8a3417a8-f447-43fe-92fe-0e8f62467f04",
+    "workflowId": "Wp6frfty07pckbuB",
+    "nodes": [
+      {
+        "parameters": {
+          "httpMethod": "POST",
+          "path": "registro-lala-API",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.webhook",
+        "typeVersion": 2.1,
+        "position": [
+          -192,
+          16
+        ],
+        "id": "2eca3c96-90eb-4d41-a690-3e3f141f73e7",
+        "name": "Webhook",
+        "webhookId": "34e78e4e-dd54-4913-b74f-f7ed556c0b94"
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "=https://api.flodesk.com/v1/subscribers/",
+          "authentication": "genericCredentialType",
+          "genericAuthType": "httpBasicAuth",
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "={\n  \"email\": \"{{ $json.body.submission.fields.Correo }}\",\n  \"segment_ids\": [\"69c58061f3c17d36d34ee3ff\"]\n}",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          208,
+          16
+        ],
+        "id": "bb5d6e54-e993-4928-b0a7-9aee646f54d9",
+        "name": "Agregar a Flodesk",
+        "retryOnFail": false,
+        "maxTries": 5,
+        "waitBetweenTries": 5000,
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "hSaP4d59L4OoJOce",
+            "name": "Flodesk Alex"
+          },
+          "httpBasicAuth": {
+            "id": "SAnNYgEFTv4K59IE",
+            "name": "FLODESK LALA"
+          }
+        },
+        "onError": "continueRegularOutput"
+      },
+      {
+        "parameters": {
+          "operation": "append",
+          "documentId": {
+            "__rl": true,
+            "value": "https://docs.google.com/spreadsheets/d/1-MvhcP3xpSc4xiZa58vWkb9yuceSXG7RmLcqMYHgBD8/edit",
+            "mode": "url"
+          },
+          "sheetName": {
+            "__rl": true,
+            "value": "gid=0",
+            "mode": "list",
+            "cachedResultName": "Registrados",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1-MvhcP3xpSc4xiZa58vWkb9yuceSXG7RmLcqMYHgBD8/edit#gid=0"
+          },
+          "columns": {
+            "mappingMode": "defineBelow",
+            "value": {
+              "EMAIL": "={{ $('Webhook').item.json.body.submission.fields.Correo }}",
+              "FECHA": "={{ $now.setZone('America/Bogota').toFormat('yyyy-MM-dd HH:mm:ss') }}",
+              "CAMPAÑA": "={{ $('Webhook').item.json.body.submission.fields[\"UTM Campaign\"] }}",
+              "FUENTE": "={{ $('Webhook').item.json.body.submission.fields[\"UTM Source\"] }}",
+              "MEDIO": "={{ $('Webhook').item.json.body.submission.fields[\"UTM Medium\"] }}",
+              "TERMINO": "={{ $('Webhook').item.json.body.submission.fields[\"UTM Term\"] }}",
+              "CONTENIDO": "={{ $('Webhook').item.json.body.submission.fields[\"UTM Content\"] }}",
+              "PREGUNTA CUALIFICACIÓN": "={{ $json.Pregunta_cualificacion }}",
+              "IP": "={{ $('Webhook').item.json.body.submission.metadata.ip }}"
+            },
+            "matchingColumns": [],
+            "schema": [
+              {
+                "id": "EMAIL",
+                "displayName": "EMAIL",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "FECHA",
+                "displayName": "FECHA",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "CAMPAÑA",
+                "displayName": "CAMPAÑA",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "FUENTE",
+                "displayName": "FUENTE",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "MEDIO",
+                "displayName": "MEDIO",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "TERMINO",
+                "displayName": "TERMINO",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "CONTENIDO",
+                "displayName": "CONTENIDO",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "PREGUNTA CUALIFICACIÓN",
+                "displayName": "PREGUNTA CUALIFICACIÓN",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "IP",
+                "displayName": "IP",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              }
+            ],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": false
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.googleSheets",
+        "typeVersion": 4.7,
+        "position": [
+          208,
+          -208
+        ],
+        "id": "52523d78-f6e4-4154-9b3b-f4770b9ae5fb",
+        "name": "Conteo de leads",
+        "credentials": {
+          "googleSheetsOAuth2Api": {
+            "id": "RVzGPXmtbwg7e3zT",
+            "name": "SHEET INFO.ANDRES"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "f6ade06f-bf89-4342-b4e7-3190542b019e",
+                "name": "Pregunta_cualificacion",
+                "value": "={{ $json.body.submission.fields[\"¿Cuál es tu situación actual  y cuál es tu mayor reto hoy?\"] }}",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          16,
+          16
+        ],
+        "id": "c7603ea6-552f-4d59-8b79-213119c9bccf",
+        "name": "Edit Fields"
+      }
+    ],
+    "connections": {
+      "Webhook": {
+        "main": [
+          [
+            {
+              "node": "Agregar a Flodesk",
+              "type": "main",
+              "index": 0
+            },
+            {
+              "node": "Edit Fields",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Agregar a Flodesk": {
+        "main": [
+          []
+        ]
+      },
+      "Edit Fields": {
+        "main": [
+          [
+            {
+              "node": "Conteo de leads",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "authors": "BE Online",
+    "name": "Version 8a3417a8",
+    "description": "",
+    "autosaved": true
+  },
+  "activeVersionId": "8a3417a8-f447-43fe-92fe-0e8f62467f04",
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Agregar a Flodesk",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Agregar a Flodesk": {
+      "main": [
+        []
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Conteo de leads",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2026-03-27T17:25:54.166Z",
+  "id": "Wp6frfty07pckbuB",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Lala - Registro - API",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "registro-lala-API",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -192,
+        16
+      ],
+      "id": "2eca3c96-90eb-4d41-a690-3e3f141f73e7",
+      "name": "Webhook",
+      "webhookId": "34e78e4e-dd54-4913-b74f-f7ed556c0b94"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.flodesk.com/v1/subscribers/",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"email\": \"{{ $json.body.submission.fields.Correo }}\",\n  \"segment_ids\": [\"69c58061f3c17d36d34ee3ff\"]\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        208,
+        16
+      ],
+      "id": "bb5d6e54-e993-4928-b0a7-9aee646f54d9",
+      "name": "Agregar a Flodesk",
+      "retryOnFail": false,
+      "maxTries": 5,
+      "waitBetweenTries": 5000,
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "hSaP4d59L4OoJOce",
+          "name": "Flodesk Alex"
+        },
+        "httpBasicAuth": {
+          "id": "SAnNYgEFTv4K59IE",
+          "name": "FLODESK LALA"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "https://docs.google.com/spreadsheets/d/1-MvhcP3xpSc4xiZa58vWkb9yuceSXG7RmLcqMYHgBD8/edit",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Registrados",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1-MvhcP3xpSc4xiZa58vWkb9yuceSXG7RmLcqMYHgBD8/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "EMAIL": "={{ $('Webhook').item.json.body.submission.fields.Correo }}",
+            "FECHA": "={{ $now.setZone('America/Bogota').toFormat('yyyy-MM-dd HH:mm:ss') }}",
+            "CAMPAÑA": "={{ $('Webhook').item.json.body.submission.fields[\"UTM Campaign\"] }}",
+            "FUENTE": "={{ $('Webhook').item.json.body.submission.fields[\"UTM Source\"] }}",
+            "MEDIO": "={{ $('Webhook').item.json.body.submission.fields[\"UTM Medium\"] }}",
+            "TERMINO": "={{ $('Webhook').item.json.body.submission.fields[\"UTM Term\"] }}",
+            "CONTENIDO": "={{ $('Webhook').item.json.body.submission.fields[\"UTM Content\"] }}",
+            "PREGUNTA CUALIFICACIÓN": "={{ $json.Pregunta_cualificacion }}",
+            "IP": "={{ $('Webhook').item.json.body.submission.metadata.ip }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "EMAIL",
+              "displayName": "EMAIL",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "FECHA",
+              "displayName": "FECHA",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "CAMPAÑA",
+              "displayName": "CAMPAÑA",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "FUENTE",
+              "displayName": "FUENTE",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "MEDIO",
+              "displayName": "MEDIO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "TERMINO",
+              "displayName": "TERMINO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "CONTENIDO",
+              "displayName": "CONTENIDO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "PREGUNTA CUALIFICACIÓN",
+              "displayName": "PREGUNTA CUALIFICACIÓN",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "IP",
+              "displayName": "IP",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        208,
+        -208
+      ],
+      "id": "52523d78-f6e4-4154-9b3b-f4770b9ae5fb",
+      "name": "Conteo de leads",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "RVzGPXmtbwg7e3zT",
+          "name": "SHEET INFO.ANDRES"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "f6ade06f-bf89-4342-b4e7-3190542b019e",
+              "name": "Pregunta_cualificacion",
+              "value": "={{ $json.body.submission.fields[\"¿Cuál es tu situación actual  y cuál es tu mayor reto hoy?\"] }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        16,
+        16
+      ],
+      "id": "c7603ea6-552f-4d59-8b79-213119c9bccf",
+      "name": "Edit Fields"
+    }
+  ],
+  "pinData": {
+    "Webhook": [
+      {
+        "json": {
+          "headers": {
+            "host": "contenedor1-n8n.vqn37t.easypanel.host",
+            "user-agent": "AtomiForm/1.0",
+            "content-length": "748",
+            "accept": "application/json, text/plain, */*",
+            "accept-encoding": "gzip, compress, deflate, br",
+            "content-type": "application/json",
+            "x-form-id": "37f54dc1-0ad7-489a-a712-f78f1009755e",
+            "x-forwarded-for": "24.199.100.93",
+            "x-forwarded-host": "contenedor1-n8n.vqn37t.easypanel.host",
+            "x-forwarded-port": "443",
+            "x-forwarded-proto": "https",
+            "x-forwarded-server": "730fdd9182ea",
+            "x-real-ip": "24.199.100.93",
+            "x-webhook-id": "13c2c6e3-7530-448c-b34c-1631d194f53a"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "event": "form_submission",
+            "id": "1a111e46-4901-433a-b52a-fa31cacae92b",
+            "form": {
+              "id": "37f54dc1-0ad7-489a-a712-f78f1009755e",
+              "name": "Formulario desfio: tu pasteleria como negocio"
+            },
+            "submission": {
+              "submittedAt": "2026-03-27T17:36:37.625Z",
+              "fields": {
+                "Correo": "wilders2013@gmail.com",
+                "¿Cuál es tu situación actual  y cuál es tu mayor reto hoy?": "No tengo experiencia o tengo muy poca; quiero saber si esto puede ser un negocio rentable para mí desde cero."
+              },
+              "metadata": {
+                "page": {
+                  "id": "BmS2RyGOxmF77tgBr9t9",
+                  "url": "https://www.lalapastelera.com/pastelera-insuperable-registro",
+                  "name": "registro"
+                },
+                "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36",
+                "ip": "190.68.206.216"
+              }
+            }
+          },
+          "webhookUrl": "https://contenedor1-n8n.vqn37t.easypanel.host/webhook-test/registro-lala-API",
+          "executionMode": "test"
+        }
+      }
+    ],
+    "Edit Fields": [
+      {
+        "json": {
+          "Pregunta_cualificacion": "No tengo experiencia o tengo muy poca; quiero saber si esto puede ser un negocio rentable para mí desde cero."
+        }
+      }
+    ]
+  },
+  "repo_name": "backupn8n",
+  "repo_owner": "infoandresrendoncol",
+  "repo_path": "backup/",
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false,
+    "binaryMode": "separate"
+  },
+  "shared": [
+    {
+      "updatedAt": "2026-03-27T17:25:54.175Z",
+      "createdAt": "2026-03-27T17:25:54.175Z",
+      "role": "workflow:owner",
+      "workflowId": "Wp6frfty07pckbuB",
+      "projectId": "4KmSbENK2cGxsjaf"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2026-03-27T18:21:11.378Z",
+  "versionId": "8a3417a8-f447-43fe-92fe-0e8f62467f04"
+}
