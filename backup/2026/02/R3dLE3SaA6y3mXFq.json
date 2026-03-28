@@ -1,9 +1,9 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2026-02-18T17:55:47.000Z",
-    "createdAt": "2026-02-18T17:55:28.240Z",
-    "versionId": "7e56f7a6-1272-4614-9338-56adeba79136",
+    "updatedAt": "2026-03-27T20:14:30.000Z",
+    "createdAt": "2026-03-27T19:39:30.283Z",
+    "versionId": "f84b6d23-1cf7-45af-b69d-18a71c623978",
     "workflowId": "R3dLE3SaA6y3mXFq",
     "nodes": [
       {
@@ -54,8 +54,8 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.2,
         "position": [
-          208,
-          16
+          -16,
+          256
         ],
         "id": "5c1dd33b-46e5-4eea-87eb-309785f6bdf5",
         "name": "Agregar a Flodesk",
@@ -92,16 +92,16 @@
           "columns": {
             "mappingMode": "defineBelow",
             "value": {
-              "EMAIL": "={{ $json.body.submission.fields.Correo }}",
-              "TELEFONO": "={{ $json.body.submission.fields.Celular }}",
+              "EMAIL": "={{ $('Webhook').item.json.body.submission.fields.Correo }}",
+              "TELEFONO": "=",
               "PREGUNTA CUALIFICACIÓN": "={{ $json.Pregunta_cualificacion }}",
-              "CAMPAÑA": "={{ $json.body.submission.fields[\"UTM Campaign\"] }}",
-              "FUENTE": "={{ $json.body.submission.fields[\"UTM Source\"] }}",
-              "MEDIO": "={{ $json.body.submission.fields[\"UTM Medium\"] }}",
-              "TERMINO": "={{ $json.body.submission.fields[\"UTM Term\"] }}",
-              "CONTENIDO": "={{ $json.body.submission.fields[\"UTM Content\"] }}",
-              "IP": "={{ $json.body.submission.metadata.ip }}",
-              "FECHA": "={{ $json.body.submission.submittedAt }}"
+              "CAMPAÑA": "={{ $('Webhook').item.json.body.submission.fields[\"UTM Campaign\"] }}",
+              "FUENTE": "={{ $('Webhook').item.json.body.submission.fields[\"UTM Source\"] }}",
+              "MEDIO": "={{ $('Webhook').item.json.body.submission.fields[\"UTM Medium\"] }}",
+              "TERMINO": "={{ $('Webhook').item.json.body.submission.fields[\"UTM Term\"] }}",
+              "CONTENIDO": "={{ $('Webhook').item.json.body.submission.fields[\"UTM Content\"] }}",
+              "IP": "={{ $('Webhook').item.json.body.submission.metadata.ip }}",
+              "FECHA": "={{ $('Webhook').item.json.body.submission.submittedAt }}"
             },
             "matchingColumns": [],
             "schema": [
@@ -245,11 +245,6 @@
         "main": [
           [
             {
-              "node": "Agregar a Flodesk",
-              "type": "main",
-              "index": 0
-            },
-            {
               "node": "Edit Fields",
               "type": "main",
               "index": 0
@@ -275,20 +270,15 @@
       }
     },
     "authors": "BE Online",
-    "name": "Version 7e56f7a6",
+    "name": "Version f84b6d23",
     "description": "",
     "autosaved": true
   },
-  "activeVersionId": "7e56f7a6-1272-4614-9338-56adeba79136",
+  "activeVersionId": "f84b6d23-1cf7-45af-b69d-18a71c623978",
   "connections": {
     "Webhook": {
       "main": [
         [
-          {
-            "node": "Agregar a Flodesk",
-            "type": "main",
-            "index": 0
-          },
           {
             "node": "Edit Fields",
             "type": "main",
@@ -370,8 +360,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        208,
-        16
+        -16,
+        256
       ],
       "id": "5c1dd33b-46e5-4eea-87eb-309785f6bdf5",
       "name": "Agregar a Flodesk",
@@ -408,16 +398,16 @@
         "columns": {
           "mappingMode": "defineBelow",
           "value": {
-            "EMAIL": "={{ $json.body.submission.fields.Correo }}",
-            "TELEFONO": "={{ $json.body.submission.fields.Celular }}",
+            "EMAIL": "={{ $('Webhook').item.json.body.submission.fields.Correo }}",
+            "TELEFONO": "=",
             "PREGUNTA CUALIFICACIÓN": "={{ $json.Pregunta_cualificacion }}",
-            "CAMPAÑA": "={{ $json.body.submission.fields[\"UTM Campaign\"] }}",
-            "FUENTE": "={{ $json.body.submission.fields[\"UTM Source\"] }}",
-            "MEDIO": "={{ $json.body.submission.fields[\"UTM Medium\"] }}",
-            "TERMINO": "={{ $json.body.submission.fields[\"UTM Term\"] }}",
-            "CONTENIDO": "={{ $json.body.submission.fields[\"UTM Content\"] }}",
-            "IP": "={{ $json.body.submission.metadata.ip }}",
-            "FECHA": "={{ $json.body.submission.submittedAt }}"
+            "CAMPAÑA": "={{ $('Webhook').item.json.body.submission.fields[\"UTM Campaign\"] }}",
+            "FUENTE": "={{ $('Webhook').item.json.body.submission.fields[\"UTM Source\"] }}",
+            "MEDIO": "={{ $('Webhook').item.json.body.submission.fields[\"UTM Medium\"] }}",
+            "TERMINO": "={{ $('Webhook').item.json.body.submission.fields[\"UTM Term\"] }}",
+            "CONTENIDO": "={{ $('Webhook').item.json.body.submission.fields[\"UTM Content\"] }}",
+            "IP": "={{ $('Webhook').item.json.body.submission.metadata.ip }}",
+            "FECHA": "={{ $('Webhook').item.json.body.submission.submittedAt }}"
           },
           "matchingColumns": [],
           "schema": [
@@ -618,7 +608,8 @@
   "repo_path": "backup/",
   "settings": {
     "executionOrder": "v1",
-    "availableInMCP": false
+    "availableInMCP": false,
+    "binaryMode": "separate"
   },
   "shared": [
     {
@@ -632,6 +623,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2026-02-20T16:03:04.208Z",
-  "versionId": "7e56f7a6-1272-4614-9338-56adeba79136"
+  "updatedAt": "2026-03-27T19:39:30.282Z",
+  "versionId": "f84b6d23-1cf7-45af-b69d-18a71c623978"
 }
