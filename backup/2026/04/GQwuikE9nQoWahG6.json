@@ -1,0 +1,366 @@
+{
+  "active": true,
+  "activeVersion": {
+    "updatedAt": "2026-04-10T16:23:47.000Z",
+    "createdAt": "2026-04-10T16:19:16.066Z",
+    "versionId": "a034fcb9-080e-4a09-821b-c78915e7e16f",
+    "workflowId": "GQwuikE9nQoWahG6",
+    "nodes": [
+      {
+        "parameters": {
+          "httpMethod": "POST",
+          "path": "alex-camino-autor",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.webhook",
+        "typeVersion": 2.1,
+        "position": [
+          -192,
+          16
+        ],
+        "id": "e9b48f1e-c44c-4ccb-92cc-a08dc80915bc",
+        "name": "Webhook",
+        "webhookId": "7169968f-55a6-4b03-bd29-f62515668e77"
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "=https://api.flodesk.com/v1/subscribers",
+          "authentication": "genericCredentialType",
+          "genericAuthType": "httpBasicAuth",
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "={\n  \"email\": \"{{ $json.body.data.buyer.email }}\",\n  \"first_name\": \"{{ $json.body.data.buyer.name }}\",\n  \"segment_ids\": [\"69d922f082c38b7c76e8e1ac\"]\n}",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          160,
+          16
+        ],
+        "id": "639bbb3b-9eae-4538-a780-9b62cfbd9b41",
+        "name": "Agregar a Flodesk",
+        "retryOnFail": false,
+        "maxTries": 5,
+        "waitBetweenTries": 5000,
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "hSaP4d59L4OoJOce",
+            "name": "Flodesk Alex"
+          },
+          "httpBasicAuth": {
+            "id": "QvDqcChg1nnswrDt",
+            "name": "FLODESK ALEX"
+          }
+        },
+        "onError": "continueRegularOutput"
+      }
+    ],
+    "connections": {
+      "Webhook": {
+        "main": [
+          [
+            {
+              "node": "Agregar a Flodesk",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Agregar a Flodesk": {
+        "main": [
+          []
+        ]
+      }
+    },
+    "authors": "BE Online",
+    "name": "Version a034fcb9",
+    "description": "",
+    "autosaved": true
+  },
+  "activeVersionId": "a034fcb9-080e-4a09-821b-c78915e7e16f",
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Agregar a Flodesk",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Agregar a Flodesk": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "createdAt": "2026-04-10T16:07:53.531Z",
+  "id": "GQwuikE9nQoWahG6",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Alexandra - Camino Autor",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "alex-camino-autor",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -192,
+        16
+      ],
+      "id": "e9b48f1e-c44c-4ccb-92cc-a08dc80915bc",
+      "name": "Webhook",
+      "webhookId": "7169968f-55a6-4b03-bd29-f62515668e77"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.flodesk.com/v1/subscribers",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"email\": \"{{ $json.body.data.buyer.email }}\",\n  \"first_name\": \"{{ $json.body.data.buyer.name }}\",\n  \"segment_ids\": [\"69d922f082c38b7c76e8e1ac\"]\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        160,
+        16
+      ],
+      "id": "639bbb3b-9eae-4538-a780-9b62cfbd9b41",
+      "name": "Agregar a Flodesk",
+      "retryOnFail": false,
+      "maxTries": 5,
+      "waitBetweenTries": 5000,
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "hSaP4d59L4OoJOce",
+          "name": "Flodesk Alex"
+        },
+        "httpBasicAuth": {
+          "id": "QvDqcChg1nnswrDt",
+          "name": "FLODESK ALEX"
+        }
+      },
+      "onError": "continueRegularOutput"
+    }
+  ],
+  "pinData": {
+    "Webhook": [
+      {
+        "json": {
+          "headers": {
+            "host": "contenedor1-n8n.vqn37t.easypanel.host",
+            "user-agent": "Jodd HTTP",
+            "content-length": "2515",
+            "content-type": "application/json",
+            "x-forwarded-for": "100.53.135.208",
+            "x-forwarded-host": "contenedor1-n8n.vqn37t.easypanel.host",
+            "x-forwarded-port": "443",
+            "x-forwarded-proto": "https",
+            "x-forwarded-server": "730fdd9182ea",
+            "x-hotmart-hottok": "p3pyMTUj7l7z86JGfalI9JMXTpiyBq85599017-fc1a-4b36-9723-828cee66c3e2",
+            "x-real-ip": "100.53.135.208",
+            "accept-encoding": "gzip"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "data": {
+              "product": {
+                "support_email": "support@hotmart.com.br",
+                "has_co_production": false,
+                "name": "Produto test postback2",
+                "warranty_date": "2017-12-27T00:00:00Z",
+                "is_physical_product": false,
+                "id": 0,
+                "ucode": "fb056612-bcc6-4217-9e6d-2a5d1110ac2f",
+                "product_format_id": 1,
+                "content": {
+                  "has_physical_products": true,
+                  "products": [
+                    {
+                      "name": "How to Make Clear Ice",
+                      "is_physical_product": false,
+                      "id": 4774438,
+                      "ucode": "559fef42-3406-4d82-b775-d09bd33936b1"
+                    },
+                    {
+                      "name": "Organizador de Poeira",
+                      "is_physical_product": true,
+                      "id": 4999597,
+                      "ucode": "099e7644-b7d1-43d6-82a9-ec6be0118a4b"
+                    }
+                  ]
+                }
+              },
+              "shipping": {
+                "carrier": {
+                  "service": "SEDEX",
+                  "name": "CORREIOS"
+                },
+                "cost": {
+                  "currency_value": "BRL",
+                  "value": 25.5
+                },
+                "estimated_delivery_days": 7,
+                "fulfillment": {
+                  "service": "MANUAL"
+                }
+              },
+              "commissions": [
+                {
+                  "currency_value": "BRL",
+                  "source": "MARKETPLACE",
+                  "value": 149.5
+                },
+                {
+                  "currency_value": "BRL",
+                  "source": "PRODUCER",
+                  "value": 1350.5
+                }
+              ],
+              "purchase": {
+                "original_offer_price": {
+                  "currency_value": "BRL",
+                  "value": 1500
+                },
+                "checkout_country": {
+                  "iso": "BR",
+                  "name": "Brasil"
+                },
+                "sckPaymentLink": "sckPaymentLinkTest",
+                "order_bump": {
+                  "parent_purchase_transaction": "HP02316330308193",
+                  "is_order_bump": true
+                },
+                "variants": {
+                  "attributes": [
+                    {
+                      "name": "Tamanho",
+                      "value": "Médio"
+                    },
+                    {
+                      "name": "Cor",
+                      "value": "Azul"
+                    }
+                  ],
+                  "sku": "HTM_SANDBOX-01"
+                },
+                "approved_date": 1511783346000,
+                "offer": {
+                  "code": "test",
+                  "coupon_code": "SHHUHA"
+                },
+                "is_funnel": false,
+                "event_tickets": {
+                  "amount": 1775837507456
+                },
+                "order_date": 1511783344000,
+                "price": {
+                  "currency_value": "BRL",
+                  "value": 1500
+                },
+                "buyer_ip": "00.00.00.00",
+                "payment": {
+                  "installments_number": 12,
+                  "type": "CREDIT_CARD"
+                },
+                "full_price": {
+                  "currency_value": "BRL",
+                  "value": 1500
+                },
+                "business_model": "I",
+                "transaction": "HP16015479281022",
+                "status": "COMPLETED"
+              },
+              "affiliates": [
+                {
+                  "affiliate_code": "Q58388177J",
+                  "name": "Affiliate name"
+                }
+              ],
+              "producer": {
+                "legal_nature": "Pessoa Física",
+                "document": "12345678965",
+                "name": "Producer Test Name"
+              },
+              "subscription": {
+                "subscriber": {
+                  "code": "I9OT62C3"
+                },
+                "plan": {
+                  "name": "plano de teste",
+                  "id": 123
+                },
+                "status": "ACTIVE"
+              },
+              "buyer": {
+                "checkout_phone_code": "999999999",
+                "address": {
+                  "zipcode": "38400123",
+                  "country": "Brasil",
+                  "number": "10",
+                  "address": "Avenida Francisco Galassi",
+                  "city": "Uberlândia",
+                  "state": "Minas Gerais",
+                  "neighborhood": "Tubalina",
+                  "complement": "Perto do shopping",
+                  "country_iso": "BR"
+                },
+                "document": "69526128664",
+                "name": "Teste Comprador",
+                "last_name": "Comprador",
+                "checkout_phone": "99999999900",
+                "first_name": "Teste",
+                "email": "testeComprador271101postman15@example.com",
+                "document_type": "CPF"
+              }
+            },
+            "id": "ad26a758-b98e-49a3-be9c-f4019ef978ed",
+            "creation_date": 1775837507463,
+            "event": "PURCHASE_COMPLETE",
+            "version": "2.0.0"
+          },
+          "webhookUrl": "https://contenedor1-n8n.vqn37t.easypanel.host/webhook-test/alex-camino-autor",
+          "executionMode": "test"
+        }
+      }
+    ]
+  },
+  "repo_name": "backupn8n",
+  "repo_owner": "infoandresrendoncol",
+  "repo_path": "backup/",
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false,
+    "binaryMode": "separate"
+  },
+  "shared": [
+    {
+      "updatedAt": "2026-04-10T16:07:53.538Z",
+      "createdAt": "2026-04-10T16:07:53.538Z",
+      "role": "workflow:owner",
+      "workflowId": "GQwuikE9nQoWahG6",
+      "projectId": "4KmSbENK2cGxsjaf"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2026-04-10T16:19:16.065Z",
+  "versionId": "a034fcb9-080e-4a09-821b-c78915e7e16f"
+}
