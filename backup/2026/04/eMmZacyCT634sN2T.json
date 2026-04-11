@@ -1,0 +1,155 @@
+{
+  "active": false,
+  "activeVersion": null,
+  "activeVersionId": null,
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Agregar a Flodesk",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Agregar a Flodesk": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "createdAt": "2026-04-10T16:04:52.387Z",
+  "id": "eMmZacyCT634sN2T",
+  "isArchived": true,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Lala - Camino de autores",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -272,
+        -48
+      ],
+      "id": "ab760532-2baa-43b2-95d3-b36a3f60548d",
+      "name": "Webhook",
+      "webhookId": "4c57b7f3-4549-4375-9416-ee13b6ec9159"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.flodesk.com/v1/subscribers/",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"email\": \"{{ $json.body.submission.fields.Correo }}\",\n  \"segment_ids\": [\"69c58061f3c17d36d34ee3ff\"]\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        96,
+        -48
+      ],
+      "id": "9c378fcb-a732-4746-a83e-74f8cf216cf7",
+      "name": "Agregar a Flodesk",
+      "retryOnFail": false,
+      "maxTries": 5,
+      "waitBetweenTries": 5000,
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "hSaP4d59L4OoJOce",
+          "name": "Flodesk Alex"
+        },
+        "httpBasicAuth": {
+          "id": "SAnNYgEFTv4K59IE",
+          "name": "FLODESK LALA"
+        }
+      },
+      "onError": "continueRegularOutput"
+    }
+  ],
+  "pinData": {
+    "Webhook": [
+      {
+        "json": {
+          "headers": {
+            "host": "contenedor1-n8n.vqn37t.easypanel.host",
+            "user-agent": "AtomiForm/1.0",
+            "content-length": "748",
+            "accept": "application/json, text/plain, */*",
+            "accept-encoding": "gzip, compress, deflate, br",
+            "content-type": "application/json",
+            "x-form-id": "37f54dc1-0ad7-489a-a712-f78f1009755e",
+            "x-forwarded-for": "24.199.100.93",
+            "x-forwarded-host": "contenedor1-n8n.vqn37t.easypanel.host",
+            "x-forwarded-port": "443",
+            "x-forwarded-proto": "https",
+            "x-forwarded-server": "730fdd9182ea",
+            "x-real-ip": "24.199.100.93",
+            "x-webhook-id": "13c2c6e3-7530-448c-b34c-1631d194f53a"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "event": "form_submission",
+            "id": "1a111e46-4901-433a-b52a-fa31cacae92b",
+            "form": {
+              "id": "37f54dc1-0ad7-489a-a712-f78f1009755e",
+              "name": "Formulario desfio: tu pasteleria como negocio"
+            },
+            "submission": {
+              "submittedAt": "2026-03-27T17:36:37.625Z",
+              "fields": {
+                "Correo": "wilders2013@gmail.com",
+                "¿Cuál es tu situación actual  y cuál es tu mayor reto hoy?": "No tengo experiencia o tengo muy poca; quiero saber si esto puede ser un negocio rentable para mí desde cero."
+              },
+              "metadata": {
+                "page": {
+                  "id": "BmS2RyGOxmF77tgBr9t9",
+                  "url": "https://www.lalapastelera.com/pastelera-insuperable-registro",
+                  "name": "registro"
+                },
+                "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36",
+                "ip": "190.68.206.216"
+              }
+            }
+          },
+          "webhookUrl": "https://contenedor1-n8n.vqn37t.easypanel.host/webhook-test/registro-lala-API",
+          "executionMode": "test"
+        }
+      }
+    ]
+  },
+  "repo_name": "backupn8n",
+  "repo_owner": "infoandresrendoncol",
+  "repo_path": "backup/",
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false,
+    "binaryMode": "separate"
+  },
+  "shared": [
+    {
+      "updatedAt": "2026-04-10T16:04:52.401Z",
+      "createdAt": "2026-04-10T16:04:52.401Z",
+      "role": "workflow:owner",
+      "workflowId": "eMmZacyCT634sN2T",
+      "projectId": "4KmSbENK2cGxsjaf"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2026-04-10T16:06:36.000Z",
+  "versionId": "b4496206-3bfc-49b4-b66c-b070132ed3a6"
+}
