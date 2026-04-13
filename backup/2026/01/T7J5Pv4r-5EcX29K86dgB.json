@@ -474,7 +474,7 @@
       "credentials": {
         "facebookGraphApi": {
           "id": "ynh4i2xLfKE74JQc",
-          "name": "Facebook Ads - DATA"
+          "name": "Facebook Ads - DATA (Luis,12Abr2026)"
         }
       }
     },
@@ -658,6 +658,48 @@
       "id": "4683b7d2-dd41-45cb-bb83-34e9f1e1134f",
       "name": "Crear fila con info",
       "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "content": "BeOnline: EAAiCZCbhPb7gBRMZBPvq86Xx5HxIGaZCZCZAdoe5IN746eTHBu0lKuOBk1mZBYXJyZBKHFVIJtNKBUnaXDdWasWAWsSz5TIYVrHm9vyBu0JfUuMspfZAckwRck4TtVRgWok0EJL3HfWAggl2SKAFnhfLKB1oFD3Ahv8moWTzJJ1SjBFcETY31uBPr5LIK7AVt0NMmQ5HGsc5JmEPLv9bhvEfqnyC5aG4jVl9op9nyzysf0Dwq7R1y4yc1H5sURvCncrBcefrEC2R00Tt0r3CyWgpCReh"
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        32,
+        -208
+      ],
+      "id": "90074487-b2e4-414c-8608-be3fa182f47a",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "operation": "select",
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "mode": "list",
+          "value": ""
+        }
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        -112,
+        240
+      ],
+      "id": "f56ea0f4-ddb2-4c3b-a375-2d4d58ebd02d",
+      "name": "Select rows from a table",
+      "credentials": {
+        "postgres": {
+          "id": "YDGdJcEneBEpa52a",
+          "name": "Postgres BeOnline new (Luis-12Abr2026)"
+        }
+      }
     }
   ],
   "pinData": {},
@@ -666,7 +708,8 @@
   "repo_path": "backup/",
   "settings": {
     "executionOrder": "v1",
-    "availableInMCP": false
+    "availableInMCP": false,
+    "binaryMode": "separate"
   },
   "shared": [
     {
@@ -684,6 +727,6 @@
   },
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2026-01-20T23:46:46.737Z",
-  "versionId": "04d83bda-4c52-44e7-aa4c-f4e18baec3f9"
+  "updatedAt": "2026-04-13T02:45:04.826Z",
+  "versionId": "41b2ec4a-9be3-4540-b894-93b3e5a4d2f1"
 }
