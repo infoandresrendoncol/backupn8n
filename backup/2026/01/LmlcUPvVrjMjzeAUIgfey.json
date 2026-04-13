@@ -1400,7 +1400,8 @@
   "repo_path": "backup/",
   "settings": {
     "executionOrder": "v1",
-    "availableInMCP": false
+    "availableInMCP": false,
+    "binaryMode": "separate"
   },
   "shared": [
     {
@@ -1414,6 +1415,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2026-01-21T18:44:49.140Z",
-  "versionId": "27f06ed1-7913-49c1-8406-4a4d066c2297"
+  "updatedAt": "2026-04-13T02:59:55.202Z",
+  "versionId": "450d6ce0-38d3-4a45-b368-97c4efe79012"
 }
