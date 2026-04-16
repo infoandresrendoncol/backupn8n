@@ -1,9 +1,9 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2026-01-21T18:44:51.000Z",
-    "createdAt": "2026-01-21T18:44:49.141Z",
-    "versionId": "27f06ed1-7913-49c1-8406-4a4d066c2297",
+    "updatedAt": "2026-04-15T19:43:48.000Z",
+    "createdAt": "2026-04-15T19:43:12.585Z",
+    "versionId": "0fcdad7b-95b0-4c25-ae30-40c5acbf83db",
     "workflowId": "LmlcUPvVrjMjzeAUIgfey",
     "nodes": [
       {
@@ -15,8 +15,8 @@
         "type": "n8n-nodes-base.webhook",
         "typeVersion": 2.1,
         "position": [
-          0,
-          0
+          -240,
+          16
         ],
         "id": "563c039b-7052-4bae-b481-0b70793bdf43",
         "name": "Info Hotmart",
@@ -39,7 +39,7 @@
         "type": "n8n-nodes-base.supabase",
         "typeVersion": 1,
         "position": [
-          416,
+          448,
           0
         ],
         "id": "d96e7a04-b491-42bb-952d-e46ae0317ccf",
@@ -395,7 +395,7 @@
         "type": "n8n-nodes-base.switch",
         "typeVersion": 3.4,
         "position": [
-          208,
+          -48,
           0
         ],
         "id": "6bb2ebeb-eab5-4f5f-a78d-588037914b9d",
@@ -542,6 +542,28 @@
             "name": "Supabase BE"
           }
         }
+      },
+      {
+        "parameters": {},
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1,
+        "position": [
+          256,
+          -96
+        ],
+        "id": "6ed62c4a-e2c7-48c4-af4a-79b5ee604668",
+        "name": "No Operation, do nothing"
+      },
+      {
+        "parameters": {},
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1,
+        "position": [
+          208,
+          192
+        ],
+        "id": "6f504e9c-0a26-4327-b80b-aa5adbc19e11",
+        "name": "No Operation, do nothing1"
       }
     ],
     "connections": {
@@ -627,21 +649,21 @@
         "main": [
           [
             {
-              "node": "Consulta Email",
+              "node": "No Operation, do nothing",
               "type": "main",
               "index": 0
             }
           ],
           [
             {
-              "node": "Consulta Email",
+              "node": "No Operation, do nothing",
               "type": "main",
               "index": 0
             }
           ],
           [
             {
-              "node": "Cargar Reembolso",
+              "node": "No Operation, do nothing1",
               "type": "main",
               "index": 0
             }
@@ -694,11 +716,11 @@
       }
     },
     "authors": "BE Online",
-    "name": "Version 27f06ed1",
+    "name": "Version 0fcdad7b",
     "description": "",
-    "autosaved": false
+    "autosaved": true
   },
-  "activeVersionId": "27f06ed1-7913-49c1-8406-4a4d066c2297",
+  "activeVersionId": "0fcdad7b-95b0-4c25-ae30-40c5acbf83db",
   "connections": {
     "Info Hotmart": {
       "main": [
@@ -782,21 +804,21 @@
       "main": [
         [
           {
-            "node": "Consulta Email",
+            "node": "No Operation, do nothing",
             "type": "main",
             "index": 0
           }
         ],
         [
           {
-            "node": "Consulta Email",
+            "node": "No Operation, do nothing",
             "type": "main",
             "index": 0
           }
         ],
         [
           {
-            "node": "Cargar Reembolso",
+            "node": "No Operation, do nothing1",
             "type": "main",
             "index": 0
           }
@@ -865,8 +887,8 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2.1,
       "position": [
-        0,
-        0
+        -240,
+        16
       ],
       "id": "563c039b-7052-4bae-b481-0b70793bdf43",
       "name": "Info Hotmart",
@@ -889,7 +911,7 @@
       "type": "n8n-nodes-base.supabase",
       "typeVersion": 1,
       "position": [
-        416,
+        448,
         0
       ],
       "id": "d96e7a04-b491-42bb-952d-e46ae0317ccf",
@@ -1245,7 +1267,7 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3.4,
       "position": [
-        208,
+        -48,
         0
       ],
       "id": "6bb2ebeb-eab5-4f5f-a78d-588037914b9d",
@@ -1392,6 +1414,28 @@
           "name": "Supabase BE"
         }
       }
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        256,
+        -96
+      ],
+      "id": "6ed62c4a-e2c7-48c4-af4a-79b5ee604668",
+      "name": "No Operation, do nothing"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        208,
+        192
+      ],
+      "id": "6f504e9c-0a26-4327-b80b-aa5adbc19e11",
+      "name": "No Operation, do nothing1"
     }
   ],
   "pinData": {},
@@ -1415,6 +1459,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2026-04-13T02:59:55.202Z",
-  "versionId": "450d6ce0-38d3-4a45-b368-97c4efe79012"
+  "updatedAt": "2026-04-15T19:43:12.583Z",
+  "versionId": "0fcdad7b-95b0-4c25-ae30-40c5acbf83db"
 }
