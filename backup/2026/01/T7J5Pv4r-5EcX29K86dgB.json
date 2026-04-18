@@ -346,24 +346,12 @@
     },
     "Buscar Cuentas Publicitarias": {
       "main": [
-        [
-          {
-            "node": "Buscar Info en Meta",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        []
       ]
     },
     "Buscar Info en Meta": {
       "main": [
-        [
-          {
-            "node": "Separar info por campaña",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        []
       ]
     },
     "Separar info por campaña": {
@@ -700,6 +688,48 @@
           "name": "Postgres BeOnline new (Luis-12Abr2026)"
         }
       }
+    },
+    {
+      "parameters": {
+        "graphApiVersion": "v23.0",
+        "node": "=act_013680582147065/insights",
+        "options": {
+          "queryParameters": {
+            "parameter": [
+              {
+                "name": "level",
+                "value": "campaign"
+              },
+              {
+                "name": "fields",
+                "value": "account_id,campaign_id,campaign_name,objective,spend,clicks,video_p75_watched_actions,impressions,ctr,cpm,actions"
+              },
+              {
+                "name": "access_token",
+                "value": "EAAMLtoYApwoBQTStKUHePZB8cg7N19oQy8rKFVrRjOyZAINgbQAXAHB2R8nnLKc6nD86UbhyrC6n6DQemr71Pz303U9cYoUEhsw6ZCrDklHt8OlnX0UCgEhJeSScSpePZBbCf1UZAt39RgeIF3vmQbONvPT0ZAxn3ho84lAyZCzM6ZAEX0tXC22ZB4E0a3Xfy7wKg"
+              },
+              {
+                "name": "date_preset",
+                "value": "yesterday"
+              }
+            ]
+          }
+        }
+      },
+      "type": "n8n-nodes-base.facebookGraphApi",
+      "typeVersion": 1,
+      "position": [
+        144,
+        240
+      ],
+      "id": "3100bf33-bf60-44bb-82ac-d9dec4fbd6f6",
+      "name": "Buscar Info en Meta1",
+      "credentials": {
+        "facebookGraphApi": {
+          "id": "ynh4i2xLfKE74JQc",
+          "name": "Facebook Ads - DATA (Luis,12Abr2026)"
+        }
+      }
     }
   ],
   "pinData": {},
@@ -727,6 +757,6 @@
   },
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2026-04-13T02:45:04.826Z",
-  "versionId": "41b2ec4a-9be3-4540-b894-93b3e5a4d2f1"
+  "updatedAt": "2026-04-17T22:53:16.780Z",
+  "versionId": "3b2004f5-1030-412e-85b4-d3dfd56d6bec"
 }
