@@ -1,9 +1,9 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2026-04-21T18:00:32.000Z",
-    "createdAt": "2026-04-21T18:00:22.722Z",
-    "versionId": "f3ffece6-9539-4838-bf08-6c748052182b",
+    "updatedAt": "2026-04-22T22:52:45.000Z",
+    "createdAt": "2026-04-22T22:52:41.890Z",
+    "versionId": "df34ff2b-d984-4eb6-9b2e-404b60356ee1",
     "workflowId": "vRpJ23fdJOBjMbBf",
     "nodes": [
       {
@@ -926,7 +926,7 @@
       {
         "parameters": {
           "method": "POST",
-          "url": "https://unnichat.com.br/a/start/ChVQGd9qcUNahQJ6yIAy",
+          "url": "https://unnichat.com.br/a/start/pqsP8jSRaN1PJolMxxCH",
           "sendBody": true,
           "specifyBody": "json",
           "jsonBody": "={\n  \"id\": \"{{ $json.id || Math.floor(Math.random() * 1000000).toString() }}\",\n  \"data\": {\n    \"number\": \"{{ $('Webhook').item.json.body.data.buyer.checkout_phone }}\",\n    \"tag\": \"global\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
@@ -1018,11 +1018,11 @@
       }
     },
     "authors": "BE Online",
-    "name": "Version f3ffece6",
+    "name": "Version df34ff2b",
     "description": "",
     "autosaved": true
   },
-  "activeVersionId": "f3ffece6-9539-4838-bf08-6c748052182b",
+  "activeVersionId": "df34ff2b-d984-4eb6-9b2e-404b60356ee1",
   "connections": {
     "Webhook": {
       "main": [
@@ -2026,7 +2026,7 @@
     {
       "parameters": {
         "method": "POST",
-        "url": "https://unnichat.com.br/a/start/ChVQGd9qcUNahQJ6yIAy",
+        "url": "https://unnichat.com.br/a/start/pqsP8jSRaN1PJolMxxCH",
         "sendBody": true,
         "specifyBody": "json",
         "jsonBody": "={\n  \"id\": \"{{ $json.id || Math.floor(Math.random() * 1000000).toString() }}\",\n  \"data\": {\n    \"number\": \"{{ $('Webhook').item.json.body.data.buyer.checkout_phone }}\",\n    \"tag\": \"global\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
@@ -2245,6 +2245,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2026-04-21T18:00:22.721Z",
-  "versionId": "f3ffece6-9539-4838-bf08-6c748052182b"
+  "updatedAt": "2026-04-22T22:52:41.889Z",
+  "versionId": "df34ff2b-d984-4eb6-9b2e-404b60356ee1"
 }
