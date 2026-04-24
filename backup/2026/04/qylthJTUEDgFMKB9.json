@@ -110,17 +110,6 @@
         ]
       ]
     },
-    "When clicking ‘Execute workflow’": {
-      "main": [
-        [
-          {
-            "node": "Tipo de transacción1",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "ConsultaMailCliente": {
       "main": [
         [
@@ -177,6 +166,17 @@
         [
           {
             "node": "CargarVenta0",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Info Hotmart": {
+      "main": [
+        [
+          {
+            "node": "Tipo de transacción1",
             "type": "main",
             "index": 0
           }
@@ -724,17 +724,6 @@
       "name": "No Operation, do nothing1"
     },
     {
-      "parameters": {},
-      "type": "n8n-nodes-base.manualTrigger",
-      "typeVersion": 1,
-      "position": [
-        -240,
-        -288
-      ],
-      "id": "851d693d-685b-43e1-81c0-f89e50040167",
-      "name": "When clicking ‘Execute workflow’"
-    },
-    {
       "parameters": {
         "assignments": {
           "assignments": [
@@ -799,8 +788,7 @@
           "id": "YDGdJcEneBEpa52a",
           "name": "Postgres BeOnline new (Luis-12Abr2026)"
         }
-      },
-      "disabled": true
+      }
     },
     {
       "parameters": {
@@ -831,13 +819,13 @@
             {
               "id": "074c88e5-f3f1-4869-9726-1a671cd7b08f",
               "name": "facturacion_neta",
-              "value": "={{ $('When clicking ‘Execute workflow’').item.json.body.data.commissions[1].value/ (($json.porc_productor_be.toNumber())+($json.porc_be_online.toNumber()))}}\n\n\n{{ $('When clicking ‘Execute workflow’').item.json.body.data.commissions[1].value / ($json.porc_productor_be.toNumber()) + ($json.porc_be_online.toNumber()) }}",
+              "value": "={{ $('Info Hotmart').item.json.body.data.commissions[1].value/ (($json.porc_productor_be.toNumber())+($json.porc_be_online.toNumber()))}}",
               "type": "number"
             },
             {
               "id": "1421eb0c-82ca-459a-b95e-8871caa03d15",
               "name": "comision_productor_hotmart",
-              "value": "={{ $('Info Hotmart').item.json.body.data.commissions[1].value / ($json.porc_productor_be + $json.porc_be_online) * ($json.porc_productor_hotmart) }}",
+              "value": "={{$('Info Hotmart').item.json.body.data.commissions[1].value /(($json.porc_productor_be.toNumber()+$json.porc_be_online.toNumber())*$json.porc_productor_hotmart.toNumber())  }}\n\n\n\n{{$('Info Hotmart').item.json.body.data.commissions[1].value}}\n\n//\n{{ $json.porc_productor_be.toNumber() }}\n//\n{{ $json.porc_be_online.toNumber() }}\n//\n{{ $json.porc_productor_hotmart.toNumber() }}\n\n0.00955",
               "type": "number"
             },
             {
@@ -977,24 +965,35 @@
           "name": "Postgres BeOnline new (Luis-12Abr2026)"
         }
       }
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -240,
+        -288
+      ],
+      "id": "851d693d-685b-43e1-81c0-f89e50040167",
+      "name": "Info Hotmart"
     }
   ],
   "pinData": {
-    "When clicking ‘Execute workflow’": [
+    "Info Hotmart": [
       {
         "json": {
           "headers": {
             "host": "contenedor1-n8n.vqn37t.easypanel.host",
             "user-agent": "Jodd HTTP",
-            "content-length": "2372",
+            "content-length": "2424",
             "content-type": "application/json",
-            "x-forwarded-for": "54.174.36.223",
+            "x-forwarded-for": "44.200.86.101",
             "x-forwarded-host": "contenedor1-n8n.vqn37t.easypanel.host",
             "x-forwarded-port": "443",
             "x-forwarded-proto": "https",
             "x-forwarded-server": "730fdd9182ea",
             "x-hotmart-hottok": "utYQiCvNkSCu3jMUFRgoPOcsfpKl8a41246415",
-            "x-real-ip": "54.174.36.223",
+            "x-real-ip": "44.200.86.101",
             "accept-encoding": "gzip"
           },
           "params": {},
@@ -1004,7 +1003,7 @@
               "product": {
                 "has_co_production": true,
                 "name": "PLAN DE ALIMENTACIÓN MENSUAL",
-                "warranty_date": "2026-04-29T00:00:00Z",
+                "warranty_date": "2026-04-30T00:00:00Z",
                 "is_physical_product": false,
                 "id": 7492517,
                 "ucode": "fd8ff198-2759-4d56-8519-2087151f34ad",
@@ -1056,24 +1055,24 @@
                   "name": "Colombia"
                 },
                 "origin": {
-                  "xcod": "{\"co\":\"VID02 - VSL 0126\",\"vid\":\"120241541850160125\",\"vsrc\":\"metaads\",\"u\":\"701055b9-d272-46e6-b89d-f590c4c81685\",\"url\":\"www.federicoymarialuisa.com/pam-accedeahora-vsl02\",\"r\":\"instagram.com/\",\"v\":1}",
-                  "sck": "s=metaads|m=Instagram_Feed|c=00 - [AUTO] - [VID02 - VSL 0126] A+|co=VID02 - VSL 0126|utm_id=120241541849910125|t=120241541850010125"
+                  "xcod": "{\"co\":\"VID02 [SIMPLE] - VSL 0126\",\"vid\":\"120241120303780125\",\"vsrc\":\"metaads\",\"u\":\"b54ab1bf-58a8-4f8a-ba2e-02ed0b4249cb\",\"url\":\"www.federicoymarialuisa.com/pam-accedeahora-vsl01\",\"r\":\"instagram.com/\",\"v\":1}",
+                  "sck": "s=metaads|m=Instagram_Feed|c=00 - [AUTO] - [VID02 [SIMPLE] - VSL 0126] A+|co=VID02 [SIMPLE] - VSL 0126|utm_id=120241120303570125|t=120241120303680125"
                 },
                 "order_bump": {
                   "is_order_bump": false
                 },
-                "approved_date": 1776891678000,
+                "approved_date": 1776963879000,
                 "offer": {
                   "code": "xd4zbnzd"
                 },
                 "is_funnel": false,
-                "order_date": 1776891675000,
-                "date_next_charge": 1779451200000,
+                "order_date": 1776963872000,
+                "date_next_charge": 1779537600000,
                 "price": {
                   "currency_value": "COP",
                   "value": 54625
                 },
-                "buyer_ip": "201.221.176.76",
+                "buyer_ip": "181.58.39.173",
                 "payment": {
                   "installments_number": 1,
                   "type": "CREDIT_CARD"
@@ -1084,7 +1083,7 @@
                 },
                 "business_model": "A",
                 "invoice_by": "SELLER",
-                "transaction": "HP0543938879",
+                "transaction": "HP3131484670",
                 "status": "APPROVED"
               },
               "affiliates": [
@@ -1100,7 +1099,7 @@
               },
               "subscription": {
                 "subscriber": {
-                  "code": "P7YNUH8J"
+                  "code": "TX8QR1J6"
                 },
                 "plan": {
                   "name": "Pioneros",
@@ -1113,15 +1112,16 @@
                   "country": "Colombia",
                   "country_iso": "CO"
                 },
-                "document": "39169941",
-                "name": "Claudia Maria Rojas",
-                "last_name": "Rojas",
-                "first_name": "Claudia",
-                "email": "clau_mafe@hotmail.com"
+                "document": "",
+                "name": "Valentina Alzate Restrepo",
+                "last_name": "Restrepo",
+                "first_name": "Valentina",
+                "email": "valenalzate0717@gmail.com",
+                "document_type": ""
               }
             },
-            "id": "39a70c29-435a-497d-abfe-d7bfef948416",
-            "creation_date": 1776891690866,
+            "id": "5750828c-831d-478b-bb66-b2fc24f13825",
+            "creation_date": 1776963891245,
             "event": "PURCHASE_APPROVED",
             "version": "2.0.0"
           },
@@ -1150,6 +1150,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2026-04-23T01:06:54.010Z",
-  "versionId": "7930515c-bb39-443a-a188-a75235a5bcf2"
+  "updatedAt": "2026-04-23T18:56:46.072Z",
+  "versionId": "39216ec0-cdb3-4521-9351-9b5225dd38c2"
 }
