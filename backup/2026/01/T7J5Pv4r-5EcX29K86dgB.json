@@ -375,6 +375,28 @@
           }
         ]
       ]
+    },
+    "Buscar Cuentas Publicitarias0": {
+      "main": [
+        [
+          {
+            "node": "Buscar Info en Meta1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Buscar Info en Meta1": {
+      "main": [
+        [
+          {
+            "node": "Separar info por campaña",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2026-01-15T19:15:15.013Z",
@@ -407,7 +429,9 @@
     {
       "parameters": {
         "operation": "getAll",
-        "tableId": "cuentas_publicitarias_meta"
+        "tableId": "cuentas_publicitarias_meta",
+        "returnAll": true,
+        "filterType": "none"
       },
       "type": "n8n-nodes-base.supabase",
       "typeVersion": 1,
@@ -662,35 +686,6 @@
     },
     {
       "parameters": {
-        "operation": "select",
-        "schema": {
-          "__rl": true,
-          "mode": "list",
-          "value": "public"
-        },
-        "table": {
-          "__rl": true,
-          "mode": "list",
-          "value": ""
-        }
-      },
-      "type": "n8n-nodes-base.postgres",
-      "typeVersion": 2.6,
-      "position": [
-        -112,
-        240
-      ],
-      "id": "f56ea0f4-ddb2-4c3b-a375-2d4d58ebd02d",
-      "name": "Select rows from a table",
-      "credentials": {
-        "postgres": {
-          "id": "YDGdJcEneBEpa52a",
-          "name": "Postgres BeOnline new (Luis-12Abr2026)"
-        }
-      }
-    },
-    {
-      "parameters": {
         "graphApiVersion": "v23.0",
         "node": "=act_013680582147065/insights",
         "options": {
@@ -719,8 +714,8 @@
       "type": "n8n-nodes-base.facebookGraphApi",
       "typeVersion": 1,
       "position": [
-        144,
-        240
+        112,
+        256
       ],
       "id": "3100bf33-bf60-44bb-82ac-d9dec4fbd6f6",
       "name": "Buscar Info en Meta1",
@@ -728,6 +723,38 @@
         "facebookGraphApi": {
           "id": "ynh4i2xLfKE74JQc",
           "name": "Facebook Ads - DATA (Luis,12Abr2026)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "select",
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "cuentas_publicitarias_meta",
+          "mode": "list",
+          "cachedResultName": "cuentas_publicitarias_meta"
+        },
+        "returnAll": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        -128,
+        240
+      ],
+      "id": "f56ea0f4-ddb2-4c3b-a375-2d4d58ebd02d",
+      "name": "Buscar Cuentas Publicitarias0",
+      "credentials": {
+        "postgres": {
+          "id": "YDGdJcEneBEpa52a",
+          "name": "Postgres BeOnline new (Luis-12Abr2026)"
         }
       }
     }
@@ -757,6 +784,6 @@
   },
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2026-04-17T22:53:16.780Z",
-  "versionId": "3b2004f5-1030-412e-85b4-d3dfd56d6bec"
+  "updatedAt": "2026-04-25T14:47:10.650Z",
+  "versionId": "ef1d9969-5863-45e9-bc18-362951355c1e"
 }
