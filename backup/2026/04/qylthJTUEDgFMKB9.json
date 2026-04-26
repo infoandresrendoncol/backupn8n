@@ -45,14 +45,14 @@
       "main": [
         [
           {
-            "node": "ConsultaMailCliente",
+            "node": "Consulta Email0",
             "type": "main",
             "index": 0
           }
         ],
         [
           {
-            "node": "ConsultaMailCliente",
+            "node": "Consulta Email0",
             "type": "main",
             "index": 0
           }
@@ -112,27 +112,21 @@
     },
     "ConsultaMailCliente": {
       "main": [
-        [
-          {
-            "node": "¿Cliente no existe?",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        []
       ]
     },
     "¿Cliente no existe?": {
       "main": [
         [
           {
-            "node": "CrearCliente0",
+            "node": "CrearCliente",
             "type": "main",
             "index": 0
           }
         ],
         [
           {
-            "node": "Busqueda productor y porcentajes1",
+            "node": "Busqueda productor y porcentajes2",
             "type": "main",
             "index": 0
           }
@@ -141,31 +135,19 @@
     },
     "CrearCliente0": {
       "main": [
-        [
-          {
-            "node": "Busqueda productor y porcentajes1",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        []
       ]
     },
     "Busqueda productor y porcentajes1": {
       "main": [
-        [
-          {
-            "node": "Asignación de comisiones1",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        []
       ]
     },
     "Asignación de comisiones1": {
       "main": [
         [
           {
-            "node": "CargarVenta0",
+            "node": "CargarVenta1",
             "type": "main",
             "index": 0
           }
@@ -182,12 +164,47 @@
           }
         ]
       ]
+    },
+    "Consulta Email0": {
+      "main": [
+        [
+          {
+            "node": "¿Cliente no existe?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "CrearCliente": {
+      "main": [
+        [
+          {
+            "node": "Busqueda productor y porcentajes2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Busqueda productor y porcentajes2": {
+      "main": [
+        [
+          {
+            "node": "Asignación de comisiones1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2026-04-22T23:30:48.382Z",
   "id": "qylthJTUEDgFMKB9",
   "isArchived": false,
-  "meta": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
   "name": "hotmart-test",
   "nodes": [
     {
@@ -207,7 +224,7 @@
       "type": "n8n-nodes-base.supabase",
       "typeVersion": 1,
       "position": [
-        496,
+        480,
         -112
       ],
       "id": "ae6f6597-5350-4b28-a40d-d66b0b6ef44c",
@@ -755,8 +772,8 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        496,
-        -272
+        384,
+        -640
       ],
       "id": "84a7e2f2-f4a1-434f-b97e-37dec73ca635",
       "name": "ConsultaMailCliente",
@@ -778,7 +795,7 @@
       "typeVersion": 2.6,
       "position": [
         864,
-        -208
+        -544
       ],
       "id": "60c3369d-d18c-4388-ad94-4385b474a3f0",
       "name": "CrearCliente0",
@@ -799,8 +816,8 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        1152,
-        -144
+        1120,
+        -528
       ],
       "id": "c372f3a4-604d-4aae-9634-207c251321fc",
       "name": "Busqueda productor y porcentajes1",
@@ -887,7 +904,7 @@
       "typeVersion": 2.6,
       "position": [
         1920,
-        -144
+        -448
       ],
       "id": "ebd022a4-ced7-4ce1-b793-7aeedd67efc4",
       "name": "CargarVenta0",
@@ -976,6 +993,400 @@
       ],
       "id": "851d693d-685b-43e1-81c0-f89e50040167",
       "name": "Info Hotmart"
+    },
+    {
+      "parameters": {
+        "operation": "select",
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "clientes",
+          "mode": "list",
+          "cachedResultName": "clientes"
+        },
+        "returnAll": true,
+        "where": {
+          "values": [
+            {
+              "column": "email",
+              "value": "={{ $json.body.data.buyer.email }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        496,
+        -256
+      ],
+      "id": "ae15fe99-3247-4ff4-b384-ba80fb323160",
+      "name": "Consulta Email0",
+      "credentials": {
+        "postgres": {
+          "id": "YDGdJcEneBEpa52a",
+          "name": "Postgres BeOnline new (Luis-12Abr2026)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "clientes",
+          "mode": "list",
+          "cachedResultName": "clientes"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "email": "={{ $('Tipo de transacción1').item.json.body.data.buyer.email }}",
+            "nombre": "={{ $('Tipo de transacción1').item.json.body.data.buyer.name }}",
+            "productor_id": "={{ $('Tipo de transacción1').item.json.body.data.producer.document }}",
+            "pais": "={{ $('Tipo de transacción1').item.json.body.data.buyer.country }}",
+            "fecha_registro": "={{ $now }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "email",
+              "displayName": "email",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "nombre",
+              "displayName": "nombre",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "pais",
+              "displayName": "pais",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "fecha_registro",
+              "displayName": "fecha_registro",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "productor_id",
+              "displayName": "productor_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        912,
+        -240
+      ],
+      "id": "2de58220-b72b-4ed4-8ba0-b8e126d8b21d",
+      "name": "CrearCliente",
+      "credentials": {
+        "postgres": {
+          "id": "YDGdJcEneBEpa52a",
+          "name": "Postgres BeOnline new (Luis-12Abr2026)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "select",
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "mapeo_clientes",
+          "mode": "list",
+          "cachedResultName": "mapeo_clientes"
+        },
+        "returnAll": true,
+        "where": {
+          "values": [
+            {
+              "column": "productor_id",
+              "value": "={{ $('Tipo de transacción1').item.json.body.data.producer.document }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        1152,
+        -144
+      ],
+      "id": "c0fcebbb-bf5a-406d-b95d-7675dcb2936d",
+      "name": "Busqueda productor y porcentajes2",
+      "credentials": {
+        "postgres": {
+          "id": "YDGdJcEneBEpa52a",
+          "name": "Postgres BeOnline new (Luis-12Abr2026)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "ventas_hotmart",
+          "mode": "list",
+          "cachedResultName": "ventas_hotmart"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "facturacion_bruta": 0,
+            "comision_productor_hotmart": 0,
+            "comision_andres": 0,
+            "comision_mariana": 0,
+            "comision_wilder": 0,
+            "comision_otros": 0,
+            "comision_be_online": 0,
+            "comision_productor_be": 0,
+            "facturacion_neta": 0,
+            "nro_recurrencia": 0
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id_transaccion",
+              "displayName": "id_transaccion",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "email_cliente",
+              "displayName": "email_cliente",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "producto_id",
+              "displayName": "producto_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "producto_nombre",
+              "displayName": "producto_nombre",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "facturacion_bruta",
+              "displayName": "facturacion_bruta",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "comision_productor_hotmart",
+              "displayName": "comision_productor_hotmart",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "comision_andres",
+              "displayName": "comision_andres",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "comision_mariana",
+              "displayName": "comision_mariana",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "comision_wilder",
+              "displayName": "comision_wilder",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "comision_otros",
+              "displayName": "comision_otros",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "comision_be_online",
+              "displayName": "comision_be_online",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "pais_comprador",
+              "displayName": "pais_comprador",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "status",
+              "displayName": "status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "fecha_venta",
+              "displayName": "fecha_venta",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "comision_productor_be",
+              "displayName": "comision_productor_be",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "facturacion_neta",
+              "displayName": "facturacion_neta",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "nro_recurrencia",
+              "displayName": "nro_recurrencia",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "metodo_pago",
+              "displayName": "metodo_pago",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        1920,
+        -96
+      ],
+      "id": "e60be494-1410-49da-92e0-f00546cd973d",
+      "name": "CargarVenta1",
+      "credentials": {
+        "postgres": {
+          "id": "YDGdJcEneBEpa52a",
+          "name": "Postgres BeOnline new (Luis-12Abr2026)"
+        }
+      }
     }
   ],
   "pinData": {
@@ -1150,6 +1561,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2026-04-23T18:56:46.072Z",
-  "versionId": "39216ec0-cdb3-4521-9351-9b5225dd38c2"
+  "updatedAt": "2026-04-25T14:59:47.769Z",
+  "versionId": "dde7737b-19fe-48db-aa22-767f6ce4f3a6"
 }
