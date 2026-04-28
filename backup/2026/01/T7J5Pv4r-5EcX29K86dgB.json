@@ -1,9 +1,9 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2026-01-21T00:00:17.000Z",
-    "createdAt": "2026-01-20T23:46:46.738Z",
-    "versionId": "04d83bda-4c52-44e7-aa4c-f4e18baec3f9",
+    "updatedAt": "2026-04-27T21:25:19.000Z",
+    "createdAt": "2026-04-27T21:25:18.741Z",
+    "versionId": "ccb37a0b-b762-4782-8e71-8cd8b1a364a7",
     "workflowId": "T7J5Pv4r-5EcX29K86dgB",
     "nodes": [
       {
@@ -28,7 +28,9 @@
       {
         "parameters": {
           "operation": "getAll",
-          "tableId": "cuentas_publicitarias_meta"
+          "tableId": "cuentas_publicitarias_meta",
+          "returnAll": true,
+          "filterType": "none"
         },
         "type": "n8n-nodes-base.supabase",
         "typeVersion": 1,
@@ -83,7 +85,7 @@
         "credentials": {
           "facebookGraphApi": {
             "id": "ynh4i2xLfKE74JQc",
-            "name": "Facebook Ads - DATA"
+            "name": "Facebook Ads - DATA (Luis,12Abr2026)"
           }
         }
       },
@@ -261,12 +263,444 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          720,
-          0
+          784,
+          240
         ],
         "id": "4683b7d2-dd41-45cb-bb83-34e9f1e1134f",
         "name": "Crear fila con info",
         "onError": "continueRegularOutput"
+      },
+      {
+        "parameters": {
+          "content": "BeOnline: EAAiCZCbhPb7gBRMZBPvq86Xx5HxIGaZCZCZAdoe5IN746eTHBu0lKuOBk1mZBYXJyZBKHFVIJtNKBUnaXDdWasWAWsSz5TIYVrHm9vyBu0JfUuMspfZAckwRck4TtVRgWok0EJL3HfWAggl2SKAFnhfLKB1oFD3Ahv8moWTzJJ1SjBFcETY31uBPr5LIK7AVt0NMmQ5HGsc5JmEPLv9bhvEfqnyC5aG4jVl9op9nyzysf0Dwq7R1y4yc1H5sURvCncrBcefrEC2R00Tt0r3CyWgpCReh"
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          32,
+          -208
+        ],
+        "id": "90074487-b2e4-414c-8608-be3fa182f47a",
+        "name": "Sticky Note"
+      },
+      {
+        "parameters": {
+          "operation": "select",
+          "schema": {
+            "__rl": true,
+            "mode": "list",
+            "value": "public"
+          },
+          "table": {
+            "__rl": true,
+            "value": "cuentas_publicitarias_meta",
+            "mode": "list",
+            "cachedResultName": "cuentas_publicitarias_meta"
+          },
+          "returnAll": true,
+          "options": {}
+        },
+        "type": "n8n-nodes-base.postgres",
+        "typeVersion": 2.6,
+        "position": [
+          -128,
+          240
+        ],
+        "id": "f56ea0f4-ddb2-4c3b-a375-2d4d58ebd02d",
+        "name": "Buscar Cuentas Publicitarias0",
+        "credentials": {
+          "postgres": {
+            "id": "YDGdJcEneBEpa52a",
+            "name": "Postgres BeOnline new (Luis-12Abr2026)"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "graphApiVersion": "v23.0",
+          "node": "=act_3013680582147065/insights",
+          "options": {
+            "queryParameters": {
+              "parameter": [
+                {
+                  "name": "level",
+                  "value": "campaign"
+                },
+                {
+                  "name": "fields",
+                  "value": "account_id,campaign_id,campaign_name,objective,spend,clicks,video_p75_watched_actions,impressions,ctr,cpm,actions"
+                },
+                {
+                  "name": "access_token",
+                  "value": "EAAiCZCbhPb7gBRVbyRuMoZBEw0AeZBjX18iAijhP1jybFltviCvjRN1Vo80XcXCi0WUPyv7TcmbKJDP1ZCMgblwvR6vntXzilJjXAcWLUkgRWSPkQZCy01Nav1gH6NZBMzui4UabYaOawIGHxJ3OBva6iWp2N6YeB8arBXU76ZB2RppslwyRgFs8i5M24jUTiuv"
+                },
+                {
+                  "name": "date_preset",
+                  "value": "yesterday"
+                }
+              ]
+            }
+          }
+        },
+        "type": "n8n-nodes-base.facebookGraphApi",
+        "typeVersion": 1,
+        "position": [
+          128,
+          240
+        ],
+        "id": "e615b71a-adf5-468a-8017-c7e756404721",
+        "name": "Buscar Info en Meta2",
+        "credentials": {
+          "facebookGraphApi": {
+            "id": "ynh4i2xLfKE74JQc",
+            "name": "Facebook Ads - DATA (Luis,12Abr2026)"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "defa3e79-0746-4950-8be5-492e69804184",
+                "name": "",
+                "value": "",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          864,
+          592
+        ],
+        "id": "4b504048-fc58-43ab-8a3e-c7ea51620246",
+        "name": "Edit Fields"
+      },
+      {
+        "parameters": {},
+        "type": "n8n-nodes-base.manualTrigger",
+        "typeVersion": 1,
+        "position": [
+          -464,
+          288
+        ],
+        "id": "936ddcfb-c566-4172-aa8f-6e3c30ac004a",
+        "name": "When clicking ‘Execute workflow’"
+      },
+      {
+        "parameters": {
+          "schema": {
+            "__rl": true,
+            "mode": "list",
+            "value": "public"
+          },
+          "table": {
+            "__rl": true,
+            "value": "gasto_marketing_fb",
+            "mode": "list",
+            "cachedResultName": "gasto_marketing_fb"
+          },
+          "columns": {
+            "mappingMode": "defineBelow",
+            "value": {
+              "gasto_total": "={{ $json.gasto_total }}",
+              "gasto_productor": "={{ $json.gasto_productor }}",
+              "gasto_be_online": "={{ $json.gasto_be_online }}",
+              "resultados": "={{ $json.resultados }}",
+              "costo_por_resultado": "={{ $json.costo_por_resultado }}",
+              "clics": "={{ $json.clics }}",
+              "impresiones": "={{ $json.impresiones }}",
+              "ctr": "={{ $json.ctr }}",
+              "cpm": "={{ $json.cpm }}",
+              "video_view_75": "={{ $json.video_view_75 }}",
+              "page_view": "={{ $json.page_view }}",
+              "pagos_iniciados": "={{ $json.pagos_iniciados }}",
+              "visitas_instagram": "={{ $json.visitas_instagram }}",
+              "campaña_id": "={{ $json['campaña_id'] }}",
+              "nombre_campaña": "={{ $json['nombre_campaña'] }}",
+              "tipo_campaña": "={{ $json['tipo_campaña'] }}",
+              "fecha_gasto": "={{ $json.fecha_gasto }}",
+              "id_cuenta_ads": "={{ $json.id_cuenta_ads }}"
+            },
+            "matchingColumns": [
+              "id"
+            ],
+            "schema": [
+              {
+                "id": "id",
+                "displayName": "id",
+                "required": false,
+                "defaultMatch": true,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "campaña_id",
+                "displayName": "campaña_id",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "nombre_campaña",
+                "displayName": "nombre_campaña",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "tipo_campaña",
+                "displayName": "tipo_campaña",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "gasto_total",
+                "displayName": "gasto_total",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "gasto_productor",
+                "displayName": "gasto_productor",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "gasto_be_online",
+                "displayName": "gasto_be_online",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "resultados",
+                "displayName": "resultados",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "costo_por_resultado",
+                "displayName": "costo_por_resultado",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "fecha_gasto",
+                "displayName": "fecha_gasto",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "dateTime",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "clics",
+                "displayName": "clics",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "impresiones",
+                "displayName": "impresiones",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "ctr",
+                "displayName": "ctr",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "cpm",
+                "displayName": "cpm",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "id_cuenta_ads",
+                "displayName": "id_cuenta_ads",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "video_view_75",
+                "displayName": "video_view_75",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "page_view",
+                "displayName": "page_view",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "pagos_iniciados",
+                "displayName": "pagos_iniciados",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "visitas_instagram",
+                "displayName": "visitas_instagram",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true
+              }
+            ],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": false
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.postgres",
+        "typeVersion": 2.6,
+        "position": [
+          768,
+          0
+        ],
+        "id": "ddaa25c1-f994-427f-be33-3d2490f1db2e",
+        "name": "Insertar datos pauta tabla",
+        "credentials": {
+          "postgres": {
+            "id": "YDGdJcEneBEpa52a",
+            "name": "Postgres BeOnline new (Luis-12Abr2026)"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "content": "token Vence 27 de Junio"
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          496,
+          -240
+        ],
+        "id": "cae58961-c932-4d70-98bf-20f657657792",
+        "name": "Sticky Note1"
+      },
+      {
+        "parameters": {
+          "url": "https://graph.facebook.com/v25.0/oauth/access_token",
+          "sendQuery": true,
+          "queryParameters": {
+            "parameters": [
+              {
+                "name": "grant_type",
+                "value": "fb_exchange_token"
+              },
+              {
+                "name": "client_id",
+                "value": "907230552045448"
+              },
+              {
+                "name": "client_secret",
+                "value": "5d292190fe02106404712fd9e03a1d4b"
+              },
+              {
+                "name": "fb_exchange_token",
+                "value": "EAAM5HxLIt4gBRfWfIZC60dKS6vGDIuL1Yv10tWIA9qZCPWPUWkL5Ks91cq9vR4oJOTtqiZBA2iiegBYnb6cu0IVRTwnLP5ctmvuZBHiU7tbyWEkoYoZAVN58bRrRZBwKlvquURBvp9bAsIrMjp3ZAxYMIQnn39qw2bYA23tRIK3ZBcMfZAM3nMifle8Ri0ZCtxYTgO011jCQaSTZBtDLGjjZA9OeJnGhDlWTepErsqU7WepeAKAqZCcpZCvbzPEKWJq6LMj0M4fzMzXfZAf6X7iJcpu90gxXVymqQZDZD"
+              }
+            ]
+          },
+          "options": {
+            "redirect": {
+              "redirect": {}
+            }
+          }
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.3,
+        "position": [
+          352,
+          -384
+        ],
+        "id": "82c182e2-be7e-4aee-8ae2-5000c8d20807",
+        "name": "renovacion_token_fb_ads1"
+      },
+      {
+        "parameters": {
+          "content": "La renovación del token se debe hacer cada 59 dias, aca encuentras el endpoint para renovarlo, importante, debes generar el acces token de facebook graph api: \n\nhttps://developers.facebook.com/tools/explorer/907230552045448/?method=GET&path=me%3Ffields%3Did%2Cname&version=v25.0",
+          "width": 640
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          -384,
+          -432
+        ],
+        "id": "e80ac328-a4f8-45df-9af0-9c0793722148",
+        "name": "Sticky Note2"
+      },
+      {
+        "parameters": {
+          "content": "Para mas información:\nhttps://developers.facebook.com/documentation/facebook-login/guides/access-tokens/get-long-lived"
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          608,
+          -448
+        ],
+        "id": "e304caf3-d6bc-4d23-91b4-3af8093a18ad",
+        "name": "Sticky Note3"
       }
     ],
     "connections": {
@@ -274,7 +708,7 @@
         "main": [
           [
             {
-              "node": "Buscar Cuentas Publicitarias",
+              "node": "Buscar Cuentas Publicitarias0",
               "type": "main",
               "index": 0
             }
@@ -283,24 +717,12 @@
       },
       "Buscar Cuentas Publicitarias": {
         "main": [
-          [
-            {
-              "node": "Buscar Info en Meta",
-              "type": "main",
-              "index": 0
-            }
-          ]
+          []
         ]
       },
       "Buscar Info en Meta": {
         "main": [
-          [
-            {
-              "node": "Separar info por campaña",
-              "type": "main",
-              "index": 0
-            }
-          ]
+          []
         ]
       },
       "Separar info por campaña": {
@@ -318,7 +740,40 @@
         "main": [
           [
             {
-              "node": "Crear fila con info",
+              "node": "Insertar datos pauta tabla",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Buscar Cuentas Publicitarias0": {
+        "main": [
+          [
+            {
+              "node": "Buscar Info en Meta2",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "When clicking ‘Execute workflow’": {
+        "main": [
+          [
+            {
+              "node": "Buscar Cuentas Publicitarias0",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Buscar Info en Meta2": {
+        "main": [
+          [
+            {
+              "node": "Separar info por campaña",
               "type": "main",
               "index": 0
             }
@@ -327,17 +782,17 @@
       }
     },
     "authors": "BE Online",
-    "name": "Version 04d83bda",
+    "name": "Version ccb37a0b",
     "description": "",
     "autosaved": false
   },
-  "activeVersionId": "04d83bda-4c52-44e7-aa4c-f4e18baec3f9",
+  "activeVersionId": "ccb37a0b-b762-4782-8e71-8cd8b1a364a7",
   "connections": {
     "Día siguiente 5:00 am": {
       "main": [
         [
           {
-            "node": "Buscar Cuentas Publicitarias",
+            "node": "Buscar Cuentas Publicitarias0",
             "type": "main",
             "index": 0
           }
@@ -369,7 +824,7 @@
       "main": [
         [
           {
-            "node": "Crear fila con info",
+            "node": "Insertar datos pauta tabla",
             "type": "main",
             "index": 0
           }
@@ -380,14 +835,25 @@
       "main": [
         [
           {
-            "node": "Buscar Info en Meta1",
+            "node": "Buscar Info en Meta2",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Buscar Info en Meta1": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Buscar Cuentas Publicitarias0",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Buscar Info en Meta2": {
       "main": [
         [
           {
@@ -664,8 +1130,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        720,
-        0
+        784,
+        240
       ],
       "id": "4683b7d2-dd41-45cb-bb83-34e9f1e1134f",
       "name": "Crear fila con info",
@@ -683,48 +1149,6 @@
       ],
       "id": "90074487-b2e4-414c-8608-be3fa182f47a",
       "name": "Sticky Note"
-    },
-    {
-      "parameters": {
-        "graphApiVersion": "v23.0",
-        "node": "=act_013680582147065/insights",
-        "options": {
-          "queryParameters": {
-            "parameter": [
-              {
-                "name": "level",
-                "value": "campaign"
-              },
-              {
-                "name": "fields",
-                "value": "account_id,campaign_id,campaign_name,objective,spend,clicks,video_p75_watched_actions,impressions,ctr,cpm,actions"
-              },
-              {
-                "name": "access_token",
-                "value": "EAAMLtoYApwoBQTStKUHePZB8cg7N19oQy8rKFVrRjOyZAINgbQAXAHB2R8nnLKc6nD86UbhyrC6n6DQemr71Pz303U9cYoUEhsw6ZCrDklHt8OlnX0UCgEhJeSScSpePZBbCf1UZAt39RgeIF3vmQbONvPT0ZAxn3ho84lAyZCzM6ZAEX0tXC22ZB4E0a3Xfy7wKg"
-              },
-              {
-                "name": "date_preset",
-                "value": "yesterday"
-              }
-            ]
-          }
-        }
-      },
-      "type": "n8n-nodes-base.facebookGraphApi",
-      "typeVersion": 1,
-      "position": [
-        112,
-        256
-      ],
-      "id": "3100bf33-bf60-44bb-82ac-d9dec4fbd6f6",
-      "name": "Buscar Info en Meta1",
-      "credentials": {
-        "facebookGraphApi": {
-          "id": "ynh4i2xLfKE74JQc",
-          "name": "Facebook Ads - DATA (Luis,12Abr2026)"
-        }
-      }
     },
     {
       "parameters": {
@@ -757,6 +1181,393 @@
           "name": "Postgres BeOnline new (Luis-12Abr2026)"
         }
       }
+    },
+    {
+      "parameters": {
+        "graphApiVersion": "v23.0",
+        "node": "=act_3013680582147065/insights",
+        "options": {
+          "queryParameters": {
+            "parameter": [
+              {
+                "name": "level",
+                "value": "campaign"
+              },
+              {
+                "name": "fields",
+                "value": "account_id,campaign_id,campaign_name,objective,spend,clicks,video_p75_watched_actions,impressions,ctr,cpm,actions"
+              },
+              {
+                "name": "access_token",
+                "value": "EAAiCZCbhPb7gBRVbyRuMoZBEw0AeZBjX18iAijhP1jybFltviCvjRN1Vo80XcXCi0WUPyv7TcmbKJDP1ZCMgblwvR6vntXzilJjXAcWLUkgRWSPkQZCy01Nav1gH6NZBMzui4UabYaOawIGHxJ3OBva6iWp2N6YeB8arBXU76ZB2RppslwyRgFs8i5M24jUTiuv"
+              },
+              {
+                "name": "date_preset",
+                "value": "yesterday"
+              }
+            ]
+          }
+        }
+      },
+      "type": "n8n-nodes-base.facebookGraphApi",
+      "typeVersion": 1,
+      "position": [
+        128,
+        240
+      ],
+      "id": "e615b71a-adf5-468a-8017-c7e756404721",
+      "name": "Buscar Info en Meta2",
+      "credentials": {
+        "facebookGraphApi": {
+          "id": "ynh4i2xLfKE74JQc",
+          "name": "Facebook Ads - DATA (Luis,12Abr2026)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "defa3e79-0746-4950-8be5-492e69804184",
+              "name": "",
+              "value": "",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        864,
+        592
+      ],
+      "id": "4b504048-fc58-43ab-8a3e-c7ea51620246",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -464,
+        288
+      ],
+      "id": "936ddcfb-c566-4172-aa8f-6e3c30ac004a",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "gasto_marketing_fb",
+          "mode": "list",
+          "cachedResultName": "gasto_marketing_fb"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "gasto_total": "={{ $json.gasto_total }}",
+            "gasto_productor": "={{ $json.gasto_productor }}",
+            "gasto_be_online": "={{ $json.gasto_be_online }}",
+            "resultados": "={{ $json.resultados }}",
+            "costo_por_resultado": "={{ $json.costo_por_resultado }}",
+            "clics": "={{ $json.clics }}",
+            "impresiones": "={{ $json.impresiones }}",
+            "ctr": "={{ $json.ctr }}",
+            "cpm": "={{ $json.cpm }}",
+            "video_view_75": "={{ $json.video_view_75 }}",
+            "page_view": "={{ $json.page_view }}",
+            "pagos_iniciados": "={{ $json.pagos_iniciados }}",
+            "visitas_instagram": "={{ $json.visitas_instagram }}",
+            "campaña_id": "={{ $json['campaña_id'] }}",
+            "nombre_campaña": "={{ $json['nombre_campaña'] }}",
+            "tipo_campaña": "={{ $json['tipo_campaña'] }}",
+            "fecha_gasto": "={{ $json.fecha_gasto }}",
+            "id_cuenta_ads": "={{ $json.id_cuenta_ads }}"
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "campaña_id",
+              "displayName": "campaña_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "nombre_campaña",
+              "displayName": "nombre_campaña",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "tipo_campaña",
+              "displayName": "tipo_campaña",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "gasto_total",
+              "displayName": "gasto_total",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "gasto_productor",
+              "displayName": "gasto_productor",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "gasto_be_online",
+              "displayName": "gasto_be_online",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "resultados",
+              "displayName": "resultados",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "costo_por_resultado",
+              "displayName": "costo_por_resultado",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "fecha_gasto",
+              "displayName": "fecha_gasto",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "clics",
+              "displayName": "clics",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "impresiones",
+              "displayName": "impresiones",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "ctr",
+              "displayName": "ctr",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "cpm",
+              "displayName": "cpm",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "id_cuenta_ads",
+              "displayName": "id_cuenta_ads",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "video_view_75",
+              "displayName": "video_view_75",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "page_view",
+              "displayName": "page_view",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "pagos_iniciados",
+              "displayName": "pagos_iniciados",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "visitas_instagram",
+              "displayName": "visitas_instagram",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        800,
+        0
+      ],
+      "id": "ddaa25c1-f994-427f-be33-3d2490f1db2e",
+      "name": "Insertar datos pauta tabla",
+      "credentials": {
+        "postgres": {
+          "id": "YDGdJcEneBEpa52a",
+          "name": "Postgres BeOnline new (Luis-12Abr2026)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "token Vence 27 de Junio"
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        496,
+        -240
+      ],
+      "id": "cae58961-c932-4d70-98bf-20f657657792",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "url": "https://graph.facebook.com/v25.0/oauth/access_token",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "grant_type",
+              "value": "fb_exchange_token"
+            },
+            {
+              "name": "client_id",
+              "value": "907230552045448"
+            },
+            {
+              "name": "client_secret",
+              "value": "5d292190fe02106404712fd9e03a1d4b"
+            },
+            {
+              "name": "fb_exchange_token",
+              "value": "EAAM5HxLIt4gBRfWfIZC60dKS6vGDIuL1Yv10tWIA9qZCPWPUWkL5Ks91cq9vR4oJOTtqiZBA2iiegBYnb6cu0IVRTwnLP5ctmvuZBHiU7tbyWEkoYoZAVN58bRrRZBwKlvquURBvp9bAsIrMjp3ZAxYMIQnn39qw2bYA23tRIK3ZBcMfZAM3nMifle8Ri0ZCtxYTgO011jCQaSTZBtDLGjjZA9OeJnGhDlWTepErsqU7WepeAKAqZCcpZCvbzPEKWJq6LMj0M4fzMzXfZAf6X7iJcpu90gxXVymqQZDZD"
+            }
+          ]
+        },
+        "options": {
+          "redirect": {
+            "redirect": {}
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        352,
+        -384
+      ],
+      "id": "82c182e2-be7e-4aee-8ae2-5000c8d20807",
+      "name": "renovacion_token_fb_ads1"
+    },
+    {
+      "parameters": {
+        "content": "La renovación del token se debe hacer cada 59 dias, aca encuentras el endpoint para renovarlo, importante, debes generar el acces token de facebook graph api: \n\nhttps://developers.facebook.com/tools/explorer/907230552045448/?method=GET&path=me%3Ffields%3Did%2Cname&version=v25.0",
+        "width": 640
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -384,
+        -432
+      ],
+      "id": "e80ac328-a4f8-45df-9af0-9c0793722148",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "content": "Para mas información:\nhttps://developers.facebook.com/documentation/facebook-login/guides/access-tokens/get-long-lived"
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        608,
+        -448
+      ],
+      "id": "e304caf3-d6bc-4d23-91b4-3af8093a18ad",
+      "name": "Sticky Note3"
     }
   ],
   "pinData": {},
@@ -784,6 +1595,6 @@
   },
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2026-04-25T14:47:10.650Z",
-  "versionId": "ef1d9969-5863-45e9-bc18-362951355c1e"
+  "updatedAt": "2026-04-27T21:25:25.019Z",
+  "versionId": "b29c40c0-026c-4988-bfb6-b29658d040d8"
 }
