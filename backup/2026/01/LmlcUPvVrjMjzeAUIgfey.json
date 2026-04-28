@@ -1,9 +1,9 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2026-04-22T23:51:29.000Z",
-    "createdAt": "2026-04-22T23:51:28.080Z",
-    "versionId": "27b04977-d2ff-470f-b85a-8594b606b9e3",
+    "updatedAt": "2026-04-27T15:46:05.000Z",
+    "createdAt": "2026-04-27T15:46:02.154Z",
+    "versionId": "c3ee6f90-b438-48ae-86a3-974041849b8c",
     "workflowId": "LmlcUPvVrjMjzeAUIgfey",
     "nodes": [
       {
@@ -548,6 +548,1176 @@
         "id": "563c039b-7052-4bae-b481-0b70793bdf43",
         "name": "Info Hotmart",
         "webhookId": "7e71da5f-b86d-4848-9d4b-a6f02fd9c2ba"
+      },
+      {
+        "parameters": {
+          "operation": "executeQuery",
+          "query": "INSERT INTO reembolsos_hotmart (\n    id_reembolso, \n    id_transaccion_original, \n    email_cliente, \n    fecha_reembolso\n) \nVALUES (\n    '{{ $json.body.data.purchase.transaction }}', \n    '{{ $json.body.data.purchase.order_bump.parent_purchase_transaction }}', \n    '{{ $json.body.data.buyer.email }}', \n    '{{ $json.body.data.product.warranty_date }}'\n);",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.postgres",
+        "typeVersion": 2.6,
+        "position": [
+          256,
+          1808
+        ],
+        "id": "b23d5c4e-f7b8-4b05-bd0b-088c62ceafad",
+        "name": "CargarReembolso",
+        "alwaysOutputData": true,
+        "credentials": {
+          "postgres": {
+            "id": "YDGdJcEneBEpa52a",
+            "name": "Postgres BeOnline new (Luis-12Abr2026)"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "operation": "executeQuery",
+          "query": "UPDATE ventas_hotmart\nSET \n    status = '{{ $('Info Hotmart').item.json.body.event }}',\n    fecha_venta = '{{ $('Info Hotmart').item.json.body.data.product.warranty_date }}'\nWHERE \n    id = '{{ $json.id }}';",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.postgres",
+        "typeVersion": 2.6,
+        "position": [
+          1120,
+          1776
+        ],
+        "id": "63ab42c5-4cc5-445f-abbb-c2ca5a27ac5f",
+        "name": "Actualizar estado de la venta0",
+        "alwaysOutputData": true,
+        "credentials": {
+          "postgres": {
+            "id": "YDGdJcEneBEpa52a",
+            "name": "Postgres BeOnline new (Luis-12Abr2026)"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "operation": "executeQuery",
+          "query": "SELECT * FROM ventas_hotmart \nWHERE id_transaccion = '{{ $json.id_transaccion_original }}'",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.postgres",
+        "typeVersion": 2.6,
+        "position": [
+          496,
+          1808
+        ],
+        "id": "340316f6-a532-4a3c-aea5-83a33589f05e",
+        "name": "BuscarVenta0",
+        "alwaysOutputData": true,
+        "credentials": {
+          "postgres": {
+            "id": "YDGdJcEneBEpa52a",
+            "name": "Postgres BeOnline new (Luis-12Abr2026)"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "operation": "select",
+          "schema": {
+            "__rl": true,
+            "mode": "list",
+            "value": "public"
+          },
+          "table": {
+            "__rl": true,
+            "value": "clientes",
+            "mode": "list",
+            "cachedResultName": "clientes"
+          },
+          "returnAll": true,
+          "where": {
+            "values": [
+              {
+                "column": "email",
+                "value": "={{ $json.body.data.buyer.email }}"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.postgres",
+        "typeVersion": 2.6,
+        "position": [
+          272,
+          1120
+        ],
+        "id": "2c3d23d3-64f5-49b2-8bab-de3b2cf750cb",
+        "name": "Consulta Email0",
+        "alwaysOutputData": true,
+        "credentials": {
+          "postgres": {
+            "id": "YDGdJcEneBEpa52a",
+            "name": "Postgres BeOnline new (Luis-12Abr2026)"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "schema": {
+            "__rl": true,
+            "mode": "list",
+            "value": "public"
+          },
+          "table": {
+            "__rl": true,
+            "value": "clientes",
+            "mode": "list",
+            "cachedResultName": "clientes"
+          },
+          "columns": {
+            "mappingMode": "defineBelow",
+            "value": {
+              "email": "={{ $('Tipo de transacción').item.json.body.data.buyer.email }}",
+              "nombre": "={{ $('Tipo de transacción').item.json.body.data.buyer.name }}",
+              "productor_id": "={{ $('Tipo de transacción').item.json.body.data.producer.document }}",
+              "pais": "={{ $('Tipo de transacción').item.json.body.data.buyer.address.country }}",
+              "fecha_registro": "={{ $now }}"
+            },
+            "matchingColumns": [],
+            "schema": [
+              {
+                "id": "email",
+                "displayName": "email",
+                "required": true,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "nombre",
+                "displayName": "nombre",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "pais",
+                "displayName": "pais",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "fecha_registro",
+                "displayName": "fecha_registro",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "dateTime",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "productor_id",
+                "displayName": "productor_id",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              }
+            ],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": false
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.postgres",
+        "typeVersion": 2.6,
+        "position": [
+          736,
+          1040
+        ],
+        "id": "ccb39ee3-e68b-4ef6-96db-1a2a2fd33370",
+        "name": "CrearCliente",
+        "credentials": {
+          "postgres": {
+            "id": "YDGdJcEneBEpa52a",
+            "name": "Postgres BeOnline new (Luis-12Abr2026)"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "operation": "select",
+          "schema": {
+            "__rl": true,
+            "mode": "list",
+            "value": "public"
+          },
+          "table": {
+            "__rl": true,
+            "value": "mapeo_clientes",
+            "mode": "list",
+            "cachedResultName": "mapeo_clientes"
+          },
+          "returnAll": true,
+          "where": {
+            "values": [
+              {
+                "column": "productor_id",
+                "value": "={{ $('Tipo de transacción').item.json.body.data.producer.document }}"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.postgres",
+        "typeVersion": 2.6,
+        "position": [
+          960,
+          1120
+        ],
+        "id": "f3557ac1-4a0e-45f7-b2f3-933869c07ea5",
+        "name": "Busqueda productor y porcentajes2",
+        "credentials": {
+          "postgres": {
+            "id": "YDGdJcEneBEpa52a",
+            "name": "Postgres BeOnline new (Luis-12Abr2026)"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "schema": {
+            "__rl": true,
+            "mode": "list",
+            "value": "public"
+          },
+          "table": {
+            "__rl": true,
+            "value": "ventas_hotmart",
+            "mode": "list",
+            "cachedResultName": "ventas_hotmart"
+          },
+          "columns": {
+            "mappingMode": "defineBelow",
+            "value": {
+              "comision_productor_hotmart": "={{ Math.round($json.comision_productor_hotmart * 1000) / 1000}}",
+              "comision_andres": "={{ Math.round($json.comision_andres * 1000) / 1000}}",
+              "comision_mariana": "={{ Math.round($json.comision_mariana * 1000) / 1000}}",
+              "comision_wilder": "={{ Math.round($json.comision_wilder * 1000) / 1000}}",
+              "comision_otros": "={{ Math.round($json.comision_otros * 1000) / 1000}}",
+              "id_transaccion": "={{ $('Tipo de transacción').item.json.body.data.purchase.transaction }}",
+              "email_cliente": "={{ $('Info Hotmart').item.json.body.data.buyer.email }}",
+              "producto_id": "={{ $('Info Hotmart').item.json.body.data.product.id }}",
+              "producto_nombre": "={{ $('Info Hotmart').item.json.body.data.product.name }}",
+              "facturacion_bruta": "={{ $('Info Hotmart').item.json.body.data.purchase.original_offer_price.value }}",
+              "facturacion_neta": "={{ Math.round($json.facturacion_neta * 1000) / 1000}}",
+              "pais_comprador": "={{ $('Info Hotmart').item.json.body.data.purchase.checkout_country.name }}",
+              "status": "={{ \n  ({\n    'PURCHASE_APPROVED': 'Aprobado',\n    'PURCHASE_COMPLETE': 'Completo',\n    'PURCHASE_CANCELED': 'Cancelado',\n    'PURCHASE_REFUNDED': 'Reembolsado',\n    'WAITING_PAYMENT': 'Esperando Pago'\n  })[$('Info Hotmart').item.json.body.event] || 'Procesando' \n}}",
+              "comision_be_online": "={{ Math.round($json.comision_be_online * 1000) / 1000}}",
+              "comision_productor_be": "={{ Math.round($json.comision_productor_be * 1000) / 1000}}",
+              "fecha_venta": "={{ $('Info Hotmart').item.json.body.data.product.warranty_date }}",
+              "nro_recurrencia": "={{ $('Info Hotmart').item.json.body.data.purchase.recurrence_number }}",
+              "metodo_pago": "={{    ({     'CREDIT_CARD': 'Tarjeta de Crédito',     'PSE': 'PSE',     'NEQUI': 'Nequi',     'BANCOLOMBIA': 'Bancolombia',     'BILLET': 'Efecty / Boleto',     'PIX': 'Pix',     'PAYPAL': 'PayPal',     'HOTMART_BALANCE': 'Saldo Hotmart',     'DIRECT_DEBIT': 'Transferencia Bancaria',     'GOOGLE_PAY': 'Google Pay'   })[$('Info Hotmart').item.json.body.data.purchase.payment.type] \n\n $('Info Hotmart').item.json.body.data.purchase.payment.type  }}"
+            },
+            "matchingColumns": [
+              "id"
+            ],
+            "schema": [
+              {
+                "id": "id_transaccion",
+                "displayName": "id_transaccion",
+                "required": true,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "email_cliente",
+                "displayName": "email_cliente",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "producto_id",
+                "displayName": "producto_id",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "producto_nombre",
+                "displayName": "producto_nombre",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "facturacion_bruta",
+                "displayName": "facturacion_bruta",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "comision_productor_hotmart",
+                "displayName": "comision_productor_hotmart",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "comision_andres",
+                "displayName": "comision_andres",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "comision_mariana",
+                "displayName": "comision_mariana",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "comision_wilder",
+                "displayName": "comision_wilder",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "comision_otros",
+                "displayName": "comision_otros",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "comision_be_online",
+                "displayName": "comision_be_online",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "pais_comprador",
+                "displayName": "pais_comprador",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "status",
+                "displayName": "status",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "fecha_venta",
+                "displayName": "fecha_venta",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "dateTime",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "comision_productor_be",
+                "displayName": "comision_productor_be",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "facturacion_neta",
+                "displayName": "facturacion_neta",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "id",
+                "displayName": "id",
+                "required": false,
+                "defaultMatch": true,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "nro_recurrencia",
+                "displayName": "nro_recurrencia",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "metodo_pago",
+                "displayName": "metodo_pago",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              }
+            ],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": false
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.postgres",
+        "typeVersion": 2.6,
+        "position": [
+          1520,
+          1120
+        ],
+        "id": "0e6f1ba2-2124-41f5-8718-e223456f58aa",
+        "name": "CargarVenta1",
+        "credentials": {
+          "postgres": {
+            "id": "YDGdJcEneBEpa52a",
+            "name": "Postgres BeOnline new (Luis-12Abr2026)"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 3
+            },
+            "conditions": [
+              {
+                "id": "d7cbeaa7-e8e0-4738-97ed-3df8beef1041",
+                "leftValue": "={{ $json.isEmpty() }}",
+                "rightValue": 0,
+                "operator": {
+                  "type": "boolean",
+                  "operation": "true",
+                  "singleValue": true
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.3,
+        "position": [
+          496,
+          1120
+        ],
+        "id": "17b9e73c-c55d-48db-a3d0-d810bc617cb9",
+        "name": "¿Cliente no existe?1"
+      },
+      {
+        "parameters": {
+          "rules": {
+            "values": [
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 3
+                  },
+                  "conditions": [
+                    {
+                      "leftValue": "={{ $json.body.event }}",
+                      "rightValue": "PURCHASE_APPROVED",
+                      "operator": {
+                        "type": "string",
+                        "operation": "equals"
+                      },
+                      "id": "04f61f28-3eef-4226-8749-6fda22cd511a"
+                    }
+                  ],
+                  "combinator": "and"
+                },
+                "renameOutput": true,
+                "outputKey": "APPROVED"
+              },
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 3
+                  },
+                  "conditions": [
+                    {
+                      "id": "9f22a65d-94cf-4d42-a87d-21998128117c",
+                      "leftValue": "={{ $json.body.event }}",
+                      "rightValue": "PURCHASE_COMPLETE",
+                      "operator": {
+                        "type": "string",
+                        "operation": "equals",
+                        "name": "filter.operator.equals"
+                      }
+                    }
+                  ],
+                  "combinator": "and"
+                },
+                "renameOutput": true,
+                "outputKey": "COMPLETE"
+              },
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 3
+                  },
+                  "conditions": [
+                    {
+                      "id": "fc2b372d-f12c-41e9-956f-b85ceb31a95d",
+                      "leftValue": "={{ $json.body.event }}",
+                      "rightValue": "PURCHASE_REFUNDED",
+                      "operator": {
+                        "type": "string",
+                        "operation": "equals"
+                      }
+                    }
+                  ],
+                  "combinator": "and"
+                },
+                "renameOutput": true,
+                "outputKey": "REFUNDED"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.switch",
+        "typeVersion": 3.4,
+        "position": [
+          -208,
+          1136
+        ],
+        "id": "0faf052e-2ab5-4027-a7e0-cc0dd83569bc",
+        "name": "Tipo de transacción"
+      },
+      {
+        "parameters": {
+          "tableId": "reembolsos_hotmart",
+          "fieldsUi": {
+            "fieldValues": [
+              {
+                "fieldId": "id_reembolso",
+                "fieldValue": "={{ $json.body.data.purchase.transaction }}"
+              },
+              {
+                "fieldId": "id_transaccion_original",
+                "fieldValue": "={{ $json.body.data.purchase.order_bump.parent_purchase_transaction }}"
+              },
+              {
+                "fieldId": "email_cliente",
+                "fieldValue": "={{ $json.body.data.buyer.email }}"
+              },
+              {
+                "fieldId": "fecha_reembolso",
+                "fieldValue": "={{ $json.body.data.product.warranty_date }}"
+              }
+            ]
+          }
+        },
+        "type": "n8n-nodes-base.supabase",
+        "typeVersion": 1,
+        "position": [
+          256,
+          1328
+        ],
+        "id": "eaa2403c-d14f-4883-aa32-8dd4c947e898",
+        "name": "Cargar Reembolso1",
+        "credentials": {
+          "supabaseApi": {
+            "id": "MrnzEgGfGVHsVNPD",
+            "name": "Supabase BE"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "operation": "getAll",
+          "tableId": "ventas_hotmart",
+          "limit": 1,
+          "filters": {
+            "conditions": [
+              {
+                "keyName": "id_transaccion",
+                "condition": "eq",
+                "keyValue": "={{ $json.id_transaccion_original }}"
+              }
+            ]
+          }
+        },
+        "type": "n8n-nodes-base.supabase",
+        "typeVersion": 1,
+        "position": [
+          496,
+          1408
+        ],
+        "id": "7d53b6a5-bdf1-4f22-9592-057cea86f40f",
+        "name": "Buscar venta1",
+        "credentials": {
+          "supabaseApi": {
+            "id": "MrnzEgGfGVHsVNPD",
+            "name": "Supabase BE"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "sortFieldsUi": {
+            "sortField": [
+              {
+                "fieldName": "nro_recurrencia",
+                "order": "descending"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.sort",
+        "typeVersion": 1,
+        "position": [
+          704,
+          1408
+        ],
+        "id": "4733a7d8-0ccb-4616-859a-7863739c1e60",
+        "name": "Ordenar ventas1"
+      },
+      {
+        "parameters": {},
+        "type": "n8n-nodes-base.limit",
+        "typeVersion": 1,
+        "position": [
+          912,
+          1408
+        ],
+        "id": "8df9d799-31ca-4bfc-b534-a11bf5a0ea44",
+        "name": "Seleccionar Ultima1"
+      },
+      {
+        "parameters": {
+          "operation": "update",
+          "tableId": "ventas_hotmart",
+          "filters": {
+            "conditions": [
+              {
+                "keyName": "id",
+                "condition": "eq",
+                "keyValue": "={{ $json.id }}"
+              }
+            ]
+          },
+          "fieldsUi": {
+            "fieldValues": [
+              {
+                "fieldId": "status",
+                "fieldValue": "={{ $('Info Hotmart').item.json.body.event }}"
+              },
+              {
+                "fieldId": "fecha_venta",
+                "fieldValue": "={{ $('Info Hotmart').item.json.body.data.product.warranty_date }}"
+              }
+            ]
+          }
+        },
+        "type": "n8n-nodes-base.supabase",
+        "typeVersion": 1,
+        "position": [
+          1120,
+          1600
+        ],
+        "id": "293dac13-652b-4550-af3c-4495678e87aa",
+        "name": "Actualizar estado de la venta1",
+        "credentials": {
+          "supabaseApi": {
+            "id": "MrnzEgGfGVHsVNPD",
+            "name": "Supabase BE"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "content": "FLUJO REAL",
+          "height": 768,
+          "width": 2032
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          -144,
+          -272
+        ],
+        "id": "289dcc1e-d800-4a01-a85e-1e563c138ec9",
+        "name": "Sticky Note"
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "074c88e5-f3f1-4869-9726-1a671cd7b08f",
+                "name": "facturacion_neta",
+                "value": "=1",
+                "type": "number"
+              },
+              {
+                "id": "1421eb0c-82ca-459a-b95e-8871caa03d15",
+                "name": "comision_productor_hotmart",
+                "value": "=1",
+                "type": "number"
+              },
+              {
+                "id": "9af72081-f99d-4672-a2c9-4d7892668496",
+                "name": "comision_productor_be",
+                "value": "=1",
+                "type": "number"
+              },
+              {
+                "id": "84fcfde0-1a3f-422b-9646-af60569fabde",
+                "name": "comision_be_online",
+                "value": "=1",
+                "type": "number"
+              },
+              {
+                "id": "4ea41935-0c1b-4e09-be79-cf1fd6b64e9e",
+                "name": "comision_andres",
+                "value": "=1",
+                "type": "number"
+              },
+              {
+                "id": "72061381-c17d-4515-bb16-9be3cfadf41e",
+                "name": "comision_mariana",
+                "value": "=1",
+                "type": "number"
+              },
+              {
+                "id": "ed706a05-95cd-4497-a322-21fab6b1973f",
+                "name": "comision_wilder",
+                "value": "=1",
+                "type": "number"
+              },
+              {
+                "id": "2da347c9-375c-47f4-908a-7460b2098b59",
+                "name": "comision_otros",
+                "value": "=1",
+                "type": "number"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          1264,
+          1120
+        ],
+        "id": "e832593a-f40a-4b2f-8aaa-317b32ef6f89",
+        "name": "Asignación de comisiones3"
+      },
+      {
+        "parameters": {
+          "schema": {
+            "__rl": true,
+            "mode": "list",
+            "value": "public"
+          },
+          "table": {
+            "__rl": true,
+            "value": "reembolsos_hotmart",
+            "mode": "list",
+            "cachedResultName": "reembolsos_hotmart"
+          },
+          "columns": {
+            "mappingMode": "defineBelow",
+            "value": {
+              "id_reembolso": "={{ $json.body.data.purchase.transaction }}",
+              "id_transaccion_original": "={{ $json.body.data.purchase.order_bump.parent_purchase_transaction }}",
+              "email_cliente": "={{ $json.body.data.buyer.email }}",
+              "fecha_reembolso": "={{ $json.body.data.product.warranty_date }}"
+            },
+            "matchingColumns": [],
+            "schema": [
+              {
+                "id": "id_reembolso",
+                "displayName": "id_reembolso",
+                "required": true,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "id_transaccion_original",
+                "displayName": "id_transaccion_original",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "email_cliente",
+                "displayName": "email_cliente",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "fecha_reembolso",
+                "displayName": "fecha_reembolso",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "dateTime",
+                "canBeUsedToMatch": true
+              }
+            ],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": false
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.postgres",
+        "typeVersion": 2.6,
+        "position": [
+          256,
+          1520
+        ],
+        "id": "1942d5c1-0d11-4b52-8c35-7fa197dd9322",
+        "name": "Cargar Reembolso2",
+        "credentials": {
+          "postgres": {
+            "id": "YDGdJcEneBEpa52a",
+            "name": "Postgres BeOnline new (Luis-12Abr2026)"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "operation": "select",
+          "schema": {
+            "__rl": true,
+            "mode": "list",
+            "value": "public"
+          },
+          "table": {
+            "__rl": true,
+            "value": "ventas_hotmart",
+            "mode": "list",
+            "cachedResultName": "ventas_hotmart"
+          },
+          "returnAll": true,
+          "where": {
+            "values": [
+              {
+                "column": "id_transaccion",
+                "value": "={{ $json.id_transaccion_original }}"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.postgres",
+        "typeVersion": 2.6,
+        "position": [
+          544,
+          1600
+        ],
+        "id": "6e71f674-8450-4d2f-bb7b-7042db9e3a58",
+        "name": "BuscarVenta",
+        "credentials": {
+          "postgres": {
+            "id": "YDGdJcEneBEpa52a",
+            "name": "Postgres BeOnline new (Luis-12Abr2026)"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "operation": "update",
+          "schema": {
+            "__rl": true,
+            "mode": "list",
+            "value": "public"
+          },
+          "table": {
+            "__rl": true,
+            "value": "ventas_hotmart",
+            "mode": "list",
+            "cachedResultName": "ventas_hotmart"
+          },
+          "columns": {
+            "mappingMode": "defineBelow",
+            "value": {
+              "id": "={{ $json.id }}",
+              "status": "={{ $('Info Hotmart').item.json.body.event }}",
+              "fecha_venta": "={{ $('Info Hotmart').item.json.body.data.product.warranty_date }}"
+            },
+            "matchingColumns": [
+              "id"
+            ],
+            "schema": [
+              {
+                "id": "id_transaccion",
+                "displayName": "id_transaccion",
+                "required": true,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "email_cliente",
+                "displayName": "email_cliente",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "producto_id",
+                "displayName": "producto_id",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "producto_nombre",
+                "displayName": "producto_nombre",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "facturacion_bruta",
+                "displayName": "facturacion_bruta",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "comision_productor_hotmart",
+                "displayName": "comision_productor_hotmart",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "comision_andres",
+                "displayName": "comision_andres",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "comision_mariana",
+                "displayName": "comision_mariana",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "comision_wilder",
+                "displayName": "comision_wilder",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "comision_otros",
+                "displayName": "comision_otros",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "comision_be_online",
+                "displayName": "comision_be_online",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "pais_comprador",
+                "displayName": "pais_comprador",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "status",
+                "displayName": "status",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "fecha_venta",
+                "displayName": "fecha_venta",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "dateTime",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "comision_productor_be",
+                "displayName": "comision_productor_be",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "facturacion_neta",
+                "displayName": "facturacion_neta",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "id",
+                "displayName": "id",
+                "required": false,
+                "defaultMatch": true,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "nro_recurrencia",
+                "displayName": "nro_recurrencia",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "metodo_pago",
+                "displayName": "metodo_pago",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": true
+              }
+            ],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": false
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.postgres",
+        "typeVersion": 2.6,
+        "position": [
+          1120,
+          1408
+        ],
+        "id": "8c5f1bda-4292-4bc7-a8e4-2e8953af5f48",
+        "name": "actualzarEstadoVenta",
+        "credentials": {
+          "postgres": {
+            "id": "YDGdJcEneBEpa52a",
+            "name": "Postgres BeOnline new (Luis-12Abr2026)"
+          }
+        }
       }
     ],
     "connections": {
@@ -691,7 +1861,154 @@
         "main": [
           [
             {
-              "node": "Tipo de transacción1",
+              "node": "Tipo de transacción",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Consulta Email0": {
+        "main": [
+          [
+            {
+              "node": "¿Cliente no existe?1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "CrearCliente": {
+        "main": [
+          [
+            {
+              "node": "Busqueda productor y porcentajes2",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Busqueda productor y porcentajes2": {
+        "main": [
+          [
+            {
+              "node": "Asignación de comisiones3",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "¿Cliente no existe?1": {
+        "main": [
+          [
+            {
+              "node": "CrearCliente",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Busqueda productor y porcentajes2",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Tipo de transacción": {
+        "main": [
+          [
+            {
+              "node": "Consulta Email0",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Consulta Email0",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Cargar Reembolso2",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Cargar Reembolso1": {
+        "main": [
+          [
+            {
+              "node": "Buscar venta1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Buscar venta1": {
+        "main": [
+          []
+        ]
+      },
+      "Ordenar ventas1": {
+        "main": [
+          [
+            {
+              "node": "Seleccionar Ultima1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Seleccionar Ultima1": {
+        "main": [
+          [
+            {
+              "node": "actualzarEstadoVenta",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Asignación de comisiones3": {
+        "main": [
+          [
+            {
+              "node": "CargarVenta1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Cargar Reembolso2": {
+        "main": [
+          [
+            {
+              "node": "BuscarVenta",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "BuscarVenta": {
+        "main": [
+          [
+            {
+              "node": "Ordenar ventas1",
               "type": "main",
               "index": 0
             }
@@ -700,11 +2017,11 @@
       }
     },
     "authors": "BE Online",
-    "name": "Version 27b04977",
+    "name": "Version c3ee6f90",
     "description": "",
     "autosaved": true
   },
-  "activeVersionId": "27b04977-d2ff-470f-b85a-8594b606b9e3",
+  "activeVersionId": "c3ee6f90-b438-48ae-86a3-974041849b8c",
   "connections": {
     "Consulta Email": {
       "main": [
@@ -846,7 +2163,154 @@
       "main": [
         [
           {
-            "node": "Tipo de transacción1",
+            "node": "Tipo de transacción",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Consulta Email0": {
+      "main": [
+        [
+          {
+            "node": "¿Cliente no existe?1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "CrearCliente": {
+      "main": [
+        [
+          {
+            "node": "Busqueda productor y porcentajes2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Busqueda productor y porcentajes2": {
+      "main": [
+        [
+          {
+            "node": "Asignación de comisiones3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "¿Cliente no existe?1": {
+      "main": [
+        [
+          {
+            "node": "CrearCliente",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Busqueda productor y porcentajes2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Tipo de transacción": {
+      "main": [
+        [
+          {
+            "node": "Consulta Email0",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Consulta Email0",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Cargar Reembolso2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Cargar Reembolso1": {
+      "main": [
+        [
+          {
+            "node": "Buscar venta1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Buscar venta1": {
+      "main": [
+        []
+      ]
+    },
+    "Ordenar ventas1": {
+      "main": [
+        [
+          {
+            "node": "Seleccionar Ultima1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Seleccionar Ultima1": {
+      "main": [
+        [
+          {
+            "node": "actualzarEstadoVenta",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Asignación de comisiones3": {
+      "main": [
+        [
+          {
+            "node": "CargarVenta1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Cargar Reembolso2": {
+      "main": [
+        [
+          {
+            "node": "BuscarVenta",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "BuscarVenta": {
+      "main": [
+        [
+          {
+            "node": "Ordenar ventas1",
             "type": "main",
             "index": 0
           }
@@ -1404,9 +2868,1324 @@
       "id": "563c039b-7052-4bae-b481-0b70793bdf43",
       "name": "Info Hotmart",
       "webhookId": "7e71da5f-b86d-4848-9d4b-a6f02fd9c2ba"
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "INSERT INTO reembolsos_hotmart (\n    id_reembolso, \n    id_transaccion_original, \n    email_cliente, \n    fecha_reembolso\n) \nVALUES (\n    '{{ $json.body.data.purchase.transaction }}', \n    '{{ $json.body.data.purchase.order_bump.parent_purchase_transaction }}', \n    '{{ $json.body.data.buyer.email }}', \n    '{{ $json.body.data.product.warranty_date }}'\n);",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        256,
+        1808
+      ],
+      "id": "b23d5c4e-f7b8-4b05-bd0b-088c62ceafad",
+      "name": "CargarReembolso",
+      "alwaysOutputData": true,
+      "credentials": {
+        "postgres": {
+          "id": "YDGdJcEneBEpa52a",
+          "name": "Postgres BeOnline new (Luis-12Abr2026)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "UPDATE ventas_hotmart\nSET \n    status = '{{ $('Info Hotmart').item.json.body.event }}',\n    fecha_venta = '{{ $('Info Hotmart').item.json.body.data.product.warranty_date }}'\nWHERE \n    id = '{{ $json.id }}';",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        1120,
+        1776
+      ],
+      "id": "63ab42c5-4cc5-445f-abbb-c2ca5a27ac5f",
+      "name": "Actualizar estado de la venta0",
+      "alwaysOutputData": true,
+      "credentials": {
+        "postgres": {
+          "id": "YDGdJcEneBEpa52a",
+          "name": "Postgres BeOnline new (Luis-12Abr2026)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT * FROM ventas_hotmart \nWHERE id_transaccion = '{{ $json.id_transaccion_original }}'",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        496,
+        1808
+      ],
+      "id": "340316f6-a532-4a3c-aea5-83a33589f05e",
+      "name": "BuscarVenta0",
+      "alwaysOutputData": true,
+      "credentials": {
+        "postgres": {
+          "id": "YDGdJcEneBEpa52a",
+          "name": "Postgres BeOnline new (Luis-12Abr2026)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "select",
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "clientes",
+          "mode": "list",
+          "cachedResultName": "clientes"
+        },
+        "returnAll": true,
+        "where": {
+          "values": [
+            {
+              "column": "email",
+              "value": "={{ $json.body.data.buyer.email }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        272,
+        1120
+      ],
+      "id": "2c3d23d3-64f5-49b2-8bab-de3b2cf750cb",
+      "name": "Consulta Email0",
+      "alwaysOutputData": true,
+      "credentials": {
+        "postgres": {
+          "id": "YDGdJcEneBEpa52a",
+          "name": "Postgres BeOnline new (Luis-12Abr2026)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "clientes",
+          "mode": "list",
+          "cachedResultName": "clientes"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "email": "={{ $('Tipo de transacción').item.json.body.data.buyer.email }}",
+            "nombre": "={{ $('Tipo de transacción').item.json.body.data.buyer.name }}",
+            "productor_id": "={{ $('Tipo de transacción').item.json.body.data.producer.document }}",
+            "pais": "={{ $('Tipo de transacción').item.json.body.data.buyer.address.country }}",
+            "fecha_registro": "={{ $now }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "email",
+              "displayName": "email",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "nombre",
+              "displayName": "nombre",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "pais",
+              "displayName": "pais",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "fecha_registro",
+              "displayName": "fecha_registro",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "productor_id",
+              "displayName": "productor_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        736,
+        1040
+      ],
+      "id": "ccb39ee3-e68b-4ef6-96db-1a2a2fd33370",
+      "name": "CrearCliente",
+      "credentials": {
+        "postgres": {
+          "id": "YDGdJcEneBEpa52a",
+          "name": "Postgres BeOnline new (Luis-12Abr2026)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "select",
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "mapeo_clientes",
+          "mode": "list",
+          "cachedResultName": "mapeo_clientes"
+        },
+        "returnAll": true,
+        "where": {
+          "values": [
+            {
+              "column": "productor_id",
+              "value": "={{ $('Tipo de transacción').item.json.body.data.producer.document }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        960,
+        1120
+      ],
+      "id": "f3557ac1-4a0e-45f7-b2f3-933869c07ea5",
+      "name": "Busqueda productor y porcentajes2",
+      "credentials": {
+        "postgres": {
+          "id": "YDGdJcEneBEpa52a",
+          "name": "Postgres BeOnline new (Luis-12Abr2026)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "ventas_hotmart",
+          "mode": "list",
+          "cachedResultName": "ventas_hotmart"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "comision_productor_hotmart": "={{ Math.round($json.comision_productor_hotmart * 1000) / 1000}}",
+            "comision_andres": "={{ Math.round($json.comision_andres * 1000) / 1000}}",
+            "comision_mariana": "={{ Math.round($json.comision_mariana * 1000) / 1000}}",
+            "comision_wilder": "={{ Math.round($json.comision_wilder * 1000) / 1000}}",
+            "comision_otros": "={{ Math.round($json.comision_otros * 1000) / 1000}}",
+            "id_transaccion": "={{ $('Tipo de transacción').item.json.body.data.purchase.transaction }}",
+            "email_cliente": "={{ $('Info Hotmart').item.json.body.data.buyer.email }}",
+            "producto_id": "={{ $('Info Hotmart').item.json.body.data.product.id }}",
+            "producto_nombre": "={{ $('Info Hotmart').item.json.body.data.product.name }}",
+            "facturacion_bruta": "={{ $('Info Hotmart').item.json.body.data.purchase.original_offer_price.value }}",
+            "facturacion_neta": "={{ Math.round($json.facturacion_neta * 1000) / 1000}}",
+            "pais_comprador": "={{ $('Info Hotmart').item.json.body.data.purchase.checkout_country.name }}",
+            "status": "={{ \n  ({\n    'PURCHASE_APPROVED': 'Aprobado',\n    'PURCHASE_COMPLETE': 'Completo',\n    'PURCHASE_CANCELED': 'Cancelado',\n    'PURCHASE_REFUNDED': 'Reembolsado',\n    'WAITING_PAYMENT': 'Esperando Pago'\n  })[$('Info Hotmart').item.json.body.event] || 'Procesando' \n}}",
+            "comision_be_online": "={{ Math.round($json.comision_be_online * 1000) / 1000}}",
+            "comision_productor_be": "={{ Math.round($json.comision_productor_be * 1000) / 1000}}",
+            "fecha_venta": "={{ $('Info Hotmart').item.json.body.data.product.warranty_date }}",
+            "nro_recurrencia": "={{ $('Info Hotmart').item.json.body.data.purchase.recurrence_number }}",
+            "metodo_pago": "={{    ({     'CREDIT_CARD': 'Tarjeta de Crédito',     'PSE': 'PSE',     'NEQUI': 'Nequi',     'BANCOLOMBIA': 'Bancolombia',     'BILLET': 'Efecty / Boleto',     'PIX': 'Pix',     'PAYPAL': 'PayPal',     'HOTMART_BALANCE': 'Saldo Hotmart',     'DIRECT_DEBIT': 'Transferencia Bancaria',     'GOOGLE_PAY': 'Google Pay'   })[$('Info Hotmart').item.json.body.data.purchase.payment.type] \n\n $('Info Hotmart').item.json.body.data.purchase.payment.type  }}"
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id_transaccion",
+              "displayName": "id_transaccion",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "email_cliente",
+              "displayName": "email_cliente",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "producto_id",
+              "displayName": "producto_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "producto_nombre",
+              "displayName": "producto_nombre",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "facturacion_bruta",
+              "displayName": "facturacion_bruta",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "comision_productor_hotmart",
+              "displayName": "comision_productor_hotmart",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "comision_andres",
+              "displayName": "comision_andres",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "comision_mariana",
+              "displayName": "comision_mariana",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "comision_wilder",
+              "displayName": "comision_wilder",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "comision_otros",
+              "displayName": "comision_otros",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "comision_be_online",
+              "displayName": "comision_be_online",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "pais_comprador",
+              "displayName": "pais_comprador",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "status",
+              "displayName": "status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "fecha_venta",
+              "displayName": "fecha_venta",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "comision_productor_be",
+              "displayName": "comision_productor_be",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "facturacion_neta",
+              "displayName": "facturacion_neta",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "nro_recurrencia",
+              "displayName": "nro_recurrencia",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "metodo_pago",
+              "displayName": "metodo_pago",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        1520,
+        1120
+      ],
+      "id": "0e6f1ba2-2124-41f5-8718-e223456f58aa",
+      "name": "CargarVenta1",
+      "credentials": {
+        "postgres": {
+          "id": "YDGdJcEneBEpa52a",
+          "name": "Postgres BeOnline new (Luis-12Abr2026)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "d7cbeaa7-e8e0-4738-97ed-3df8beef1041",
+              "leftValue": "={{ $json.isEmpty() }}",
+              "rightValue": 0,
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        496,
+        1120
+      ],
+      "id": "17b9e73c-c55d-48db-a3d0-d810bc617cb9",
+      "name": "¿Cliente no existe?1"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.body.event }}",
+                    "rightValue": "PURCHASE_APPROVED",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "04f61f28-3eef-4226-8749-6fda22cd511a"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "APPROVED"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "9f22a65d-94cf-4d42-a87d-21998128117c",
+                    "leftValue": "={{ $json.body.event }}",
+                    "rightValue": "PURCHASE_COMPLETE",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "COMPLETE"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "fc2b372d-f12c-41e9-956f-b85ceb31a95d",
+                    "leftValue": "={{ $json.body.event }}",
+                    "rightValue": "PURCHASE_REFUNDED",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "REFUNDED"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        -208,
+        1136
+      ],
+      "id": "0faf052e-2ab5-4027-a7e0-cc0dd83569bc",
+      "name": "Tipo de transacción"
+    },
+    {
+      "parameters": {
+        "tableId": "reembolsos_hotmart",
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "id_reembolso",
+              "fieldValue": "={{ $json.body.data.purchase.transaction }}"
+            },
+            {
+              "fieldId": "id_transaccion_original",
+              "fieldValue": "={{ $json.body.data.purchase.order_bump.parent_purchase_transaction }}"
+            },
+            {
+              "fieldId": "email_cliente",
+              "fieldValue": "={{ $json.body.data.buyer.email }}"
+            },
+            {
+              "fieldId": "fecha_reembolso",
+              "fieldValue": "={{ $json.body.data.product.warranty_date }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        256,
+        1328
+      ],
+      "id": "eaa2403c-d14f-4883-aa32-8dd4c947e898",
+      "name": "Cargar Reembolso1",
+      "credentials": {
+        "supabaseApi": {
+          "id": "MrnzEgGfGVHsVNPD",
+          "name": "Supabase BE"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "tableId": "ventas_hotmart",
+        "limit": 1,
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "id_transaccion",
+              "condition": "eq",
+              "keyValue": "={{ $json.id_transaccion_original }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        496,
+        1408
+      ],
+      "id": "7d53b6a5-bdf1-4f22-9592-057cea86f40f",
+      "name": "Buscar venta1",
+      "credentials": {
+        "supabaseApi": {
+          "id": "MrnzEgGfGVHsVNPD",
+          "name": "Supabase BE"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sortFieldsUi": {
+          "sortField": [
+            {
+              "fieldName": "nro_recurrencia",
+              "order": "descending"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.sort",
+      "typeVersion": 1,
+      "position": [
+        704,
+        1408
+      ],
+      "id": "4733a7d8-0ccb-4616-859a-7863739c1e60",
+      "name": "Ordenar ventas1"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.limit",
+      "typeVersion": 1,
+      "position": [
+        912,
+        1408
+      ],
+      "id": "8df9d799-31ca-4bfc-b534-a11bf5a0ea44",
+      "name": "Seleccionar Ultima1"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "tableId": "ventas_hotmart",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "id",
+              "condition": "eq",
+              "keyValue": "={{ $json.id }}"
+            }
+          ]
+        },
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "status",
+              "fieldValue": "={{ $('Info Hotmart').item.json.body.event }}"
+            },
+            {
+              "fieldId": "fecha_venta",
+              "fieldValue": "={{ $('Info Hotmart').item.json.body.data.product.warranty_date }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        1120,
+        1600
+      ],
+      "id": "293dac13-652b-4550-af3c-4495678e87aa",
+      "name": "Actualizar estado de la venta1",
+      "credentials": {
+        "supabaseApi": {
+          "id": "MrnzEgGfGVHsVNPD",
+          "name": "Supabase BE"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "FLUJO REAL",
+        "height": 768,
+        "width": 2032
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -144,
+        -272
+      ],
+      "id": "289dcc1e-d800-4a01-a85e-1e563c138ec9",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "074c88e5-f3f1-4869-9726-1a671cd7b08f",
+              "name": "facturacion_neta",
+              "value": "=1",
+              "type": "number"
+            },
+            {
+              "id": "1421eb0c-82ca-459a-b95e-8871caa03d15",
+              "name": "comision_productor_hotmart",
+              "value": "=1",
+              "type": "number"
+            },
+            {
+              "id": "9af72081-f99d-4672-a2c9-4d7892668496",
+              "name": "comision_productor_be",
+              "value": "=1",
+              "type": "number"
+            },
+            {
+              "id": "84fcfde0-1a3f-422b-9646-af60569fabde",
+              "name": "comision_be_online",
+              "value": "=1",
+              "type": "number"
+            },
+            {
+              "id": "4ea41935-0c1b-4e09-be79-cf1fd6b64e9e",
+              "name": "comision_andres",
+              "value": "=1",
+              "type": "number"
+            },
+            {
+              "id": "72061381-c17d-4515-bb16-9be3cfadf41e",
+              "name": "comision_mariana",
+              "value": "=1",
+              "type": "number"
+            },
+            {
+              "id": "ed706a05-95cd-4497-a322-21fab6b1973f",
+              "name": "comision_wilder",
+              "value": "=1",
+              "type": "number"
+            },
+            {
+              "id": "2da347c9-375c-47f4-908a-7460b2098b59",
+              "name": "comision_otros",
+              "value": "=1",
+              "type": "number"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1264,
+        1120
+      ],
+      "id": "e832593a-f40a-4b2f-8aaa-317b32ef6f89",
+      "name": "Asignación de comisiones3"
+    },
+    {
+      "parameters": {
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "reembolsos_hotmart",
+          "mode": "list",
+          "cachedResultName": "reembolsos_hotmart"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "id_reembolso": "={{ $json.body.data.purchase.transaction }}",
+            "id_transaccion_original": "={{ $json.body.data.purchase.order_bump.parent_purchase_transaction }}",
+            "email_cliente": "={{ $json.body.data.buyer.email }}",
+            "fecha_reembolso": "={{ $json.body.data.product.warranty_date }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "id_reembolso",
+              "displayName": "id_reembolso",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "id_transaccion_original",
+              "displayName": "id_transaccion_original",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "email_cliente",
+              "displayName": "email_cliente",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "fecha_reembolso",
+              "displayName": "fecha_reembolso",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        256,
+        1520
+      ],
+      "id": "1942d5c1-0d11-4b52-8c35-7fa197dd9322",
+      "name": "Cargar Reembolso2",
+      "credentials": {
+        "postgres": {
+          "id": "YDGdJcEneBEpa52a",
+          "name": "Postgres BeOnline new (Luis-12Abr2026)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "select",
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "ventas_hotmart",
+          "mode": "list",
+          "cachedResultName": "ventas_hotmart"
+        },
+        "returnAll": true,
+        "where": {
+          "values": [
+            {
+              "column": "id_transaccion",
+              "value": "={{ $json.id_transaccion_original }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        544,
+        1600
+      ],
+      "id": "6e71f674-8450-4d2f-bb7b-7042db9e3a58",
+      "name": "BuscarVenta",
+      "credentials": {
+        "postgres": {
+          "id": "YDGdJcEneBEpa52a",
+          "name": "Postgres BeOnline new (Luis-12Abr2026)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "ventas_hotmart",
+          "mode": "list",
+          "cachedResultName": "ventas_hotmart"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "id": "={{ $json.id }}",
+            "status": "={{ $('Info Hotmart').item.json.body.event }}",
+            "fecha_venta": "={{ $('Info Hotmart').item.json.body.data.product.warranty_date }}"
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id_transaccion",
+              "displayName": "id_transaccion",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "email_cliente",
+              "displayName": "email_cliente",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "producto_id",
+              "displayName": "producto_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "producto_nombre",
+              "displayName": "producto_nombre",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "facturacion_bruta",
+              "displayName": "facturacion_bruta",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "comision_productor_hotmart",
+              "displayName": "comision_productor_hotmart",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "comision_andres",
+              "displayName": "comision_andres",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "comision_mariana",
+              "displayName": "comision_mariana",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "comision_wilder",
+              "displayName": "comision_wilder",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "comision_otros",
+              "displayName": "comision_otros",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "comision_be_online",
+              "displayName": "comision_be_online",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "pais_comprador",
+              "displayName": "pais_comprador",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "status",
+              "displayName": "status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "fecha_venta",
+              "displayName": "fecha_venta",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "comision_productor_be",
+              "displayName": "comision_productor_be",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "facturacion_neta",
+              "displayName": "facturacion_neta",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "nro_recurrencia",
+              "displayName": "nro_recurrencia",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "metodo_pago",
+              "displayName": "metodo_pago",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        1120,
+        1408
+      ],
+      "id": "8c5f1bda-4292-4bc7-a8e4-2e8953af5f48",
+      "name": "actualzarEstadoVenta",
+      "credentials": {
+        "postgres": {
+          "id": "YDGdJcEneBEpa52a",
+          "name": "Postgres BeOnline new (Luis-12Abr2026)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "Oportunidades Mejora: \n\nEnviar mensaje al whatsapp/coreo cuando usuario abandone el carrito"
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -1072,
+        160
+      ],
+      "id": "8e109485-ccdb-430d-b900-dc1862094776",
+      "name": "Sticky Note1"
     }
   ],
-  "pinData": {},
+  "pinData": {
+    "Info Hotmart": [
+      {
+        "json": {
+          "headers": {
+            "host": "contenedor1-n8n.vqn37t.easypanel.host",
+            "user-agent": "Jodd HTTP",
+            "content-length": "2102",
+            "content-type": "application/json",
+            "x-forwarded-for": "98.82.130.253",
+            "x-forwarded-host": "contenedor1-n8n.vqn37t.easypanel.host",
+            "x-forwarded-port": "443",
+            "x-forwarded-proto": "https",
+            "x-forwarded-server": "730fdd9182ea",
+            "x-hotmart-hottok": "utYQiCvNkSCu3jMUFRgoPOcsfpKl8a41246415",
+            "x-real-ip": "98.82.130.253",
+            "accept-encoding": "gzip"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "data": {
+              "product": {
+                "has_co_production": true,
+                "name": "Recetas para congelar y disfrutar",
+                "warranty_date": "2026-05-04T00:00:00Z",
+                "is_physical_product": false,
+                "id": 7536621,
+                "ucode": "fe0cb92c-4c93-4df7-b165-4c8a278b7c2b",
+                "product_format_id": 1
+              },
+              "commissions": [
+                {
+                  "currency_value": "USD",
+                  "source": "MARKETPLACE",
+                  "value": 1.18
+                },
+                {
+                  "currency_conversion": {
+                    "converted_value": 32876.26,
+                    "converted_to_currency": "COP",
+                    "conversion_rate": 3554.190659
+                  },
+                  "currency_value": "USD",
+                  "source": "COPRODUCER",
+                  "value": 9.25
+                }
+              ],
+              "purchase": {
+                "original_offer_price": {
+                  "currency_value": "USD",
+                  "value": 11.5
+                },
+                "subscription_anticipation_purchase": false,
+                "checkout_country": {
+                  "iso": "CO",
+                  "name": "Colombia"
+                },
+                "origin": {
+                  "xcod": "{\"co\":\"IMG04 - Storie 0426]\",\"vid\":\"120241852839450125\",\"vsrc\":\"metaads\",\"u\":\"93928006-2013-4a8c-8580-c1230e833bd0\",\"url\":\"www.federicoymarialuisa.com/pam-accedeahora-vsl01\",\"r\":\"instagram.com/\",\"v\":1}",
+                  "sck": "s=metaads|m=Instagram_Stories|c=00 - [AUTO] - A+ [IMG04 - Storie 0426]|co=IMG04 - Storie 0426]|utm_id=120241852673730125|t=120241852839440125"
+                },
+                "order_bump": {
+                  "parent_purchase_transaction": "HP0620648930",
+                  "is_order_bump": true
+                },
+                "approved_date": 1777300045000,
+                "offer": {
+                  "code": "88j2gv4u"
+                },
+                "is_funnel": false,
+                "order_date": 1777300043000,
+                "price": {
+                  "currency_value": "COP",
+                  "value": 40872
+                },
+                "buyer_ip": "186.154.38.50",
+                "payment": {
+                  "installments_number": 1,
+                  "type": "CREDIT_CARD"
+                },
+                "full_price": {
+                  "currency_value": "COP",
+                  "value": 40872
+                },
+                "business_model": "A",
+                "invoice_by": "SELLER",
+                "transaction": "HP0607182718",
+                "status": "APPROVED"
+              },
+              "affiliates": [
+                {
+                  "affiliate_code": "",
+                  "name": ""
+                }
+              ],
+              "producer": {
+                "legal_nature": "Pessoa Jurídica",
+                "document": "L24000067740",
+                "name": "MARTINEZ ARIAS INVESMENTS LLC"
+              },
+              "buyer": {
+                "address": {
+                  "zipcode": "",
+                  "country": "Colombia",
+                  "address": "",
+                  "city": "",
+                  "complement": "",
+                  "country_iso": "CO"
+                },
+                "document": "",
+                "name": "María Consuelo Botero",
+                "last_name": "Botero",
+                "first_name": "María",
+                "email": "mariaconsuelobotero@gmail.com",
+                "document_type": ""
+              }
+            },
+            "hottok": "utYQiCvNkSCu3jMUFRgoPOcsfpKl8a41246415",
+            "id": "668c83c2-ed29-4e89-be70-654912b2b9ae",
+            "creation_date": 1777300057243,
+            "event": "PURCHASE_APPROVED",
+            "version": "2.0.0"
+          },
+          "webhookUrl": "https://contenedor1-n8n.vqn37t.easypanel.host/webhook/hotmart-ventas-global",
+          "executionMode": "production"
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      }
+    ]
+  },
   "repo_name": "backupn8n",
   "repo_owner": "infoandresrendoncol",
   "repo_path": "backup/",
@@ -1427,6 +4206,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2026-04-22T23:51:28.080Z",
-  "versionId": "27b04977-d2ff-470f-b85a-8594b606b9e3"
+  "updatedAt": "2026-04-27T15:47:09.127Z",
+  "versionId": "d39bea9a-6d96-436f-8c5d-775183f03ecb"
 }
