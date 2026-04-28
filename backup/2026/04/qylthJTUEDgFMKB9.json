@@ -156,13 +156,7 @@
     },
     "Info Hotmart": {
       "main": [
-        [
-          {
-            "node": "Tipo de transacción1",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        []
       ]
     },
     "Consulta Email0": {
@@ -1561,6 +1555,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2026-04-25T14:59:47.769Z",
-  "versionId": "dde7737b-19fe-48db-aa22-767f6ce4f3a6"
+  "updatedAt": "2026-04-27T14:58:25.083Z",
+  "versionId": "a24f95d9-ffe4-439a-8396-52aec5a0b96c"
 }
