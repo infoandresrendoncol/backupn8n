@@ -3626,49 +3626,49 @@
             {
               "id": "074c88e5-f3f1-4869-9726-1a671cd7b08f",
               "name": "facturacion_neta",
-              "value": "=1",
+              "value": "={{ $('Info Hotmart').item.json.body.data.commissions[1].value / (($json.porc_productor_be.toNumber()) + ($json.porc_be_online.toNumber() ))}}",
               "type": "number"
             },
             {
               "id": "1421eb0c-82ca-459a-b95e-8871caa03d15",
               "name": "comision_productor_hotmart",
-              "value": "=1",
+              "value": "={{ ($('Info Hotmart').item.json.body.data.commissions[1].value / (($json.porc_productor_be.toNumber()) + ($json.porc_be_online.toNumber() )))*$json.porc_productor_hotmart}}",
               "type": "number"
             },
             {
               "id": "9af72081-f99d-4672-a2c9-4d7892668496",
               "name": "comision_productor_be",
-              "value": "=1",
+              "value": "={{ $('Info Hotmart').item.json.body.data.commissions[1].value / (($json.porc_productor_be.toNumber()) + $json.porc_be_online.toNumber()) * ($json.porc_productor_be.toNumber()) }}",
               "type": "number"
             },
             {
               "id": "84fcfde0-1a3f-422b-9646-af60569fabde",
               "name": "comision_be_online",
-              "value": "=1",
+              "value": "={{ $('Info Hotmart').item.json.body.data.commissions[1].value / (($json.porc_productor_be.toNumber()) + ($json.porc_be_online.toNumber())) * ($json.porc_be_online.toNumber()) }}",
               "type": "number"
             },
             {
               "id": "4ea41935-0c1b-4e09-be79-cf1fd6b64e9e",
               "name": "comision_andres",
-              "value": "=1",
+              "value": "={{ $('Info Hotmart').item.json.body.data.commissions[1].value/ (($json.porc_productor_be.toNumber()) + ($json.porc_be_online.toNumber())) * ($json.porc_andres.toNumber()) }}",
               "type": "number"
             },
             {
               "id": "72061381-c17d-4515-bb16-9be3cfadf41e",
               "name": "comision_mariana",
-              "value": "=1",
+              "value": "={{ $('Info Hotmart').item.json.body.data.commissions[1].value/ (($json.porc_productor_be.toNumber()) + ($json.porc_be_online.toNumber())) * ($json.porc_mariana.toNumber()) }}",
               "type": "number"
             },
             {
               "id": "ed706a05-95cd-4497-a322-21fab6b1973f",
               "name": "comision_wilder",
-              "value": "=1",
+              "value": "={{ $('Info Hotmart').item.json.body.data.commissions[1].value/ (($json.porc_productor_be.toNumber()) + ($json.porc_be_online.toNumber())) * ($json.porc_wilder.toNumber()) }}",
               "type": "number"
             },
             {
               "id": "2da347c9-375c-47f4-908a-7460b2098b59",
               "name": "comision_otros",
-              "value": "=1",
+              "value": "={{ $('Info Hotmart').item.json.body.data.commissions[1].value/ (($json.porc_productor_be.toNumber()) + ($json.porc_be_online.toNumber())) * ($json.porc_extra.toNumber()) }}",
               "type": "number"
             }
           ]
@@ -4060,15 +4060,15 @@
           "headers": {
             "host": "contenedor1-n8n.vqn37t.easypanel.host",
             "user-agent": "Jodd HTTP",
-            "content-length": "2102",
+            "content-length": "1961",
             "content-type": "application/json",
-            "x-forwarded-for": "98.82.130.253",
+            "x-forwarded-for": "13.217.209.81",
             "x-forwarded-host": "contenedor1-n8n.vqn37t.easypanel.host",
             "x-forwarded-port": "443",
             "x-forwarded-proto": "https",
-            "x-forwarded-server": "730fdd9182ea",
+            "x-forwarded-server": "ca87c8df81ee",
             "x-hotmart-hottok": "utYQiCvNkSCu3jMUFRgoPOcsfpKl8a41246415",
-            "x-real-ip": "98.82.130.253",
+            "x-real-ip": "13.217.209.81",
             "accept-encoding": "gzip"
           },
           "params": {},
@@ -4078,7 +4078,7 @@
               "product": {
                 "has_co_production": true,
                 "name": "Recetas para congelar y disfrutar",
-                "warranty_date": "2026-05-04T00:00:00Z",
+                "warranty_date": "2026-05-12T00:00:00Z",
                 "is_physical_product": false,
                 "id": 7536621,
                 "ucode": "fe0cb92c-4c93-4df7-b165-4c8a278b7c2b",
@@ -4092,13 +4092,13 @@
                 },
                 {
                   "currency_conversion": {
-                    "converted_value": 32876.26,
+                    "converted_value": 34554.3,
                     "converted_to_currency": "COP",
-                    "conversion_rate": 3554.190659
+                    "conversion_rate": 3727.54
                   },
                   "currency_value": "USD",
                   "source": "COPRODUCER",
-                  "value": 9.25
+                  "value": 9.27
                 }
               ],
               "purchase": {
@@ -4112,35 +4112,35 @@
                   "name": "Colombia"
                 },
                 "origin": {
-                  "xcod": "{\"co\":\"IMG04 - Storie 0426]\",\"vid\":\"120241852839450125\",\"vsrc\":\"metaads\",\"u\":\"93928006-2013-4a8c-8580-c1230e833bd0\",\"url\":\"www.federicoymarialuisa.com/pam-accedeahora-vsl01\",\"r\":\"instagram.com/\",\"v\":1}",
-                  "sck": "s=metaads|m=Instagram_Stories|c=00 - [AUTO] - A+ [IMG04 - Storie 0426]|co=IMG04 - Storie 0426]|utm_id=120241852673730125|t=120241852839440125"
+                  "xcod": "{\"co\":\"VID03 - VSL 0126\",\"vid\":\"120242502332690125\",\"vsrc\":\"metaads\",\"u\":\"5f2f212e-ca2b-4091-b410-254227f1074b\",\"url\":\"www.federicoymarialuisa.com/pam-accedeahora-vsl01\",\"r\":\"instagram.com/\",\"v\":1}",
+                  "sck": "s=metaads|m=Instagram_Stories|c=00 - [AUTO] - A+|co=VID03 - VSL 0126|utm_id=120242502332650125|t=120242502332670125"
                 },
                 "order_bump": {
-                  "parent_purchase_transaction": "HP0620648930",
+                  "parent_purchase_transaction": "HP4128777889",
                   "is_order_bump": true
                 },
-                "approved_date": 1777300045000,
+                "approved_date": 1778008939000,
                 "offer": {
                   "code": "88j2gv4u"
                 },
                 "is_funnel": false,
-                "order_date": 1777300043000,
+                "order_date": 1778008936000,
                 "price": {
                   "currency_value": "COP",
-                  "value": 40872
+                  "value": 42865
                 },
-                "buyer_ip": "186.154.38.50",
+                "buyer_ip": "177.93.59.65",
                 "payment": {
                   "installments_number": 1,
                   "type": "CREDIT_CARD"
                 },
                 "full_price": {
                   "currency_value": "COP",
-                  "value": 40872
+                  "value": 42865
                 },
                 "business_model": "A",
                 "invoice_by": "SELLER",
-                "transaction": "HP0607182718",
+                "transaction": "HP4214576894",
                 "status": "APPROVED"
               },
               "affiliates": [
@@ -4156,24 +4156,18 @@
               },
               "buyer": {
                 "address": {
-                  "zipcode": "",
                   "country": "Colombia",
-                  "address": "",
-                  "city": "",
-                  "complement": "",
                   "country_iso": "CO"
                 },
-                "document": "",
-                "name": "María Consuelo Botero",
-                "last_name": "Botero",
-                "first_name": "María",
-                "email": "mariaconsuelobotero@gmail.com",
-                "document_type": ""
+                "document": "1073510915",
+                "name": "Leidy Cirley Jimenez guaca",
+                "last_name": "guaca",
+                "first_name": "Leidy",
+                "email": "leidycirleyjimenezguaca@gmail.com"
               }
             },
-            "hottok": "utYQiCvNkSCu3jMUFRgoPOcsfpKl8a41246415",
-            "id": "668c83c2-ed29-4e89-be70-654912b2b9ae",
-            "creation_date": 1777300057243,
+            "id": "a02facec-6fa0-4058-8d37-2f6ad5ff4a95",
+            "creation_date": 1778008951293,
             "event": "PURCHASE_APPROVED",
             "version": "2.0.0"
           },
@@ -4206,6 +4200,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2026-04-27T15:47:09.127Z",
-  "versionId": "d39bea9a-6d96-436f-8c5d-775183f03ecb"
+  "updatedAt": "2026-05-05T21:56:37.440Z",
+  "versionId": "2305d6a3-9968-43c5-a84a-c70da0a219a4"
 }
