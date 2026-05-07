@@ -1,9 +1,9 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2026-04-27T15:46:05.000Z",
-    "createdAt": "2026-04-27T15:46:02.154Z",
-    "versionId": "c3ee6f90-b438-48ae-86a3-974041849b8c",
+    "updatedAt": "2026-05-06T18:28:03.000Z",
+    "createdAt": "2026-05-06T18:26:51.619Z",
+    "versionId": "f274a62a-15d1-4d9e-ad2b-cec501feeefa",
     "workflowId": "LmlcUPvVrjMjzeAUIgfey",
     "nodes": [
       {
@@ -46,19 +46,19 @@
               },
               {
                 "fieldId": "email",
-                "fieldValue": "={{ $('Info Hotmart').item.json.body.data.buyer.email }}"
+                "fieldValue": "={{ $('BE Online').item.json.body.data.buyer.email }}"
               },
               {
                 "fieldId": "nombre",
-                "fieldValue": "={{ $('Info Hotmart').item.json.body.data.buyer.name }}"
+                "fieldValue": "={{ $('BE Online').item.json.body.data.buyer.name }}"
               },
               {
                 "fieldId": "pais",
-                "fieldValue": "={{ $('Info Hotmart').item.json.body.data.buyer.address.country }}"
+                "fieldValue": "={{ $('BE Online').item.json.body.data.buyer.address.country }}"
               },
               {
                 "fieldId": "productor_id",
-                "fieldValue": "={{ $('Info Hotmart').item.json.body.data.producer.document }}"
+                "fieldValue": "={{ $('BE Online').item.json.body.data.producer.document }}"
               }
             ]
           }
@@ -85,23 +85,23 @@
             "fieldValues": [
               {
                 "fieldId": "id_transaccion",
-                "fieldValue": "={{ $('Info Hotmart').item.json.body.data.purchase.transaction }}"
+                "fieldValue": "={{ $('BE Online').item.json.body.data.purchase.transaction }}"
               },
               {
                 "fieldId": "email_cliente",
-                "fieldValue": "={{ $('Info Hotmart').item.json.body.data.buyer.email }}"
+                "fieldValue": "={{ $('BE Online').item.json.body.data.buyer.email }}"
               },
               {
                 "fieldId": "producto_id",
-                "fieldValue": "={{ $('Info Hotmart').item.json.body.data.product.id }}"
+                "fieldValue": "={{ $('BE Online').item.json.body.data.product.id }}"
               },
               {
                 "fieldId": "producto_nombre",
-                "fieldValue": "={{ $('Info Hotmart').item.json.body.data.product.name }}"
+                "fieldValue": "={{ $('BE Online').item.json.body.data.product.name }}"
               },
               {
                 "fieldId": "facturacion_bruta",
-                "fieldValue": "={{ $('Info Hotmart').item.json.body.data.purchase.original_offer_price.value }}"
+                "fieldValue": "={{ $('BE Online').item.json.body.data.purchase.original_offer_price.value }}"
               },
               {
                 "fieldId": "facturacion_neta",
@@ -121,7 +121,7 @@
               },
               {
                 "fieldId": "pais_comprador",
-                "fieldValue": "={{ $('Info Hotmart').item.json.body.data.purchase.checkout_country.name }}"
+                "fieldValue": "={{ $('BE Online').item.json.body.data.purchase.checkout_country.name }}"
               },
               {
                 "fieldId": "comision_productor_hotmart",
@@ -141,19 +141,19 @@
               },
               {
                 "fieldId": "status",
-                "fieldValue": "={{ \n  ({\n    'PURCHASE_APPROVED': 'Aprobado',\n    'PURCHASE_COMPLETE': 'Completo',\n    'PURCHASE_CANCELED': 'Cancelado',\n    'PURCHASE_REFUNDED': 'Reembolsado',\n    'WAITING_PAYMENT': 'Esperando Pago'\n  })[$('Info Hotmart').item.json.body.event] || 'Procesando' \n}}"
+                "fieldValue": "={{ \n  ({\n    'PURCHASE_APPROVED': 'Aprobado',\n    'PURCHASE_COMPLETE': 'Completo',\n    'PURCHASE_CANCELED': 'Cancelado',\n    'PURCHASE_REFUNDED': 'Reembolsado',\n    'WAITING_PAYMENT': 'Esperando Pago'\n  })[$('BE Online').item.json.body.event] || 'Procesando' \n}}"
               },
               {
                 "fieldId": "nro_recurrencia",
-                "fieldValue": "={{ $('Info Hotmart').item.json.body.data.purchase.recurrence_number }}"
+                "fieldValue": "={{ $('BE Online').item.json.body.data.purchase.recurrence_number }}"
               },
               {
                 "fieldId": "metodo_pago",
-                "fieldValue": "={{ \n  ({\n    'CREDIT_CARD': 'Tarjeta de Crédito',\n    'PSE': 'PSE',\n    'NEQUI': 'Nequi',\n    'BANCOLOMBIA': 'Bancolombia',\n    'BILLET': 'Efecty / Boleto',\n    'PIX': 'Pix',\n    'PAYPAL': 'PayPal',\n    'HOTMART_BALANCE': 'Saldo Hotmart',\n    'DIRECT_DEBIT': 'Transferencia Bancaria',\n    'GOOGLE_PAY': 'Google Pay'\n  })[$('Info Hotmart').item.json.body.data.purchase.payment.type] || $('Info Hotmart').item.json.body.data.purchase.payment.type \n}}"
+                "fieldValue": "={{ \n  ({\n    'CREDIT_CARD': 'Tarjeta de Crédito',\n    'PSE': 'PSE',\n    'NEQUI': 'Nequi',\n    'BANCOLOMBIA': 'Bancolombia',\n    'BILLET': 'Efecty / Boleto',\n    'PIX': 'Pix',\n    'PAYPAL': 'PayPal',\n    'HOTMART_BALANCE': 'Saldo Hotmart',\n    'DIRECT_DEBIT': 'Transferencia Bancaria',\n    'GOOGLE_PAY': 'Google Pay'\n  })[$('BE Online').item.json.body.data.purchase.payment.type] || $('BE Online').item.json.body.data.purchase.payment.type \n}}"
               },
               {
                 "fieldId": "fecha_venta",
-                "fieldValue": "={{ $('Info Hotmart').item.json.body.data.product.warranty_date }}"
+                "fieldValue": "={{ $('BE Online').item.json.body.data.product.warranty_date }}"
               }
             ]
           }
@@ -213,49 +213,49 @@
               {
                 "id": "074c88e5-f3f1-4869-9726-1a671cd7b08f",
                 "name": "facturacion_neta",
-                "value": "={{ $('Info Hotmart').item.json.body.data.commissions[1].value / ($json.porc_productor_be + $json.porc_be_online) }}",
+                "value": "={{ $('BE Online').item.json.body.data.commissions[1].value / ($json.porc_productor_be + $json.porc_be_online) }}",
                 "type": "number"
               },
               {
                 "id": "1421eb0c-82ca-459a-b95e-8871caa03d15",
                 "name": "comision_productor_hotmart",
-                "value": "={{ $('Info Hotmart').item.json.body.data.commissions[1].value / ($json.porc_productor_be + $json.porc_be_online) * ($json.porc_productor_hotmart) }}",
+                "value": "={{ $('BE Online').item.json.body.data.commissions[1].value / ($json.porc_productor_be + $json.porc_be_online) * ($json.porc_productor_hotmart) }}",
                 "type": "number"
               },
               {
                 "id": "9af72081-f99d-4672-a2c9-4d7892668496",
                 "name": "comision_productor_be",
-                "value": "={{ $('Info Hotmart').item.json.body.data.commissions[1].value / ($json.porc_productor_be + $json.porc_be_online) * ($json.porc_productor_be) }}",
+                "value": "={{ $('BE Online').item.json.body.data.commissions[1].value / ($json.porc_productor_be + $json.porc_be_online) * ($json.porc_productor_be) }}",
                 "type": "number"
               },
               {
                 "id": "84fcfde0-1a3f-422b-9646-af60569fabde",
                 "name": "comision_be_online",
-                "value": "={{ $('Info Hotmart').item.json.body.data.commissions[1].value / ($json.porc_productor_be + $json.porc_be_online) * ($json.porc_be_online) }}",
+                "value": "={{ $('BE Online').item.json.body.data.commissions[1].value / ($json.porc_productor_be + $json.porc_be_online) * ($json.porc_be_online) }}",
                 "type": "number"
               },
               {
                 "id": "4ea41935-0c1b-4e09-be79-cf1fd6b64e9e",
                 "name": "comision_andres",
-                "value": "={{ $('Info Hotmart').item.json.body.data.commissions[1].value/ ($json.porc_productor_be + $json.porc_be_online) * ($json.porc_andres) }}",
+                "value": "={{ $('BE Online').item.json.body.data.commissions[1].value/ ($json.porc_productor_be + $json.porc_be_online) * ($json.porc_andres) }}",
                 "type": "number"
               },
               {
                 "id": "72061381-c17d-4515-bb16-9be3cfadf41e",
                 "name": "comision_mariana",
-                "value": "={{ $('Info Hotmart').item.json.body.data.commissions[1].value / ($json.porc_productor_be + $json.porc_be_online) * ($json.porc_mariana) }}",
+                "value": "={{ $('BE Online').item.json.body.data.commissions[1].value / ($json.porc_productor_be + $json.porc_be_online) * ($json.porc_mariana) }}",
                 "type": "number"
               },
               {
                 "id": "ed706a05-95cd-4497-a322-21fab6b1973f",
                 "name": "comision_wilder",
-                "value": "={{ $('Info Hotmart').item.json.body.data.commissions[1].value/ ($json.porc_productor_be + $json.porc_be_online) * ($json.porc_wilder) }}",
+                "value": "={{ $('BE Online').item.json.body.data.commissions[1].value/ ($json.porc_productor_be + $json.porc_be_online) * ($json.porc_wilder) }}",
                 "type": "number"
               },
               {
                 "id": "2da347c9-375c-47f4-908a-7460b2098b59",
                 "name": "comision_otros",
-                "value": "={{ $('Info Hotmart').item.json.body.data.commissions[1].value / ($json.porc_productor_be + $json.porc_be_online) * ($json.porc_extra) }}",
+                "value": "={{ $('BE Online').item.json.body.data.commissions[1].value / ($json.porc_productor_be + $json.porc_be_online) * ($json.porc_extra) }}",
                 "type": "number"
               }
             ]
@@ -281,7 +281,7 @@
               {
                 "keyName": "productor_id",
                 "condition": "eq",
-                "keyValue": "={{ $('Info Hotmart').item.json.body.data.producer.document }}"
+                "keyValue": "={{ $('BE Online').item.json.body.data.producer.document }}"
               }
             ]
           }
@@ -509,11 +509,11 @@
             "fieldValues": [
               {
                 "fieldId": "status",
-                "fieldValue": "={{ $('Info Hotmart').item.json.body.event }}"
+                "fieldValue": "={{ $('BE Online').item.json.body.event }}"
               },
               {
                 "fieldId": "fecha_venta",
-                "fieldValue": "={{ $('Info Hotmart').item.json.body.data.product.warranty_date }}"
+                "fieldValue": "={{ $('BE Online').item.json.body.data.product.warranty_date }}"
               }
             ]
           }
@@ -532,22 +532,6 @@
             "name": "Supabase BE"
           }
         }
-      },
-      {
-        "parameters": {
-          "httpMethod": "POST",
-          "path": "hotmart-ventas-global",
-          "options": {}
-        },
-        "type": "n8n-nodes-base.webhook",
-        "typeVersion": 2.1,
-        "position": [
-          -416,
-          32
-        ],
-        "id": "563c039b-7052-4bae-b481-0b70793bdf43",
-        "name": "Info Hotmart",
-        "webhookId": "7e71da5f-b86d-4848-9d4b-a6f02fd9c2ba"
       },
       {
         "parameters": {
@@ -808,18 +792,18 @@
               "comision_wilder": "={{ Math.round($json.comision_wilder * 1000) / 1000}}",
               "comision_otros": "={{ Math.round($json.comision_otros * 1000) / 1000}}",
               "id_transaccion": "={{ $('Tipo de transacción').item.json.body.data.purchase.transaction }}",
-              "email_cliente": "={{ $('Info Hotmart').item.json.body.data.buyer.email }}",
-              "producto_id": "={{ $('Info Hotmart').item.json.body.data.product.id }}",
-              "producto_nombre": "={{ $('Info Hotmart').item.json.body.data.product.name }}",
-              "facturacion_bruta": "={{ $('Info Hotmart').item.json.body.data.purchase.original_offer_price.value }}",
+              "email_cliente": "={{ $('BE Online').item.json.body.data.buyer.email }}",
+              "producto_id": "={{ $('BE Online').item.json.body.data.product.id }}",
+              "producto_nombre": "={{ $('BE Online').item.json.body.data.product.name }}",
+              "facturacion_bruta": "={{ $('BE Online').item.json.body.data.purchase.original_offer_price.value }}",
               "facturacion_neta": "={{ Math.round($json.facturacion_neta * 1000) / 1000}}",
-              "pais_comprador": "={{ $('Info Hotmart').item.json.body.data.purchase.checkout_country.name }}",
-              "status": "={{ \n  ({\n    'PURCHASE_APPROVED': 'Aprobado',\n    'PURCHASE_COMPLETE': 'Completo',\n    'PURCHASE_CANCELED': 'Cancelado',\n    'PURCHASE_REFUNDED': 'Reembolsado',\n    'WAITING_PAYMENT': 'Esperando Pago'\n  })[$('Info Hotmart').item.json.body.event] || 'Procesando' \n}}",
+              "pais_comprador": "={{ $('BE Online').item.json.body.data.purchase.checkout_country.name }}",
+              "status": "={{ \n  ({\n    'PURCHASE_APPROVED': 'Aprobado',\n    'PURCHASE_COMPLETE': 'Completo',\n    'PURCHASE_CANCELED': 'Cancelado',\n    'PURCHASE_REFUNDED': 'Reembolsado',\n    'WAITING_PAYMENT': 'Esperando Pago'\n  })[$('BE Online').item.json.body.event] || 'Procesando' \n}}",
               "comision_be_online": "={{ Math.round($json.comision_be_online * 1000) / 1000}}",
               "comision_productor_be": "={{ Math.round($json.comision_productor_be * 1000) / 1000}}",
-              "fecha_venta": "={{ $('Info Hotmart').item.json.body.data.product.warranty_date }}",
-              "nro_recurrencia": "={{ $('Info Hotmart').item.json.body.data.purchase.recurrence_number }}",
-              "metodo_pago": "={{    ({     'CREDIT_CARD': 'Tarjeta de Crédito',     'PSE': 'PSE',     'NEQUI': 'Nequi',     'BANCOLOMBIA': 'Bancolombia',     'BILLET': 'Efecty / Boleto',     'PIX': 'Pix',     'PAYPAL': 'PayPal',     'HOTMART_BALANCE': 'Saldo Hotmart',     'DIRECT_DEBIT': 'Transferencia Bancaria',     'GOOGLE_PAY': 'Google Pay'   })[$('Info Hotmart').item.json.body.data.purchase.payment.type] \n\n $('Info Hotmart').item.json.body.data.purchase.payment.type  }}"
+              "fecha_venta": "={{ $('BE Online').item.json.body.data.product.warranty_date }}",
+              "nro_recurrencia": "={{ $('BE Online').item.json.body.data.purchase.recurrence_number }}",
+              "metodo_pago": "={{    ({     'CREDIT_CARD': 'Tarjeta de Crédito',     'PSE': 'PSE',     'NEQUI': 'Nequi',     'BANCOLOMBIA': 'Bancolombia',     'BILLET': 'Efecty / Boleto',     'PIX': 'Pix',     'PAYPAL': 'PayPal',     'HOTMART_BALANCE': 'Saldo Hotmart',     'DIRECT_DEBIT': 'Transferencia Bancaria',     'GOOGLE_PAY': 'Google Pay'   })[$('BE Online').item.json.body.data.purchase.payment.type] \n\n $('BE Online').item.json.body.data.purchase.payment.type  }}"
             },
             "matchingColumns": [
               "id"
@@ -1006,8 +990,8 @@
         "type": "n8n-nodes-base.postgres",
         "typeVersion": 2.6,
         "position": [
-          1520,
-          1120
+          1952,
+          1104
         ],
         "id": "0e6f1ba2-2124-41f5-8718-e223456f58aa",
         "name": "CargarVenta1",
@@ -1260,11 +1244,11 @@
             "fieldValues": [
               {
                 "fieldId": "status",
-                "fieldValue": "={{ $('Info Hotmart').item.json.body.event }}"
+                "fieldValue": "={{ $('BE Online').item.json.body.event }}"
               },
               {
                 "fieldId": "fecha_venta",
-                "fieldValue": "={{ $('Info Hotmart').item.json.body.data.product.warranty_date }}"
+                "fieldValue": "={{ $('BE Online').item.json.body.data.product.warranty_date }}"
               }
             ]
           }
@@ -1306,49 +1290,49 @@
               {
                 "id": "074c88e5-f3f1-4869-9726-1a671cd7b08f",
                 "name": "facturacion_neta",
-                "value": "=1",
+                "value": "={{ $('BE Online').item.json.body.data.commissions[1].value / (($json.porc_productor_be.toNumber()) + ($json.porc_be_online.toNumber() ))}}",
                 "type": "number"
               },
               {
                 "id": "1421eb0c-82ca-459a-b95e-8871caa03d15",
                 "name": "comision_productor_hotmart",
-                "value": "=1",
+                "value": "={{ ($('BE Online').item.json.body.data.commissions[1].value / (($json.porc_productor_be.toNumber()) + ($json.porc_be_online.toNumber() )))*$json.porc_productor_hotmart}}",
                 "type": "number"
               },
               {
                 "id": "9af72081-f99d-4672-a2c9-4d7892668496",
                 "name": "comision_productor_be",
-                "value": "=1",
+                "value": "={{ $('BE Online').item.json.body.data.commissions[1].value / (($json.porc_productor_be.toNumber()) + $json.porc_be_online.toNumber()) * ($json.porc_productor_be.toNumber()) }}",
                 "type": "number"
               },
               {
                 "id": "84fcfde0-1a3f-422b-9646-af60569fabde",
                 "name": "comision_be_online",
-                "value": "=1",
+                "value": "={{ $('BE Online').item.json.body.data.commissions[1].value / (($json.porc_productor_be.toNumber()) + ($json.porc_be_online.toNumber())) * ($json.porc_be_online.toNumber()) }}",
                 "type": "number"
               },
               {
                 "id": "4ea41935-0c1b-4e09-be79-cf1fd6b64e9e",
                 "name": "comision_andres",
-                "value": "=1",
+                "value": "={{ $('BE Online').item.json.body.data.commissions[1].value/ (($json.porc_productor_be.toNumber()) + ($json.porc_be_online.toNumber())) * ($json.porc_andres.toNumber()) }}",
                 "type": "number"
               },
               {
                 "id": "72061381-c17d-4515-bb16-9be3cfadf41e",
                 "name": "comision_mariana",
-                "value": "=1",
+                "value": "={{ $('BE Online').item.json.body.data.commissions[1].value/ (($json.porc_productor_be.toNumber()) + ($json.porc_be_online.toNumber())) * ($json.porc_mariana.toNumber()) }}",
                 "type": "number"
               },
               {
                 "id": "ed706a05-95cd-4497-a322-21fab6b1973f",
                 "name": "comision_wilder",
-                "value": "=1",
+                "value": "={{ $('BE Online').item.json.body.data.commissions[1].value/ (($json.porc_productor_be.toNumber()) + ($json.porc_be_online.toNumber())) * ($json.porc_wilder.toNumber()) }}",
                 "type": "number"
               },
               {
                 "id": "2da347c9-375c-47f4-908a-7460b2098b59",
                 "name": "comision_otros",
-                "value": "=1",
+                "value": "={{ $('BE Online').item.json.body.data.commissions[1].value/ (($json.porc_productor_be.toNumber()) + ($json.porc_be_online.toNumber())) * ($json.porc_extra.toNumber()) }}",
                 "type": "number"
               }
             ]
@@ -1358,8 +1342,8 @@
         "type": "n8n-nodes-base.set",
         "typeVersion": 3.4,
         "position": [
-          1264,
-          1120
+          1520,
+          1104
         ],
         "id": "e832593a-f40a-4b2f-8aaa-317b32ef6f89",
         "name": "Asignación de comisiones3"
@@ -1502,8 +1486,8 @@
             "mappingMode": "defineBelow",
             "value": {
               "id": "={{ $json.id }}",
-              "status": "={{ $('Info Hotmart').item.json.body.event }}",
-              "fecha_venta": "={{ $('Info Hotmart').item.json.body.data.product.warranty_date }}"
+              "status": "={{ $('BE Online').item.json.body.event }}",
+              "fecha_venta": "={{ $('BE Online').item.json.body.data.product.warranty_date }}"
             },
             "matchingColumns": [
               "id"
@@ -1718,6 +1702,163 @@
             "name": "Postgres BeOnline new (Luis-12Abr2026)"
           }
         }
+      },
+      {
+        "parameters": {
+          "content": "Oportunidades Mejora: \n\nEnviar mensaje al whatsapp/coreo cuando usuario abandone el carrito"
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          -1072,
+          160
+        ],
+        "id": "8e109485-ccdb-430d-b900-dc1862094776",
+        "name": "Sticky Note1"
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 3
+            },
+            "conditions": [
+              {
+                "id": "7d3b1f23-e09b-4db3-ae23-192ca14a2c23",
+                "leftValue": "",
+                "rightValue": "",
+                "operator": {
+                  "type": "string",
+                  "operation": "equals",
+                  "name": "filter.operator.equals"
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.3,
+        "position": [
+          1184,
+          1120
+        ],
+        "id": "3a748f6d-b8da-443f-9840-4473a79f5159",
+        "name": "producto_comision_diff?"
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "074c88e5-f3f1-4869-9726-1a671cd7b08f",
+                "name": "facturacion_neta",
+                "value": "={{ $('BE Online').item.json.body.data.commissions[1].value / (($json.porc_productor_be.toNumber()) + ($json.porc_be_online.toNumber() ))}}",
+                "type": "number"
+              },
+              {
+                "id": "1421eb0c-82ca-459a-b95e-8871caa03d15",
+                "name": "comision_productor_hotmart",
+                "value": "={{ ($('BE Online').item.json.body.data.commissions[1].value / (($json.porc_productor_be.toNumber()) + ($json.porc_be_online.toNumber() )))*$json.porc_productor_hotmart}}",
+                "type": "number"
+              },
+              {
+                "id": "9af72081-f99d-4672-a2c9-4d7892668496",
+                "name": "comision_productor_be",
+                "value": "={{ $('BE Online').item.json.body.data.commissions[1].value / (($json.porc_productor_be.toNumber()) + $json.porc_be_online.toNumber()) * ($json.porc_productor_be.toNumber()) }}",
+                "type": "number"
+              },
+              {
+                "id": "84fcfde0-1a3f-422b-9646-af60569fabde",
+                "name": "comision_be_online",
+                "value": "={{ $('BE Online').item.json.body.data.commissions[1].value / (($json.porc_productor_be.toNumber()) + ($json.porc_be_online.toNumber())) * ($json.porc_be_online.toNumber()) }}",
+                "type": "number"
+              },
+              {
+                "id": "4ea41935-0c1b-4e09-be79-cf1fd6b64e9e",
+                "name": "comision_andres",
+                "value": "={{ $('BE Online').item.json.body.data.commissions[1].value/ (($json.porc_productor_be.toNumber()) + ($json.porc_be_online.toNumber())) * ($json.porc_andres.toNumber()) }}",
+                "type": "number"
+              },
+              {
+                "id": "72061381-c17d-4515-bb16-9be3cfadf41e",
+                "name": "comision_mariana",
+                "value": "={{ $('BE Online').item.json.body.data.commissions[1].value/ (($json.porc_productor_be.toNumber()) + ($json.porc_be_online.toNumber())) * ($json.porc_mariana.toNumber()) }}",
+                "type": "number"
+              },
+              {
+                "id": "ed706a05-95cd-4497-a322-21fab6b1973f",
+                "name": "comision_wilder",
+                "value": "={{ $('BE Online').item.json.body.data.commissions[1].value/ (($json.porc_productor_be.toNumber()) + ($json.porc_be_online.toNumber())) * ($json.porc_wilder.toNumber()) }}",
+                "type": "number"
+              },
+              {
+                "id": "2da347c9-375c-47f4-908a-7460b2098b59",
+                "name": "comision_otros",
+                "value": "={{ $('BE Online').item.json.body.data.commissions[1].value/ (($json.porc_productor_be.toNumber()) + ($json.porc_be_online.toNumber())) * ($json.porc_extra.toNumber()) }}",
+                "type": "number"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          1536,
+          928
+        ],
+        "id": "2e3a4c51-36df-4d23-af03-6d1e2e76ab7b",
+        "name": "Asignación de comisiones4"
+      },
+      {
+        "parameters": {
+          "content": "AJUSTAR"
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          1344,
+          784
+        ],
+        "id": "68d2f78e-094b-490c-809c-c024e3c77462",
+        "name": "Sticky Note2"
+      },
+      {
+        "parameters": {
+          "httpMethod": "POST",
+          "path": "hotmart-ventas-global",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.webhook",
+        "typeVersion": 2.1,
+        "position": [
+          -496,
+          976
+        ],
+        "id": "563c039b-7052-4bae-b481-0b70793bdf43",
+        "name": "BE Online",
+        "webhookId": "7e71da5f-b86d-4848-9d4b-a6f02fd9c2ba"
+      },
+      {
+        "parameters": {
+          "httpMethod": "POST",
+          "path": "Be-Online-Holdings-LLC",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.webhook",
+        "typeVersion": 2.1,
+        "position": [
+          -496,
+          1184
+        ],
+        "id": "9cc3e38b-2fee-42d2-bf09-b5ebc10fd976",
+        "name": "Be Online Holdings LLC",
+        "webhookId": "1f7a6437-ba22-4045-a389-ef626b44f03e"
       }
     ],
     "connections": {
@@ -1857,17 +1998,6 @@
           ]
         ]
       },
-      "Info Hotmart": {
-        "main": [
-          [
-            {
-              "node": "Tipo de transacción",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
       "Consulta Email0": {
         "main": [
           [
@@ -1894,7 +2024,7 @@
         "main": [
           [
             {
-              "node": "Asignación de comisiones3",
+              "node": "producto_comision_diff?",
               "type": "main",
               "index": 0
             }
@@ -2014,14 +2144,65 @@
             }
           ]
         ]
+      },
+      "producto_comision_diff?": {
+        "main": [
+          [
+            {
+              "node": "Asignación de comisiones4",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Asignación de comisiones3",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Asignación de comisiones4": {
+        "main": [
+          [
+            {
+              "node": "CargarVenta1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "BE Online": {
+        "main": [
+          [
+            {
+              "node": "Tipo de transacción",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Be Online Holdings LLC": {
+        "main": [
+          [
+            {
+              "node": "Tipo de transacción",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
       }
     },
     "authors": "BE Online",
-    "name": "Version c3ee6f90",
+    "name": "Version f274a62a",
     "description": "",
     "autosaved": true
   },
-  "activeVersionId": "c3ee6f90-b438-48ae-86a3-974041849b8c",
+  "activeVersionId": "f274a62a-15d1-4d9e-ad2b-cec501feeefa",
   "connections": {
     "Consulta Email": {
       "main": [
@@ -2159,17 +2340,6 @@
         ]
       ]
     },
-    "Info Hotmart": {
-      "main": [
-        [
-          {
-            "node": "Tipo de transacción",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Consulta Email0": {
       "main": [
         [
@@ -2196,7 +2366,7 @@
       "main": [
         [
           {
-            "node": "Asignación de comisiones3",
+            "node": "producto_comision_diff?",
             "type": "main",
             "index": 0
           }
@@ -2316,6 +2486,57 @@
           }
         ]
       ]
+    },
+    "producto_comision_diff?": {
+      "main": [
+        [
+          {
+            "node": "Asignación de comisiones4",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Asignación de comisiones3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Asignación de comisiones4": {
+      "main": [
+        [
+          {
+            "node": "CargarVenta1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "BE Online": {
+      "main": [
+        [
+          {
+            "node": "Tipo de transacción",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Be Online Holdings LLC": {
+      "main": [
+        [
+          {
+            "node": "Tipo de transacción",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2026-01-07T21:00:31.246Z",
@@ -2366,19 +2587,19 @@
             },
             {
               "fieldId": "email",
-              "fieldValue": "={{ $('Info Hotmart').item.json.body.data.buyer.email }}"
+              "fieldValue": "={{ $('BE Online').item.json.body.data.buyer.email }}"
             },
             {
               "fieldId": "nombre",
-              "fieldValue": "={{ $('Info Hotmart').item.json.body.data.buyer.name }}"
+              "fieldValue": "={{ $('BE Online').item.json.body.data.buyer.name }}"
             },
             {
               "fieldId": "pais",
-              "fieldValue": "={{ $('Info Hotmart').item.json.body.data.buyer.address.country }}"
+              "fieldValue": "={{ $('BE Online').item.json.body.data.buyer.address.country }}"
             },
             {
               "fieldId": "productor_id",
-              "fieldValue": "={{ $('Info Hotmart').item.json.body.data.producer.document }}"
+              "fieldValue": "={{ $('BE Online').item.json.body.data.producer.document }}"
             }
           ]
         }
@@ -2405,23 +2626,23 @@
           "fieldValues": [
             {
               "fieldId": "id_transaccion",
-              "fieldValue": "={{ $('Info Hotmart').item.json.body.data.purchase.transaction }}"
+              "fieldValue": "={{ $('BE Online').item.json.body.data.purchase.transaction }}"
             },
             {
               "fieldId": "email_cliente",
-              "fieldValue": "={{ $('Info Hotmart').item.json.body.data.buyer.email }}"
+              "fieldValue": "={{ $('BE Online').item.json.body.data.buyer.email }}"
             },
             {
               "fieldId": "producto_id",
-              "fieldValue": "={{ $('Info Hotmart').item.json.body.data.product.id }}"
+              "fieldValue": "={{ $('BE Online').item.json.body.data.product.id }}"
             },
             {
               "fieldId": "producto_nombre",
-              "fieldValue": "={{ $('Info Hotmart').item.json.body.data.product.name }}"
+              "fieldValue": "={{ $('BE Online').item.json.body.data.product.name }}"
             },
             {
               "fieldId": "facturacion_bruta",
-              "fieldValue": "={{ $('Info Hotmart').item.json.body.data.purchase.original_offer_price.value }}"
+              "fieldValue": "={{ $('BE Online').item.json.body.data.purchase.original_offer_price.value }}"
             },
             {
               "fieldId": "facturacion_neta",
@@ -2441,7 +2662,7 @@
             },
             {
               "fieldId": "pais_comprador",
-              "fieldValue": "={{ $('Info Hotmart').item.json.body.data.purchase.checkout_country.name }}"
+              "fieldValue": "={{ $('BE Online').item.json.body.data.purchase.checkout_country.name }}"
             },
             {
               "fieldId": "comision_productor_hotmart",
@@ -2461,19 +2682,19 @@
             },
             {
               "fieldId": "status",
-              "fieldValue": "={{ \n  ({\n    'PURCHASE_APPROVED': 'Aprobado',\n    'PURCHASE_COMPLETE': 'Completo',\n    'PURCHASE_CANCELED': 'Cancelado',\n    'PURCHASE_REFUNDED': 'Reembolsado',\n    'WAITING_PAYMENT': 'Esperando Pago'\n  })[$('Info Hotmart').item.json.body.event] || 'Procesando' \n}}"
+              "fieldValue": "={{ \n  ({\n    'PURCHASE_APPROVED': 'Aprobado',\n    'PURCHASE_COMPLETE': 'Completo',\n    'PURCHASE_CANCELED': 'Cancelado',\n    'PURCHASE_REFUNDED': 'Reembolsado',\n    'WAITING_PAYMENT': 'Esperando Pago'\n  })[$('BE Online').item.json.body.event] || 'Procesando' \n}}"
             },
             {
               "fieldId": "nro_recurrencia",
-              "fieldValue": "={{ $('Info Hotmart').item.json.body.data.purchase.recurrence_number }}"
+              "fieldValue": "={{ $('BE Online').item.json.body.data.purchase.recurrence_number }}"
             },
             {
               "fieldId": "metodo_pago",
-              "fieldValue": "={{ \n  ({\n    'CREDIT_CARD': 'Tarjeta de Crédito',\n    'PSE': 'PSE',\n    'NEQUI': 'Nequi',\n    'BANCOLOMBIA': 'Bancolombia',\n    'BILLET': 'Efecty / Boleto',\n    'PIX': 'Pix',\n    'PAYPAL': 'PayPal',\n    'HOTMART_BALANCE': 'Saldo Hotmart',\n    'DIRECT_DEBIT': 'Transferencia Bancaria',\n    'GOOGLE_PAY': 'Google Pay'\n  })[$('Info Hotmart').item.json.body.data.purchase.payment.type] || $('Info Hotmart').item.json.body.data.purchase.payment.type \n}}"
+              "fieldValue": "={{ \n  ({\n    'CREDIT_CARD': 'Tarjeta de Crédito',\n    'PSE': 'PSE',\n    'NEQUI': 'Nequi',\n    'BANCOLOMBIA': 'Bancolombia',\n    'BILLET': 'Efecty / Boleto',\n    'PIX': 'Pix',\n    'PAYPAL': 'PayPal',\n    'HOTMART_BALANCE': 'Saldo Hotmart',\n    'DIRECT_DEBIT': 'Transferencia Bancaria',\n    'GOOGLE_PAY': 'Google Pay'\n  })[$('BE Online').item.json.body.data.purchase.payment.type] || $('BE Online').item.json.body.data.purchase.payment.type \n}}"
             },
             {
               "fieldId": "fecha_venta",
-              "fieldValue": "={{ $('Info Hotmart').item.json.body.data.product.warranty_date }}"
+              "fieldValue": "={{ $('BE Online').item.json.body.data.product.warranty_date }}"
             }
           ]
         }
@@ -2533,49 +2754,49 @@
             {
               "id": "074c88e5-f3f1-4869-9726-1a671cd7b08f",
               "name": "facturacion_neta",
-              "value": "={{ $('Info Hotmart').item.json.body.data.commissions[1].value / ($json.porc_productor_be + $json.porc_be_online) }}",
+              "value": "={{ $('BE Online').item.json.body.data.commissions[1].value / ($json.porc_productor_be + $json.porc_be_online) }}",
               "type": "number"
             },
             {
               "id": "1421eb0c-82ca-459a-b95e-8871caa03d15",
               "name": "comision_productor_hotmart",
-              "value": "={{ $('Info Hotmart').item.json.body.data.commissions[1].value / ($json.porc_productor_be + $json.porc_be_online) * ($json.porc_productor_hotmart) }}",
+              "value": "={{ $('BE Online').item.json.body.data.commissions[1].value / ($json.porc_productor_be + $json.porc_be_online) * ($json.porc_productor_hotmart) }}",
               "type": "number"
             },
             {
               "id": "9af72081-f99d-4672-a2c9-4d7892668496",
               "name": "comision_productor_be",
-              "value": "={{ $('Info Hotmart').item.json.body.data.commissions[1].value / ($json.porc_productor_be + $json.porc_be_online) * ($json.porc_productor_be) }}",
+              "value": "={{ $('BE Online').item.json.body.data.commissions[1].value / ($json.porc_productor_be + $json.porc_be_online) * ($json.porc_productor_be) }}",
               "type": "number"
             },
             {
               "id": "84fcfde0-1a3f-422b-9646-af60569fabde",
               "name": "comision_be_online",
-              "value": "={{ $('Info Hotmart').item.json.body.data.commissions[1].value / ($json.porc_productor_be + $json.porc_be_online) * ($json.porc_be_online) }}",
+              "value": "={{ $('BE Online').item.json.body.data.commissions[1].value / ($json.porc_productor_be + $json.porc_be_online) * ($json.porc_be_online) }}",
               "type": "number"
             },
             {
               "id": "4ea41935-0c1b-4e09-be79-cf1fd6b64e9e",
               "name": "comision_andres",
-              "value": "={{ $('Info Hotmart').item.json.body.data.commissions[1].value/ ($json.porc_productor_be + $json.porc_be_online) * ($json.porc_andres) }}",
+              "value": "={{ $('BE Online').item.json.body.data.commissions[1].value/ ($json.porc_productor_be + $json.porc_be_online) * ($json.porc_andres) }}",
               "type": "number"
             },
             {
               "id": "72061381-c17d-4515-bb16-9be3cfadf41e",
               "name": "comision_mariana",
-              "value": "={{ $('Info Hotmart').item.json.body.data.commissions[1].value / ($json.porc_productor_be + $json.porc_be_online) * ($json.porc_mariana) }}",
+              "value": "={{ $('BE Online').item.json.body.data.commissions[1].value / ($json.porc_productor_be + $json.porc_be_online) * ($json.porc_mariana) }}",
               "type": "number"
             },
             {
               "id": "ed706a05-95cd-4497-a322-21fab6b1973f",
               "name": "comision_wilder",
-              "value": "={{ $('Info Hotmart').item.json.body.data.commissions[1].value/ ($json.porc_productor_be + $json.porc_be_online) * ($json.porc_wilder) }}",
+              "value": "={{ $('BE Online').item.json.body.data.commissions[1].value/ ($json.porc_productor_be + $json.porc_be_online) * ($json.porc_wilder) }}",
               "type": "number"
             },
             {
               "id": "2da347c9-375c-47f4-908a-7460b2098b59",
               "name": "comision_otros",
-              "value": "={{ $('Info Hotmart').item.json.body.data.commissions[1].value / ($json.porc_productor_be + $json.porc_be_online) * ($json.porc_extra) }}",
+              "value": "={{ $('BE Online').item.json.body.data.commissions[1].value / ($json.porc_productor_be + $json.porc_be_online) * ($json.porc_extra) }}",
               "type": "number"
             }
           ]
@@ -2601,7 +2822,7 @@
             {
               "keyName": "productor_id",
               "condition": "eq",
-              "keyValue": "={{ $('Info Hotmart').item.json.body.data.producer.document }}"
+              "keyValue": "={{ $('BE Online').item.json.body.data.producer.document }}"
             }
           ]
         }
@@ -2829,11 +3050,11 @@
           "fieldValues": [
             {
               "fieldId": "status",
-              "fieldValue": "={{ $('Info Hotmart').item.json.body.event }}"
+              "fieldValue": "={{ $('BE Online').item.json.body.event }}"
             },
             {
               "fieldId": "fecha_venta",
-              "fieldValue": "={{ $('Info Hotmart').item.json.body.data.product.warranty_date }}"
+              "fieldValue": "={{ $('BE Online').item.json.body.data.product.warranty_date }}"
             }
           ]
         }
@@ -2852,22 +3073,6 @@
           "name": "Supabase BE"
         }
       }
-    },
-    {
-      "parameters": {
-        "httpMethod": "POST",
-        "path": "hotmart-ventas-global",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.webhook",
-      "typeVersion": 2.1,
-      "position": [
-        -416,
-        32
-      ],
-      "id": "563c039b-7052-4bae-b481-0b70793bdf43",
-      "name": "Info Hotmart",
-      "webhookId": "7e71da5f-b86d-4848-9d4b-a6f02fd9c2ba"
     },
     {
       "parameters": {
@@ -3128,18 +3333,18 @@
             "comision_wilder": "={{ Math.round($json.comision_wilder * 1000) / 1000}}",
             "comision_otros": "={{ Math.round($json.comision_otros * 1000) / 1000}}",
             "id_transaccion": "={{ $('Tipo de transacción').item.json.body.data.purchase.transaction }}",
-            "email_cliente": "={{ $('Info Hotmart').item.json.body.data.buyer.email }}",
-            "producto_id": "={{ $('Info Hotmart').item.json.body.data.product.id }}",
-            "producto_nombre": "={{ $('Info Hotmart').item.json.body.data.product.name }}",
-            "facturacion_bruta": "={{ $('Info Hotmart').item.json.body.data.purchase.original_offer_price.value }}",
+            "email_cliente": "={{ $('BE Online').item.json.body.data.buyer.email }}",
+            "producto_id": "={{ $('BE Online').item.json.body.data.product.id }}",
+            "producto_nombre": "={{ $('BE Online').item.json.body.data.product.name }}",
+            "facturacion_bruta": "={{ $('BE Online').item.json.body.data.purchase.original_offer_price.value }}",
             "facturacion_neta": "={{ Math.round($json.facturacion_neta * 1000) / 1000}}",
-            "pais_comprador": "={{ $('Info Hotmart').item.json.body.data.purchase.checkout_country.name }}",
-            "status": "={{ \n  ({\n    'PURCHASE_APPROVED': 'Aprobado',\n    'PURCHASE_COMPLETE': 'Completo',\n    'PURCHASE_CANCELED': 'Cancelado',\n    'PURCHASE_REFUNDED': 'Reembolsado',\n    'WAITING_PAYMENT': 'Esperando Pago'\n  })[$('Info Hotmart').item.json.body.event] || 'Procesando' \n}}",
+            "pais_comprador": "={{ $('BE Online').item.json.body.data.purchase.checkout_country.name }}",
+            "status": "={{ \n  ({\n    'PURCHASE_APPROVED': 'Aprobado',\n    'PURCHASE_COMPLETE': 'Completo',\n    'PURCHASE_CANCELED': 'Cancelado',\n    'PURCHASE_REFUNDED': 'Reembolsado',\n    'WAITING_PAYMENT': 'Esperando Pago'\n  })[$('BE Online').item.json.body.event] || 'Procesando' \n}}",
             "comision_be_online": "={{ Math.round($json.comision_be_online * 1000) / 1000}}",
             "comision_productor_be": "={{ Math.round($json.comision_productor_be * 1000) / 1000}}",
-            "fecha_venta": "={{ $('Info Hotmart').item.json.body.data.product.warranty_date }}",
-            "nro_recurrencia": "={{ $('Info Hotmart').item.json.body.data.purchase.recurrence_number }}",
-            "metodo_pago": "={{    ({     'CREDIT_CARD': 'Tarjeta de Crédito',     'PSE': 'PSE',     'NEQUI': 'Nequi',     'BANCOLOMBIA': 'Bancolombia',     'BILLET': 'Efecty / Boleto',     'PIX': 'Pix',     'PAYPAL': 'PayPal',     'HOTMART_BALANCE': 'Saldo Hotmart',     'DIRECT_DEBIT': 'Transferencia Bancaria',     'GOOGLE_PAY': 'Google Pay'   })[$('Info Hotmart').item.json.body.data.purchase.payment.type] \n\n $('Info Hotmart').item.json.body.data.purchase.payment.type  }}"
+            "fecha_venta": "={{ $('BE Online').item.json.body.data.product.warranty_date }}",
+            "nro_recurrencia": "={{ $('BE Online').item.json.body.data.purchase.recurrence_number }}",
+            "metodo_pago": "={{    ({     'CREDIT_CARD': 'Tarjeta de Crédito',     'PSE': 'PSE',     'NEQUI': 'Nequi',     'BANCOLOMBIA': 'Bancolombia',     'BILLET': 'Efecty / Boleto',     'PIX': 'Pix',     'PAYPAL': 'PayPal',     'HOTMART_BALANCE': 'Saldo Hotmart',     'DIRECT_DEBIT': 'Transferencia Bancaria',     'GOOGLE_PAY': 'Google Pay'   })[$('BE Online').item.json.body.data.purchase.payment.type] \n\n $('BE Online').item.json.body.data.purchase.payment.type  }}"
           },
           "matchingColumns": [
             "id"
@@ -3326,8 +3531,8 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        1520,
-        1120
+        1952,
+        1104
       ],
       "id": "0e6f1ba2-2124-41f5-8718-e223456f58aa",
       "name": "CargarVenta1",
@@ -3580,11 +3785,11 @@
           "fieldValues": [
             {
               "fieldId": "status",
-              "fieldValue": "={{ $('Info Hotmart').item.json.body.event }}"
+              "fieldValue": "={{ $('BE Online').item.json.body.event }}"
             },
             {
               "fieldId": "fecha_venta",
-              "fieldValue": "={{ $('Info Hotmart').item.json.body.data.product.warranty_date }}"
+              "fieldValue": "={{ $('BE Online').item.json.body.data.product.warranty_date }}"
             }
           ]
         }
@@ -3626,49 +3831,49 @@
             {
               "id": "074c88e5-f3f1-4869-9726-1a671cd7b08f",
               "name": "facturacion_neta",
-              "value": "={{ $('Info Hotmart').item.json.body.data.commissions[1].value / (($json.porc_productor_be.toNumber()) + ($json.porc_be_online.toNumber() ))}}",
+              "value": "={{ $('BE Online').item.json.body.data.commissions[1].value / (($json.porc_productor_be.toNumber()) + ($json.porc_be_online.toNumber() ))}}",
               "type": "number"
             },
             {
               "id": "1421eb0c-82ca-459a-b95e-8871caa03d15",
               "name": "comision_productor_hotmart",
-              "value": "={{ ($('Info Hotmart').item.json.body.data.commissions[1].value / (($json.porc_productor_be.toNumber()) + ($json.porc_be_online.toNumber() )))*$json.porc_productor_hotmart}}",
+              "value": "={{ ($('BE Online').item.json.body.data.commissions[1].value / (($json.porc_productor_be.toNumber()) + ($json.porc_be_online.toNumber() )))*$json.porc_productor_hotmart}}",
               "type": "number"
             },
             {
               "id": "9af72081-f99d-4672-a2c9-4d7892668496",
               "name": "comision_productor_be",
-              "value": "={{ $('Info Hotmart').item.json.body.data.commissions[1].value / (($json.porc_productor_be.toNumber()) + $json.porc_be_online.toNumber()) * ($json.porc_productor_be.toNumber()) }}",
+              "value": "={{ $('BE Online').item.json.body.data.commissions[1].value / (($json.porc_productor_be.toNumber()) + $json.porc_be_online.toNumber()) * ($json.porc_productor_be.toNumber()) }}",
               "type": "number"
             },
             {
               "id": "84fcfde0-1a3f-422b-9646-af60569fabde",
               "name": "comision_be_online",
-              "value": "={{ $('Info Hotmart').item.json.body.data.commissions[1].value / (($json.porc_productor_be.toNumber()) + ($json.porc_be_online.toNumber())) * ($json.porc_be_online.toNumber()) }}",
+              "value": "={{ $('BE Online').item.json.body.data.commissions[1].value / (($json.porc_productor_be.toNumber()) + ($json.porc_be_online.toNumber())) * ($json.porc_be_online.toNumber()) }}",
               "type": "number"
             },
             {
               "id": "4ea41935-0c1b-4e09-be79-cf1fd6b64e9e",
               "name": "comision_andres",
-              "value": "={{ $('Info Hotmart').item.json.body.data.commissions[1].value/ (($json.porc_productor_be.toNumber()) + ($json.porc_be_online.toNumber())) * ($json.porc_andres.toNumber()) }}",
+              "value": "={{ $('BE Online').item.json.body.data.commissions[1].value/ (($json.porc_productor_be.toNumber()) + ($json.porc_be_online.toNumber())) * ($json.porc_andres.toNumber()) }}",
               "type": "number"
             },
             {
               "id": "72061381-c17d-4515-bb16-9be3cfadf41e",
               "name": "comision_mariana",
-              "value": "={{ $('Info Hotmart').item.json.body.data.commissions[1].value/ (($json.porc_productor_be.toNumber()) + ($json.porc_be_online.toNumber())) * ($json.porc_mariana.toNumber()) }}",
+              "value": "={{ $('BE Online').item.json.body.data.commissions[1].value/ (($json.porc_productor_be.toNumber()) + ($json.porc_be_online.toNumber())) * ($json.porc_mariana.toNumber()) }}",
               "type": "number"
             },
             {
               "id": "ed706a05-95cd-4497-a322-21fab6b1973f",
               "name": "comision_wilder",
-              "value": "={{ $('Info Hotmart').item.json.body.data.commissions[1].value/ (($json.porc_productor_be.toNumber()) + ($json.porc_be_online.toNumber())) * ($json.porc_wilder.toNumber()) }}",
+              "value": "={{ $('BE Online').item.json.body.data.commissions[1].value/ (($json.porc_productor_be.toNumber()) + ($json.porc_be_online.toNumber())) * ($json.porc_wilder.toNumber()) }}",
               "type": "number"
             },
             {
               "id": "2da347c9-375c-47f4-908a-7460b2098b59",
               "name": "comision_otros",
-              "value": "={{ $('Info Hotmart').item.json.body.data.commissions[1].value/ (($json.porc_productor_be.toNumber()) + ($json.porc_be_online.toNumber())) * ($json.porc_extra.toNumber()) }}",
+              "value": "={{ $('BE Online').item.json.body.data.commissions[1].value/ (($json.porc_productor_be.toNumber()) + ($json.porc_be_online.toNumber())) * ($json.porc_extra.toNumber()) }}",
               "type": "number"
             }
           ]
@@ -3678,8 +3883,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        1264,
-        1120
+        1520,
+        1104
       ],
       "id": "e832593a-f40a-4b2f-8aaa-317b32ef6f89",
       "name": "Asignación de comisiones3"
@@ -3822,8 +4027,8 @@
           "mappingMode": "defineBelow",
           "value": {
             "id": "={{ $json.id }}",
-            "status": "={{ $('Info Hotmart').item.json.body.event }}",
-            "fecha_venta": "={{ $('Info Hotmart').item.json.body.data.product.warranty_date }}"
+            "status": "={{ $('BE Online').item.json.body.event }}",
+            "fecha_venta": "={{ $('BE Online').item.json.body.data.product.warranty_date }}"
           },
           "matchingColumns": [
             "id"
@@ -4051,10 +4256,154 @@
       ],
       "id": "8e109485-ccdb-430d-b900-dc1862094776",
       "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "7d3b1f23-e09b-4db3-ae23-192ca14a2c23",
+              "leftValue": "",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        1184,
+        1120
+      ],
+      "id": "3a748f6d-b8da-443f-9840-4473a79f5159",
+      "name": "producto_comision_diff?"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "074c88e5-f3f1-4869-9726-1a671cd7b08f",
+              "name": "facturacion_neta",
+              "value": "={{ $('BE Online').item.json.body.data.commissions[1].value / (($json.porc_productor_be.toNumber()) + ($json.porc_be_online.toNumber() ))}}",
+              "type": "number"
+            },
+            {
+              "id": "1421eb0c-82ca-459a-b95e-8871caa03d15",
+              "name": "comision_productor_hotmart",
+              "value": "={{ ($('BE Online').item.json.body.data.commissions[1].value / (($json.porc_productor_be.toNumber()) + ($json.porc_be_online.toNumber() )))*$json.porc_productor_hotmart}}",
+              "type": "number"
+            },
+            {
+              "id": "9af72081-f99d-4672-a2c9-4d7892668496",
+              "name": "comision_productor_be",
+              "value": "={{ $('BE Online').item.json.body.data.commissions[1].value / (($json.porc_productor_be.toNumber()) + $json.porc_be_online.toNumber()) * ($json.porc_productor_be.toNumber()) }}",
+              "type": "number"
+            },
+            {
+              "id": "84fcfde0-1a3f-422b-9646-af60569fabde",
+              "name": "comision_be_online",
+              "value": "={{ $('BE Online').item.json.body.data.commissions[1].value / (($json.porc_productor_be.toNumber()) + ($json.porc_be_online.toNumber())) * ($json.porc_be_online.toNumber()) }}",
+              "type": "number"
+            },
+            {
+              "id": "4ea41935-0c1b-4e09-be79-cf1fd6b64e9e",
+              "name": "comision_andres",
+              "value": "={{ $('BE Online').item.json.body.data.commissions[1].value/ (($json.porc_productor_be.toNumber()) + ($json.porc_be_online.toNumber())) * ($json.porc_andres.toNumber()) }}",
+              "type": "number"
+            },
+            {
+              "id": "72061381-c17d-4515-bb16-9be3cfadf41e",
+              "name": "comision_mariana",
+              "value": "={{ $('BE Online').item.json.body.data.commissions[1].value/ (($json.porc_productor_be.toNumber()) + ($json.porc_be_online.toNumber())) * ($json.porc_mariana.toNumber()) }}",
+              "type": "number"
+            },
+            {
+              "id": "ed706a05-95cd-4497-a322-21fab6b1973f",
+              "name": "comision_wilder",
+              "value": "={{ $('BE Online').item.json.body.data.commissions[1].value/ (($json.porc_productor_be.toNumber()) + ($json.porc_be_online.toNumber())) * ($json.porc_wilder.toNumber()) }}",
+              "type": "number"
+            },
+            {
+              "id": "2da347c9-375c-47f4-908a-7460b2098b59",
+              "name": "comision_otros",
+              "value": "={{ $('BE Online').item.json.body.data.commissions[1].value/ (($json.porc_productor_be.toNumber()) + ($json.porc_be_online.toNumber())) * ($json.porc_extra.toNumber()) }}",
+              "type": "number"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1536,
+        928
+      ],
+      "id": "2e3a4c51-36df-4d23-af03-6d1e2e76ab7b",
+      "name": "Asignación de comisiones4"
+    },
+    {
+      "parameters": {
+        "content": "AJUSTAR"
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1344,
+        784
+      ],
+      "id": "68d2f78e-094b-490c-809c-c024e3c77462",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "hotmart-ventas-global",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -496,
+        976
+      ],
+      "id": "563c039b-7052-4bae-b481-0b70793bdf43",
+      "name": "BE Online",
+      "webhookId": "7e71da5f-b86d-4848-9d4b-a6f02fd9c2ba"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "Be-Online-Holdings-LLC",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -496,
+        1184
+      ],
+      "id": "9cc3e38b-2fee-42d2-bf09-b5ebc10fd976",
+      "name": "Be Online Holdings LLC",
+      "webhookId": "1f7a6437-ba22-4045-a389-ef626b44f03e"
     }
   ],
   "pinData": {
-    "Info Hotmart": [
+    "BE Online": [
       {
         "json": {
           "headers": {
@@ -4199,7 +4548,7 @@
   ],
   "staticData": null,
   "tags": [],
-  "triggerCount": 1,
-  "updatedAt": "2026-05-05T21:56:37.440Z",
-  "versionId": "2305d6a3-9968-43c5-a84a-c70da0a219a4"
+  "triggerCount": 2,
+  "updatedAt": "2026-05-06T18:26:51.618Z",
+  "versionId": "f274a62a-15d1-4d9e-ad2b-cec501feeefa"
 }
