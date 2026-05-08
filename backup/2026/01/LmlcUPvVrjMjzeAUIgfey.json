@@ -1,9 +1,9 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2026-05-06T18:28:03.000Z",
-    "createdAt": "2026-05-06T18:26:51.619Z",
-    "versionId": "f274a62a-15d1-4d9e-ad2b-cec501feeefa",
+    "updatedAt": "2026-05-07T19:24:37.000Z",
+    "createdAt": "2026-05-07T19:24:24.353Z",
+    "versionId": "94e78b30-8b85-4939-8bd9-d90a611c0e80",
     "workflowId": "LmlcUPvVrjMjzeAUIgfey",
     "nodes": [
       {
@@ -990,7 +990,7 @@
         "type": "n8n-nodes-base.postgres",
         "typeVersion": 2.6,
         "position": [
-          1952,
+          2608,
           1104
         ],
         "id": "0e6f1ba2-2124-41f5-8718-e223456f58aa",
@@ -1282,71 +1282,6 @@
         ],
         "id": "289dcc1e-d800-4a01-a85e-1e563c138ec9",
         "name": "Sticky Note"
-      },
-      {
-        "parameters": {
-          "assignments": {
-            "assignments": [
-              {
-                "id": "074c88e5-f3f1-4869-9726-1a671cd7b08f",
-                "name": "facturacion_neta",
-                "value": "={{ $('BE Online').item.json.body.data.commissions[1].value / (($json.porc_productor_be.toNumber()) + ($json.porc_be_online.toNumber() ))}}",
-                "type": "number"
-              },
-              {
-                "id": "1421eb0c-82ca-459a-b95e-8871caa03d15",
-                "name": "comision_productor_hotmart",
-                "value": "={{ ($('BE Online').item.json.body.data.commissions[1].value / (($json.porc_productor_be.toNumber()) + ($json.porc_be_online.toNumber() )))*$json.porc_productor_hotmart}}",
-                "type": "number"
-              },
-              {
-                "id": "9af72081-f99d-4672-a2c9-4d7892668496",
-                "name": "comision_productor_be",
-                "value": "={{ $('BE Online').item.json.body.data.commissions[1].value / (($json.porc_productor_be.toNumber()) + $json.porc_be_online.toNumber()) * ($json.porc_productor_be.toNumber()) }}",
-                "type": "number"
-              },
-              {
-                "id": "84fcfde0-1a3f-422b-9646-af60569fabde",
-                "name": "comision_be_online",
-                "value": "={{ $('BE Online').item.json.body.data.commissions[1].value / (($json.porc_productor_be.toNumber()) + ($json.porc_be_online.toNumber())) * ($json.porc_be_online.toNumber()) }}",
-                "type": "number"
-              },
-              {
-                "id": "4ea41935-0c1b-4e09-be79-cf1fd6b64e9e",
-                "name": "comision_andres",
-                "value": "={{ $('BE Online').item.json.body.data.commissions[1].value/ (($json.porc_productor_be.toNumber()) + ($json.porc_be_online.toNumber())) * ($json.porc_andres.toNumber()) }}",
-                "type": "number"
-              },
-              {
-                "id": "72061381-c17d-4515-bb16-9be3cfadf41e",
-                "name": "comision_mariana",
-                "value": "={{ $('BE Online').item.json.body.data.commissions[1].value/ (($json.porc_productor_be.toNumber()) + ($json.porc_be_online.toNumber())) * ($json.porc_mariana.toNumber()) }}",
-                "type": "number"
-              },
-              {
-                "id": "ed706a05-95cd-4497-a322-21fab6b1973f",
-                "name": "comision_wilder",
-                "value": "={{ $('BE Online').item.json.body.data.commissions[1].value/ (($json.porc_productor_be.toNumber()) + ($json.porc_be_online.toNumber())) * ($json.porc_wilder.toNumber()) }}",
-                "type": "number"
-              },
-              {
-                "id": "2da347c9-375c-47f4-908a-7460b2098b59",
-                "name": "comision_otros",
-                "value": "={{ $('BE Online').item.json.body.data.commissions[1].value/ (($json.porc_productor_be.toNumber()) + ($json.porc_be_online.toNumber())) * ($json.porc_extra.toNumber()) }}",
-                "type": "number"
-              }
-            ]
-          },
-          "options": {}
-        },
-        "type": "n8n-nodes-base.set",
-        "typeVersion": 3.4,
-        "position": [
-          1520,
-          1104
-        ],
-        "id": "e832593a-f40a-4b2f-8aaa-317b32ef6f89",
-        "name": "Asignación de comisiones3"
       },
       {
         "parameters": {
@@ -1728,12 +1663,12 @@
             "conditions": [
               {
                 "id": "7d3b1f23-e09b-4db3-ae23-192ca14a2c23",
-                "leftValue": "",
-                "rightValue": "",
+                "leftValue": "={{ $json }}",
+                "rightValue": "=",
                 "operator": {
-                  "type": "string",
-                  "operation": "equals",
-                  "name": "filter.operator.equals"
+                  "type": "object",
+                  "operation": "exists",
+                  "singleValue": true
                 }
               }
             ],
@@ -1744,76 +1679,11 @@
         "type": "n8n-nodes-base.if",
         "typeVersion": 2.3,
         "position": [
-          1184,
+          1680,
           1120
         ],
         "id": "3a748f6d-b8da-443f-9840-4473a79f5159",
         "name": "producto_comision_diff?"
-      },
-      {
-        "parameters": {
-          "assignments": {
-            "assignments": [
-              {
-                "id": "074c88e5-f3f1-4869-9726-1a671cd7b08f",
-                "name": "facturacion_neta",
-                "value": "={{ $('BE Online').item.json.body.data.commissions[1].value / (($json.porc_productor_be.toNumber()) + ($json.porc_be_online.toNumber() ))}}",
-                "type": "number"
-              },
-              {
-                "id": "1421eb0c-82ca-459a-b95e-8871caa03d15",
-                "name": "comision_productor_hotmart",
-                "value": "={{ ($('BE Online').item.json.body.data.commissions[1].value / (($json.porc_productor_be.toNumber()) + ($json.porc_be_online.toNumber() )))*$json.porc_productor_hotmart}}",
-                "type": "number"
-              },
-              {
-                "id": "9af72081-f99d-4672-a2c9-4d7892668496",
-                "name": "comision_productor_be",
-                "value": "={{ $('BE Online').item.json.body.data.commissions[1].value / (($json.porc_productor_be.toNumber()) + $json.porc_be_online.toNumber()) * ($json.porc_productor_be.toNumber()) }}",
-                "type": "number"
-              },
-              {
-                "id": "84fcfde0-1a3f-422b-9646-af60569fabde",
-                "name": "comision_be_online",
-                "value": "={{ $('BE Online').item.json.body.data.commissions[1].value / (($json.porc_productor_be.toNumber()) + ($json.porc_be_online.toNumber())) * ($json.porc_be_online.toNumber()) }}",
-                "type": "number"
-              },
-              {
-                "id": "4ea41935-0c1b-4e09-be79-cf1fd6b64e9e",
-                "name": "comision_andres",
-                "value": "={{ $('BE Online').item.json.body.data.commissions[1].value/ (($json.porc_productor_be.toNumber()) + ($json.porc_be_online.toNumber())) * ($json.porc_andres.toNumber()) }}",
-                "type": "number"
-              },
-              {
-                "id": "72061381-c17d-4515-bb16-9be3cfadf41e",
-                "name": "comision_mariana",
-                "value": "={{ $('BE Online').item.json.body.data.commissions[1].value/ (($json.porc_productor_be.toNumber()) + ($json.porc_be_online.toNumber())) * ($json.porc_mariana.toNumber()) }}",
-                "type": "number"
-              },
-              {
-                "id": "ed706a05-95cd-4497-a322-21fab6b1973f",
-                "name": "comision_wilder",
-                "value": "={{ $('BE Online').item.json.body.data.commissions[1].value/ (($json.porc_productor_be.toNumber()) + ($json.porc_be_online.toNumber())) * ($json.porc_wilder.toNumber()) }}",
-                "type": "number"
-              },
-              {
-                "id": "2da347c9-375c-47f4-908a-7460b2098b59",
-                "name": "comision_otros",
-                "value": "={{ $('BE Online').item.json.body.data.commissions[1].value/ (($json.porc_productor_be.toNumber()) + ($json.porc_be_online.toNumber())) * ($json.porc_extra.toNumber()) }}",
-                "type": "number"
-              }
-            ]
-          },
-          "options": {}
-        },
-        "type": "n8n-nodes-base.set",
-        "typeVersion": 3.4,
-        "position": [
-          1536,
-          928
-        ],
-        "id": "2e3a4c51-36df-4d23-af03-6d1e2e76ab7b",
-        "name": "Asignación de comisiones4"
       },
       {
         "parameters": {
@@ -1822,8 +1692,8 @@
         "type": "n8n-nodes-base.stickyNote",
         "typeVersion": 1,
         "position": [
-          1344,
-          784
+          2128,
+          752
         ],
         "id": "68d2f78e-094b-490c-809c-c024e3c77462",
         "name": "Sticky Note2"
@@ -1859,6 +1729,177 @@
         "id": "9cc3e38b-2fee-42d2-bf09-b5ebc10fd976",
         "name": "Be Online Holdings LLC",
         "webhookId": "1f7a6437-ba22-4045-a389-ef626b44f03e"
+      },
+      {
+        "parameters": {
+          "operation": "select",
+          "schema": {
+            "__rl": true,
+            "mode": "list",
+            "value": "public"
+          },
+          "table": {
+            "__rl": true,
+            "value": "comision_productos",
+            "mode": "list",
+            "cachedResultName": "comision_productos"
+          },
+          "returnAll": true,
+          "where": {
+            "values": [
+              {
+                "column": "producto_id",
+                "value": "={{ $('Tipo de transacción').item.json.body.data.product.id.toString() }}"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.postgres",
+        "typeVersion": 2.6,
+        "position": [
+          1264,
+          1120
+        ],
+        "id": "5f0111c9-cf2f-462c-a293-8fe25cf56562",
+        "name": "traer_comisiones_productos_diff",
+        "alwaysOutputData": true,
+        "credentials": {
+          "postgres": {
+            "id": "YDGdJcEneBEpa52a",
+            "name": "Postgres BeOnline new (Luis-12Abr2026)"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "074c88e5-f3f1-4869-9726-1a671cd7b08f",
+                "name": "facturacion_neta",
+                "value": "={{ $('BE Online').item.json.body.data.commissions[1].value / (($json.porc_productor_be.toNumber()) + ($json.porc_be_online.toNumber() ))}}",
+                "type": "number"
+              },
+              {
+                "id": "1421eb0c-82ca-459a-b95e-8871caa03d15",
+                "name": "comision_productor_hotmart",
+                "value": "={{ ($('BE Online').item.json.body.data.commissions[1].value / (($json.porc_productor_be.toNumber()) + ($json.porc_be_online.toNumber() )))*$json.porc_productor_hotmart}}",
+                "type": "number"
+              },
+              {
+                "id": "9af72081-f99d-4672-a2c9-4d7892668496",
+                "name": "comision_productor_be",
+                "value": "={{ $('BE Online').item.json.body.data.commissions[1].value / (($json.porc_productor_be.toNumber()) + $json.porc_be_online.toNumber()) * ($json.porc_productor_be.toNumber()) }}",
+                "type": "number"
+              },
+              {
+                "id": "84fcfde0-1a3f-422b-9646-af60569fabde",
+                "name": "comision_be_online",
+                "value": "={{ $('BE Online').item.json.body.data.commissions[1].value / (($json.porc_productor_be.toNumber()) + ($json.porc_be_online.toNumber())) * ($json.porc_be_online.toNumber()) }}",
+                "type": "number"
+              },
+              {
+                "id": "4ea41935-0c1b-4e09-be79-cf1fd6b64e9e",
+                "name": "comision_andres",
+                "value": "={{ $('BE Online').item.json.body.data.commissions[1].value/ (($json.porc_productor_be.toNumber()) + ($json.porc_be_online.toNumber())) * ( $('Busqueda productor y porcentajes2').item.json.porc_andres.toNumber()) }}\n",
+                "type": "number"
+              },
+              {
+                "id": "72061381-c17d-4515-bb16-9be3cfadf41e",
+                "name": "comision_mariana",
+                "value": "={{ $('BE Online').item.json.body.data.commissions[1].value/ (($json.porc_productor_be.toNumber()) + ($json.porc_be_online.toNumber())) * ($('Busqueda productor y porcentajes2').item.json.porc_mariana.toNumber()) }}",
+                "type": "number"
+              },
+              {
+                "id": "ed706a05-95cd-4497-a322-21fab6b1973f",
+                "name": "comision_wilder",
+                "value": "={{ $('BE Online').item.json.body.data.commissions[1].value/ (($json.porc_productor_be.toNumber()) + ($json.porc_be_online.toNumber())) * ($('Busqueda productor y porcentajes2').item.json.porc_wilder.toNumber()) }}",
+                "type": "number"
+              },
+              {
+                "id": "2da347c9-375c-47f4-908a-7460b2098b59",
+                "name": "comision_otros",
+                "value": "={{ $('BE Online').item.json.body.data.commissions[1].value/ (($json.porc_productor_be.toNumber()) + ($json.porc_be_online.toNumber())) * ($('Busqueda productor y porcentajes2').item.json.porc_extra.toNumber()) }}",
+                "type": "number"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          2192,
+          928
+        ],
+        "id": "2e3a4c51-36df-4d23-af03-6d1e2e76ab7b",
+        "name": "Asignación de comisiones producto diferente"
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "074c88e5-f3f1-4869-9726-1a671cd7b08f",
+                "name": "facturacion_neta",
+                "value": "={{ $('BE Online').item.json.body.data.commissions[1].value / (( $('Busqueda productor y porcentajes2').item.json.porc_productor_be.toNumber()) + ( $('Busqueda productor y porcentajes2').item.json.porc_be_online.toNumber() ))}}",
+                "type": "number"
+              },
+              {
+                "id": "1421eb0c-82ca-459a-b95e-8871caa03d15",
+                "name": "comision_productor_hotmart",
+                "value": "={{ ($('BE Online').item.json.body.data.commissions[1].value / (( $('Busqueda productor y porcentajes2').item.json.porc_productor_be.toNumber()) + ( $('Busqueda productor y porcentajes2').item.json.porc_be_online.toNumber() )))* $('Busqueda productor y porcentajes2').item.json.porc_productor_hotmart}}",
+                "type": "number"
+              },
+              {
+                "id": "9af72081-f99d-4672-a2c9-4d7892668496",
+                "name": "comision_productor_be",
+                "value": "={{ $('BE Online').item.json.body.data.commissions[1].value / (( $('Busqueda productor y porcentajes2').item.json.porc_productor_be.toNumber()) +  $('Busqueda productor y porcentajes2').item.json.porc_be_online.toNumber()) * ( $('Busqueda productor y porcentajes2').item.json.porc_productor_be.toNumber()) }}",
+                "type": "number"
+              },
+              {
+                "id": "84fcfde0-1a3f-422b-9646-af60569fabde",
+                "name": "comision_be_online",
+                "value": "={{ $('BE Online').item.json.body.data.commissions[1].value / (($json.porc_productor_be.toNumber()) + ($json.porc_be_online.toNumber())) * ($json.porc_be_online.toNumber()) }}",
+                "type": "number"
+              },
+              {
+                "id": "4ea41935-0c1b-4e09-be79-cf1fd6b64e9e",
+                "name": "comision_andres",
+                "value": "={{ $('BE Online').item.json.body.data.commissions[1].value/ (( $('Busqueda productor y porcentajes2').item.json.porc_productor_be.toNumber()) + ( $('Busqueda productor y porcentajes2').item.json.porc_be_online.toNumber())) * ( $('Busqueda productor y porcentajes2').item.json.porc_andres.toNumber()) }}",
+                "type": "number"
+              },
+              {
+                "id": "72061381-c17d-4515-bb16-9be3cfadf41e",
+                "name": "comision_mariana",
+                "value": "={{ $('BE Online').item.json.body.data.commissions[1].value/ (( $('Busqueda productor y porcentajes2').item.json.porc_productor_be.toNumber()) + ( $('Busqueda productor y porcentajes2').item.json.porc_be_online.toNumber())) * ( $('Busqueda productor y porcentajes2').item.json.porc_mariana.toNumber()) }}",
+                "type": "number"
+              },
+              {
+                "id": "ed706a05-95cd-4497-a322-21fab6b1973f",
+                "name": "comision_wilder",
+                "value": "={{ $('BE Online').item.json.body.data.commissions[1].value/ (( $('Busqueda productor y porcentajes2').item.json.porc_productor_be.toNumber()) + ( $('Busqueda productor y porcentajes2').item.json.porc_be_online.toNumber())) * ( $('Busqueda productor y porcentajes2').item.json.porc_wilder.toNumber()) }}",
+                "type": "number"
+              },
+              {
+                "id": "2da347c9-375c-47f4-908a-7460b2098b59",
+                "name": "comision_otros",
+                "value": "={{ $('BE Online').item.json.body.data.commissions[1].value/ (( $('Busqueda productor y porcentajes2').item.json.porc_productor_be.toNumber()) + ( $('Busqueda productor y porcentajes2').item.json.porc_be_online.toNumber())) * ( $('Busqueda productor y porcentajes2').item.json.porc_extra.toNumber()) }}",
+                "type": "number"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          2176,
+          1104
+        ],
+        "id": "e832593a-f40a-4b2f-8aaa-317b32ef6f89",
+        "name": "asignacion comisiones producto normal"
       }
     ],
     "connections": {
@@ -2024,7 +2065,7 @@
         "main": [
           [
             {
-              "node": "producto_comision_diff?",
+              "node": "traer_comisiones_productos_diff",
               "type": "main",
               "index": 0
             }
@@ -2112,17 +2153,6 @@
           ]
         ]
       },
-      "Asignación de comisiones3": {
-        "main": [
-          [
-            {
-              "node": "CargarVenta1",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
       "Cargar Reembolso2": {
         "main": [
           [
@@ -2149,25 +2179,14 @@
         "main": [
           [
             {
-              "node": "Asignación de comisiones4",
+              "node": "Asignación de comisiones producto diferente",
               "type": "main",
               "index": 0
             }
           ],
           [
             {
-              "node": "Asignación de comisiones3",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "Asignación de comisiones4": {
-        "main": [
-          [
-            {
-              "node": "CargarVenta1",
+              "node": "asignacion comisiones producto normal",
               "type": "main",
               "index": 0
             }
@@ -2195,14 +2214,47 @@
             }
           ]
         ]
+      },
+      "traer_comisiones_productos_diff": {
+        "main": [
+          [
+            {
+              "node": "producto_comision_diff?",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Asignación de comisiones producto diferente": {
+        "main": [
+          [
+            {
+              "node": "CargarVenta1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "asignacion comisiones producto normal": {
+        "main": [
+          [
+            {
+              "node": "CargarVenta1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
       }
     },
     "authors": "BE Online",
-    "name": "Version f274a62a",
+    "name": "Version 94e78b30",
     "description": "",
     "autosaved": true
   },
-  "activeVersionId": "f274a62a-15d1-4d9e-ad2b-cec501feeefa",
+  "activeVersionId": "94e78b30-8b85-4939-8bd9-d90a611c0e80",
   "connections": {
     "Consulta Email": {
       "main": [
@@ -2366,7 +2418,7 @@
       "main": [
         [
           {
-            "node": "producto_comision_diff?",
+            "node": "traer_comisiones_productos_diff",
             "type": "main",
             "index": 0
           }
@@ -2454,17 +2506,6 @@
         ]
       ]
     },
-    "Asignación de comisiones3": {
-      "main": [
-        [
-          {
-            "node": "CargarVenta1",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Cargar Reembolso2": {
       "main": [
         [
@@ -2491,25 +2532,14 @@
       "main": [
         [
           {
-            "node": "Asignación de comisiones4",
+            "node": "Asignación de comisiones producto diferente",
             "type": "main",
             "index": 0
           }
         ],
         [
           {
-            "node": "Asignación de comisiones3",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Asignación de comisiones4": {
-      "main": [
-        [
-          {
-            "node": "CargarVenta1",
+            "node": "asignacion comisiones producto normal",
             "type": "main",
             "index": 0
           }
@@ -2532,6 +2562,39 @@
         [
           {
             "node": "Tipo de transacción",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "traer_comisiones_productos_diff": {
+      "main": [
+        [
+          {
+            "node": "producto_comision_diff?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Asignación de comisiones producto diferente": {
+      "main": [
+        [
+          {
+            "node": "CargarVenta1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "asignacion comisiones producto normal": {
+      "main": [
+        [
+          {
+            "node": "CargarVenta1",
             "type": "main",
             "index": 0
           }
@@ -3531,7 +3594,7 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        1952,
+        2608,
         1104
       ],
       "id": "0e6f1ba2-2124-41f5-8718-e223456f58aa",
@@ -3823,71 +3886,6 @@
       ],
       "id": "289dcc1e-d800-4a01-a85e-1e563c138ec9",
       "name": "Sticky Note"
-    },
-    {
-      "parameters": {
-        "assignments": {
-          "assignments": [
-            {
-              "id": "074c88e5-f3f1-4869-9726-1a671cd7b08f",
-              "name": "facturacion_neta",
-              "value": "={{ $('BE Online').item.json.body.data.commissions[1].value / (($json.porc_productor_be.toNumber()) + ($json.porc_be_online.toNumber() ))}}",
-              "type": "number"
-            },
-            {
-              "id": "1421eb0c-82ca-459a-b95e-8871caa03d15",
-              "name": "comision_productor_hotmart",
-              "value": "={{ ($('BE Online').item.json.body.data.commissions[1].value / (($json.porc_productor_be.toNumber()) + ($json.porc_be_online.toNumber() )))*$json.porc_productor_hotmart}}",
-              "type": "number"
-            },
-            {
-              "id": "9af72081-f99d-4672-a2c9-4d7892668496",
-              "name": "comision_productor_be",
-              "value": "={{ $('BE Online').item.json.body.data.commissions[1].value / (($json.porc_productor_be.toNumber()) + $json.porc_be_online.toNumber()) * ($json.porc_productor_be.toNumber()) }}",
-              "type": "number"
-            },
-            {
-              "id": "84fcfde0-1a3f-422b-9646-af60569fabde",
-              "name": "comision_be_online",
-              "value": "={{ $('BE Online').item.json.body.data.commissions[1].value / (($json.porc_productor_be.toNumber()) + ($json.porc_be_online.toNumber())) * ($json.porc_be_online.toNumber()) }}",
-              "type": "number"
-            },
-            {
-              "id": "4ea41935-0c1b-4e09-be79-cf1fd6b64e9e",
-              "name": "comision_andres",
-              "value": "={{ $('BE Online').item.json.body.data.commissions[1].value/ (($json.porc_productor_be.toNumber()) + ($json.porc_be_online.toNumber())) * ($json.porc_andres.toNumber()) }}",
-              "type": "number"
-            },
-            {
-              "id": "72061381-c17d-4515-bb16-9be3cfadf41e",
-              "name": "comision_mariana",
-              "value": "={{ $('BE Online').item.json.body.data.commissions[1].value/ (($json.porc_productor_be.toNumber()) + ($json.porc_be_online.toNumber())) * ($json.porc_mariana.toNumber()) }}",
-              "type": "number"
-            },
-            {
-              "id": "ed706a05-95cd-4497-a322-21fab6b1973f",
-              "name": "comision_wilder",
-              "value": "={{ $('BE Online').item.json.body.data.commissions[1].value/ (($json.porc_productor_be.toNumber()) + ($json.porc_be_online.toNumber())) * ($json.porc_wilder.toNumber()) }}",
-              "type": "number"
-            },
-            {
-              "id": "2da347c9-375c-47f4-908a-7460b2098b59",
-              "name": "comision_otros",
-              "value": "={{ $('BE Online').item.json.body.data.commissions[1].value/ (($json.porc_productor_be.toNumber()) + ($json.porc_be_online.toNumber())) * ($json.porc_extra.toNumber()) }}",
-              "type": "number"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.4,
-      "position": [
-        1520,
-        1104
-      ],
-      "id": "e832593a-f40a-4b2f-8aaa-317b32ef6f89",
-      "name": "Asignación de comisiones3"
     },
     {
       "parameters": {
@@ -4269,12 +4267,12 @@
           "conditions": [
             {
               "id": "7d3b1f23-e09b-4db3-ae23-192ca14a2c23",
-              "leftValue": "",
-              "rightValue": "",
+              "leftValue": "={{ $json }}",
+              "rightValue": "=",
               "operator": {
-                "type": "string",
-                "operation": "equals",
-                "name": "filter.operator.equals"
+                "type": "object",
+                "operation": "exists",
+                "singleValue": true
               }
             }
           ],
@@ -4285,76 +4283,11 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        1184,
+        1680,
         1120
       ],
       "id": "3a748f6d-b8da-443f-9840-4473a79f5159",
       "name": "producto_comision_diff?"
-    },
-    {
-      "parameters": {
-        "assignments": {
-          "assignments": [
-            {
-              "id": "074c88e5-f3f1-4869-9726-1a671cd7b08f",
-              "name": "facturacion_neta",
-              "value": "={{ $('BE Online').item.json.body.data.commissions[1].value / (($json.porc_productor_be.toNumber()) + ($json.porc_be_online.toNumber() ))}}",
-              "type": "number"
-            },
-            {
-              "id": "1421eb0c-82ca-459a-b95e-8871caa03d15",
-              "name": "comision_productor_hotmart",
-              "value": "={{ ($('BE Online').item.json.body.data.commissions[1].value / (($json.porc_productor_be.toNumber()) + ($json.porc_be_online.toNumber() )))*$json.porc_productor_hotmart}}",
-              "type": "number"
-            },
-            {
-              "id": "9af72081-f99d-4672-a2c9-4d7892668496",
-              "name": "comision_productor_be",
-              "value": "={{ $('BE Online').item.json.body.data.commissions[1].value / (($json.porc_productor_be.toNumber()) + $json.porc_be_online.toNumber()) * ($json.porc_productor_be.toNumber()) }}",
-              "type": "number"
-            },
-            {
-              "id": "84fcfde0-1a3f-422b-9646-af60569fabde",
-              "name": "comision_be_online",
-              "value": "={{ $('BE Online').item.json.body.data.commissions[1].value / (($json.porc_productor_be.toNumber()) + ($json.porc_be_online.toNumber())) * ($json.porc_be_online.toNumber()) }}",
-              "type": "number"
-            },
-            {
-              "id": "4ea41935-0c1b-4e09-be79-cf1fd6b64e9e",
-              "name": "comision_andres",
-              "value": "={{ $('BE Online').item.json.body.data.commissions[1].value/ (($json.porc_productor_be.toNumber()) + ($json.porc_be_online.toNumber())) * ($json.porc_andres.toNumber()) }}",
-              "type": "number"
-            },
-            {
-              "id": "72061381-c17d-4515-bb16-9be3cfadf41e",
-              "name": "comision_mariana",
-              "value": "={{ $('BE Online').item.json.body.data.commissions[1].value/ (($json.porc_productor_be.toNumber()) + ($json.porc_be_online.toNumber())) * ($json.porc_mariana.toNumber()) }}",
-              "type": "number"
-            },
-            {
-              "id": "ed706a05-95cd-4497-a322-21fab6b1973f",
-              "name": "comision_wilder",
-              "value": "={{ $('BE Online').item.json.body.data.commissions[1].value/ (($json.porc_productor_be.toNumber()) + ($json.porc_be_online.toNumber())) * ($json.porc_wilder.toNumber()) }}",
-              "type": "number"
-            },
-            {
-              "id": "2da347c9-375c-47f4-908a-7460b2098b59",
-              "name": "comision_otros",
-              "value": "={{ $('BE Online').item.json.body.data.commissions[1].value/ (($json.porc_productor_be.toNumber()) + ($json.porc_be_online.toNumber())) * ($json.porc_extra.toNumber()) }}",
-              "type": "number"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.4,
-      "position": [
-        1536,
-        928
-      ],
-      "id": "2e3a4c51-36df-4d23-af03-6d1e2e76ab7b",
-      "name": "Asignación de comisiones4"
     },
     {
       "parameters": {
@@ -4363,8 +4296,8 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        1344,
-        784
+        2128,
+        752
       ],
       "id": "68d2f78e-094b-490c-809c-c024e3c77462",
       "name": "Sticky Note2"
@@ -4400,6 +4333,177 @@
       "id": "9cc3e38b-2fee-42d2-bf09-b5ebc10fd976",
       "name": "Be Online Holdings LLC",
       "webhookId": "1f7a6437-ba22-4045-a389-ef626b44f03e"
+    },
+    {
+      "parameters": {
+        "operation": "select",
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "comision_productos",
+          "mode": "list",
+          "cachedResultName": "comision_productos"
+        },
+        "returnAll": true,
+        "where": {
+          "values": [
+            {
+              "column": "producto_id",
+              "value": "={{ $('Tipo de transacción').item.json.body.data.product.id.toString() }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        1264,
+        1120
+      ],
+      "id": "5f0111c9-cf2f-462c-a293-8fe25cf56562",
+      "name": "traer_comisiones_productos_diff",
+      "alwaysOutputData": true,
+      "credentials": {
+        "postgres": {
+          "id": "YDGdJcEneBEpa52a",
+          "name": "Postgres BeOnline new (Luis-12Abr2026)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "074c88e5-f3f1-4869-9726-1a671cd7b08f",
+              "name": "facturacion_neta",
+              "value": "={{ $('BE Online').item.json.body.data.commissions[1].value / (($json.porc_productor_be.toNumber()) + ($json.porc_be_online.toNumber() ))}}",
+              "type": "number"
+            },
+            {
+              "id": "1421eb0c-82ca-459a-b95e-8871caa03d15",
+              "name": "comision_productor_hotmart",
+              "value": "={{ ($('BE Online').item.json.body.data.commissions[1].value / (($json.porc_productor_be.toNumber()) + ($json.porc_be_online.toNumber() )))*$json.porc_productor_hotmart}}",
+              "type": "number"
+            },
+            {
+              "id": "9af72081-f99d-4672-a2c9-4d7892668496",
+              "name": "comision_productor_be",
+              "value": "={{ $('BE Online').item.json.body.data.commissions[1].value / (($json.porc_productor_be.toNumber()) + $json.porc_be_online.toNumber()) * ($json.porc_productor_be.toNumber()) }}",
+              "type": "number"
+            },
+            {
+              "id": "84fcfde0-1a3f-422b-9646-af60569fabde",
+              "name": "comision_be_online",
+              "value": "={{ $('BE Online').item.json.body.data.commissions[1].value / (($json.porc_productor_be.toNumber()) + ($json.porc_be_online.toNumber())) * ($json.porc_be_online.toNumber()) }}",
+              "type": "number"
+            },
+            {
+              "id": "4ea41935-0c1b-4e09-be79-cf1fd6b64e9e",
+              "name": "comision_andres",
+              "value": "={{ $('BE Online').item.json.body.data.commissions[1].value/ (($json.porc_productor_be.toNumber()) + ($json.porc_be_online.toNumber())) * ( $('Busqueda productor y porcentajes2').item.json.porc_andres.toNumber()) }}\n",
+              "type": "number"
+            },
+            {
+              "id": "72061381-c17d-4515-bb16-9be3cfadf41e",
+              "name": "comision_mariana",
+              "value": "={{ $('BE Online').item.json.body.data.commissions[1].value/ (($json.porc_productor_be.toNumber()) + ($json.porc_be_online.toNumber())) * ($('Busqueda productor y porcentajes2').item.json.porc_mariana.toNumber()) }}",
+              "type": "number"
+            },
+            {
+              "id": "ed706a05-95cd-4497-a322-21fab6b1973f",
+              "name": "comision_wilder",
+              "value": "={{ $('BE Online').item.json.body.data.commissions[1].value/ (($json.porc_productor_be.toNumber()) + ($json.porc_be_online.toNumber())) * ($('Busqueda productor y porcentajes2').item.json.porc_wilder.toNumber()) }}",
+              "type": "number"
+            },
+            {
+              "id": "2da347c9-375c-47f4-908a-7460b2098b59",
+              "name": "comision_otros",
+              "value": "={{ $('BE Online').item.json.body.data.commissions[1].value/ (($json.porc_productor_be.toNumber()) + ($json.porc_be_online.toNumber())) * ($('Busqueda productor y porcentajes2').item.json.porc_extra.toNumber()) }}",
+              "type": "number"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        2192,
+        928
+      ],
+      "id": "2e3a4c51-36df-4d23-af03-6d1e2e76ab7b",
+      "name": "Asignación de comisiones producto diferente"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "074c88e5-f3f1-4869-9726-1a671cd7b08f",
+              "name": "facturacion_neta",
+              "value": "={{ $('BE Online').item.json.body.data.commissions[1].value / (( $('Busqueda productor y porcentajes2').item.json.porc_productor_be.toNumber()) + ( $('Busqueda productor y porcentajes2').item.json.porc_be_online.toNumber() ))}}",
+              "type": "number"
+            },
+            {
+              "id": "1421eb0c-82ca-459a-b95e-8871caa03d15",
+              "name": "comision_productor_hotmart",
+              "value": "={{ ($('BE Online').item.json.body.data.commissions[1].value / (( $('Busqueda productor y porcentajes2').item.json.porc_productor_be.toNumber()) + ( $('Busqueda productor y porcentajes2').item.json.porc_be_online.toNumber() )))* $('Busqueda productor y porcentajes2').item.json.porc_productor_hotmart}}",
+              "type": "number"
+            },
+            {
+              "id": "9af72081-f99d-4672-a2c9-4d7892668496",
+              "name": "comision_productor_be",
+              "value": "={{ $('BE Online').item.json.body.data.commissions[1].value / (( $('Busqueda productor y porcentajes2').item.json.porc_productor_be.toNumber()) +  $('Busqueda productor y porcentajes2').item.json.porc_be_online.toNumber()) * ( $('Busqueda productor y porcentajes2').item.json.porc_productor_be.toNumber()) }}",
+              "type": "number"
+            },
+            {
+              "id": "84fcfde0-1a3f-422b-9646-af60569fabde",
+              "name": "comision_be_online",
+              "value": "={{ $('BE Online').item.json.body.data.commissions[1].value / (($json.porc_productor_be.toNumber()) + ($json.porc_be_online.toNumber())) * ($json.porc_be_online.toNumber()) }}",
+              "type": "number"
+            },
+            {
+              "id": "4ea41935-0c1b-4e09-be79-cf1fd6b64e9e",
+              "name": "comision_andres",
+              "value": "={{ $('BE Online').item.json.body.data.commissions[1].value/ (( $('Busqueda productor y porcentajes2').item.json.porc_productor_be.toNumber()) + ( $('Busqueda productor y porcentajes2').item.json.porc_be_online.toNumber())) * ( $('Busqueda productor y porcentajes2').item.json.porc_andres.toNumber()) }}",
+              "type": "number"
+            },
+            {
+              "id": "72061381-c17d-4515-bb16-9be3cfadf41e",
+              "name": "comision_mariana",
+              "value": "={{ $('BE Online').item.json.body.data.commissions[1].value/ (( $('Busqueda productor y porcentajes2').item.json.porc_productor_be.toNumber()) + ( $('Busqueda productor y porcentajes2').item.json.porc_be_online.toNumber())) * ( $('Busqueda productor y porcentajes2').item.json.porc_mariana.toNumber()) }}",
+              "type": "number"
+            },
+            {
+              "id": "ed706a05-95cd-4497-a322-21fab6b1973f",
+              "name": "comision_wilder",
+              "value": "={{ $('BE Online').item.json.body.data.commissions[1].value/ (( $('Busqueda productor y porcentajes2').item.json.porc_productor_be.toNumber()) + ( $('Busqueda productor y porcentajes2').item.json.porc_be_online.toNumber())) * ( $('Busqueda productor y porcentajes2').item.json.porc_wilder.toNumber()) }}",
+              "type": "number"
+            },
+            {
+              "id": "2da347c9-375c-47f4-908a-7460b2098b59",
+              "name": "comision_otros",
+              "value": "={{ $('BE Online').item.json.body.data.commissions[1].value/ (( $('Busqueda productor y porcentajes2').item.json.porc_productor_be.toNumber()) + ( $('Busqueda productor y porcentajes2').item.json.porc_be_online.toNumber())) * ( $('Busqueda productor y porcentajes2').item.json.porc_extra.toNumber()) }}",
+              "type": "number"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        2176,
+        1104
+      ],
+      "id": "e832593a-f40a-4b2f-8aaa-317b32ef6f89",
+      "name": "asignacion comisiones producto normal"
     }
   ],
   "pinData": {
@@ -4409,15 +4513,15 @@
           "headers": {
             "host": "contenedor1-n8n.vqn37t.easypanel.host",
             "user-agent": "Jodd HTTP",
-            "content-length": "1961",
+            "content-length": "2149",
             "content-type": "application/json",
-            "x-forwarded-for": "13.217.209.81",
+            "x-forwarded-for": "18.209.241.14",
             "x-forwarded-host": "contenedor1-n8n.vqn37t.easypanel.host",
             "x-forwarded-port": "443",
             "x-forwarded-proto": "https",
             "x-forwarded-server": "ca87c8df81ee",
             "x-hotmart-hottok": "utYQiCvNkSCu3jMUFRgoPOcsfpKl8a41246415",
-            "x-real-ip": "13.217.209.81",
+            "x-real-ip": "18.209.241.14",
             "accept-encoding": "gzip"
           },
           "params": {},
@@ -4426,70 +4530,87 @@
             "data": {
               "product": {
                 "has_co_production": true,
-                "name": "Recetas para congelar y disfrutar",
-                "warranty_date": "2026-05-12T00:00:00Z",
+                "name": "PLAN DE ALIMENTACIÓN MENSUAL",
+                "warranty_date": "2026-05-14T00:00:00Z",
                 "is_physical_product": false,
-                "id": 7536621,
-                "ucode": "fe0cb92c-4c93-4df7-b165-4c8a278b7c2b",
-                "product_format_id": 1
+                "id": 7492517,
+                "ucode": "fd8ff198-2759-4d56-8519-2087151f34ad",
+                "product_format_id": 13,
+                "content": {
+                  "has_physical_products": false,
+                  "products": [
+                    {
+                      "name": "Plan de alimentación mensual",
+                      "is_physical_product": false,
+                      "id": 5092790,
+                      "ucode": "d436f39b-f08c-445c-b3b4-a4838a897ba1"
+                    },
+                    {
+                      "name": "My Meal Plan",
+                      "is_physical_product": false,
+                      "id": 7492422,
+                      "ucode": "cf5c5c9c-c33a-4afd-80c5-92617f2542b1"
+                    }
+                  ]
+                }
               },
               "commissions": [
                 {
                   "currency_value": "USD",
                   "source": "MARKETPLACE",
-                  "value": 1.18
+                  "value": 1.52
                 },
                 {
                   "currency_conversion": {
-                    "converted_value": 34554.3,
+                    "converted_value": 42075.8,
                     "converted_to_currency": "COP",
-                    "conversion_rate": 3727.54
+                    "conversion_rate": 3726.82
                   },
                   "currency_value": "USD",
                   "source": "COPRODUCER",
-                  "value": 9.27
+                  "value": 11.29
                 }
               ],
               "purchase": {
                 "original_offer_price": {
                   "currency_value": "USD",
-                  "value": 11.5
+                  "value": 15.14
                 },
+                "recurrence_number": 2,
                 "subscription_anticipation_purchase": false,
                 "checkout_country": {
                   "iso": "CO",
                   "name": "Colombia"
                 },
                 "origin": {
-                  "xcod": "{\"co\":\"VID03 - VSL 0126\",\"vid\":\"120242502332690125\",\"vsrc\":\"metaads\",\"u\":\"5f2f212e-ca2b-4091-b410-254227f1074b\",\"url\":\"www.federicoymarialuisa.com/pam-accedeahora-vsl01\",\"r\":\"instagram.com/\",\"v\":1}",
-                  "sck": "s=metaads|m=Instagram_Stories|c=00 - [AUTO] - A+|co=VID03 - VSL 0126|utm_id=120242502332650125|t=120242502332670125"
+                  "src": "v3_5892714c-fb8d-4399-a17a-192b5071cf14_69cc31773b3e907a5ae164ee_600_t-10_s-1"
                 },
                 "order_bump": {
-                  "parent_purchase_transaction": "HP4128777889",
-                  "is_order_bump": true
+                  "is_order_bump": false
                 },
-                "approved_date": 1778008939000,
+                "approved_date": 1778164231000,
                 "offer": {
-                  "code": "88j2gv4u"
+                  "code": "xd4zbnzd"
                 },
                 "is_funnel": false,
-                "order_date": 1778008936000,
+                "order_date": 1778164228000,
+                "date_next_charge": 1780833600000,
                 "price": {
                   "currency_value": "COP",
-                  "value": 42865
+                  "value": 56415
                 },
-                "buyer_ip": "177.93.59.65",
+                "buyer_ip": "181.142.6.130",
                 "payment": {
                   "installments_number": 1,
                   "type": "CREDIT_CARD"
                 },
                 "full_price": {
                   "currency_value": "COP",
-                  "value": 42865
+                  "value": 56415
                 },
                 "business_model": "A",
                 "invoice_by": "SELLER",
-                "transaction": "HP4214576894",
+                "transaction": "HP4226039451",
                 "status": "APPROVED"
               },
               "affiliates": [
@@ -4503,20 +4624,35 @@
                 "document": "L24000067740",
                 "name": "MARTINEZ ARIAS INVESMENTS LLC"
               },
+              "subscription": {
+                "subscriber": {
+                  "code": "SFTGGX4G"
+                },
+                "plan": {
+                  "name": "Pioneros",
+                  "id": 1287176
+                },
+                "status": "ACTIVE"
+              },
               "buyer": {
                 "address": {
+                  "zipcode": "",
                   "country": "Colombia",
+                  "address": "",
+                  "city": "",
+                  "complement": "",
                   "country_iso": "CO"
                 },
-                "document": "1073510915",
-                "name": "Leidy Cirley Jimenez guaca",
-                "last_name": "guaca",
-                "first_name": "Leidy",
-                "email": "leidycirleyjimenezguaca@gmail.com"
+                "document": "",
+                "name": "Tatiana Mesa Ospina",
+                "last_name": "Ospina",
+                "first_name": "Tatiana",
+                "email": "tameos2000@gmail.com",
+                "document_type": ""
               }
             },
-            "id": "a02facec-6fa0-4058-8d37-2f6ad5ff4a95",
-            "creation_date": 1778008951293,
+            "id": "1ec3124c-a28f-447b-892c-5efaa4bcfca3",
+            "creation_date": 1778165235140,
             "event": "PURCHASE_APPROVED",
             "version": "2.0.0"
           },
@@ -4549,6 +4685,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 2,
-  "updatedAt": "2026-05-06T18:26:51.618Z",
-  "versionId": "f274a62a-15d1-4d9e-ad2b-cec501feeefa"
+  "updatedAt": "2026-05-07T19:24:24.352Z",
+  "versionId": "94e78b30-8b85-4939-8bd9-d90a611c0e80"
 }
