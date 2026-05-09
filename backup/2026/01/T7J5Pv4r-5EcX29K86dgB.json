@@ -1,9 +1,9 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2026-04-29T16:52:47.000Z",
-    "createdAt": "2026-04-29T16:52:40.483Z",
-    "versionId": "0f212e29-6843-4de0-b4ea-418751036f62",
+    "updatedAt": "2026-05-08T14:23:50.000Z",
+    "createdAt": "2026-05-08T14:23:29.169Z",
+    "versionId": "50939d06-772f-468a-a86a-1eb60828814f",
     "workflowId": "T7J5Pv4r-5EcX29K86dgB",
     "nodes": [
       {
@@ -318,7 +318,7 @@
       {
         "parameters": {
           "graphApiVersion": "v23.0",
-          "node": "=act_3013680582147065/insights",
+          "node": "=act_{{ $json.id_cuenta_ads }}/insights",
           "options": {
             "queryParameters": {
               "parameter": [
@@ -352,8 +352,8 @@
         "name": "Buscar Info en Meta2",
         "credentials": {
           "facebookGraphApi": {
-            "id": "DPmzFS2IPeXsoOsm",
-            "name": "token_no_funcional(dejarAsi)"
+            "id": "ynh4i2xLfKE74JQc",
+            "name": "Facebook Ads - DATA (Luis,12Abr2026)"
           }
         }
       },
@@ -782,11 +782,11 @@
       }
     },
     "authors": "BE Online",
-    "name": "Version 0f212e29",
+    "name": "Version 50939d06",
     "description": "",
     "autosaved": true
   },
-  "activeVersionId": "0f212e29-6843-4de0-b4ea-418751036f62",
+  "activeVersionId": "50939d06-772f-468a-a86a-1eb60828814f",
   "connections": {
     "Día siguiente 5:00 am": {
       "main": [
@@ -1185,7 +1185,7 @@
     {
       "parameters": {
         "graphApiVersion": "v23.0",
-        "node": "=act_3013680582147065/insights",
+        "node": "=act_{{ $json.id_cuenta_ads }}/insights",
         "options": {
           "queryParameters": {
             "parameter": [
@@ -1219,8 +1219,8 @@
       "name": "Buscar Info en Meta2",
       "credentials": {
         "facebookGraphApi": {
-          "id": "DPmzFS2IPeXsoOsm",
-          "name": "token_no_funcional(dejarAsi)"
+          "id": "ynh4i2xLfKE74JQc",
+          "name": "Facebook Ads - DATA (Luis,12Abr2026)"
         }
       }
     },
@@ -1570,7 +1570,28 @@
       "name": "Sticky Note3"
     }
   ],
-  "pinData": {},
+  "pinData": {
+    "Día siguiente 5:00 am": [
+      {
+        "json": {
+          "timestamp": "2026-05-08T05:00:43.025-04:00",
+          "Readable date": "May 8th 2026, 5:00:43 am",
+          "Readable time": "5:00:43 am",
+          "Day of week": "Friday",
+          "Year": "2026",
+          "Month": "May",
+          "Day of month": "08",
+          "Hour": "05",
+          "Minute": "00",
+          "Second": "43",
+          "Timezone": "America/New_York (UTC-04:00)"
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      }
+    ]
+  },
   "repo_name": "backupn8n",
   "repo_owner": "infoandresrendoncol",
   "repo_path": "backup/",
@@ -1595,6 +1616,6 @@
   },
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2026-05-06T18:50:46.577Z",
-  "versionId": "54f22155-91d9-4b77-8cf3-b6ad9e011972"
+  "updatedAt": "2026-05-08T14:23:29.168Z",
+  "versionId": "50939d06-772f-468a-a86a-1eb60828814f"
 }
