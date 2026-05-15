@@ -1,9 +1,9 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2026-05-08T14:23:50.000Z",
-    "createdAt": "2026-05-08T14:23:29.169Z",
-    "versionId": "50939d06-772f-468a-a86a-1eb60828814f",
+    "updatedAt": "2026-05-15T00:46:12.000Z",
+    "createdAt": "2026-05-15T00:45:17.994Z",
+    "versionId": "4eab97f3-cf86-4c20-8a7a-bc0f4f79162a",
     "workflowId": "T7J5Pv4r-5EcX29K86dgB",
     "nodes": [
       {
@@ -64,7 +64,7 @@
                 },
                 {
                   "name": "access_token",
-                  "value": "EAAMLtoYApwoBQTStKUHePZB8cg7N19oQy8rKFVrRjOyZAINgbQAXAHB2R8nnLKc6nD86UbhyrC6n6DQemr71Pz303U9cYoUEhsw6ZCrDklHt8OlnX0UCgEhJeSScSpePZBbCf1UZAt39RgeIF3vmQbONvPT0ZAxn3ho84lAyZCzM6ZAEX0tXC22ZB4E0a3Xfy7wKg"
+                  "value": "EAAiCZCbhPb7gBRervs0AIQaFs8XGeZBGCDJxbQaFpkBxmsEZAvF2fZBAcWjVJ7rxgLBZAQULrT63m8SWAWLAOc0gNLBqHutWr4Ku2EjSA6CPFlvJboLh8V9KJZAmGMnbFvyLyqvTw6D4ZCx5exAtyddrkcelxFZADaVJqpJJMkZAA3ni4TsRgtZCUlUfZCkk8JaCIGTEbThrVw3DHRLFkCUCqjD5ohZCTCZAvd5RLHA2JdkXZC5rKmZBEex8xa9qqBQLfFeZCuocgRCqFYZCZBZBkvG7UK0"
                 },
                 {
                   "name": "date_preset",
@@ -77,8 +77,8 @@
         "type": "n8n-nodes-base.facebookGraphApi",
         "typeVersion": 1,
         "position": [
-          96,
-          0
+          224,
+          224
         ],
         "id": "61dbd59e-c637-42a9-9bd4-bc865605f19f",
         "name": "Buscar Info en Meta",
@@ -97,7 +97,7 @@
         "type": "n8n-nodes-base.splitOut",
         "typeVersion": 1,
         "position": [
-          336,
+          544,
           240
         ],
         "id": "9c0cec69-8f09-4b3e-ae2f-4fc66826c918",
@@ -222,7 +222,7 @@
         "type": "n8n-nodes-base.set",
         "typeVersion": 3.4,
         "position": [
-          592,
+          800,
           240
         ],
         "id": "c8d4a585-1e6f-4bc4-8b7c-4de4dde74288",
@@ -312,48 +312,6 @@
           "postgres": {
             "id": "YDGdJcEneBEpa52a",
             "name": "Postgres BeOnline new (Luis-12Abr2026)"
-          }
-        }
-      },
-      {
-        "parameters": {
-          "graphApiVersion": "v23.0",
-          "node": "=act_{{ $json.id_cuenta_ads }}/insights",
-          "options": {
-            "queryParameters": {
-              "parameter": [
-                {
-                  "name": "level",
-                  "value": "campaign"
-                },
-                {
-                  "name": "fields",
-                  "value": "account_id,campaign_id,campaign_name,objective,spend,clicks,video_p75_watched_actions,impressions,ctr,cpm,actions"
-                },
-                {
-                  "name": "access_token",
-                  "value": "EAAiCZCbhPb7gBRVbyRuMoZBEw0AeZBjX18iAijhP1jybFltviCvjRN1Vo80XcXCi0WUPyv7TcmbKJDP1ZCMgblwvR6vntXzilJjXAcWLUkgRWSPkQZCy01Nav1gH6NZBMzui4UabYaOawIGHxJ3OBva6iWp2N6YeB8arBXU76ZB2RppslwyRgFs8i5M24jUTiuv"
-                },
-                {
-                  "name": "date_preset",
-                  "value": "yesterday"
-                }
-              ]
-            }
-          }
-        },
-        "type": "n8n-nodes-base.facebookGraphApi",
-        "typeVersion": 1,
-        "position": [
-          128,
-          240
-        ],
-        "id": "e615b71a-adf5-468a-8017-c7e756404721",
-        "name": "Buscar Info en Meta2",
-        "credentials": {
-          "facebookGraphApi": {
-            "id": "ynh4i2xLfKE74JQc",
-            "name": "Facebook Ads - DATA (Luis,12Abr2026)"
           }
         }
       },
@@ -611,7 +569,7 @@
         "type": "n8n-nodes-base.postgres",
         "typeVersion": 2.6,
         "position": [
-          864,
+          1072,
           240
         ],
         "id": "ddaa25c1-f994-427f-be33-3d2490f1db2e",
@@ -701,6 +659,48 @@
         ],
         "id": "e304caf3-d6bc-4d23-91b4-3af8093a18ad",
         "name": "Sticky Note3"
+      },
+      {
+        "parameters": {
+          "graphApiVersion": "v23.0",
+          "node": "=act_3013680582147065/insights",
+          "options": {
+            "queryParameters": {
+              "parameter": [
+                {
+                  "name": "level",
+                  "value": "campaign"
+                },
+                {
+                  "name": "fields",
+                  "value": "account_id,campaign_id,campaign_name,objective,spend,clicks,video_p75_watched_actions,impressions,ctr,cpm,actions"
+                },
+                {
+                  "name": "access_token",
+                  "value": "2395826044235704\n0ad0OwsSeeKu6FQ1IcpHtkDaRVQ"
+                },
+                {
+                  "name": "date_preset",
+                  "value": "yesterday"
+                }
+              ]
+            }
+          }
+        },
+        "type": "n8n-nodes-base.facebookGraphApi",
+        "typeVersion": 1,
+        "position": [
+          336,
+          -64
+        ],
+        "id": "253b99a3-503c-495b-baaa-4914b1dbcafd",
+        "name": "Buscar Info en Meta1",
+        "credentials": {
+          "facebookGraphApi": {
+            "id": "ynh4i2xLfKE74JQc",
+            "name": "Facebook Ads - DATA (Luis,12Abr2026)"
+          }
+        }
       }
     ],
     "connections": {
@@ -722,7 +722,13 @@
       },
       "Buscar Info en Meta": {
         "main": [
-          []
+          [
+            {
+              "node": "Separar info por campaña",
+              "type": "main",
+              "index": 0
+            }
+          ]
         ]
       },
       "Separar info por campaña": {
@@ -751,7 +757,7 @@
         "main": [
           [
             {
-              "node": "Buscar Info en Meta2",
+              "node": "Buscar Info en Meta",
               "type": "main",
               "index": 0
             }
@@ -768,25 +774,14 @@
             }
           ]
         ]
-      },
-      "Buscar Info en Meta2": {
-        "main": [
-          [
-            {
-              "node": "Separar info por campaña",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
       }
     },
     "authors": "BE Online",
-    "name": "Version 50939d06",
+    "name": "Version 4eab97f3",
     "description": "",
-    "autosaved": true
+    "autosaved": false
   },
-  "activeVersionId": "50939d06-772f-468a-a86a-1eb60828814f",
+  "activeVersionId": "4eab97f3-cf86-4c20-8a7a-bc0f4f79162a",
   "connections": {
     "Día siguiente 5:00 am": {
       "main": [
@@ -806,7 +801,13 @@
     },
     "Buscar Info en Meta": {
       "main": [
-        []
+        [
+          {
+            "node": "Separar info por campaña",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     },
     "Separar info por campaña": {
@@ -835,7 +836,7 @@
       "main": [
         [
           {
-            "node": "Buscar Info en Meta2",
+            "node": "Buscar Info en Meta",
             "type": "main",
             "index": 0
           }
@@ -847,17 +848,6 @@
         [
           {
             "node": "Buscar Cuentas Publicitarias0",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Buscar Info en Meta2": {
-      "main": [
-        [
-          {
-            "node": "Separar info por campaña",
             "type": "main",
             "index": 0
           }
@@ -931,7 +921,7 @@
               },
               {
                 "name": "access_token",
-                "value": "EAAMLtoYApwoBQTStKUHePZB8cg7N19oQy8rKFVrRjOyZAINgbQAXAHB2R8nnLKc6nD86UbhyrC6n6DQemr71Pz303U9cYoUEhsw6ZCrDklHt8OlnX0UCgEhJeSScSpePZBbCf1UZAt39RgeIF3vmQbONvPT0ZAxn3ho84lAyZCzM6ZAEX0tXC22ZB4E0a3Xfy7wKg"
+                "value": "EAAiCZCbhPb7gBRervs0AIQaFs8XGeZBGCDJxbQaFpkBxmsEZAvF2fZBAcWjVJ7rxgLBZAQULrT63m8SWAWLAOc0gNLBqHutWr4Ku2EjSA6CPFlvJboLh8V9KJZAmGMnbFvyLyqvTw6D4ZCx5exAtyddrkcelxFZADaVJqpJJMkZAA3ni4TsRgtZCUlUfZCkk8JaCIGTEbThrVw3DHRLFkCUCqjD5ohZCTCZAvd5RLHA2JdkXZC5rKmZBEex8xa9qqBQLfFeZCuocgRCqFYZCZBZBkvG7UK0"
               },
               {
                 "name": "date_preset",
@@ -944,8 +934,8 @@
       "type": "n8n-nodes-base.facebookGraphApi",
       "typeVersion": 1,
       "position": [
-        96,
-        0
+        224,
+        224
       ],
       "id": "61dbd59e-c637-42a9-9bd4-bc865605f19f",
       "name": "Buscar Info en Meta",
@@ -964,7 +954,7 @@
       "type": "n8n-nodes-base.splitOut",
       "typeVersion": 1,
       "position": [
-        336,
+        544,
         240
       ],
       "id": "9c0cec69-8f09-4b3e-ae2f-4fc66826c918",
@@ -1089,7 +1079,7 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        592,
+        800,
         240
       ],
       "id": "c8d4a585-1e6f-4bc4-8b7c-4de4dde74288",
@@ -1179,48 +1169,6 @@
         "postgres": {
           "id": "YDGdJcEneBEpa52a",
           "name": "Postgres BeOnline new (Luis-12Abr2026)"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "graphApiVersion": "v23.0",
-        "node": "=act_{{ $json.id_cuenta_ads }}/insights",
-        "options": {
-          "queryParameters": {
-            "parameter": [
-              {
-                "name": "level",
-                "value": "campaign"
-              },
-              {
-                "name": "fields",
-                "value": "account_id,campaign_id,campaign_name,objective,spend,clicks,video_p75_watched_actions,impressions,ctr,cpm,actions"
-              },
-              {
-                "name": "access_token",
-                "value": "EAAiCZCbhPb7gBRVbyRuMoZBEw0AeZBjX18iAijhP1jybFltviCvjRN1Vo80XcXCi0WUPyv7TcmbKJDP1ZCMgblwvR6vntXzilJjXAcWLUkgRWSPkQZCy01Nav1gH6NZBMzui4UabYaOawIGHxJ3OBva6iWp2N6YeB8arBXU76ZB2RppslwyRgFs8i5M24jUTiuv"
-              },
-              {
-                "name": "date_preset",
-                "value": "yesterday"
-              }
-            ]
-          }
-        }
-      },
-      "type": "n8n-nodes-base.facebookGraphApi",
-      "typeVersion": 1,
-      "position": [
-        128,
-        240
-      ],
-      "id": "e615b71a-adf5-468a-8017-c7e756404721",
-      "name": "Buscar Info en Meta2",
-      "credentials": {
-        "facebookGraphApi": {
-          "id": "ynh4i2xLfKE74JQc",
-          "name": "Facebook Ads - DATA (Luis,12Abr2026)"
         }
       }
     },
@@ -1478,7 +1426,7 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        864,
+        1072,
         240
       ],
       "id": "ddaa25c1-f994-427f-be33-3d2490f1db2e",
@@ -1568,6 +1516,48 @@
       ],
       "id": "e304caf3-d6bc-4d23-91b4-3af8093a18ad",
       "name": "Sticky Note3"
+    },
+    {
+      "parameters": {
+        "graphApiVersion": "v23.0",
+        "node": "=act_3013680582147065/insights",
+        "options": {
+          "queryParameters": {
+            "parameter": [
+              {
+                "name": "level",
+                "value": "campaign"
+              },
+              {
+                "name": "fields",
+                "value": "account_id,campaign_id,campaign_name,objective,spend,clicks,video_p75_watched_actions,impressions,ctr,cpm,actions"
+              },
+              {
+                "name": "access_token",
+                "value": "2395826044235704\n0ad0OwsSeeKu6FQ1IcpHtkDaRVQ"
+              },
+              {
+                "name": "date_preset",
+                "value": "yesterday"
+              }
+            ]
+          }
+        }
+      },
+      "type": "n8n-nodes-base.facebookGraphApi",
+      "typeVersion": 1,
+      "position": [
+        336,
+        -64
+      ],
+      "id": "253b99a3-503c-495b-baaa-4914b1dbcafd",
+      "name": "Buscar Info en Meta1",
+      "credentials": {
+        "facebookGraphApi": {
+          "id": "ynh4i2xLfKE74JQc",
+          "name": "Facebook Ads - DATA (Luis,12Abr2026)"
+        }
+      }
     }
   ],
   "pinData": {
@@ -1616,6 +1606,6 @@
   },
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2026-05-08T14:23:29.168Z",
-  "versionId": "50939d06-772f-468a-a86a-1eb60828814f"
+  "updatedAt": "2026-05-15T00:45:17.993Z",
+  "versionId": "4eab97f3-cf86-4c20-8a7a-bc0f4f79162a"
 }
