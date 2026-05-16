@@ -1,0 +1,83 @@
+{
+  "active": true,
+  "activeVersion": {
+    "updatedAt": "2026-05-15T22:46:00.000Z",
+    "createdAt": "2026-05-15T22:45:54.425Z",
+    "versionId": "97b3adc5-0471-45dc-a96f-65b1932ba061",
+    "workflowId": "mF7ZDGzlzfYvHtyC",
+    "nodes": [
+      {
+        "parameters": {},
+        "type": "n8n-nodes-base.errorTrigger",
+        "typeVersion": 1,
+        "position": [
+          0,
+          0
+        ],
+        "id": "f85bd7da-1df1-4875-a86f-8befd3fa1e56",
+        "name": "Error Trigger"
+      }
+    ],
+    "connections": {
+      "Error Trigger": {
+        "main": [
+          []
+        ]
+      }
+    },
+    "authors": "BE Online",
+    "name": "Version 97b3adc5",
+    "description": "",
+    "autosaved": true
+  },
+  "activeVersionId": "97b3adc5-0471-45dc-a96f-65b1932ba061",
+  "connections": {
+    "Error Trigger": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "createdAt": "2026-05-15T22:43:51.866Z",
+  "id": "mF7ZDGzlzfYvHtyC",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Notificacion ERROR",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.errorTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "f85bd7da-1df1-4875-a86f-8befd3fa1e56",
+      "name": "Error Trigger"
+    }
+  ],
+  "pinData": {},
+  "repo_name": "backupn8n",
+  "repo_owner": "infoandresrendoncol",
+  "repo_path": "backup/",
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "shared": [
+    {
+      "updatedAt": "2026-05-15T22:43:51.872Z",
+      "createdAt": "2026-05-15T22:43:51.872Z",
+      "role": "workflow:owner",
+      "workflowId": "mF7ZDGzlzfYvHtyC",
+      "projectId": "4KmSbENK2cGxsjaf"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2026-05-15T22:45:59.977Z",
+  "versionId": "97b3adc5-0471-45dc-a96f-65b1932ba061"
+}
