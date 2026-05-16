@@ -1,9 +1,9 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2026-05-15T00:46:12.000Z",
-    "createdAt": "2026-05-15T00:45:17.994Z",
-    "versionId": "4eab97f3-cf86-4c20-8a7a-bc0f4f79162a",
+    "updatedAt": "2026-05-16T02:44:55.000Z",
+    "createdAt": "2026-05-16T02:44:50.025Z",
+    "versionId": "41401a6c-c560-43db-a729-970c624e58cd",
     "workflowId": "T7J5Pv4r-5EcX29K86dgB",
     "nodes": [
       {
@@ -19,33 +19,11 @@
         "type": "n8n-nodes-base.scheduleTrigger",
         "typeVersion": 1.3,
         "position": [
-          -320,
-          0
+          -480,
+          16
         ],
         "id": "301517b2-d28b-4aa1-b62d-6aa0e23b6c41",
         "name": "Día siguiente 5:00 am"
-      },
-      {
-        "parameters": {
-          "operation": "getAll",
-          "tableId": "cuentas_publicitarias_meta",
-          "returnAll": true,
-          "filterType": "none"
-        },
-        "type": "n8n-nodes-base.supabase",
-        "typeVersion": 1,
-        "position": [
-          -112,
-          0
-        ],
-        "id": "87a6e13f-8535-4c88-9e9e-810ab910ecf9",
-        "name": "Buscar Cuentas Publicitarias",
-        "credentials": {
-          "supabaseApi": {
-            "id": "MrnzEgGfGVHsVNPD",
-            "name": "Supabase BE"
-          }
-        }
       },
       {
         "parameters": {
@@ -60,11 +38,11 @@
                 },
                 {
                   "name": "fields",
-                  "value": "account_id,campaign_id,campaign_name,objective,spend,clicks,video_p75_watched_actions,impressions,ctr,cpm,actions"
+                  "value": "account_id,campaign_id,campaign_name,objective,spend,clicks,views,video_play_actions,video_p75_watched_actions,ctr,cpm,actions"
                 },
                 {
                   "name": "access_token",
-                  "value": "EAAiCZCbhPb7gBRervs0AIQaFs8XGeZBGCDJxbQaFpkBxmsEZAvF2fZBAcWjVJ7rxgLBZAQULrT63m8SWAWLAOc0gNLBqHutWr4Ku2EjSA6CPFlvJboLh8V9KJZAmGMnbFvyLyqvTw6D4ZCx5exAtyddrkcelxFZADaVJqpJJMkZAA3ni4TsRgtZCUlUfZCkk8JaCIGTEbThrVw3DHRLFkCUCqjD5ohZCTCZAvd5RLHA2JdkXZC5rKmZBEex8xa9qqBQLfFeZCuocgRCqFYZCZBZBkvG7UK0"
+                  "value": "={{ $json.token_seguridad }}"
                 },
                 {
                   "name": "date_preset",
@@ -78,7 +56,7 @@
         "typeVersion": 1,
         "position": [
           224,
-          224
+          240
         ],
         "id": "61dbd59e-c637-42a9-9bd4-bc865605f19f",
         "name": "Buscar Info en Meta",
@@ -206,7 +184,7 @@
               {
                 "id": "c61e3e21-08f9-43f7-9629-267f4f53938e",
                 "name": "visitas_instagram",
-                "value": "={{ $json.actions.find(a => a.action_type === 'instagram_profile_visit')?.value || 0 }}",
+                "value": "={{ $('Buscar Info en Meta').item.json.data[2].actions[16].value }}",
                 "type": "number"
               },
               {
@@ -227,61 +205,6 @@
         ],
         "id": "c8d4a585-1e6f-4bc4-8b7c-4de4dde74288",
         "name": "Seleccionar Datos"
-      },
-      {
-        "parameters": {
-          "method": "POST",
-          "url": "http://contenedor1_supabase_kong:8000/rest/v1/gasto_marketing_fb",
-          "sendHeaders": true,
-          "headerParameters": {
-            "parameters": [
-              {
-                "name": "Authorization",
-                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyAgCiAgICAicm9sZSI6ICJhbm9uIiwKICAgICJpc3MiOiAic3VwYWJhc2UtZGVtbyIsCiAgICAiaWF0IjogMTY0MTc2OTIwMCwKICAgICJleHAiOiAxNzk5NTM1NjAwCn0.dc_X5iR_VP_qT0zsiyj_I_OZ2T9FtRU2BBNWN8Bu4GE"
-              },
-              {
-                "name": "apikey",
-                "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyAgCiAgICAicm9sZSI6ICJhbm9uIiwKICAgICJpc3MiOiAic3VwYWJhc2UtZGVtbyIsCiAgICAiaWF0IjogMTY0MTc2OTIwMCwKICAgICJleHAiOiAxNzk5NTM1NjAwCn0.dc_X5iR_VP_qT0zsiyj_I_OZ2T9FtRU2BBNWN8Bu4GE"
-              },
-              {
-                "name": "Content-Type",
-                "value": "application/json"
-              }
-            ]
-          },
-          "sendBody": true,
-          "specifyBody": "json",
-          "jsonBody": "={{ JSON.stringify($('Seleccionar Datos').all().map(item => item.json)) }}",
-          "options": {
-            "response": {
-              "response": {
-                "responseFormat": "json"
-              }
-            }
-          }
-        },
-        "type": "n8n-nodes-base.httpRequest",
-        "typeVersion": 4.3,
-        "position": [
-          800,
-          464
-        ],
-        "id": "4683b7d2-dd41-45cb-bb83-34e9f1e1134f",
-        "name": "Crear fila con info",
-        "onError": "continueRegularOutput"
-      },
-      {
-        "parameters": {
-          "content": "BeOnline: EAAiCZCbhPb7gBRMZBPvq86Xx5HxIGaZCZCZAdoe5IN746eTHBu0lKuOBk1mZBYXJyZBKHFVIJtNKBUnaXDdWasWAWsSz5TIYVrHm9vyBu0JfUuMspfZAckwRck4TtVRgWok0EJL3HfWAggl2SKAFnhfLKB1oFD3Ahv8moWTzJJ1SjBFcETY31uBPr5LIK7AVt0NMmQ5HGsc5JmEPLv9bhvEfqnyC5aG4jVl9op9nyzysf0Dwq7R1y4yc1H5sURvCncrBcefrEC2R00Tt0r3CyWgpCReh"
-        },
-        "type": "n8n-nodes-base.stickyNote",
-        "typeVersion": 1,
-        "position": [
-          32,
-          -208
-        ],
-        "id": "90074487-b2e4-414c-8608-be3fa182f47a",
-        "name": "Sticky Note"
       },
       {
         "parameters": {
@@ -332,8 +255,8 @@
         "type": "n8n-nodes-base.set",
         "typeVersion": 3.4,
         "position": [
-          800,
-          624
+          544,
+          32
         ],
         "id": "4b504048-fc58-43ab-8a3e-c7ea51620246",
         "name": "Edit Fields"
@@ -583,85 +506,6 @@
       },
       {
         "parameters": {
-          "content": "token Vence 27 de Junio"
-        },
-        "type": "n8n-nodes-base.stickyNote",
-        "typeVersion": 1,
-        "position": [
-          496,
-          -240
-        ],
-        "id": "cae58961-c932-4d70-98bf-20f657657792",
-        "name": "Sticky Note1"
-      },
-      {
-        "parameters": {
-          "url": "https://graph.facebook.com/v25.0/oauth/access_token",
-          "sendQuery": true,
-          "queryParameters": {
-            "parameters": [
-              {
-                "name": "grant_type",
-                "value": "fb_exchange_token"
-              },
-              {
-                "name": "client_id",
-                "value": "907230552045448"
-              },
-              {
-                "name": "client_secret",
-                "value": "5d292190fe02106404712fd9e03a1d4b"
-              },
-              {
-                "name": "fb_exchange_token",
-                "value": "EAAM5HxLIt4gBRfWfIZC60dKS6vGDIuL1Yv10tWIA9qZCPWPUWkL5Ks91cq9vR4oJOTtqiZBA2iiegBYnb6cu0IVRTwnLP5ctmvuZBHiU7tbyWEkoYoZAVN58bRrRZBwKlvquURBvp9bAsIrMjp3ZAxYMIQnn39qw2bYA23tRIK3ZBcMfZAM3nMifle8Ri0ZCtxYTgO011jCQaSTZBtDLGjjZA9OeJnGhDlWTepErsqU7WepeAKAqZCcpZCvbzPEKWJq6LMj0M4fzMzXfZAf6X7iJcpu90gxXVymqQZDZD"
-              }
-            ]
-          },
-          "options": {
-            "redirect": {
-              "redirect": {}
-            }
-          }
-        },
-        "type": "n8n-nodes-base.httpRequest",
-        "typeVersion": 4.3,
-        "position": [
-          352,
-          -384
-        ],
-        "id": "82c182e2-be7e-4aee-8ae2-5000c8d20807",
-        "name": "renovacion_token_fb_ads1"
-      },
-      {
-        "parameters": {
-          "content": "La renovación del token se debe hacer cada 59 dias, aca encuentras el endpoint para renovarlo, importante, debes generar el acces token de facebook graph api: \n\nhttps://developers.facebook.com/tools/explorer/907230552045448/?method=GET&path=me%3Ffields%3Did%2Cname&version=v25.0",
-          "width": 640
-        },
-        "type": "n8n-nodes-base.stickyNote",
-        "typeVersion": 1,
-        "position": [
-          -384,
-          -432
-        ],
-        "id": "e80ac328-a4f8-45df-9af0-9c0793722148",
-        "name": "Sticky Note2"
-      },
-      {
-        "parameters": {
-          "content": "Para mas información:\nhttps://developers.facebook.com/documentation/facebook-login/guides/access-tokens/get-long-lived"
-        },
-        "type": "n8n-nodes-base.stickyNote",
-        "typeVersion": 1,
-        "position": [
-          608,
-          -448
-        ],
-        "id": "e304caf3-d6bc-4d23-91b4-3af8093a18ad",
-        "name": "Sticky Note3"
-      },
-      {
-        "parameters": {
           "graphApiVersion": "v23.0",
           "node": "=act_3013680582147065/insights",
           "options": {
@@ -677,7 +521,7 @@
                 },
                 {
                   "name": "access_token",
-                  "value": "2395826044235704\n0ad0OwsSeeKu6FQ1IcpHtkDaRVQ"
+                  "value": "EAAiCZCbhPb7gBRfXt9MDC4ZAHZC8WwZCpHC2v4Bi8xEEzZCrT8BoZBiMZBQcm95H12kdHrXA4RNXpiLrWFUCCi9xcUU2sDXkRex7sUyunkPa0L49ymvYRQnB2vZCSQMYvzYGBKmBqBNjoL2eT7YIfQZA2M6ExtuhPlmJUHJGaGYwmH222VwNOSSGqnGdGcy9ADXUPwAZDZD"
                 },
                 {
                   "name": "date_preset",
@@ -690,8 +534,8 @@
         "type": "n8n-nodes-base.facebookGraphApi",
         "typeVersion": 1,
         "position": [
-          336,
-          -64
+          224,
+          32
         ],
         "id": "253b99a3-503c-495b-baaa-4914b1dbcafd",
         "name": "Buscar Info en Meta1",
@@ -713,11 +557,6 @@
               "index": 0
             }
           ]
-        ]
-      },
-      "Buscar Cuentas Publicitarias": {
-        "main": [
-          []
         ]
       },
       "Buscar Info en Meta": {
@@ -777,11 +616,11 @@
       }
     },
     "authors": "BE Online",
-    "name": "Version 4eab97f3",
+    "name": "Version 41401a6c",
     "description": "",
-    "autosaved": false
+    "autosaved": true
   },
-  "activeVersionId": "4eab97f3-cf86-4c20-8a7a-bc0f4f79162a",
+  "activeVersionId": "41401a6c-c560-43db-a729-970c624e58cd",
   "connections": {
     "Día siguiente 5:00 am": {
       "main": [
@@ -792,11 +631,6 @@
             "index": 0
           }
         ]
-      ]
-    },
-    "Buscar Cuentas Publicitarias": {
-      "main": [
-        []
       ]
     },
     "Buscar Info en Meta": {
@@ -876,33 +710,11 @@
       "type": "n8n-nodes-base.scheduleTrigger",
       "typeVersion": 1.3,
       "position": [
-        -320,
-        0
+        -480,
+        16
       ],
       "id": "301517b2-d28b-4aa1-b62d-6aa0e23b6c41",
       "name": "Día siguiente 5:00 am"
-    },
-    {
-      "parameters": {
-        "operation": "getAll",
-        "tableId": "cuentas_publicitarias_meta",
-        "returnAll": true,
-        "filterType": "none"
-      },
-      "type": "n8n-nodes-base.supabase",
-      "typeVersion": 1,
-      "position": [
-        -112,
-        0
-      ],
-      "id": "87a6e13f-8535-4c88-9e9e-810ab910ecf9",
-      "name": "Buscar Cuentas Publicitarias",
-      "credentials": {
-        "supabaseApi": {
-          "id": "MrnzEgGfGVHsVNPD",
-          "name": "Supabase BE"
-        }
-      }
     },
     {
       "parameters": {
@@ -917,11 +729,11 @@
               },
               {
                 "name": "fields",
-                "value": "account_id,campaign_id,campaign_name,objective,spend,clicks,video_p75_watched_actions,impressions,ctr,cpm,actions"
+                "value": "account_id,campaign_id,campaign_name,objective,spend,clicks,views,video_play_actions,video_p75_watched_actions,ctr,cpm,actions"
               },
               {
                 "name": "access_token",
-                "value": "EAAiCZCbhPb7gBRervs0AIQaFs8XGeZBGCDJxbQaFpkBxmsEZAvF2fZBAcWjVJ7rxgLBZAQULrT63m8SWAWLAOc0gNLBqHutWr4Ku2EjSA6CPFlvJboLh8V9KJZAmGMnbFvyLyqvTw6D4ZCx5exAtyddrkcelxFZADaVJqpJJMkZAA3ni4TsRgtZCUlUfZCkk8JaCIGTEbThrVw3DHRLFkCUCqjD5ohZCTCZAvd5RLHA2JdkXZC5rKmZBEex8xa9qqBQLfFeZCuocgRCqFYZCZBZBkvG7UK0"
+                "value": "={{ $json.token_seguridad }}"
               },
               {
                 "name": "date_preset",
@@ -935,7 +747,7 @@
       "typeVersion": 1,
       "position": [
         224,
-        224
+        240
       ],
       "id": "61dbd59e-c637-42a9-9bd4-bc865605f19f",
       "name": "Buscar Info en Meta",
@@ -1063,7 +875,7 @@
             {
               "id": "c61e3e21-08f9-43f7-9629-267f4f53938e",
               "name": "visitas_instagram",
-              "value": "={{ $json.actions.find(a => a.action_type === 'instagram_profile_visit')?.value || 0 }}",
+              "value": "={{ $('Buscar Info en Meta').item.json.data[2].actions[16].value }}",
               "type": "number"
             },
             {
@@ -1084,61 +896,6 @@
       ],
       "id": "c8d4a585-1e6f-4bc4-8b7c-4de4dde74288",
       "name": "Seleccionar Datos"
-    },
-    {
-      "parameters": {
-        "method": "POST",
-        "url": "http://contenedor1_supabase_kong:8000/rest/v1/gasto_marketing_fb",
-        "sendHeaders": true,
-        "headerParameters": {
-          "parameters": [
-            {
-              "name": "Authorization",
-              "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyAgCiAgICAicm9sZSI6ICJhbm9uIiwKICAgICJpc3MiOiAic3VwYWJhc2UtZGVtbyIsCiAgICAiaWF0IjogMTY0MTc2OTIwMCwKICAgICJleHAiOiAxNzk5NTM1NjAwCn0.dc_X5iR_VP_qT0zsiyj_I_OZ2T9FtRU2BBNWN8Bu4GE"
-            },
-            {
-              "name": "apikey",
-              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyAgCiAgICAicm9sZSI6ICJhbm9uIiwKICAgICJpc3MiOiAic3VwYWJhc2UtZGVtbyIsCiAgICAiaWF0IjogMTY0MTc2OTIwMCwKICAgICJleHAiOiAxNzk5NTM1NjAwCn0.dc_X5iR_VP_qT0zsiyj_I_OZ2T9FtRU2BBNWN8Bu4GE"
-            },
-            {
-              "name": "Content-Type",
-              "value": "application/json"
-            }
-          ]
-        },
-        "sendBody": true,
-        "specifyBody": "json",
-        "jsonBody": "={{ JSON.stringify($('Seleccionar Datos').all().map(item => item.json)) }}",
-        "options": {
-          "response": {
-            "response": {
-              "responseFormat": "json"
-            }
-          }
-        }
-      },
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.3,
-      "position": [
-        800,
-        464
-      ],
-      "id": "4683b7d2-dd41-45cb-bb83-34e9f1e1134f",
-      "name": "Crear fila con info",
-      "onError": "continueRegularOutput"
-    },
-    {
-      "parameters": {
-        "content": "BeOnline: EAAiCZCbhPb7gBRMZBPvq86Xx5HxIGaZCZCZAdoe5IN746eTHBu0lKuOBk1mZBYXJyZBKHFVIJtNKBUnaXDdWasWAWsSz5TIYVrHm9vyBu0JfUuMspfZAckwRck4TtVRgWok0EJL3HfWAggl2SKAFnhfLKB1oFD3Ahv8moWTzJJ1SjBFcETY31uBPr5LIK7AVt0NMmQ5HGsc5JmEPLv9bhvEfqnyC5aG4jVl9op9nyzysf0Dwq7R1y4yc1H5sURvCncrBcefrEC2R00Tt0r3CyWgpCReh"
-      },
-      "type": "n8n-nodes-base.stickyNote",
-      "typeVersion": 1,
-      "position": [
-        32,
-        -208
-      ],
-      "id": "90074487-b2e4-414c-8608-be3fa182f47a",
-      "name": "Sticky Note"
     },
     {
       "parameters": {
@@ -1189,8 +946,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        800,
-        624
+        544,
+        32
       ],
       "id": "4b504048-fc58-43ab-8a3e-c7ea51620246",
       "name": "Edit Fields"
@@ -1440,85 +1197,6 @@
     },
     {
       "parameters": {
-        "content": "token Vence 27 de Junio"
-      },
-      "type": "n8n-nodes-base.stickyNote",
-      "typeVersion": 1,
-      "position": [
-        496,
-        -240
-      ],
-      "id": "cae58961-c932-4d70-98bf-20f657657792",
-      "name": "Sticky Note1"
-    },
-    {
-      "parameters": {
-        "url": "https://graph.facebook.com/v25.0/oauth/access_token",
-        "sendQuery": true,
-        "queryParameters": {
-          "parameters": [
-            {
-              "name": "grant_type",
-              "value": "fb_exchange_token"
-            },
-            {
-              "name": "client_id",
-              "value": "907230552045448"
-            },
-            {
-              "name": "client_secret",
-              "value": "5d292190fe02106404712fd9e03a1d4b"
-            },
-            {
-              "name": "fb_exchange_token",
-              "value": "EAAM5HxLIt4gBRfWfIZC60dKS6vGDIuL1Yv10tWIA9qZCPWPUWkL5Ks91cq9vR4oJOTtqiZBA2iiegBYnb6cu0IVRTwnLP5ctmvuZBHiU7tbyWEkoYoZAVN58bRrRZBwKlvquURBvp9bAsIrMjp3ZAxYMIQnn39qw2bYA23tRIK3ZBcMfZAM3nMifle8Ri0ZCtxYTgO011jCQaSTZBtDLGjjZA9OeJnGhDlWTepErsqU7WepeAKAqZCcpZCvbzPEKWJq6LMj0M4fzMzXfZAf6X7iJcpu90gxXVymqQZDZD"
-            }
-          ]
-        },
-        "options": {
-          "redirect": {
-            "redirect": {}
-          }
-        }
-      },
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.3,
-      "position": [
-        352,
-        -384
-      ],
-      "id": "82c182e2-be7e-4aee-8ae2-5000c8d20807",
-      "name": "renovacion_token_fb_ads1"
-    },
-    {
-      "parameters": {
-        "content": "La renovación del token se debe hacer cada 59 dias, aca encuentras el endpoint para renovarlo, importante, debes generar el acces token de facebook graph api: \n\nhttps://developers.facebook.com/tools/explorer/907230552045448/?method=GET&path=me%3Ffields%3Did%2Cname&version=v25.0",
-        "width": 640
-      },
-      "type": "n8n-nodes-base.stickyNote",
-      "typeVersion": 1,
-      "position": [
-        -384,
-        -432
-      ],
-      "id": "e80ac328-a4f8-45df-9af0-9c0793722148",
-      "name": "Sticky Note2"
-    },
-    {
-      "parameters": {
-        "content": "Para mas información:\nhttps://developers.facebook.com/documentation/facebook-login/guides/access-tokens/get-long-lived"
-      },
-      "type": "n8n-nodes-base.stickyNote",
-      "typeVersion": 1,
-      "position": [
-        608,
-        -448
-      ],
-      "id": "e304caf3-d6bc-4d23-91b4-3af8093a18ad",
-      "name": "Sticky Note3"
-    },
-    {
-      "parameters": {
         "graphApiVersion": "v23.0",
         "node": "=act_3013680582147065/insights",
         "options": {
@@ -1534,7 +1212,7 @@
               },
               {
                 "name": "access_token",
-                "value": "2395826044235704\n0ad0OwsSeeKu6FQ1IcpHtkDaRVQ"
+                "value": "EAAiCZCbhPb7gBRfXt9MDC4ZAHZC8WwZCpHC2v4Bi8xEEzZCrT8BoZBiMZBQcm95H12kdHrXA4RNXpiLrWFUCCi9xcUU2sDXkRex7sUyunkPa0L49ymvYRQnB2vZCSQMYvzYGBKmBqBNjoL2eT7YIfQZA2M6ExtuhPlmJUHJGaGYwmH222VwNOSSGqnGdGcy9ADXUPwAZDZD"
               },
               {
                 "name": "date_preset",
@@ -1547,8 +1225,8 @@
       "type": "n8n-nodes-base.facebookGraphApi",
       "typeVersion": 1,
       "position": [
-        336,
-        -64
+        224,
+        32
       ],
       "id": "253b99a3-503c-495b-baaa-4914b1dbcafd",
       "name": "Buscar Info en Meta1",
@@ -1606,6 +1284,6 @@
   },
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2026-05-15T00:45:17.993Z",
-  "versionId": "4eab97f3-cf86-4c20-8a7a-bc0f4f79162a"
+  "updatedAt": "2026-05-16T02:44:53.151Z",
+  "versionId": "41401a6c-c560-43db-a729-970c624e58cd"
 }
