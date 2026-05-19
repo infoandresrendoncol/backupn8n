@@ -1,9 +1,9 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2026-05-16T02:44:55.000Z",
-    "createdAt": "2026-05-16T02:44:50.025Z",
-    "versionId": "41401a6c-c560-43db-a729-970c624e58cd",
+    "updatedAt": "2026-05-18T22:17:57.000Z",
+    "createdAt": "2026-05-18T22:17:24.226Z",
+    "versionId": "5a3d4081-bd66-43a2-9a2e-f68a8f7fb806",
     "workflowId": "T7J5Pv4r-5EcX29K86dgB",
     "nodes": [
       {
@@ -38,7 +38,7 @@
                 },
                 {
                   "name": "fields",
-                  "value": "account_id,campaign_id,campaign_name,objective,spend,clicks,views,video_play_actions,video_p75_watched_actions,ctr,cpm,actions"
+                  "value": "account_id,campaign_id,campaign_name,objective,spend,clicks,video_p75_watched_actions,impressions,ctr,cpm,actions"
                 },
                 {
                   "name": "access_token",
@@ -60,6 +60,7 @@
         ],
         "id": "61dbd59e-c637-42a9-9bd4-bc865605f19f",
         "name": "Buscar Info en Meta",
+        "retryOnFail": true,
         "credentials": {
           "facebookGraphApi": {
             "id": "ynh4i2xLfKE74JQc",
@@ -79,7 +80,8 @@
           240
         ],
         "id": "9c0cec69-8f09-4b3e-ae2f-4fc66826c918",
-        "name": "Separar info por campaña"
+        "name": "Separar info por campaña",
+        "retryOnFail": true
       },
       {
         "parameters": {
@@ -184,7 +186,7 @@
               {
                 "id": "c61e3e21-08f9-43f7-9629-267f4f53938e",
                 "name": "visitas_instagram",
-                "value": "={{ $('Buscar Info en Meta').item.json.data[2].actions[16].value }}",
+                "value": "={{ $json.video_p75_watched_actions[0].value}}",
                 "type": "number"
               },
               {
@@ -231,6 +233,7 @@
         ],
         "id": "f56ea0f4-ddb2-4c3b-a375-2d4d58ebd02d",
         "name": "Buscar Cuentas Publicitarias0",
+        "retryOnFail": true,
         "credentials": {
           "postgres": {
             "id": "YDGdJcEneBEpa52a",
@@ -497,6 +500,7 @@
         ],
         "id": "ddaa25c1-f994-427f-be33-3d2490f1db2e",
         "name": "Insertar datos pauta tabla",
+        "retryOnFail": true,
         "credentials": {
           "postgres": {
             "id": "YDGdJcEneBEpa52a",
@@ -616,11 +620,11 @@
       }
     },
     "authors": "BE Online",
-    "name": "Version 41401a6c",
+    "name": "Version 5a3d4081",
     "description": "",
     "autosaved": true
   },
-  "activeVersionId": "41401a6c-c560-43db-a729-970c624e58cd",
+  "activeVersionId": "5a3d4081-bd66-43a2-9a2e-f68a8f7fb806",
   "connections": {
     "Día siguiente 5:00 am": {
       "main": [
@@ -729,7 +733,7 @@
               },
               {
                 "name": "fields",
-                "value": "account_id,campaign_id,campaign_name,objective,spend,clicks,views,video_play_actions,video_p75_watched_actions,ctr,cpm,actions"
+                "value": "account_id,campaign_id,campaign_name,objective,spend,clicks,video_p75_watched_actions,impressions,ctr,cpm,actions"
               },
               {
                 "name": "access_token",
@@ -751,6 +755,7 @@
       ],
       "id": "61dbd59e-c637-42a9-9bd4-bc865605f19f",
       "name": "Buscar Info en Meta",
+      "retryOnFail": true,
       "credentials": {
         "facebookGraphApi": {
           "id": "ynh4i2xLfKE74JQc",
@@ -770,7 +775,8 @@
         240
       ],
       "id": "9c0cec69-8f09-4b3e-ae2f-4fc66826c918",
-      "name": "Separar info por campaña"
+      "name": "Separar info por campaña",
+      "retryOnFail": true
     },
     {
       "parameters": {
@@ -875,7 +881,7 @@
             {
               "id": "c61e3e21-08f9-43f7-9629-267f4f53938e",
               "name": "visitas_instagram",
-              "value": "={{ $('Buscar Info en Meta').item.json.data[2].actions[16].value }}",
+              "value": "={{ $json.video_p75_watched_actions[0].value}}",
               "type": "number"
             },
             {
@@ -922,6 +928,7 @@
       ],
       "id": "f56ea0f4-ddb2-4c3b-a375-2d4d58ebd02d",
       "name": "Buscar Cuentas Publicitarias0",
+      "retryOnFail": true,
       "credentials": {
         "postgres": {
           "id": "YDGdJcEneBEpa52a",
@@ -1188,6 +1195,7 @@
       ],
       "id": "ddaa25c1-f994-427f-be33-3d2490f1db2e",
       "name": "Insertar datos pauta tabla",
+      "retryOnFail": true,
       "credentials": {
         "postgres": {
           "id": "YDGdJcEneBEpa52a",
@@ -1284,6 +1292,6 @@
   },
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2026-05-16T02:44:53.151Z",
-  "versionId": "41401a6c-c560-43db-a729-970c624e58cd"
+  "updatedAt": "2026-05-18T22:17:24.225Z",
+  "versionId": "5a3d4081-bd66-43a2-9a2e-f68a8f7fb806"
 }
