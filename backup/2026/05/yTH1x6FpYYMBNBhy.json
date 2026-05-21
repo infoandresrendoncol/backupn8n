@@ -1,9 +1,9 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2026-05-14T15:54:17.000Z",
-    "createdAt": "2026-05-14T15:54:13.893Z",
-    "versionId": "28162535-68fc-4315-bb53-d667e17e1821",
+    "updatedAt": "2026-05-20T21:26:56.000Z",
+    "createdAt": "2026-05-20T21:26:47.337Z",
+    "versionId": "226df732-9550-409a-86b9-89a0713553d9",
     "workflowId": "yTH1x6FpYYMBNBhy",
     "nodes": [
       {
@@ -36,7 +36,7 @@
                   },
                   "conditions": [
                     {
-                      "leftValue": "={{ $json.data.purchase.recurrence_number.toString() }}",
+                      "leftValue": "={{ $json.body.data.purchase.recurrence_number.toString() }}",
                       "rightValue": "=1",
                       "operator": {
                         "type": "string",
@@ -59,8 +59,8 @@
                   "conditions": [
                     {
                       "id": "3c07bcc3-aeca-4708-b928-7db24ed5c7c1",
-                      "leftValue": "={{ $json.data.purchase.recurrence_number.toString() }}",
-                      "rightValue": "1",
+                      "leftValue": "={{ $json.body.data.purchase.recurrence_number.toString() }}",
+                      "rightValue": "=1",
                       "operator": {
                         "type": "string",
                         "operation": "notEquals"
@@ -95,7 +95,7 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.4,
         "position": [
-          464,
+          496,
           -176
         ],
         "id": "87339d88-c641-449c-a20a-abab2bb86405",
@@ -152,11 +152,11 @@
       }
     },
     "authors": "BE Online",
-    "name": "Version 28162535",
+    "name": "Version 226df732",
     "description": "",
     "autosaved": true
   },
-  "activeVersionId": "28162535-68fc-4315-bb53-d667e17e1821",
+  "activeVersionId": "226df732-9550-409a-86b9-89a0713553d9",
   "connections": {
     "Webhook": {
       "main": [
@@ -224,7 +224,7 @@
                 },
                 "conditions": [
                   {
-                    "leftValue": "={{ $json.data.purchase.recurrence_number.toString() }}",
+                    "leftValue": "={{ $json.body.data.purchase.recurrence_number.toString() }}",
                     "rightValue": "=1",
                     "operator": {
                       "type": "string",
@@ -247,8 +247,8 @@
                 "conditions": [
                   {
                     "id": "3c07bcc3-aeca-4708-b928-7db24ed5c7c1",
-                    "leftValue": "={{ $json.data.purchase.recurrence_number.toString() }}",
-                    "rightValue": "1",
+                    "leftValue": "={{ $json.body.data.purchase.recurrence_number.toString() }}",
+                    "rightValue": "=1",
                     "operator": {
                       "type": "string",
                       "operation": "notEquals"
@@ -308,139 +308,7 @@
       "name": "HTTP Request1"
     }
   ],
-  "pinData": {
-    "Webhook": [
-      {
-        "json": {
-          "id": "4cc639a5-6e3b-4151-aade-bf9b1e24d88f",
-          "creation_date": 1778769803935,
-          "event": "PURCHASE_COMPLETE",
-          "version": "2.0.0",
-          "data": {
-            "product": {
-              "id": 7492517,
-              "ucode": "fd8ff198-2759-4d56-8519-2087151f34ad",
-              "name": "PLAN DE ALIMENTACIÓN MENSUAL",
-              "warranty_date": "2026-05-13T00:00:00Z",
-              "support_email": "Federicoymarialuisahotmart@gmail.com",
-              "has_co_production": true,
-              "is_physical_product": false,
-              "product_format_id": 13,
-              "content": {
-                "has_physical_products": false,
-                "products": [
-                  {
-                    "id": 5092790,
-                    "ucode": "d436f39b-f08c-445c-b3b4-a4838a897ba1",
-                    "name": "Plan de alimentación mensual",
-                    "is_physical_product": false
-                  },
-                  {
-                    "id": 7492422,
-                    "ucode": "cf5c5c9c-c33a-4afd-80c5-92617f2542b1",
-                    "name": "My Meal Plan",
-                    "is_physical_product": false
-                  }
-                ]
-              }
-            },
-            "affiliates": [
-              {
-                "affiliate_code": "",
-                "name": ""
-              }
-            ],
-            "buyer": {
-              "email": "angelamgz@gmail.com",
-              "name": "Angela González",
-              "first_name": "Angela",
-              "last_name": "González",
-              "address": {
-                "country": "Argentina",
-                "country_iso": "AR"
-              },
-              "document": "",
-              "document_type": ""
-            },
-            "producer": {
-              "name": "MARTINEZ ARIAS INVESMENTS LLC",
-              "document": "L24000067740",
-              "legal_nature": "Pessoa Jurídica"
-            },
-            "commissions": [
-              {
-                "value": 1.53,
-                "source": "MARKETPLACE",
-                "currency_value": "USD"
-              },
-              {
-                "value": 0.1,
-                "source": "PRODUCER",
-                "currency_value": "USD",
-                "currency_conversion": {
-                  "converted_value": 372.68,
-                  "converted_to_currency": "COP",
-                  "conversion_rate": 3726.82
-                }
-              }
-            ],
-            "purchase": {
-              "approved_date": 1778118413000,
-              "full_price": {
-                "value": 57012,
-                "currency_value": "COP"
-              },
-              "price": {
-                "value": 57012,
-                "currency_value": "COP"
-              },
-              "checkout_country": {
-                "name": "Argentina",
-                "iso": "AR"
-              },
-              "order_bump": {
-                "is_order_bump": true
-              },
-              "origin": {
-                "xcod": "v3_6bbf9d03-711a-4c27-b9f0-76ef1ad02b71_69cc31773b3e907a5ae164ee_795_t-10_s-1"
-              },
-              "buyer_ip": "191.95.38.255",
-              "original_offer_price": {
-                "value": 15.3,
-                "currency_value": "USD"
-              },
-              "order_date": 1778118412000,
-              "status": "COMPLETED",
-              "transaction": "HP2489051409",
-              "payment": {
-                "installments_number": 1,
-                "type": "CREDIT_CARD"
-              },
-              "offer": {
-                "code": "xd4zbnzd"
-              },
-              "invoice_by": "SELLER",
-              "subscription_anticipation_purchase": false,
-              "date_next_charge": 1780833600000,
-              "recurrence_number": 1,
-              "is_funnel": false,
-              "business_model": "A"
-            },
-            "subscription": {
-              "status": "ACTIVE",
-              "plan": {
-                "id": 1287176,
-                "name": "Pioneros"
-              },
-              "subscriber": {
-                "code": "C2SOSWXB"
-              }
-            }
-          }
-        }
-      }
-    ]
-  },
+  "pinData": {},
   "repo_name": "backupn8n",
   "repo_owner": "infoandresrendoncol",
   "repo_path": "backup/",
@@ -460,6 +328,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2026-05-14T16:06:25.216Z",
-  "versionId": "956ad0c6-c19c-4efa-b9cf-f7bbb19f5d21"
+  "updatedAt": "2026-05-20T21:26:47.336Z",
+  "versionId": "226df732-9550-409a-86b9-89a0713553d9"
 }
