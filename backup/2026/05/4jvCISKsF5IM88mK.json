@@ -1,0 +1,1579 @@
+{
+  "active": true,
+  "activeVersion": {
+    "updatedAt": "2026-05-22T00:37:44.000Z",
+    "createdAt": "2026-05-22T00:23:16.794Z",
+    "versionId": "cafa0c19-5268-45e2-b467-7bbe015f2117",
+    "workflowId": "4jvCISKsF5IM88mK",
+    "nodes": [
+      {
+        "parameters": {
+          "httpMethod": "POST",
+          "path": "lunacal-webhook",
+          "options": {}
+        },
+        "id": "a5615f3d-83e9-4e7a-9f50-222c82c98166",
+        "name": "Webhook LunaCal",
+        "type": "n8n-nodes-base.webhook",
+        "typeVersion": 1.1,
+        "position": [
+          -2784,
+          1024
+        ],
+        "webhookId": "96a125b9-e994-4da0-9945-a73155afff1b"
+      },
+      {
+        "parameters": {
+          "dataType": "string",
+          "value1": "={{ $json.body.triggerEvent }}",
+          "rules": {
+            "rules": [
+              {
+                "value2": "BOOKING_CREATED"
+              },
+              {
+                "value2": "BOOKING_RESCHEDULED",
+                "output": 1
+              },
+              {
+                "value2": "BOOKING_CANCELLED",
+                "output": 2
+              }
+            ]
+          }
+        },
+        "id": "97da73e6-d781-434b-a22c-6adf87d449f5",
+        "name": "Clasificar Evento",
+        "type": "n8n-nodes-base.switch",
+        "typeVersion": 1,
+        "position": [
+          -2560,
+          1024
+        ]
+      },
+      {
+        "parameters": {
+          "operation": "append",
+          "documentId": {
+            "__rl": true,
+            "value": "1AVjq5VQYZ4ThXM3EP4idqApBuWO1y8Mlui2E7Oiw2KU",
+            "mode": "list",
+            "cachedResultName": "Control de Citas LunaCal",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1AVjq5VQYZ4ThXM3EP4idqApBuWO1y8Mlui2E7Oiw2KU/edit?usp=drivesdk"
+          },
+          "sheetName": {
+            "__rl": true,
+            "value": "gid=0",
+            "mode": "list",
+            "cachedResultName": "Hoja 1",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1AVjq5VQYZ4ThXM3EP4idqApBuWO1y8Mlui2E7Oiw2KU/edit#gid=0"
+          },
+          "columns": {
+            "mappingMode": "defineBelow",
+            "value": {
+              "ID Reserva": "={{ $json.body.payload.bookingId }}",
+              "Nombre": "={{ $json.body.payload?.responses?.name?.value || $json.body.payload?.attendees[0]?.name || 'Cliente' }}",
+              "Fecha Inicio": "={{ $json.body.payload.startTime }}",
+              "Teléfono": "={{ $json.body.payload?.responses?.phone?.value || '' }}",
+              "Email": "={{ $json.body.payload?.responses?.email?.value || $json.body.payload?.attendees[0]?.email }}"
+            },
+            "matchingColumns": [],
+            "schema": [
+              {
+                "id": "ID Reserva",
+                "displayName": "ID Reserva",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "Nombre",
+                "displayName": "Nombre",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "Email",
+                "displayName": "Email",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "Teléfono",
+                "displayName": "Teléfono",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "Fecha Inicio",
+                "displayName": "Fecha Inicio",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "Estado",
+                "displayName": "Estado",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              }
+            ],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": false
+          },
+          "options": {}
+        },
+        "id": "3d7a0174-1499-4162-a8b5-be2961d5f57f",
+        "name": "Sheets: Registrar Nueva",
+        "type": "n8n-nodes-base.googleSheets",
+        "typeVersion": 4.5,
+        "position": [
+          -2320,
+          608
+        ],
+        "credentials": {
+          "googleSheetsOAuth2Api": {
+            "id": "uniCNvqoYoprQPic",
+            "name": "SHEET INFO.HOLDINGS"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "operation": "update",
+          "documentId": {
+            "__rl": true,
+            "value": "1AVjq5VQYZ4ThXM3EP4idqApBuWO1y8Mlui2E7Oiw2KU",
+            "mode": "list",
+            "cachedResultName": "Control de Citas LunaCal",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1AVjq5VQYZ4ThXM3EP4idqApBuWO1y8Mlui2E7Oiw2KU/edit?usp=drivesdk"
+          },
+          "sheetName": {
+            "__rl": true,
+            "value": "gid=0",
+            "mode": "list",
+            "cachedResultName": "Hoja 1",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1AVjq5VQYZ4ThXM3EP4idqApBuWO1y8Mlui2E7Oiw2KU/edit#gid=0"
+          },
+          "columns": {
+            "mappingMode": "defineBelow",
+            "value": {
+              "Fecha Inicio": "={{ $node[\"Webhook LunaCal\"].json.body.payload.startTime }}",
+              "Teléfono": "={{ $node[\"Webhook LunaCal\"].json.body.payload?.responses?.phone?.value || '' }}",
+              "Email": "={{ $node[\"Webhook LunaCal\"].json.body.payload?.responses?.email?.value || $node[\"Webhook LunaCal\"].json.body.payload?.attendees[0]?.email }}",
+              "Nombre": "={{ $node[\"Webhook LunaCal\"].json.body.payload?.responses?.name?.value || $node[\"Webhook LunaCal\"].json.body.payload?.attendees[0]?.name || 'Cliente' }}",
+              "ID Reserva": "={{ $node[\"Webhook LunaCal\"].json.body.payload.bookingId }}",
+              "Estado": "ACCEPTED"
+            },
+            "matchingColumns": [
+              "ID Reserva"
+            ],
+            "schema": [
+              {
+                "id": "ID Reserva",
+                "displayName": "ID Reserva",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "Nombre",
+                "displayName": "Nombre",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "Email",
+                "displayName": "Email",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "Teléfono",
+                "displayName": "Teléfono",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "Fecha Inicio",
+                "displayName": "Fecha Inicio",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "Estado",
+                "displayName": "Estado",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "row_number",
+                "displayName": "row_number",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "readOnly": true,
+                "removed": true
+              }
+            ],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": false
+          },
+          "options": {}
+        },
+        "id": "b0d16688-8137-480e-8f77-46691917d7c7",
+        "name": "Sheets: Marcar Reagendada",
+        "type": "n8n-nodes-base.googleSheets",
+        "typeVersion": 4.5,
+        "position": [
+          -2320,
+          1024
+        ],
+        "credentials": {
+          "googleSheetsOAuth2Api": {
+            "id": "uniCNvqoYoprQPic",
+            "name": "SHEET INFO.HOLDINGS"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "operation": "update",
+          "documentId": {
+            "__rl": true,
+            "value": "1AVjq5VQYZ4ThXM3EP4idqApBuWO1y8Mlui2E7Oiw2KU",
+            "mode": "list",
+            "cachedResultName": "Control de Citas LunaCal",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1AVjq5VQYZ4ThXM3EP4idqApBuWO1y8Mlui2E7Oiw2KU/edit?usp=drivesdk"
+          },
+          "sheetName": {
+            "__rl": true,
+            "value": "gid=0",
+            "mode": "list",
+            "cachedResultName": "Hoja 1",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1AVjq5VQYZ4ThXM3EP4idqApBuWO1y8Mlui2E7Oiw2KU/edit#gid=0"
+          },
+          "columns": {
+            "mappingMode": "defineBelow",
+            "value": {
+              "Fecha Inicio": "={{ $json.body.payload.startTime }}",
+              "Teléfono": "={{ $json.body.payload?.responses?.phone?.value || '' }}",
+              "Email": "={{ $json.body.payload?.responses?.email?.value || $json.body.payload?.attendees[0]?.email }}",
+              "Nombre": "={{ $json.body.payload?.responses?.name?.value || $json.body.payload?.attendees[0]?.name || 'Cliente' }}",
+              "ID Reserva": "={{ $json.body.payload.bookingId }}"
+            },
+            "matchingColumns": [],
+            "schema": [
+              {
+                "id": "ID Reserva",
+                "displayName": "ID Reserva",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "Nombre",
+                "displayName": "Nombre",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "Email",
+                "displayName": "Email",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "Teléfono",
+                "displayName": "Teléfono",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "Fecha Inicio",
+                "displayName": "Fecha Inicio",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "Estado",
+                "displayName": "Estado",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "row_number",
+                "displayName": "row_number",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "readOnly": true,
+                "removed": true
+              }
+            ],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": false
+          },
+          "options": {}
+        },
+        "id": "8c5f79b5-365b-419f-96c2-c2d91855380e",
+        "name": "Sheets: Marcar Cancelada",
+        "type": "n8n-nodes-base.googleSheets",
+        "typeVersion": 4.5,
+        "position": [
+          -2320,
+          1360
+        ],
+        "credentials": {
+          "googleSheetsOAuth2Api": {
+            "id": "uniCNvqoYoprQPic",
+            "name": "SHEET INFO.HOLDINGS"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "https://unnichat.com.br/a/start/nvF71dsb2bzCqXNfgOYr",
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "={\n  \"name\": \"{{ $node[\"Webhook LunaCal\"].json.body.payload?.responses?.name?.value || $node[\"Webhook LunaCal\"].json.body.payload?.attendees[0]?.name || 'Cliente' }}\",\n  \"email\": \"{{ $node[\"Webhook LunaCal\"].json.body.payload?.responses?.email?.value || $node[\"Webhook LunaCal\"].json.body.payload?.attendees[0]?.email }}\",\n  \"phone\": \"{{ $node[\"Webhook LunaCal\"].json.body.payload?.responses?.phone?.value || '' }}\",\n  \"tipo_mensaje\": \"confirmacion\"\n}",
+          "options": {}
+        },
+        "id": "91740a26-e855-4aea-9293-20a68c339ed2",
+        "name": "Unichat: Confirmación",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          -2064,
+          608
+        ]
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "https://unnichat.com.br/a/start/nvF71dsb2bzCqXNfgOYr",
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "={\n  \"name\": \"{{ $node[\"Webhook LunaCal\"].json.body.payload?.responses?.name?.value || $node[\"Webhook LunaCal\"].json.body.payload?.attendees[0]?.name || 'Cliente' }}\",\n  \"email\": \"{{ $node[\"Webhook LunaCal\"].json.body.payload?.responses?.email?.value || $node[\"Webhook LunaCal\"].json.body.payload?.attendees[0]?.email }}\",\n  \"phone\": \"{{ $node[\"Webhook LunaCal\"].json.body.payload?.responses?.phone?.value || '' }}\",\n  \"tipo_mensaje\": \"reagendamiento\"\n}",
+          "options": {}
+        },
+        "id": "05b7c6f6-8393-47cf-b90a-726beab1320a",
+        "name": "Unichat: Reagendado",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          -1808,
+          1024
+        ]
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "https://unnichat.com.br/a/start/nvF71dsb2bzCqXNfgOYr",
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "={\n  \"name\": \"{{ $node[\"Webhook LunaCal\"].json.body.payload?.responses?.name?.value || $node[\"Webhook LunaCal\"].json.body.payload?.attendees[0]?.name || 'Cliente' }}\",\n  \"email\": \"{{ $node[\"Webhook LunaCal\"].json.body.payload?.responses?.email?.value || $node[\"Webhook LunaCal\"].json.body.payload?.attendees[0]?.email }}\",\n  \"phone\": \"{{ $node[\"Webhook LunaCal\"].json.body.payload?.responses?.phone?.value || '' }}\",\n  \"tipo_mensaje\": \"cancelacion\"\n}",
+          "options": {}
+        },
+        "id": "fd8938c8-9bec-4874-9c72-4e3cb3537197",
+        "name": "Unichat: Cancelado",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          -2064,
+          1360
+        ]
+      },
+      {
+        "parameters": {},
+        "id": "28cc83ac-aa73-4173-bec5-f76f48306dcd",
+        "name": "Esperar hasta 10 min antes",
+        "type": "n8n-nodes-base.wait",
+        "typeVersion": 1.1,
+        "position": [
+          -1552,
+          912
+        ],
+        "webhookId": "3dd850fc-3727-4794-a2d3-42ea23c240c4"
+      },
+      {
+        "parameters": {
+          "documentId": {
+            "__rl": true,
+            "value": "1AVjq5VQYZ4ThXM3EP4idqApBuWO1y8Mlui2E7Oiw2KU",
+            "mode": "list",
+            "cachedResultName": "Control de Citas LunaCal",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1AVjq5VQYZ4ThXM3EP4idqApBuWO1y8Mlui2E7Oiw2KU/edit?usp=drivesdk"
+          },
+          "sheetName": {
+            "__rl": true,
+            "value": "gid=0",
+            "mode": "list",
+            "cachedResultName": "Hoja 1",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1AVjq5VQYZ4ThXM3EP4idqApBuWO1y8Mlui2E7Oiw2KU/edit#gid=0"
+          },
+          "filtersUI": {
+            "values": [
+              {
+                "lookupColumn": "ID Reserva",
+                "lookupValue": "={{ $node[\"Webhook LunaCal\"].json.body.payload.bookingId }}"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "id": "b274f042-dc27-4e92-b4d6-55b12cc39fc4",
+        "name": "Sheets: Consultar Estado Actual",
+        "type": "n8n-nodes-base.googleSheets",
+        "typeVersion": 4.5,
+        "position": [
+          -1328,
+          912
+        ],
+        "credentials": {
+          "googleSheetsOAuth2Api": {
+            "id": "uniCNvqoYoprQPic",
+            "name": "SHEET INFO.HOLDINGS"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "string": [
+              {
+                "value1": "={{ $json.Estado }}",
+                "value2": "ACCEPTED"
+              }
+            ]
+          }
+        },
+        "id": "24238607-d328-4d42-b571-ccc3d045bbaa",
+        "name": "¿Sigue Activa?",
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 1,
+        "position": [
+          -1104,
+          912
+        ]
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "https://unnichat.com.br/a/start/nvF71dsb2bzCqXNfgOYr",
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "={\n  \"name\": \"{{ $node[\"Webhook LunaCal\"].json.body.payload?.responses?.name?.value || $node[\"Webhook LunaCal\"].json.body.payload?.attendees[0]?.name || 'Cliente' }}\",\n  \"email\": \"{{ $node[\"Webhook LunaCal\"].json.body.payload?.responses?.email?.value || $node[\"Webhook LunaCal\"].json.body.payload?.attendees[0]?.email }}\",\n  \"phone\": \"{{ $node[\"Webhook LunaCal\"].json.body.payload?.responses?.phone?.value || '' }}\",\n  \"tipo_mensaje\": \"recordatorio\"\n}",
+          "options": {}
+        },
+        "id": "3347b041-e2c8-47a9-b991-b5b636681333",
+        "name": "Unichat: Recordatorio",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          -880,
+          880
+        ]
+      },
+      {
+        "parameters": {
+          "operation": "append",
+          "documentId": {
+            "__rl": true,
+            "value": "1AVjq5VQYZ4ThXM3EP4idqApBuWO1y8Mlui2E7Oiw2KU",
+            "mode": "list",
+            "cachedResultName": "Control de Citas LunaCal",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1AVjq5VQYZ4ThXM3EP4idqApBuWO1y8Mlui2E7Oiw2KU/edit?usp=drivesdk"
+          },
+          "sheetName": {
+            "__rl": true,
+            "value": "gid=0",
+            "mode": "list",
+            "cachedResultName": "Hoja 1",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1AVjq5VQYZ4ThXM3EP4idqApBuWO1y8Mlui2E7Oiw2KU/edit#gid=0"
+          },
+          "columns": {
+            "mappingMode": "defineBelow",
+            "value": {
+              "Fecha Inicio": "={{ $json.body.payload.startTime }}",
+              "Teléfono": "={{ $json.body.payload?.responses?.phone?.value || '' }}",
+              "Email": "={{ $json.body.payload?.responses?.email?.value || $json.body.payload?.attendees[0]?.email }}",
+              "Nombre": "={{ $json.body.payload?.responses?.name?.value || $json.body.payload?.attendees[0]?.name || 'Cliente' }}",
+              "ID Reserva": "={{ $json.body.payload.bookingId }}"
+            },
+            "matchingColumns": [],
+            "schema": [
+              {
+                "id": "ID Reserva",
+                "displayName": "ID Reserva",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "Nombre",
+                "displayName": "Nombre",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "Email",
+                "displayName": "Email",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "Teléfono",
+                "displayName": "Teléfono",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "Fecha Inicio",
+                "displayName": "Fecha Inicio",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "Estado",
+                "displayName": "Estado",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              }
+            ],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": false
+          },
+          "options": {}
+        },
+        "id": "eebff7b1-c71b-42de-a5e6-f6c66b9aa97c",
+        "name": "Sheets: Registrar Nueva Fecha",
+        "type": "n8n-nodes-base.googleSheets",
+        "typeVersion": 4.5,
+        "position": [
+          -2064,
+          1024
+        ],
+        "credentials": {
+          "googleSheetsOAuth2Api": {
+            "id": "uniCNvqoYoprQPic",
+            "name": "SHEET INFO.HOLDINGS"
+          }
+        }
+      }
+    ],
+    "connections": {
+      "Webhook LunaCal": {
+        "main": [
+          [
+            {
+              "node": "Clasificar Evento",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Clasificar Evento": {
+        "main": [
+          [
+            {
+              "node": "Sheets: Registrar Nueva",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Sheets: Marcar Reagendada",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Sheets: Marcar Cancelada",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Sheets: Registrar Nueva": {
+        "main": [
+          [
+            {
+              "node": "Unichat: Confirmación",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Sheets: Marcar Reagendada": {
+        "main": [
+          [
+            {
+              "node": "Sheets: Registrar Nueva Fecha",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Sheets: Registrar Nueva Fecha": {
+        "main": [
+          [
+            {
+              "node": "Unichat: Reagendado",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Sheets: Marcar Cancelada": {
+        "main": [
+          [
+            {
+              "node": "Unichat: Cancelado",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Unichat: Confirmación": {
+        "main": [
+          [
+            {
+              "node": "Esperar hasta 10 min antes",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Unichat: Reagendado": {
+        "main": [
+          [
+            {
+              "node": "Esperar hasta 10 min antes",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Esperar hasta 10 min antes": {
+        "main": [
+          [
+            {
+              "node": "Sheets: Consultar Estado Actual",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Sheets: Consultar Estado Actual": {
+        "main": [
+          [
+            {
+              "node": "¿Sigue Activa?",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "¿Sigue Activa?": {
+        "main": [
+          [
+            {
+              "node": "Unichat: Recordatorio",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "authors": "BE Online",
+    "name": "Version cafa0c19",
+    "description": "",
+    "autosaved": true
+  },
+  "activeVersionId": "cafa0c19-5268-45e2-b467-7bbe015f2117",
+  "connections": {
+    "Webhook LunaCal": {
+      "main": [
+        [
+          {
+            "node": "Clasificar Evento",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Clasificar Evento": {
+      "main": [
+        [
+          {
+            "node": "Sheets: Registrar Nueva",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Sheets: Marcar Reagendada",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Sheets: Marcar Cancelada",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Sheets: Registrar Nueva": {
+      "main": [
+        [
+          {
+            "node": "Unichat: Confirmación",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Sheets: Marcar Reagendada": {
+      "main": [
+        [
+          {
+            "node": "Sheets: Registrar Nueva Fecha",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Sheets: Registrar Nueva Fecha": {
+      "main": [
+        [
+          {
+            "node": "Unichat: Reagendado",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Sheets: Marcar Cancelada": {
+      "main": [
+        [
+          {
+            "node": "Unichat: Cancelado",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Unichat: Confirmación": {
+      "main": [
+        [
+          {
+            "node": "Esperar hasta 10 min antes",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Unichat: Reagendado": {
+      "main": [
+        [
+          {
+            "node": "Esperar hasta 10 min antes",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Esperar hasta 10 min antes": {
+      "main": [
+        [
+          {
+            "node": "Sheets: Consultar Estado Actual",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Sheets: Consultar Estado Actual": {
+      "main": [
+        [
+          {
+            "node": "¿Sigue Activa?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "¿Sigue Activa?": {
+      "main": [
+        [
+          {
+            "node": "Unichat: Recordatorio",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2026-05-21T22:11:20.605Z",
+  "id": "4jvCISKsF5IM88mK",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Lunacal Reunion Inicial Agendada",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "lunacal-webhook",
+        "options": {}
+      },
+      "id": "a5615f3d-83e9-4e7a-9f50-222c82c98166",
+      "name": "Webhook LunaCal",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1.1,
+      "position": [
+        -2784,
+        1024
+      ],
+      "webhookId": "96a125b9-e994-4da0-9945-a73155afff1b"
+    },
+    {
+      "parameters": {
+        "dataType": "string",
+        "value1": "={{ $json.body.triggerEvent }}",
+        "rules": {
+          "rules": [
+            {
+              "value2": "BOOKING_CREATED"
+            },
+            {
+              "value2": "BOOKING_RESCHEDULED",
+              "output": 1
+            },
+            {
+              "value2": "BOOKING_CANCELLED",
+              "output": 2
+            }
+          ]
+        }
+      },
+      "id": "97da73e6-d781-434b-a22c-6adf87d449f5",
+      "name": "Clasificar Evento",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 1,
+      "position": [
+        -2560,
+        1024
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1AVjq5VQYZ4ThXM3EP4idqApBuWO1y8Mlui2E7Oiw2KU",
+          "mode": "list",
+          "cachedResultName": "Control de Citas LunaCal",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1AVjq5VQYZ4ThXM3EP4idqApBuWO1y8Mlui2E7Oiw2KU/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Hoja 1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1AVjq5VQYZ4ThXM3EP4idqApBuWO1y8Mlui2E7Oiw2KU/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "ID Reserva": "={{ $json.body.payload.bookingId }}",
+            "Nombre": "={{ $json.body.payload?.responses?.name?.value || $json.body.payload?.attendees[0]?.name || 'Cliente' }}",
+            "Fecha Inicio": "={{ $json.body.payload.startTime }}",
+            "Teléfono": "={{ $json.body.payload?.responses?.phone?.value || '' }}",
+            "Email": "={{ $json.body.payload?.responses?.email?.value || $json.body.payload?.attendees[0]?.email }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "ID Reserva",
+              "displayName": "ID Reserva",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Nombre",
+              "displayName": "Nombre",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Teléfono",
+              "displayName": "Teléfono",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Fecha Inicio",
+              "displayName": "Fecha Inicio",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Estado",
+              "displayName": "Estado",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "id": "3d7a0174-1499-4162-a8b5-be2961d5f57f",
+      "name": "Sheets: Registrar Nueva",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        -2320,
+        608
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "uniCNvqoYoprQPic",
+          "name": "SHEET INFO.HOLDINGS"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1AVjq5VQYZ4ThXM3EP4idqApBuWO1y8Mlui2E7Oiw2KU",
+          "mode": "list",
+          "cachedResultName": "Control de Citas LunaCal",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1AVjq5VQYZ4ThXM3EP4idqApBuWO1y8Mlui2E7Oiw2KU/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Hoja 1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1AVjq5VQYZ4ThXM3EP4idqApBuWO1y8Mlui2E7Oiw2KU/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Fecha Inicio": "={{ $node[\"Webhook LunaCal\"].json.body.payload.startTime }}",
+            "Teléfono": "={{ $node[\"Webhook LunaCal\"].json.body.payload?.responses?.phone?.value || '' }}",
+            "Email": "={{ $node[\"Webhook LunaCal\"].json.body.payload?.responses?.email?.value || $node[\"Webhook LunaCal\"].json.body.payload?.attendees[0]?.email }}",
+            "Nombre": "={{ $node[\"Webhook LunaCal\"].json.body.payload?.responses?.name?.value || $node[\"Webhook LunaCal\"].json.body.payload?.attendees[0]?.name || 'Cliente' }}",
+            "ID Reserva": "={{ $node[\"Webhook LunaCal\"].json.body.payload.bookingId }}",
+            "Estado": "ACCEPTED"
+          },
+          "matchingColumns": [
+            "ID Reserva"
+          ],
+          "schema": [
+            {
+              "id": "ID Reserva",
+              "displayName": "ID Reserva",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Nombre",
+              "displayName": "Nombre",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Teléfono",
+              "displayName": "Teléfono",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Fecha Inicio",
+              "displayName": "Fecha Inicio",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Estado",
+              "displayName": "Estado",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "id": "b0d16688-8137-480e-8f77-46691917d7c7",
+      "name": "Sheets: Marcar Reagendada",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        -2320,
+        1024
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "uniCNvqoYoprQPic",
+          "name": "SHEET INFO.HOLDINGS"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1AVjq5VQYZ4ThXM3EP4idqApBuWO1y8Mlui2E7Oiw2KU",
+          "mode": "list",
+          "cachedResultName": "Control de Citas LunaCal",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1AVjq5VQYZ4ThXM3EP4idqApBuWO1y8Mlui2E7Oiw2KU/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Hoja 1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1AVjq5VQYZ4ThXM3EP4idqApBuWO1y8Mlui2E7Oiw2KU/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Fecha Inicio": "={{ $json.body.payload.startTime }}",
+            "Teléfono": "={{ $json.body.payload?.responses?.phone?.value || '' }}",
+            "Email": "={{ $json.body.payload?.responses?.email?.value || $json.body.payload?.attendees[0]?.email }}",
+            "Nombre": "={{ $json.body.payload?.responses?.name?.value || $json.body.payload?.attendees[0]?.name || 'Cliente' }}",
+            "ID Reserva": "={{ $json.body.payload.bookingId }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "ID Reserva",
+              "displayName": "ID Reserva",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Nombre",
+              "displayName": "Nombre",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Teléfono",
+              "displayName": "Teléfono",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Fecha Inicio",
+              "displayName": "Fecha Inicio",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Estado",
+              "displayName": "Estado",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "id": "8c5f79b5-365b-419f-96c2-c2d91855380e",
+      "name": "Sheets: Marcar Cancelada",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        -2320,
+        1360
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "uniCNvqoYoprQPic",
+          "name": "SHEET INFO.HOLDINGS"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://unnichat.com.br/a/start/nvF71dsb2bzCqXNfgOYr",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"name\": \"{{ $node[\"Webhook LunaCal\"].json.body.payload?.responses?.name?.value || $node[\"Webhook LunaCal\"].json.body.payload?.attendees[0]?.name || 'Cliente' }}\",\n  \"email\": \"{{ $node[\"Webhook LunaCal\"].json.body.payload?.responses?.email?.value || $node[\"Webhook LunaCal\"].json.body.payload?.attendees[0]?.email }}\",\n  \"phone\": \"{{ $node[\"Webhook LunaCal\"].json.body.payload?.responses?.phone?.value || '' }}\",\n  \"tipo_mensaje\": \"confirmacion\"\n}",
+        "options": {}
+      },
+      "id": "91740a26-e855-4aea-9293-20a68c339ed2",
+      "name": "Unichat: Confirmación",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -2064,
+        608
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://unnichat.com.br/a/start/nvF71dsb2bzCqXNfgOYr",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"name\": \"{{ $node[\"Webhook LunaCal\"].json.body.payload?.responses?.name?.value || $node[\"Webhook LunaCal\"].json.body.payload?.attendees[0]?.name || 'Cliente' }}\",\n  \"email\": \"{{ $node[\"Webhook LunaCal\"].json.body.payload?.responses?.email?.value || $node[\"Webhook LunaCal\"].json.body.payload?.attendees[0]?.email }}\",\n  \"phone\": \"{{ $node[\"Webhook LunaCal\"].json.body.payload?.responses?.phone?.value || '' }}\",\n  \"tipo_mensaje\": \"reagendamiento\"\n}",
+        "options": {}
+      },
+      "id": "05b7c6f6-8393-47cf-b90a-726beab1320a",
+      "name": "Unichat: Reagendado",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -1808,
+        1024
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://unnichat.com.br/a/start/nvF71dsb2bzCqXNfgOYr",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"name\": \"{{ $node[\"Webhook LunaCal\"].json.body.payload?.responses?.name?.value || $node[\"Webhook LunaCal\"].json.body.payload?.attendees[0]?.name || 'Cliente' }}\",\n  \"email\": \"{{ $node[\"Webhook LunaCal\"].json.body.payload?.responses?.email?.value || $node[\"Webhook LunaCal\"].json.body.payload?.attendees[0]?.email }}\",\n  \"phone\": \"{{ $node[\"Webhook LunaCal\"].json.body.payload?.responses?.phone?.value || '' }}\",\n  \"tipo_mensaje\": \"cancelacion\"\n}",
+        "options": {}
+      },
+      "id": "fd8938c8-9bec-4874-9c72-4e3cb3537197",
+      "name": "Unichat: Cancelado",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -2064,
+        1360
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "28cc83ac-aa73-4173-bec5-f76f48306dcd",
+      "name": "Esperar hasta 10 min antes",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        -1552,
+        912
+      ],
+      "webhookId": "3dd850fc-3727-4794-a2d3-42ea23c240c4"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1AVjq5VQYZ4ThXM3EP4idqApBuWO1y8Mlui2E7Oiw2KU",
+          "mode": "list",
+          "cachedResultName": "Control de Citas LunaCal",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1AVjq5VQYZ4ThXM3EP4idqApBuWO1y8Mlui2E7Oiw2KU/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Hoja 1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1AVjq5VQYZ4ThXM3EP4idqApBuWO1y8Mlui2E7Oiw2KU/edit#gid=0"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "ID Reserva",
+              "lookupValue": "={{ $node[\"Webhook LunaCal\"].json.body.payload.bookingId }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "b274f042-dc27-4e92-b4d6-55b12cc39fc4",
+      "name": "Sheets: Consultar Estado Actual",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        -1328,
+        912
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "uniCNvqoYoprQPic",
+          "name": "SHEET INFO.HOLDINGS"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $json.Estado }}",
+              "value2": "ACCEPTED"
+            }
+          ]
+        }
+      },
+      "id": "24238607-d328-4d42-b571-ccc3d045bbaa",
+      "name": "¿Sigue Activa?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        -1104,
+        912
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://unnichat.com.br/a/start/nvF71dsb2bzCqXNfgOYr",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"name\": \"{{ $node[\"Webhook LunaCal\"].json.body.payload?.responses?.name?.value || $node[\"Webhook LunaCal\"].json.body.payload?.attendees[0]?.name || 'Cliente' }}\",\n  \"email\": \"{{ $node[\"Webhook LunaCal\"].json.body.payload?.responses?.email?.value || $node[\"Webhook LunaCal\"].json.body.payload?.attendees[0]?.email }}\",\n  \"phone\": \"{{ $node[\"Webhook LunaCal\"].json.body.payload?.responses?.phone?.value || '' }}\",\n  \"tipo_mensaje\": \"recordatorio\"\n}",
+        "options": {}
+      },
+      "id": "3347b041-e2c8-47a9-b991-b5b636681333",
+      "name": "Unichat: Recordatorio",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -880,
+        880
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1AVjq5VQYZ4ThXM3EP4idqApBuWO1y8Mlui2E7Oiw2KU",
+          "mode": "list",
+          "cachedResultName": "Control de Citas LunaCal",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1AVjq5VQYZ4ThXM3EP4idqApBuWO1y8Mlui2E7Oiw2KU/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Hoja 1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1AVjq5VQYZ4ThXM3EP4idqApBuWO1y8Mlui2E7Oiw2KU/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Fecha Inicio": "={{ $json.body.payload.startTime }}",
+            "Teléfono": "={{ $json.body.payload?.responses?.phone?.value || '' }}",
+            "Email": "={{ $json.body.payload?.responses?.email?.value || $json.body.payload?.attendees[0]?.email }}",
+            "Nombre": "={{ $json.body.payload?.responses?.name?.value || $json.body.payload?.attendees[0]?.name || 'Cliente' }}",
+            "ID Reserva": "={{ $json.body.payload.bookingId }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "ID Reserva",
+              "displayName": "ID Reserva",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Nombre",
+              "displayName": "Nombre",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Teléfono",
+              "displayName": "Teléfono",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Fecha Inicio",
+              "displayName": "Fecha Inicio",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Estado",
+              "displayName": "Estado",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "id": "eebff7b1-c71b-42de-a5e6-f6c66b9aa97c",
+      "name": "Sheets: Registrar Nueva Fecha",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        -2064,
+        1024
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "uniCNvqoYoprQPic",
+          "name": "SHEET INFO.HOLDINGS"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "repo_name": "backupn8n",
+  "repo_owner": "infoandresrendoncol",
+  "repo_path": "backup/",
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "shared": [
+    {
+      "updatedAt": "2026-05-21T22:11:20.610Z",
+      "createdAt": "2026-05-21T22:11:20.610Z",
+      "role": "workflow:owner",
+      "workflowId": "4jvCISKsF5IM88mK",
+      "projectId": "4KmSbENK2cGxsjaf"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2026-05-22T00:23:16.793Z",
+  "versionId": "cafa0c19-5268-45e2-b467-7bbe015f2117"
+}
