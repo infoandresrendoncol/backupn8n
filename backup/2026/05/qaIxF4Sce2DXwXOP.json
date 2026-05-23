@@ -1,0 +1,230 @@
+{
+  "active": true,
+  "activeVersion": {
+    "updatedAt": "2026-05-22T18:26:35.000Z",
+    "createdAt": "2026-05-22T18:26:28.345Z",
+    "versionId": "6543954f-4a7a-4271-80f0-fed478e7536a",
+    "workflowId": "qaIxF4Sce2DXwXOP",
+    "nodes": [
+      {
+        "parameters": {
+          "httpMethod": "POST",
+          "path": "club-pastelero-ventas-22-05-26",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.webhook",
+        "typeVersion": 2.1,
+        "position": [
+          -192,
+          16
+        ],
+        "id": "171dee7e-b81b-425b-874b-0aacd42ac3f7",
+        "name": "Webhook",
+        "webhookId": "dac29b65-edb0-42a6-9eb5-53bfebb13706"
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "https://unnichat.com.br/a/start/5lXTa0wtv1ijeUS4voU4",
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "={\n  \"data\": {\n    \"number\": \"{{ $json.body.data.buyer.checkout_phone }}\",\n    \"tag\": \"global\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          208,
+          128
+        ],
+        "id": "2c7bec85-d671-4106-a73a-567257ee78e9",
+        "name": "Agregar contacto Unnichat"
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "=https://api.flodesk.com/v1/subscribers",
+          "authentication": "genericCredentialType",
+          "genericAuthType": "httpBasicAuth",
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "={\n  \"email\": \"{{ $json.body.data.buyer.email }}\",\n  \"first_name\": \"{{ $json.body.data.buyer.name }}\",\n  \"segment_ids\": [\"6a109e5966673b0f9f1160b9\"]\n}",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          208,
+          -128
+        ],
+        "id": "33dd30da-4169-4b86-9b60-9901bc41c62c",
+        "name": "Agregar a Flodesk",
+        "retryOnFail": false,
+        "maxTries": 5,
+        "waitBetweenTries": 5000,
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "hSaP4d59L4OoJOce",
+            "name": "Flodesk Alex"
+          },
+          "httpBasicAuth": {
+            "id": "SAnNYgEFTv4K59IE",
+            "name": "FLODESK LALA"
+          }
+        },
+        "onError": "continueRegularOutput"
+      }
+    ],
+    "connections": {
+      "Webhook": {
+        "main": [
+          [
+            {
+              "node": "Agregar a Flodesk",
+              "type": "main",
+              "index": 0
+            },
+            {
+              "node": "Agregar contacto Unnichat",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Agregar a Flodesk": {
+        "main": [
+          []
+        ]
+      }
+    },
+    "authors": "BE Online",
+    "name": "Version 6543954f",
+    "description": "",
+    "autosaved": true
+  },
+  "activeVersionId": "6543954f-4a7a-4271-80f0-fed478e7536a",
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Agregar a Flodesk",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Agregar contacto Unnichat",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Agregar a Flodesk": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "createdAt": "2026-05-22T17:54:46.850Z",
+  "id": "qaIxF4Sce2DXwXOP",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Lala - Ventas - Club",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "club-pastelero-ventas-22-05-26",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -192,
+        16
+      ],
+      "id": "171dee7e-b81b-425b-874b-0aacd42ac3f7",
+      "name": "Webhook",
+      "webhookId": "dac29b65-edb0-42a6-9eb5-53bfebb13706"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://unnichat.com.br/a/start/5lXTa0wtv1ijeUS4voU4",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"data\": {\n    \"number\": \"{{ $json.body.data.buyer.checkout_phone }}\",\n    \"tag\": \"global\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        208,
+        128
+      ],
+      "id": "2c7bec85-d671-4106-a73a-567257ee78e9",
+      "name": "Agregar contacto Unnichat"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.flodesk.com/v1/subscribers",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"email\": \"{{ $json.body.data.buyer.email }}\",\n  \"first_name\": \"{{ $json.body.data.buyer.name }}\",\n  \"segment_ids\": [\"6a109e5966673b0f9f1160b9\"]\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        208,
+        -128
+      ],
+      "id": "33dd30da-4169-4b86-9b60-9901bc41c62c",
+      "name": "Agregar a Flodesk",
+      "retryOnFail": false,
+      "maxTries": 5,
+      "waitBetweenTries": 5000,
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "hSaP4d59L4OoJOce",
+          "name": "Flodesk Alex"
+        },
+        "httpBasicAuth": {
+          "id": "SAnNYgEFTv4K59IE",
+          "name": "FLODESK LALA"
+        }
+      },
+      "onError": "continueRegularOutput"
+    }
+  ],
+  "pinData": {},
+  "repo_name": "backupn8n",
+  "repo_owner": "infoandresrendoncol",
+  "repo_path": "backup/",
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false,
+    "binaryMode": "separate"
+  },
+  "shared": [
+    {
+      "updatedAt": "2026-05-22T17:54:46.862Z",
+      "createdAt": "2026-05-22T17:54:46.862Z",
+      "role": "workflow:owner",
+      "workflowId": "qaIxF4Sce2DXwXOP",
+      "projectId": "4KmSbENK2cGxsjaf"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2026-05-22T18:26:28.344Z",
+  "versionId": "6543954f-4a7a-4271-80f0-fed478e7536a"
+}
