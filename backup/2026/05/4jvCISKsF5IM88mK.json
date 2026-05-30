@@ -1,9 +1,9 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2026-05-22T00:37:44.000Z",
-    "createdAt": "2026-05-22T00:23:16.794Z",
-    "versionId": "cafa0c19-5268-45e2-b467-7bbe015f2117",
+    "updatedAt": "2026-05-29T22:27:13.000Z",
+    "createdAt": "2026-05-29T22:27:08.891Z",
+    "versionId": "8d52ebaa-7098-4f4d-994c-3b0523c3609e",
     "workflowId": "4jvCISKsF5IM88mK",
     "nodes": [
       {
@@ -72,10 +72,11 @@
             "mappingMode": "defineBelow",
             "value": {
               "ID Reserva": "={{ $json.body.payload.bookingId }}",
-              "Nombre": "={{ $json.body.payload?.responses?.name?.value || $json.body.payload?.attendees[0]?.name || 'Cliente' }}",
+              "Nombre": "={{ $json.body.payload.responses?.name?.value || $json.body.payload.attendees[0]?.name || 'Cliente' }}",
               "Fecha Inicio": "={{ $json.body.payload.startTime }}",
-              "Teléfono": "={{ $json.body.payload?.responses?.phone?.value || '' }}",
-              "Email": "={{ $json.body.payload?.responses?.email?.value || $json.body.payload?.attendees[0]?.email }}"
+              "Teléfono": "={{ $json.body.payload.responses?.[ 'attendee-phone' ]?.value || $json.body.payload.attendees[0]?.phoneNumber || '' }}",
+              "Email": "={{ $json.body.payload?.responses?.email?.value || $json.body.payload?.attendees[0]?.email }}",
+              "Estado": "AGENDADA"
             },
             "matchingColumns": [],
             "schema": [
@@ -175,11 +176,11 @@
             "mappingMode": "defineBelow",
             "value": {
               "Fecha Inicio": "={{ $node[\"Webhook LunaCal\"].json.body.payload.startTime }}",
-              "Teléfono": "={{ $node[\"Webhook LunaCal\"].json.body.payload?.responses?.phone?.value || '' }}",
+              "Teléfono": "={{ $json.body.payload.responses?.[ 'attendee-phone' ]?.value || $json.body.payload.attendees[0]?.phoneNumber || '' }}",
               "Email": "={{ $node[\"Webhook LunaCal\"].json.body.payload?.responses?.email?.value || $node[\"Webhook LunaCal\"].json.body.payload?.attendees[0]?.email }}",
-              "Nombre": "={{ $node[\"Webhook LunaCal\"].json.body.payload?.responses?.name?.value || $node[\"Webhook LunaCal\"].json.body.payload?.attendees[0]?.name || 'Cliente' }}",
+              "Nombre": "={{ $json.body.payload.responses?.name?.value || $json.body.payload.attendees[0]?.name || 'Cliente' }}",
               "ID Reserva": "={{ $node[\"Webhook LunaCal\"].json.body.payload.bookingId }}",
-              "Estado": "ACCEPTED"
+              "Estado": "REPROGRAMADA"
             },
             "matchingColumns": [
               "ID Reserva"
@@ -294,12 +295,15 @@
             "mappingMode": "defineBelow",
             "value": {
               "Fecha Inicio": "={{ $json.body.payload.startTime }}",
-              "Teléfono": "={{ $json.body.payload?.responses?.phone?.value || '' }}",
+              "Teléfono": "={{ $json.body.payload.responses?.[ 'attendee-phone' ]?.value || $json.body.payload.attendees[0]?.phoneNumber || '' }}",
               "Email": "={{ $json.body.payload?.responses?.email?.value || $json.body.payload?.attendees[0]?.email }}",
               "Nombre": "={{ $json.body.payload?.responses?.name?.value || $json.body.payload?.attendees[0]?.name || 'Cliente' }}",
-              "ID Reserva": "={{ $json.body.payload.bookingId }}"
+              "ID Reserva": "={{ $json.body.payload.bookingId }}",
+              "Estado": "CANCELADA"
             },
-            "matchingColumns": [],
+            "matchingColumns": [
+              "ID Reserva"
+            ],
             "schema": [
               {
                 "id": "ID Reserva",
@@ -308,7 +312,8 @@
                 "defaultMatch": false,
                 "display": true,
                 "type": "string",
-                "canBeUsedToMatch": true
+                "canBeUsedToMatch": true,
+                "removed": false
               },
               {
                 "id": "Nombre",
@@ -393,7 +398,7 @@
           "url": "https://unnichat.com.br/a/start/nvF71dsb2bzCqXNfgOYr",
           "sendBody": true,
           "specifyBody": "json",
-          "jsonBody": "={\n  \"name\": \"{{ $node[\"Webhook LunaCal\"].json.body.payload?.responses?.name?.value || $node[\"Webhook LunaCal\"].json.body.payload?.attendees[0]?.name || 'Cliente' }}\",\n  \"email\": \"{{ $node[\"Webhook LunaCal\"].json.body.payload?.responses?.email?.value || $node[\"Webhook LunaCal\"].json.body.payload?.attendees[0]?.email }}\",\n  \"phone\": \"{{ $node[\"Webhook LunaCal\"].json.body.payload?.responses?.phone?.value || '' }}\",\n  \"tipo_mensaje\": \"confirmacion\"\n}",
+          "jsonBody": "={\n  \"name\": \"{{ $json.Nombre || 'Cliente' }}\",\n  \"email\": \"{{ $json.Email }}\",\n  \"phone\": \"{{ $json.Teléfono }}\",\n  \"tipo_mensaje\": \"confirmacion\"\n}",
           "options": {}
         },
         "id": "91740a26-e855-4aea-9293-20a68c339ed2",
@@ -411,7 +416,7 @@
           "url": "https://unnichat.com.br/a/start/nvF71dsb2bzCqXNfgOYr",
           "sendBody": true,
           "specifyBody": "json",
-          "jsonBody": "={\n  \"name\": \"{{ $node[\"Webhook LunaCal\"].json.body.payload?.responses?.name?.value || $node[\"Webhook LunaCal\"].json.body.payload?.attendees[0]?.name || 'Cliente' }}\",\n  \"email\": \"{{ $node[\"Webhook LunaCal\"].json.body.payload?.responses?.email?.value || $node[\"Webhook LunaCal\"].json.body.payload?.attendees[0]?.email }}\",\n  \"phone\": \"{{ $node[\"Webhook LunaCal\"].json.body.payload?.responses?.phone?.value || '' }}\",\n  \"tipo_mensaje\": \"reagendamiento\"\n}",
+          "jsonBody": "={\n  \"name\": \"{{ $json.body.payload.responses?.name?.value || $json.body.payload.attendees[0]?.name || 'Cliente' }}\",\n  \"email\": \"{{ $json.body.payload.responses?.email?.value || $json.body.payload.attendees[0]?.email }}\",\n  \"phone\": \"{{ $json.body.payload.responses?.[ 'attendee-phone' ]?.value || $json.body.payload.attendees[0]?.phoneNumber || '' }}\",\n  \"tipo_mensaje\": \"reagendamiento\"\n}",
           "options": {}
         },
         "id": "05b7c6f6-8393-47cf-b90a-726beab1320a",
@@ -426,10 +431,10 @@
       {
         "parameters": {
           "method": "POST",
-          "url": "https://unnichat.com.br/a/start/nvF71dsb2bzCqXNfgOYr",
+          "url": "https://unnichat.com.br/a/start/TZvorrJBIJZPSquezvL5",
           "sendBody": true,
           "specifyBody": "json",
-          "jsonBody": "={\n  \"name\": \"{{ $node[\"Webhook LunaCal\"].json.body.payload?.responses?.name?.value || $node[\"Webhook LunaCal\"].json.body.payload?.attendees[0]?.name || 'Cliente' }}\",\n  \"email\": \"{{ $node[\"Webhook LunaCal\"].json.body.payload?.responses?.email?.value || $node[\"Webhook LunaCal\"].json.body.payload?.attendees[0]?.email }}\",\n  \"phone\": \"{{ $node[\"Webhook LunaCal\"].json.body.payload?.responses?.phone?.value || '' }}\",\n  \"tipo_mensaje\": \"cancelacion\"\n}",
+          "jsonBody": "={\n  \"name\": \"{{ $('Webhook LunaCal').item.json.body.payload.responses?.name?.value || $('Webhook LunaCal').item.json.body.payload.attendees[0]?.name || 'Cliente' }}\",\n  \"email\": \"{{ $('Webhook LunaCal').item.json.body.payload.responses?.email?.value || $('Webhook LunaCal').item.json.body.payload.attendees[0]?.email }}\",\n  \"phone\": \"{{ $('Webhook LunaCal').item.json.body.payload.responses?.['attendee-phone']?.value || $('Webhook LunaCal').item.json.body.payload.attendees[0]?.phoneNumber }}\",\n  \"tipo_mensaje\": \"cancelacion\"\n}",
           "options": {}
         },
         "id": "fd8938c8-9bec-4874-9c72-4e3cb3537197",
@@ -442,7 +447,10 @@
         ]
       },
       {
-        "parameters": {},
+        "parameters": {
+          "resume": "specificTime",
+          "dateTime": "={{ $('Webhook LunaCal').item.json.body.payload.startTime.toDateTime().minus({ minutes: 10 }) }}"
+        },
         "id": "28cc83ac-aa73-4173-bec5-f76f48306dcd",
         "name": "Esperar hasta 10 min antes",
         "type": "n8n-nodes-base.wait",
@@ -473,7 +481,7 @@
             "values": [
               {
                 "lookupColumn": "ID Reserva",
-                "lookupValue": "={{ $node[\"Webhook LunaCal\"].json.body.payload.bookingId }}"
+                "lookupValue": "={{ $('Webhook LunaCal').item.json.body.payload.bookingId }}"
               }
             ]
           },
@@ -500,7 +508,8 @@
             "string": [
               {
                 "value1": "={{ $json.Estado }}",
-                "value2": "ACCEPTED"
+                "operation": "notEqual",
+                "value2": "CANCELADA"
               }
             ]
           }
@@ -520,7 +529,7 @@
           "url": "https://unnichat.com.br/a/start/nvF71dsb2bzCqXNfgOYr",
           "sendBody": true,
           "specifyBody": "json",
-          "jsonBody": "={\n  \"name\": \"{{ $node[\"Webhook LunaCal\"].json.body.payload?.responses?.name?.value || $node[\"Webhook LunaCal\"].json.body.payload?.attendees[0]?.name || 'Cliente' }}\",\n  \"email\": \"{{ $node[\"Webhook LunaCal\"].json.body.payload?.responses?.email?.value || $node[\"Webhook LunaCal\"].json.body.payload?.attendees[0]?.email }}\",\n  \"phone\": \"{{ $node[\"Webhook LunaCal\"].json.body.payload?.responses?.phone?.value || '' }}\",\n  \"tipo_mensaje\": \"recordatorio\"\n}",
+          "jsonBody": "={\n  \"name\": \"{{ $('Webhook LunaCal').item.json.body.payload.responses?.name?.value || $('Webhook LunaCal').item.json.body.payload.attendees[0]?.name || 'Cliente' }}\",\n  \"email\": \"{{ $('Webhook LunaCal').item.json.body.payload.responses?.email?.value || $('Webhook LunaCal').item.json.body.payload.attendees[0]?.email }}\",\n  \"phone\": \"{{ $('Webhook LunaCal').item.json.body.payload.responses?.[ 'attendee-phone' ]?.value || $('Webhook LunaCal').item.json.body.payload.attendees[0]?.phoneNumber || '' }}\",\n  \"tipo_mensaje\": \"recordatorio\"\n}",
           "options": {}
         },
         "id": "3347b041-e2c8-47a9-b991-b5b636681333",
@@ -553,10 +562,11 @@
             "mappingMode": "defineBelow",
             "value": {
               "Fecha Inicio": "={{ $json.body.payload.startTime }}",
-              "Teléfono": "={{ $json.body.payload?.responses?.phone?.value || '' }}",
+              "Teléfono": "={{ $json.body.payload.responses?.[ 'attendee-phone' ]?.value || $json.body.payload.attendees[0]?.phoneNumber || '' }}",
               "Email": "={{ $json.body.payload?.responses?.email?.value || $json.body.payload?.attendees[0]?.email }}",
-              "Nombre": "={{ $json.body.payload?.responses?.name?.value || $json.body.payload?.attendees[0]?.name || 'Cliente' }}",
-              "ID Reserva": "={{ $json.body.payload.bookingId }}"
+              "Nombre": "={{ $json.body.payload.responses?.name?.value || $json.body.payload.attendees[0]?.name || 'Cliente' }}",
+              "ID Reserva": "={{ $json.body.payload.bookingId }}",
+              "Estado": "REPROGRAMADA"
             },
             "matchingColumns": [],
             "schema": [
@@ -774,11 +784,11 @@
       }
     },
     "authors": "BE Online",
-    "name": "Version cafa0c19",
+    "name": "Version 8d52ebaa",
     "description": "",
     "autosaved": true
   },
-  "activeVersionId": "cafa0c19-5268-45e2-b467-7bbe015f2117",
+  "activeVersionId": "8d52ebaa-7098-4f4d-994c-3b0523c3609e",
   "connections": {
     "Webhook LunaCal": {
       "main": [
@@ -990,10 +1000,11 @@
           "mappingMode": "defineBelow",
           "value": {
             "ID Reserva": "={{ $json.body.payload.bookingId }}",
-            "Nombre": "={{ $json.body.payload?.responses?.name?.value || $json.body.payload?.attendees[0]?.name || 'Cliente' }}",
+            "Nombre": "={{ $json.body.payload.responses?.name?.value || $json.body.payload.attendees[0]?.name || 'Cliente' }}",
             "Fecha Inicio": "={{ $json.body.payload.startTime }}",
-            "Teléfono": "={{ $json.body.payload?.responses?.phone?.value || '' }}",
-            "Email": "={{ $json.body.payload?.responses?.email?.value || $json.body.payload?.attendees[0]?.email }}"
+            "Teléfono": "={{ $json.body.payload.responses?.[ 'attendee-phone' ]?.value || $json.body.payload.attendees[0]?.phoneNumber || '' }}",
+            "Email": "={{ $json.body.payload?.responses?.email?.value || $json.body.payload?.attendees[0]?.email }}",
+            "Estado": "AGENDADA"
           },
           "matchingColumns": [],
           "schema": [
@@ -1093,11 +1104,11 @@
           "mappingMode": "defineBelow",
           "value": {
             "Fecha Inicio": "={{ $node[\"Webhook LunaCal\"].json.body.payload.startTime }}",
-            "Teléfono": "={{ $node[\"Webhook LunaCal\"].json.body.payload?.responses?.phone?.value || '' }}",
+            "Teléfono": "={{ $json.body.payload.responses?.[ 'attendee-phone' ]?.value || $json.body.payload.attendees[0]?.phoneNumber || '' }}",
             "Email": "={{ $node[\"Webhook LunaCal\"].json.body.payload?.responses?.email?.value || $node[\"Webhook LunaCal\"].json.body.payload?.attendees[0]?.email }}",
-            "Nombre": "={{ $node[\"Webhook LunaCal\"].json.body.payload?.responses?.name?.value || $node[\"Webhook LunaCal\"].json.body.payload?.attendees[0]?.name || 'Cliente' }}",
+            "Nombre": "={{ $json.body.payload.responses?.name?.value || $json.body.payload.attendees[0]?.name || 'Cliente' }}",
             "ID Reserva": "={{ $node[\"Webhook LunaCal\"].json.body.payload.bookingId }}",
-            "Estado": "ACCEPTED"
+            "Estado": "REPROGRAMADA"
           },
           "matchingColumns": [
             "ID Reserva"
@@ -1212,12 +1223,15 @@
           "mappingMode": "defineBelow",
           "value": {
             "Fecha Inicio": "={{ $json.body.payload.startTime }}",
-            "Teléfono": "={{ $json.body.payload?.responses?.phone?.value || '' }}",
+            "Teléfono": "={{ $json.body.payload.responses?.[ 'attendee-phone' ]?.value || $json.body.payload.attendees[0]?.phoneNumber || '' }}",
             "Email": "={{ $json.body.payload?.responses?.email?.value || $json.body.payload?.attendees[0]?.email }}",
             "Nombre": "={{ $json.body.payload?.responses?.name?.value || $json.body.payload?.attendees[0]?.name || 'Cliente' }}",
-            "ID Reserva": "={{ $json.body.payload.bookingId }}"
+            "ID Reserva": "={{ $json.body.payload.bookingId }}",
+            "Estado": "CANCELADA"
           },
-          "matchingColumns": [],
+          "matchingColumns": [
+            "ID Reserva"
+          ],
           "schema": [
             {
               "id": "ID Reserva",
@@ -1226,7 +1240,8 @@
               "defaultMatch": false,
               "display": true,
               "type": "string",
-              "canBeUsedToMatch": true
+              "canBeUsedToMatch": true,
+              "removed": false
             },
             {
               "id": "Nombre",
@@ -1311,7 +1326,7 @@
         "url": "https://unnichat.com.br/a/start/nvF71dsb2bzCqXNfgOYr",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"name\": \"{{ $node[\"Webhook LunaCal\"].json.body.payload?.responses?.name?.value || $node[\"Webhook LunaCal\"].json.body.payload?.attendees[0]?.name || 'Cliente' }}\",\n  \"email\": \"{{ $node[\"Webhook LunaCal\"].json.body.payload?.responses?.email?.value || $node[\"Webhook LunaCal\"].json.body.payload?.attendees[0]?.email }}\",\n  \"phone\": \"{{ $node[\"Webhook LunaCal\"].json.body.payload?.responses?.phone?.value || '' }}\",\n  \"tipo_mensaje\": \"confirmacion\"\n}",
+        "jsonBody": "={\n  \"name\": \"{{ $json.Nombre || 'Cliente' }}\",\n  \"email\": \"{{ $json.Email }}\",\n  \"phone\": \"{{ $json.Teléfono }}\",\n  \"tipo_mensaje\": \"confirmacion\"\n}",
         "options": {}
       },
       "id": "91740a26-e855-4aea-9293-20a68c339ed2",
@@ -1329,7 +1344,7 @@
         "url": "https://unnichat.com.br/a/start/nvF71dsb2bzCqXNfgOYr",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"name\": \"{{ $node[\"Webhook LunaCal\"].json.body.payload?.responses?.name?.value || $node[\"Webhook LunaCal\"].json.body.payload?.attendees[0]?.name || 'Cliente' }}\",\n  \"email\": \"{{ $node[\"Webhook LunaCal\"].json.body.payload?.responses?.email?.value || $node[\"Webhook LunaCal\"].json.body.payload?.attendees[0]?.email }}\",\n  \"phone\": \"{{ $node[\"Webhook LunaCal\"].json.body.payload?.responses?.phone?.value || '' }}\",\n  \"tipo_mensaje\": \"reagendamiento\"\n}",
+        "jsonBody": "={\n  \"name\": \"{{ $json.body.payload.responses?.name?.value || $json.body.payload.attendees[0]?.name || 'Cliente' }}\",\n  \"email\": \"{{ $json.body.payload.responses?.email?.value || $json.body.payload.attendees[0]?.email }}\",\n  \"phone\": \"{{ $json.body.payload.responses?.[ 'attendee-phone' ]?.value || $json.body.payload.attendees[0]?.phoneNumber || '' }}\",\n  \"tipo_mensaje\": \"reagendamiento\"\n}",
         "options": {}
       },
       "id": "05b7c6f6-8393-47cf-b90a-726beab1320a",
@@ -1344,10 +1359,10 @@
     {
       "parameters": {
         "method": "POST",
-        "url": "https://unnichat.com.br/a/start/nvF71dsb2bzCqXNfgOYr",
+        "url": "https://unnichat.com.br/a/start/TZvorrJBIJZPSquezvL5",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"name\": \"{{ $node[\"Webhook LunaCal\"].json.body.payload?.responses?.name?.value || $node[\"Webhook LunaCal\"].json.body.payload?.attendees[0]?.name || 'Cliente' }}\",\n  \"email\": \"{{ $node[\"Webhook LunaCal\"].json.body.payload?.responses?.email?.value || $node[\"Webhook LunaCal\"].json.body.payload?.attendees[0]?.email }}\",\n  \"phone\": \"{{ $node[\"Webhook LunaCal\"].json.body.payload?.responses?.phone?.value || '' }}\",\n  \"tipo_mensaje\": \"cancelacion\"\n}",
+        "jsonBody": "={\n  \"name\": \"{{ $json.Nombre }}\",\n  \"email\": \"{{ $json.Email }}\",\n  \"phone\": \"{{ $json.Teléfono.replace('+', '') }}\",\n  \"tipo_mensaje\": \"cancelacion\"\n}",
         "options": {}
       },
       "id": "fd8938c8-9bec-4874-9c72-4e3cb3537197",
@@ -1360,7 +1375,10 @@
       ]
     },
     {
-      "parameters": {},
+      "parameters": {
+        "resume": "specificTime",
+        "dateTime": "={{ $('Webhook LunaCal').item.json.body.payload.startTime.toDateTime().minus({ minutes: 10 }) }}"
+      },
       "id": "28cc83ac-aa73-4173-bec5-f76f48306dcd",
       "name": "Esperar hasta 10 min antes",
       "type": "n8n-nodes-base.wait",
@@ -1391,7 +1409,7 @@
           "values": [
             {
               "lookupColumn": "ID Reserva",
-              "lookupValue": "={{ $node[\"Webhook LunaCal\"].json.body.payload.bookingId }}"
+              "lookupValue": "={{ $('Webhook LunaCal').item.json.body.payload.bookingId }}"
             }
           ]
         },
@@ -1418,7 +1436,8 @@
           "string": [
             {
               "value1": "={{ $json.Estado }}",
-              "value2": "ACCEPTED"
+              "operation": "notEqual",
+              "value2": "CANCELADA"
             }
           ]
         }
@@ -1438,7 +1457,7 @@
         "url": "https://unnichat.com.br/a/start/nvF71dsb2bzCqXNfgOYr",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"name\": \"{{ $node[\"Webhook LunaCal\"].json.body.payload?.responses?.name?.value || $node[\"Webhook LunaCal\"].json.body.payload?.attendees[0]?.name || 'Cliente' }}\",\n  \"email\": \"{{ $node[\"Webhook LunaCal\"].json.body.payload?.responses?.email?.value || $node[\"Webhook LunaCal\"].json.body.payload?.attendees[0]?.email }}\",\n  \"phone\": \"{{ $node[\"Webhook LunaCal\"].json.body.payload?.responses?.phone?.value || '' }}\",\n  \"tipo_mensaje\": \"recordatorio\"\n}",
+        "jsonBody": "={\n  \"name\": \"{{ $('Webhook LunaCal').item.json.body.payload.responses?.name?.value || $('Webhook LunaCal').item.json.body.payload.attendees[0]?.name || 'Cliente' }}\",\n  \"email\": \"{{ $('Webhook LunaCal').item.json.body.payload.responses?.email?.value || $('Webhook LunaCal').item.json.body.payload.attendees[0]?.email }}\",\n  \"phone\": \"{{ $('Webhook LunaCal').item.json.body.payload.responses?.[ 'attendee-phone' ]?.value || $('Webhook LunaCal').item.json.body.payload.attendees[0]?.phoneNumber || '' }}\",\n  \"tipo_mensaje\": \"recordatorio\"\n}",
         "options": {}
       },
       "id": "3347b041-e2c8-47a9-b991-b5b636681333",
@@ -1471,10 +1490,11 @@
           "mappingMode": "defineBelow",
           "value": {
             "Fecha Inicio": "={{ $json.body.payload.startTime }}",
-            "Teléfono": "={{ $json.body.payload?.responses?.phone?.value || '' }}",
+            "Teléfono": "={{ $json.body.payload.responses?.[ 'attendee-phone' ]?.value || $json.body.payload.attendees[0]?.phoneNumber || '' }}",
             "Email": "={{ $json.body.payload?.responses?.email?.value || $json.body.payload?.attendees[0]?.email }}",
-            "Nombre": "={{ $json.body.payload?.responses?.name?.value || $json.body.payload?.attendees[0]?.name || 'Cliente' }}",
-            "ID Reserva": "={{ $json.body.payload.bookingId }}"
+            "Nombre": "={{ $json.body.payload.responses?.name?.value || $json.body.payload.attendees[0]?.name || 'Cliente' }}",
+            "ID Reserva": "={{ $json.body.payload.bookingId }}",
+            "Estado": "REPROGRAMADA"
           },
           "matchingColumns": [],
           "schema": [
@@ -1554,7 +1574,194 @@
       }
     }
   ],
-  "pinData": {},
+  "pinData": {
+    "Webhook LunaCal": [
+      {
+        "json": {
+          "headers": {
+            "host": "contenedor1-n8n.vqn37t.easypanel.host",
+            "user-agent": "undici",
+            "content-length": "3074",
+            "accept": "*/*",
+            "accept-encoding": "br, gzip, deflate",
+            "accept-language": "*",
+            "baggage": "sentry-environment=production,sentry-release=bbRwxWxjgZS2MD2a_bXVn,sentry-public_key=b9fd22ac20bb04166f4fec750f5c0f6f,sentry-trace_id=a037268848cc443ca0ac2c82ba449f2b,sentry-sample_rate=0.1,sentry-transaction=POST%20%2Fapi%2Fcancel,sentry-sampled=false",
+            "content-type": "application/json",
+            "sec-fetch-mode": "cors",
+            "sentry-trace": "a037268848cc443ca0ac2c82ba449f2b-88aef631cc111a7e-0",
+            "x-forwarded-for": "52.224.89.233",
+            "x-forwarded-host": "contenedor1-n8n.vqn37t.easypanel.host",
+            "x-forwarded-port": "443",
+            "x-forwarded-proto": "https",
+            "x-forwarded-server": "ca87c8df81ee",
+            "x-lunacal-signature-256": "no-secret-provided",
+            "x-real-ip": "52.224.89.233"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "triggerEvent": "BOOKING_CANCELLED",
+            "createdAt": "2026-05-29T19:27:45.613Z",
+            "payload": {
+              "title": "Reunión inicial con BE Online entre BE Online y Andres",
+              "eventTypeTitle": "Reunión inicial con BE Online",
+              "type": "Reunión inicial con BE Online",
+              "customInputs": {},
+              "eventTypeId": 16609,
+              "userFieldsResponses": {
+                "attendee-phone": {
+                  "label": "Número de WhatsApp",
+                  "value": "+573052342418",
+                  "isHidden": false
+                },
+                "guests": {
+                  "label": "Agrega invitados",
+                  "value": [],
+                  "isHidden": false
+                },
+                "title": {
+                  "label": "what_is_this_meeting_about",
+                  "isHidden": true
+                },
+                "notes": {
+                  "label": "form_comments",
+                  "isHidden": true
+                }
+              },
+              "responses": {
+                "name": {
+                  "label": "your_name",
+                  "value": "Andres",
+                  "isHidden": false
+                },
+                "attendee-phone": {
+                  "label": "Número de WhatsApp",
+                  "value": "+573052342418",
+                  "isHidden": false
+                },
+                "email": {
+                  "label": "Correo electrónico",
+                  "value": "arendo210@gmail.com",
+                  "isHidden": false
+                },
+                "location": {
+                  "label": "location",
+                  "value": {
+                    "optionValue": "",
+                    "value": "integrations:google:meet"
+                  },
+                  "isHidden": false
+                },
+                "guests": {
+                  "label": "Agrega invitados",
+                  "value": [],
+                  "isHidden": false
+                },
+                "title": {
+                  "label": "what_is_this_meeting_about",
+                  "isHidden": true
+                },
+                "notes": {
+                  "label": "form_comments",
+                  "isHidden": true
+                },
+                "rescheduleReason": {
+                  "label": "reason_for_reschedule",
+                  "isHidden": false
+                },
+                "cancellationReason": {
+                  "label": "cancellation_reason",
+                  "isHidden": false
+                },
+                "phone": {
+                  "label": "your_phone_number",
+                  "isHidden": true
+                }
+              },
+              "startTime": "2026-06-22T21:00:00+00:00",
+              "endTime": "2026-06-22T22:00:00+00:00",
+              "organizer": {
+                "id": 8890,
+                "username": "beonline",
+                "email": "info@beonlineholdings.com",
+                "name": "Andres Rendon",
+                "timeZone": "America/Bogota",
+                "timeFormat": "h:mma",
+                "language": {
+                  "locale": "en"
+                },
+                "utcOffset": -300
+              },
+              "attendees": [
+                {
+                  "name": "Andres",
+                  "email": "arendo210@gmail.com",
+                  "phoneNumber": "+573052342418",
+                  "timeZone": "America/Bogota",
+                  "language": {
+                    "locale": "es"
+                  },
+                  "bookingSeat": null,
+                  "utcOffset": -300
+                }
+              ],
+              "uid": "1JgxxdfZaj7sZ5DgtqReVF",
+              "bookingId": 78493,
+              "location": "integrations:google:meet",
+              "destinationCalendar": [
+                {
+                  "id": 7889,
+                  "integration": "google_calendar",
+                  "externalId": "info@beonlineholdings.com",
+                  "userId": 8890,
+                  "eventTypeId": null,
+                  "credentialId": 19183,
+                  "primaryEmail": "info@beonlineholdings.com"
+                }
+              ],
+              "cancellationReason": "",
+              "team": {
+                "name": "BE Online",
+                "members": [
+                  {
+                    "name": "BE Online",
+                    "email": "beonlineagencia@gmail.com",
+                    "timeZone": "America/Bogota",
+                    "language": {
+                      "locale": "en"
+                    },
+                    "bookingSeat": null
+                  }
+                ],
+                "id": 1930
+              },
+              "seatsPerTimeSlot": null,
+              "seatsShowAttendees": false,
+              "iCalUID": "1JgxxdfZaj7sZ5DgtqReVF@Lunacal",
+              "iCalSequence": 1,
+              "additionalInformation": {},
+              "willLunacalTriggerEmail": false,
+              "eventTitle": "Reunión inicial con BE Online",
+              "eventDescription": "Estamos muy emocionados de poder comenzar trabajar con tu proyecto. Separa el espacio que más se acomode a tu agenda para que podamos reunirnos y explicarte nuestro plan de acción y metodología de trabajo.\n\n_****Nota:****_ _los espacios en gris son los que están disponibles._",
+              "requiresConfirmation": null,
+              "price": null,
+              "currency": "usd",
+              "length": 60,
+              "status": "CANCELLED",
+              "isPhoneOnly": false,
+              "rescheduleUrl": "https://lunacal.co/reschedule/1JgxxdfZaj7sZ5DgtqReVF",
+              "cancelUrl": "https://lunacal.co/booking/1JgxxdfZaj7sZ5DgtqReVF?cancel=true&allRemainingBookings=false"
+            }
+          },
+          "webhookUrl": "https://contenedor1-n8n.vqn37t.easypanel.host/webhook/lunacal-webhook",
+          "executionMode": "production"
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      }
+    ]
+  },
   "repo_name": "backupn8n",
   "repo_owner": "infoandresrendoncol",
   "repo_path": "backup/",
@@ -1574,6 +1781,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2026-05-22T00:23:16.793Z",
-  "versionId": "cafa0c19-5268-45e2-b467-7bbe015f2117"
+  "updatedAt": "2026-05-29T22:36:28.707Z",
+  "versionId": "b329da16-7284-4657-9ce7-1433f0a1133a"
 }
