@@ -1,9 +1,9 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2026-05-29T22:27:13.000Z",
-    "createdAt": "2026-05-29T22:27:08.891Z",
-    "versionId": "8d52ebaa-7098-4f4d-994c-3b0523c3609e",
+    "updatedAt": "2026-06-09T22:01:45.000Z",
+    "createdAt": "2026-06-09T13:27:14.725Z",
+    "versionId": "23fdc473-de1a-4001-b9b8-f5afe1fe3ac7",
     "workflowId": "4jvCISKsF5IM88mK",
     "nodes": [
       {
@@ -398,7 +398,7 @@
           "url": "https://unnichat.com.br/a/start/nvF71dsb2bzCqXNfgOYr",
           "sendBody": true,
           "specifyBody": "json",
-          "jsonBody": "={\n  \"name\": \"{{ $json.Nombre || 'Cliente' }}\",\n  \"email\": \"{{ $json.Email }}\",\n  \"phone\": \"{{ $json.Teléfono }}\",\n  \"tipo_mensaje\": \"confirmacion\"\n}",
+          "jsonBody": "={\n  \"id\": \"{{ Math.floor(Math.random() * 1000000).toString() }}\",\n  \"data\": {\n    \"number\": \"{{ $json.Teléfono.toString().replace('+', '') }}\",\n    \"name\": \"{{ $json.Nombre || 'Cliente' }}\",\n    \"email\": \"{{ $json.Email }}\",\n    \"tipo_mensaje\": \"cancelacion\"\n  },\n  \"version\": \"1.0.0\"\n}",
           "options": {}
         },
         "id": "91740a26-e855-4aea-9293-20a68c339ed2",
@@ -434,7 +434,7 @@
           "url": "https://unnichat.com.br/a/start/TZvorrJBIJZPSquezvL5",
           "sendBody": true,
           "specifyBody": "json",
-          "jsonBody": "={\n  \"name\": \"{{ $('Webhook LunaCal').item.json.body.payload.responses?.name?.value || $('Webhook LunaCal').item.json.body.payload.attendees[0]?.name || 'Cliente' }}\",\n  \"email\": \"{{ $('Webhook LunaCal').item.json.body.payload.responses?.email?.value || $('Webhook LunaCal').item.json.body.payload.attendees[0]?.email }}\",\n  \"phone\": \"{{ $('Webhook LunaCal').item.json.body.payload.responses?.['attendee-phone']?.value || $('Webhook LunaCal').item.json.body.payload.attendees[0]?.phoneNumber }}\",\n  \"tipo_mensaje\": \"cancelacion\"\n}",
+          "jsonBody": "={\n  \"name\": \"{{ $json.Nombre }}\",\n  \"email\": \"{{ $json.Email }}\",\n  \"phone\": \"{{ $json.Teléfono.replace('+', '') }}\",\n  \"tipo_mensaje\": \"cancelacion\"\n}",
           "options": {}
         },
         "id": "fd8938c8-9bec-4874-9c72-4e3cb3537197",
@@ -783,12 +783,13 @@
         ]
       }
     },
+    "nodeGroups": [],
     "authors": "BE Online",
-    "name": "Version 8d52ebaa",
+    "name": "Version 23fdc473",
     "description": "",
     "autosaved": true
   },
-  "activeVersionId": "8d52ebaa-7098-4f4d-994c-3b0523c3609e",
+  "activeVersionId": "23fdc473-de1a-4001-b9b8-f5afe1fe3ac7",
   "connections": {
     "Webhook LunaCal": {
       "main": [
@@ -1326,7 +1327,7 @@
         "url": "https://unnichat.com.br/a/start/nvF71dsb2bzCqXNfgOYr",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"name\": \"{{ $json.Nombre || 'Cliente' }}\",\n  \"email\": \"{{ $json.Email }}\",\n  \"phone\": \"{{ $json.Teléfono }}\",\n  \"tipo_mensaje\": \"confirmacion\"\n}",
+        "jsonBody": "={\n  \"id\": \"{{ Math.floor(Math.random() * 1000000).toString() }}\",\n  \"data\": {\n    \"number\": \"{{ $json.Teléfono.toString().replace('+', '') }}\",\n    \"name\": \"{{ $json.Nombre || 'Cliente' }}\",\n    \"email\": \"{{ $json.Email }}\",\n    \"tipo_mensaje\": \"cancelacion\"\n  },\n  \"version\": \"1.0.0\"\n}",
         "options": {}
       },
       "id": "91740a26-e855-4aea-9293-20a68c339ed2",
@@ -1781,6 +1782,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2026-05-29T22:36:28.707Z",
-  "versionId": "b329da16-7284-4657-9ce7-1433f0a1133a"
+  "updatedAt": "2026-06-09T13:27:14.723Z",
+  "versionId": "23fdc473-de1a-4001-b9b8-f5afe1fe3ac7"
 }
