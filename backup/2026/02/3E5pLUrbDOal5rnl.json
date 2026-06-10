@@ -262,6 +262,7 @@
         ]
       }
     },
+    "nodeGroups": [],
     "authors": "BE Online",
     "name": "Version ec2e6258",
     "description": "",
