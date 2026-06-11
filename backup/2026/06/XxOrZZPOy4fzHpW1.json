@@ -1,0 +1,1005 @@
+{
+  "active": true,
+  "activeVersion": {
+    "updatedAt": "2026-06-11T01:40:25.000Z",
+    "createdAt": "2026-06-11T01:39:49.419Z",
+    "versionId": "aaeb3cdf-57af-47cf-a6bb-677e376ad2c7",
+    "workflowId": "XxOrZZPOy4fzHpW1",
+    "nodes": [
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "=https://api.flodesk.com/v1/subscribers",
+          "authentication": "genericCredentialType",
+          "genericAuthType": "httpBasicAuth",
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "={\n  \"email\": \"{{ $('Transacción en Hotmart').item.json.body.data.buyer.email }}\",\n  \"first_name\": \"{{ $('Transacción en Hotmart').item.json.body.data.buyer.name }}\",\n  \"segment_ids\": [\"6a29f69f6d89d0be082aaa7e\"]\n}",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          304,
+          -432
+        ],
+        "id": "25261383-a2bb-42d3-9acd-d476b8abd9df",
+        "name": "Agregar a Flodesk",
+        "retryOnFail": false,
+        "maxTries": 5,
+        "waitBetweenTries": 5000,
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "hSaP4d59L4OoJOce",
+            "name": "Flodesk Alex"
+          },
+          "httpBasicAuth": {
+            "id": "jwNOGTuXMrnIE2QR",
+            "name": "FLODESK PROFE"
+          }
+        },
+        "onError": "continueRegularOutput"
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "https://api2.skool.com/groups/el-salon-de-la-profe-monica-9200/webhooks/b8cce9e9d7254c2e84c62f69bbdb73fc",
+          "authentication": "genericCredentialType",
+          "genericAuthType": "httpHeaderAuth",
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "={\n  \"email\": \"{{ $json.body.data.buyer.email }}\",\n  \"name\": \"{{ $json.body.data.buyer.name }}\",\n  \"send_email\": true\n}",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.4,
+        "position": [
+          -48,
+          -320
+        ],
+        "id": "3624768d-75d3-4b04-9a1a-5386d1612edc",
+        "name": "Agregar a Skool",
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "hSaP4d59L4OoJOce",
+            "name": "Flodesk Alex"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "httpMethod": "POST",
+          "path": "compracompletada-salonprofe",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.webhook",
+        "typeVersion": 2.1,
+        "position": [
+          -640,
+          -96
+        ],
+        "id": "734157b0-3b09-4e33-8449-1d6f410f1751",
+        "name": "Transacción en Hotmart",
+        "webhookId": "51b4c630-f2a1-4bcf-b6bd-570d39b5af9c"
+      },
+      {
+        "parameters": {
+          "rules": {
+            "values": [
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 3
+                  },
+                  "conditions": [
+                    {
+                      "leftValue": "={{ $json.body.event }}",
+                      "rightValue": "PURCHASE_APPROVED",
+                      "operator": {
+                        "type": "string",
+                        "operation": "equals"
+                      },
+                      "id": "4d58b8ff-ed09-4b42-9f66-a22137c1c29a"
+                    }
+                  ],
+                  "combinator": "and"
+                }
+              },
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 3
+                  },
+                  "conditions": [
+                    {
+                      "id": "54484fe3-6fd8-4f3d-b47e-210225671768",
+                      "leftValue": "={{ $json.body.event }}",
+                      "rightValue": "PURCHASE_REFUNDED",
+                      "operator": {
+                        "type": "string",
+                        "operation": "equals",
+                        "name": "filter.operator.equals"
+                      }
+                    }
+                  ],
+                  "combinator": "and"
+                }
+              },
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 3
+                  },
+                  "conditions": [
+                    {
+                      "id": "9f9328ea-d47b-4cd9-9911-094d55462d1a",
+                      "leftValue": "={{ $json.body.event }}",
+                      "rightValue": "SUBSCRIPTION_CANCELED",
+                      "operator": {
+                        "type": "string",
+                        "operation": "equals",
+                        "name": "filter.operator.equals"
+                      }
+                    }
+                  ],
+                  "combinator": "and"
+                }
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.switch",
+        "typeVersion": 3.4,
+        "position": [
+          -384,
+          -96
+        ],
+        "id": "b04542f2-0e7e-4d2a-a5a2-b8ffb76b75ea",
+        "name": "Aprobado / Cancelado - Reembolsado"
+      },
+      {
+        "parameters": {
+          "method": "DELETE",
+          "url": "https://api2.skool.com/groups/el-salon-de-la-profe-monica-9200/webhooks/b8cce9e9d7254c2e84c62f69bbdb73fc",
+          "authentication": "genericCredentialType",
+          "genericAuthType": "httpHeaderAuth",
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "={\n  \"email\": \"{{ $('Transacción en Hotmart').item.json.body.data.buyer.email }}\"\n}",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.4,
+        "position": [
+          -48,
+          96
+        ],
+        "id": "7db3d143-1f89-4cee-8a30-2986787dc9e3",
+        "name": "Eliminar de Skool",
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "hSaP4d59L4OoJOce",
+            "name": "Flodesk Alex"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "=https://api.flodesk.com/v1/subscribers",
+          "authentication": "genericCredentialType",
+          "genericAuthType": "httpBasicAuth",
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "={\n  \"email\": \"{{ $('Transacción en Hotmart').item.json.body.data.buyer.email }}\",\n  \"first_name\": \"{{ $('Transacción en Hotmart').item.json.body.data.buyer.name }}\",\n  \"segment_ids\": [\"6a29f69f6d89d0be082aaa7e\"]\n}",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          320,
+          -16
+        ],
+        "id": "457bd43e-69ca-43bf-b730-de32dc72cab2",
+        "name": "Eliminar de Flodesk",
+        "retryOnFail": false,
+        "maxTries": 5,
+        "waitBetweenTries": 5000,
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "hSaP4d59L4OoJOce",
+            "name": "Flodesk Alex"
+          },
+          "httpBasicAuth": {
+            "id": "jwNOGTuXMrnIE2QR",
+            "name": "FLODESK PROFE"
+          }
+        },
+        "onError": "continueRegularOutput"
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "https://unnichat.com.br/a/start/EhsM0SkIAo7ZX84JFKaK",
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "={\n  \"data\": {\n    \"number\": \"{{ $('Transacción en Hotmart').item.json.body.data.buyer.checkout_phone }}\",\n    \"tag\": \"Aprobado SPM\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          304,
+          -208
+        ],
+        "id": "a16d6599-4bef-4f1d-9d52-6c18443cc137",
+        "name": "Unnichat [Aprobado]"
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "https://unnichat.com.br/a/start/EhsM0SkIAo7ZX84JFKaK",
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "={\n  \"data\": {\n    \"number\": \"{{ $('Transacción en Hotmart').item.json.body.data.buyer.checkout_phone }}\",\n    \"tag\": \"Aprobado SPM\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          320,
+          208
+        ],
+        "id": "8bfb44f0-acdf-421a-87c4-52cac0b1054f",
+        "name": "Unnichat [Cancelado / Reembolsado]"
+      }
+    ],
+    "connections": {
+      "Agregar a Flodesk": {
+        "main": [
+          []
+        ]
+      },
+      "Agregar a Skool": {
+        "main": [
+          [
+            {
+              "node": "Agregar a Flodesk",
+              "type": "main",
+              "index": 0
+            },
+            {
+              "node": "Unnichat [Aprobado]",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Transacción en Hotmart": {
+        "main": [
+          [
+            {
+              "node": "Aprobado / Cancelado - Reembolsado",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Aprobado / Cancelado - Reembolsado": {
+        "main": [
+          [
+            {
+              "node": "Agregar a Skool",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Eliminar de Skool",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Eliminar de Skool",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Eliminar de Skool": {
+        "main": [
+          [
+            {
+              "node": "Eliminar de Flodesk",
+              "type": "main",
+              "index": 0
+            },
+            {
+              "node": "Unnichat [Cancelado / Reembolsado]",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "nodeGroups": [],
+    "authors": "BE Online",
+    "name": "Version aaeb3cdf",
+    "description": "",
+    "autosaved": true
+  },
+  "activeVersionId": "aaeb3cdf-57af-47cf-a6bb-677e376ad2c7",
+  "connections": {
+    "Agregar a Flodesk": {
+      "main": [
+        []
+      ]
+    },
+    "Agregar a Skool": {
+      "main": [
+        [
+          {
+            "node": "Agregar a Flodesk",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Unnichat [Aprobado]",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Transacción en Hotmart": {
+      "main": [
+        [
+          {
+            "node": "Aprobado / Cancelado - Reembolsado",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aprobado / Cancelado - Reembolsado": {
+      "main": [
+        [
+          {
+            "node": "Compra o renovación",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Eliminar de Skool",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Eliminar de Skool",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Eliminar de Skool": {
+      "main": [
+        [
+          {
+            "node": "Unnichat [Cancelado / Reembolsado]",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Flodesk [Nuevo segmento]",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Flodesk [Nuevo segmento]": {
+      "main": [
+        [
+          {
+            "node": "Flodesk [Eliminar del segmento alumno]",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Compra o renovación": {
+      "main": [
+        [
+          {
+            "node": "Agregar a Skool",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2026-06-10T23:32:51.311Z",
+  "id": "XxOrZZPOy4fzHpW1",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Profe - SPM - Compra Aprobada",
+  "nodes": [
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.flodesk.com/v1/subscribers",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"email\": \"{{ $('Transacción en Hotmart').item.json.body.data.buyer.email }}\",\n  \"first_name\": \"{{ $('Transacción en Hotmart').item.json.body.data.buyer.name }}\",\n  \"segment_ids\": [\"6a29f69f6d89d0be082aaa7e\"]\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        448,
+        -432
+      ],
+      "id": "25261383-a2bb-42d3-9acd-d476b8abd9df",
+      "name": "Agregar a Flodesk",
+      "retryOnFail": false,
+      "maxTries": 5,
+      "waitBetweenTries": 5000,
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "hSaP4d59L4OoJOce",
+          "name": "Flodesk Alex"
+        },
+        "httpBasicAuth": {
+          "id": "jwNOGTuXMrnIE2QR",
+          "name": "FLODESK PROFE"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api2.skool.com/groups/el-salon-de-la-profe-monica-9200/webhooks/b8cce9e9d7254c2e84c62f69bbdb73fc",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"email\": \"{{ $json.body.data.buyer.email }}\",\n  \"name\": \"{{ $json.body.data.buyer.name }}\",\n  \"send_email\": true\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        128,
+        -336
+      ],
+      "id": "3624768d-75d3-4b04-9a1a-5386d1612edc",
+      "name": "Agregar a Skool",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "hSaP4d59L4OoJOce",
+          "name": "Flodesk Alex"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "compracompletada-salonprofe",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -656,
+        -80
+      ],
+      "id": "734157b0-3b09-4e33-8449-1d6f410f1751",
+      "name": "Transacción en Hotmart",
+      "webhookId": "51b4c630-f2a1-4bcf-b6bd-570d39b5af9c"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.body.event }}",
+                    "rightValue": "PURCHASE_APPROVED",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "4d58b8ff-ed09-4b42-9f66-a22137c1c29a"
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "54484fe3-6fd8-4f3d-b47e-210225671768",
+                    "leftValue": "={{ $json.body.event }}",
+                    "rightValue": "PURCHASE_REFUNDED",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "9f9328ea-d47b-4cd9-9911-094d55462d1a",
+                    "leftValue": "={{ $json.body.event }}",
+                    "rightValue": "SUBSCRIPTION_CANCELED",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        -384,
+        -96
+      ],
+      "id": "b04542f2-0e7e-4d2a-a5a2-b8ffb76b75ea",
+      "name": "Aprobado / Cancelado - Reembolsado"
+    },
+    {
+      "parameters": {
+        "method": "DELETE",
+        "url": "https://api2.skool.com/groups/el-salon-de-la-profe-monica-9200/webhooks/b8cce9e9d7254c2e84c62f69bbdb73fc",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"email\": \"{{ $('Transacción en Hotmart').item.json.body.data.buyer.email }}\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -96,
+        96
+      ],
+      "id": "7db3d143-1f89-4cee-8a30-2986787dc9e3",
+      "name": "Eliminar de Skool",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "hSaP4d59L4OoJOce",
+          "name": "Flodesk Alex"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://unnichat.com.br/a/start/EhsM0SkIAo7ZX84JFKaK",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"data\": {\n    \"number\": \"{{ $('Transacción en Hotmart').item.json.body.data.buyer.checkout_phone }}\",\n    \"tag\": \"Aprobado SPM\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        448,
+        -208
+      ],
+      "id": "a16d6599-4bef-4f1d-9d52-6c18443cc137",
+      "name": "Unnichat [Aprobado]"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://unnichat.com.br/a/start/EhsM0SkIAo7ZX84JFKaK",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"data\": {\n    \"number\": \"{{ $('Transacción en Hotmart').item.json.body.data.buyer.checkout_phone }}\",\n    \"tag\": \"Aprobado SPM\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        320,
+        208
+      ],
+      "id": "8bfb44f0-acdf-421a-87c4-52cac0b1054f",
+      "name": "Unnichat [Cancelado / Reembolsado]"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.flodesk.com/v1/subscribers",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"email\": \"{{ $('Transacción en Hotmart').item.json.body.data.buyer.email }}\",\n  \"first_name\": \"{{ $('Transacción en Hotmart').item.json.body.data.buyer.name }}\",\n  \"segment_ids\": [\"6a29f69f6d89d0be082aaa7e\"]\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        320,
+        -16
+      ],
+      "id": "457bd43e-69ca-43bf-b730-de32dc72cab2",
+      "name": "Flodesk [Nuevo segmento]",
+      "retryOnFail": false,
+      "maxTries": 5,
+      "waitBetweenTries": 5000,
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "hSaP4d59L4OoJOce",
+          "name": "Flodesk Alex"
+        },
+        "httpBasicAuth": {
+          "id": "jwNOGTuXMrnIE2QR",
+          "name": "FLODESK PROFE"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "method": "DELETE",
+        "url": "=https://api.flodesk.com/v1/subscribers/{{ $('Transacción en Hotmart').item.json.body.data.buyer.email }}/segments",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n  \"segment_ids\": [\"6a2a14990f8cce81fcadc44d\"]\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        592,
+        -16
+      ],
+      "id": "6ad8d31f-b2e7-42dd-96ab-a7a4d6f87f5e",
+      "name": "Flodesk [Eliminar del segmento alumno]",
+      "credentials": {
+        "httpBasicAuth": {
+          "id": "jwNOGTuXMrnIE2QR",
+          "name": "FLODESK PROFE"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.body.data.purchase.recurrence_number.toString() }}",
+                    "rightValue": "=1",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "89664292-7a36-4595-96d0-97843fd8eae7"
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "3c07bcc3-aeca-4708-b928-7db24ed5c7c1",
+                    "leftValue": "={{ $json.body.data.purchase.recurrence_number.toString() }}",
+                    "rightValue": "=1",
+                    "operator": {
+                      "type": "string",
+                      "operation": "notEquals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        -112,
+        -304
+      ],
+      "id": "b040ff3e-dd31-4b1c-91ed-d88479f3173c",
+      "name": "Compra o renovación"
+    }
+  ],
+  "pinData": {
+    "Transacción en Hotmart": [
+      {
+        "json": {
+          "headers": {
+            "host": "contenedor1-n8n.vqn37t.easypanel.host",
+            "user-agent": "Jodd HTTP",
+            "content-length": "2514",
+            "content-type": "application/json",
+            "x-forwarded-for": "44.222.103.169",
+            "x-forwarded-host": "contenedor1-n8n.vqn37t.easypanel.host",
+            "x-forwarded-port": "443",
+            "x-forwarded-proto": "https",
+            "x-forwarded-server": "ca87c8df81ee",
+            "x-hotmart-hottok": "YtViCAYahcDsQiswYQMj45MK9ZNwUn49356628",
+            "x-real-ip": "44.222.103.169",
+            "accept-encoding": "gzip"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "data": {
+              "product": {
+                "support_email": "support@hotmart.com.br",
+                "has_co_production": false,
+                "name": "Produto test postback2",
+                "warranty_date": "2017-12-27T00:00:00Z",
+                "is_physical_product": false,
+                "id": 0,
+                "ucode": "fb056612-bcc6-4217-9e6d-2a5d1110ac2f",
+                "product_format_id": 1,
+                "content": {
+                  "has_physical_products": true,
+                  "products": [
+                    {
+                      "name": "How to Make Clear Ice",
+                      "is_physical_product": false,
+                      "id": 4774438,
+                      "ucode": "559fef42-3406-4d82-b775-d09bd33936b1"
+                    },
+                    {
+                      "name": "Organizador de Poeira",
+                      "is_physical_product": true,
+                      "id": 4999597,
+                      "ucode": "099e7644-b7d1-43d6-82a9-ec6be0118a4b"
+                    }
+                  ]
+                }
+              },
+              "shipping": {
+                "carrier": {
+                  "service": "SEDEX",
+                  "name": "CORREIOS"
+                },
+                "cost": {
+                  "currency_value": "BRL",
+                  "value": 25.5
+                },
+                "estimated_delivery_days": 7,
+                "fulfillment": {
+                  "service": "MANUAL"
+                }
+              },
+              "commissions": [
+                {
+                  "currency_value": "BRL",
+                  "source": "MARKETPLACE",
+                  "value": 149.5
+                },
+                {
+                  "currency_value": "BRL",
+                  "source": "PRODUCER",
+                  "value": 1350.5
+                }
+              ],
+              "purchase": {
+                "original_offer_price": {
+                  "currency_value": "BRL",
+                  "value": 1500
+                },
+                "checkout_country": {
+                  "iso": "BR",
+                  "name": "Brasil"
+                },
+                "sckPaymentLink": "sckPaymentLinkTest",
+                "order_bump": {
+                  "parent_purchase_transaction": "HP02316330308193",
+                  "is_order_bump": true
+                },
+                "variants": {
+                  "attributes": [
+                    {
+                      "name": "Tamanho",
+                      "value": "Médio"
+                    },
+                    {
+                      "name": "Cor",
+                      "value": "Azul"
+                    }
+                  ],
+                  "sku": "HTM_SANDBOX-01"
+                },
+                "approved_date": 1511783346000,
+                "offer": {
+                  "code": "test",
+                  "coupon_code": "SHHUHA"
+                },
+                "is_funnel": false,
+                "event_tickets": {
+                  "amount": 1781138219143
+                },
+                "order_date": 1511783344000,
+                "price": {
+                  "currency_value": "BRL",
+                  "value": 1500
+                },
+                "buyer_ip": "00.00.00.00",
+                "payment": {
+                  "installments_number": 12,
+                  "type": "CREDIT_CARD"
+                },
+                "full_price": {
+                  "currency_value": "BRL",
+                  "value": 1500
+                },
+                "business_model": "I",
+                "transaction": "HP16015479281022",
+                "status": "APPROVED"
+              },
+              "affiliates": [
+                {
+                  "affiliate_code": "Q58388177J",
+                  "name": "Affiliate name"
+                }
+              ],
+              "producer": {
+                "legal_nature": "Pessoa Física",
+                "document": "12345678965",
+                "name": "Producer Test Name"
+              },
+              "subscription": {
+                "subscriber": {
+                  "code": "I9OT62C3"
+                },
+                "plan": {
+                  "name": "plano de teste",
+                  "id": 123
+                },
+                "status": "ACTIVE"
+              },
+              "buyer": {
+                "checkout_phone_code": "999999999",
+                "address": {
+                  "zipcode": "38400123",
+                  "country": "Brasil",
+                  "number": "10",
+                  "address": "Avenida Francisco Galassi",
+                  "city": "Uberlândia",
+                  "state": "Minas Gerais",
+                  "neighborhood": "Tubalina",
+                  "complement": "Perto do shopping",
+                  "country_iso": "BR"
+                },
+                "document": "69526128664",
+                "name": "Teste Comprador",
+                "last_name": "Comprador",
+                "checkout_phone": "99999999900",
+                "first_name": "Teste",
+                "email": "testeComprador271101postman15@example.com",
+                "document_type": "CPF"
+              }
+            },
+            "id": "2e9f4366-10c8-4a60-8f65-8653e589a22e",
+            "creation_date": 1781138219152,
+            "event": "PURCHASE_APPROVED",
+            "version": "2.0.0"
+          },
+          "webhookUrl": "https://contenedor1-n8n.vqn37t.easypanel.host/webhook/compracompletada-salonprofe",
+          "executionMode": "production"
+        }
+      }
+    ]
+  },
+  "repo_name": "backupn8n",
+  "repo_owner": "infoandresrendoncol",
+  "repo_path": "backup/",
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false,
+    "binaryMode": "separate"
+  },
+  "shared": [
+    {
+      "updatedAt": "2026-06-10T23:32:51.315Z",
+      "createdAt": "2026-06-10T23:32:51.315Z",
+      "role": "workflow:owner",
+      "workflowId": "XxOrZZPOy4fzHpW1",
+      "projectId": "4KmSbENK2cGxsjaf"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2026-06-11T02:02:45.357Z",
+  "versionId": "dd47d53a-b1aa-4f2e-8700-3d9b46125cf5"
+}
