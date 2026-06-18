@@ -1,9 +1,9 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2026-06-16T13:19:08.000Z",
-    "createdAt": "2026-06-16T13:19:02.550Z",
-    "versionId": "665b131f-9311-4155-9602-68f8b4ccc7ae",
+    "updatedAt": "2026-06-17T22:02:55.000Z",
+    "createdAt": "2026-06-17T22:02:32.900Z",
+    "versionId": "9247f601-760f-4e17-b72b-5ebed94fe152",
     "workflowId": "XxOrZZPOy4fzHpW1",
     "nodes": [
       {
@@ -43,7 +43,7 @@
       {
         "parameters": {
           "method": "POST",
-          "url": "https://api2.skool.com/groups/el-salon-de-la-profe-monica-9200/webhooks/b8cce9e9d7254c2e84c62f69bbdb73fc",
+          "url": "=https://api2.skool.com/groups/el-salon-de-la-profe-monica-9200/webhooks/b8cce9e9d7254c2e84c62f69bbdb73fc?email={{ $json.body.data.buyer.email }}",
           "authentication": "genericCredentialType",
           "genericAuthType": "httpHeaderAuth",
           "sendBody": true,
@@ -55,7 +55,7 @@
         "typeVersion": 4.4,
         "position": [
           128,
-          -336
+          -320
         ],
         "id": "3624768d-75d3-4b04-9a1a-5386d1612edc",
         "name": "Agregar a Skool",
@@ -170,7 +170,7 @@
       {
         "parameters": {
           "method": "DELETE",
-          "url": "https://api2.skool.com/groups/el-salon-de-la-profe-monica-9200/webhooks/b8cce9e9d7254c2e84c62f69bbdb73fc",
+          "url": "=https://api2.skool.com/groups/el-salon-de-la-profe-monica-9200/webhooks/b8cce9e9d7254c2e84c62f69bbdb73fc?email={{ $json.body.data.buyer.email }}",
           "authentication": "genericCredentialType",
           "genericAuthType": "httpHeaderAuth",
           "sendBody": true,
@@ -181,15 +181,15 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.4,
         "position": [
-          -96,
-          96
+          80,
+          64
         ],
         "id": "7db3d143-1f89-4cee-8a30-2986787dc9e3",
         "name": "Eliminar de Skool",
         "credentials": {
           "httpHeaderAuth": {
-            "id": "hSaP4d59L4OoJOce",
-            "name": "Flodesk Alex"
+            "id": "hYFYHBVnArTRzZzO",
+            "name": "PROFE SKOOL API"
           }
         }
       },
@@ -199,7 +199,7 @@
           "url": "https://unnichat.com.br/a/start/EhsM0SkIAo7ZX84JFKaK",
           "sendBody": true,
           "specifyBody": "json",
-          "jsonBody": "={\n  \"data\": {\n    \"number\": \"{{ $('Transacción en Hotmart').item.json.body.data.buyer.checkout_phone }}\",\n    \"tag\": \"Aprobado SPM\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
+          "jsonBody": "={\n  \"data\": {\n    \"number\": \"\",\n    \"tag\": \"Aprobado SPM\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
           "options": {}
         },
         "type": "n8n-nodes-base.httpRequest",
@@ -350,6 +350,67 @@
         ],
         "id": "b040ff3e-dd31-4b1c-91ed-d88479f3173c",
         "name": "Compra o renovación"
+      },
+      {
+        "parameters": {
+          "rules": {
+            "values": [
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 3
+                  },
+                  "conditions": [
+                    {
+                      "leftValue": "={{ $json.body.data.purchase.recurrence_number.toString() }}",
+                      "rightValue": "=1",
+                      "operator": {
+                        "type": "string",
+                        "operation": "equals"
+                      },
+                      "id": "89664292-7a36-4595-96d0-97843fd8eae7"
+                    }
+                  ],
+                  "combinator": "and"
+                }
+              },
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 3
+                  },
+                  "conditions": [
+                    {
+                      "id": "3c07bcc3-aeca-4708-b928-7db24ed5c7c1",
+                      "leftValue": "={{ $json.body.data.purchase.recurrence_number.toString() }}",
+                      "rightValue": "=1",
+                      "operator": {
+                        "type": "string",
+                        "operation": "notEquals"
+                      }
+                    }
+                  ],
+                  "combinator": "and"
+                }
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.switch",
+        "typeVersion": 3.4,
+        "position": [
+          -160,
+          -80
+        ],
+        "id": "0e23867c-b1eb-43a1-bb6d-d261b2320927",
+        "name": "Compra o renovación1"
       }
     ],
     "connections": {
@@ -396,7 +457,7 @@
           ],
           [
             {
-              "node": "Eliminar de Skool",
+              "node": "Compra o renovación1",
               "type": "main",
               "index": 0
             }
@@ -447,15 +508,27 @@
             }
           ]
         ]
+      },
+      "Compra o renovación1": {
+        "main": [
+          [],
+          [
+            {
+              "node": "Eliminar de Skool",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
       }
     },
     "nodeGroups": [],
     "authors": "BE Online",
-    "name": "Version 665b131f",
+    "name": "Version 9247f601",
     "description": "",
     "autosaved": true
   },
-  "activeVersionId": "665b131f-9311-4155-9602-68f8b4ccc7ae",
+  "activeVersionId": "9247f601-760f-4e17-b72b-5ebed94fe152",
   "connections": {
     "Agregar a Flodesk": {
       "main": [
@@ -500,7 +573,7 @@
         ],
         [
           {
-            "node": "Eliminar de Skool",
+            "node": "Compra o renovación1",
             "type": "main",
             "index": 0
           }
@@ -546,6 +619,18 @@
         [
           {
             "node": "Agregar a Skool",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Compra o renovación1": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Eliminar de Skool",
             "type": "main",
             "index": 0
           }
@@ -598,7 +683,7 @@
     {
       "parameters": {
         "method": "POST",
-        "url": "https://api2.skool.com/groups/el-salon-de-la-profe-monica-9200/webhooks/b8cce9e9d7254c2e84c62f69bbdb73fc",
+        "url": "=https://api2.skool.com/groups/el-salon-de-la-profe-monica-9200/webhooks/b8cce9e9d7254c2e84c62f69bbdb73fc?email={{ $json.body.data.buyer.email }}",
         "authentication": "genericCredentialType",
         "genericAuthType": "httpHeaderAuth",
         "sendBody": true,
@@ -610,7 +695,7 @@
       "typeVersion": 4.4,
       "position": [
         128,
-        -336
+        -320
       ],
       "id": "3624768d-75d3-4b04-9a1a-5386d1612edc",
       "name": "Agregar a Skool",
@@ -725,7 +810,7 @@
     {
       "parameters": {
         "method": "DELETE",
-        "url": "https://api2.skool.com/groups/el-salon-de-la-profe-monica-9200/webhooks/b8cce9e9d7254c2e84c62f69bbdb73fc",
+        "url": "=https://api2.skool.com/groups/el-salon-de-la-profe-monica-9200/webhooks/b8cce9e9d7254c2e84c62f69bbdb73fc?email={{ $json.body.data.buyer.email }}",
         "authentication": "genericCredentialType",
         "genericAuthType": "httpHeaderAuth",
         "sendBody": true,
@@ -736,15 +821,15 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        -96,
-        96
+        80,
+        64
       ],
       "id": "7db3d143-1f89-4cee-8a30-2986787dc9e3",
       "name": "Eliminar de Skool",
       "credentials": {
         "httpHeaderAuth": {
-          "id": "hSaP4d59L4OoJOce",
-          "name": "Flodesk Alex"
+          "id": "hYFYHBVnArTRzZzO",
+          "name": "PROFE SKOOL API"
         }
       }
     },
@@ -754,7 +839,7 @@
         "url": "https://unnichat.com.br/a/start/EhsM0SkIAo7ZX84JFKaK",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"data\": {\n    \"number\": \"{{ $('Transacción en Hotmart').item.json.body.data.buyer.checkout_phone }}\",\n    \"tag\": \"Aprobado SPM\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
+        "jsonBody": "={\n  \"data\": {\n    \"number\": \"\",\n    \"tag\": \"Aprobado SPM\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
@@ -905,6 +990,67 @@
       ],
       "id": "b040ff3e-dd31-4b1c-91ed-d88479f3173c",
       "name": "Compra o renovación"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.body.data.purchase.recurrence_number.toString() }}",
+                    "rightValue": "=1",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "89664292-7a36-4595-96d0-97843fd8eae7"
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "3c07bcc3-aeca-4708-b928-7db24ed5c7c1",
+                    "leftValue": "={{ $json.body.data.purchase.recurrence_number.toString() }}",
+                    "rightValue": "=1",
+                    "operator": {
+                      "type": "string",
+                      "operation": "notEquals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        -160,
+        -80
+      ],
+      "id": "0e23867c-b1eb-43a1-bb6d-d261b2320927",
+      "name": "Compra o renovación1"
     }
   ],
   "pinData": {
@@ -914,15 +1060,15 @@
           "headers": {
             "host": "contenedor1-n8n.vqn37t.easypanel.host",
             "user-agent": "Jodd HTTP",
-            "content-length": "2514",
+            "content-length": "2130",
             "content-type": "application/json",
-            "x-forwarded-for": "44.222.103.169",
+            "x-forwarded-for": "3.239.65.84",
             "x-forwarded-host": "contenedor1-n8n.vqn37t.easypanel.host",
             "x-forwarded-port": "443",
             "x-forwarded-proto": "https",
             "x-forwarded-server": "ca87c8df81ee",
             "x-hotmart-hottok": "YtViCAYahcDsQiswYQMj45MK9ZNwUn49356628",
-            "x-real-ip": "44.222.103.169",
+            "x-real-ip": "3.239.65.84",
             "accept-encoding": "gzip"
           },
           "params": {},
@@ -930,157 +1076,111 @@
           "body": {
             "data": {
               "product": {
-                "support_email": "support@hotmart.com.br",
-                "has_co_production": false,
-                "name": "Produto test postback2",
-                "warranty_date": "2017-12-27T00:00:00Z",
+                "has_co_production": true,
+                "name": "El salón de la profe Mónica",
                 "is_physical_product": false,
-                "id": 0,
-                "ucode": "fb056612-bcc6-4217-9e6d-2a5d1110ac2f",
-                "product_format_id": 1,
-                "content": {
-                  "has_physical_products": true,
-                  "products": [
-                    {
-                      "name": "How to Make Clear Ice",
-                      "is_physical_product": false,
-                      "id": 4774438,
-                      "ucode": "559fef42-3406-4d82-b775-d09bd33936b1"
-                    },
-                    {
-                      "name": "Organizador de Poeira",
-                      "is_physical_product": true,
-                      "id": 4999597,
-                      "ucode": "099e7644-b7d1-43d6-82a9-ec6be0118a4b"
-                    }
-                  ]
-                }
-              },
-              "shipping": {
-                "carrier": {
-                  "service": "SEDEX",
-                  "name": "CORREIOS"
-                },
-                "cost": {
-                  "currency_value": "BRL",
-                  "value": 25.5
-                },
-                "estimated_delivery_days": 7,
-                "fulfillment": {
-                  "service": "MANUAL"
-                }
+                "id": 7869343,
+                "ucode": "e4f87095-2823-41cd-be72-9c20efce5e53",
+                "product_format_id": 8
               },
               "commissions": [
                 {
-                  "currency_value": "BRL",
+                  "currency_value": "USD",
                   "source": "MARKETPLACE",
-                  "value": 149.5
+                  "value": 3.37
                 },
                 {
-                  "currency_value": "BRL",
+                  "currency_conversion": {
+                    "converted_value": 10723.19,
+                    "converted_to_currency": "COP",
+                    "conversion_rate": 3492.894475
+                  },
+                  "currency_value": "USD",
                   "source": "PRODUCER",
-                  "value": 1350.5
+                  "value": 3.07
                 }
               ],
               "purchase": {
                 "original_offer_price": {
-                  "currency_value": "BRL",
-                  "value": 1500
+                  "currency_value": "USD",
+                  "value": 30.6
                 },
+                "recurrence_number": 1,
+                "subscription_anticipation_purchase": false,
                 "checkout_country": {
-                  "iso": "BR",
-                  "name": "Brasil"
+                  "iso": "CO",
+                  "name": "Colombia"
                 },
-                "sckPaymentLink": "sckPaymentLinkTest",
+                "origin": {
+                  "xcod": "{\"co\":\"VID01 - 05/26\",\"vid\":\"120247656296400516\",\"vsrc\":\"metaads\",\"u\":\"ebfd7e51-4fe9-4be9-a9d6-dda9081ae072\",\"url\":\"www.laprofemonica.co/suscripcion-accedeahora\",\"r\":\"instagram.com/\",\"v\":1}",
+                  "sck": "s=metaads|m=Instagram_Feed|c=00 - [AUTO] - A+ / VID01 - 05/26|co=VID01 - 05/26|utm_id=120247656296380516|t=120247656296460516"
+                },
                 "order_bump": {
-                  "parent_purchase_transaction": "HP02316330308193",
-                  "is_order_bump": true
+                  "is_order_bump": false
                 },
-                "variants": {
-                  "attributes": [
-                    {
-                      "name": "Tamanho",
-                      "value": "Médio"
-                    },
-                    {
-                      "name": "Cor",
-                      "value": "Azul"
-                    }
-                  ],
-                  "sku": "HTM_SANDBOX-01"
-                },
-                "approved_date": 1511783346000,
                 "offer": {
-                  "code": "test",
-                  "coupon_code": "SHHUHA"
+                  "code": "2z01xh9g",
+                  "coupon_code": "SALON",
+                  "name": "SALON",
+                  "description": "Primer pago $29"
                 },
                 "is_funnel": false,
-                "event_tickets": {
-                  "amount": 1781138219143
-                },
-                "order_date": 1511783344000,
+                "order_date": 1781474972000,
                 "price": {
-                  "currency_value": "BRL",
-                  "value": 1500
+                  "currency_value": "COP",
+                  "value": 106867
                 },
-                "buyer_ip": "00.00.00.00",
+                "buyer_ip": "190.24.38.80",
                 "payment": {
-                  "installments_number": 12,
+                  "refusal_reason": "Cartão inválido. Verifique os dados do cartão e tente realizar a compra novamente.",
+                  "installments_number": 1,
                   "type": "CREDIT_CARD"
                 },
                 "full_price": {
-                  "currency_value": "BRL",
-                  "value": 1500
+                  "currency_value": "COP",
+                  "value": 106867
                 },
-                "business_model": "I",
-                "transaction": "HP16015479281022",
-                "status": "APPROVED"
+                "business_model": "A",
+                "invoice_by": "SELLER",
+                "transaction": "HP3248178637",
+                "status": "CANCELED"
               },
               "affiliates": [
                 {
-                  "affiliate_code": "Q58388177J",
-                  "name": "Affiliate name"
+                  "affiliate_code": "",
+                  "name": ""
                 }
               ],
               "producer": {
                 "legal_nature": "Pessoa Física",
-                "document": "12345678965",
-                "name": "Producer Test Name"
+                "document": "63518573",
+                "name": "Mónica Higuera Rueda"
               },
               "subscription": {
                 "subscriber": {
-                  "code": "I9OT62C3"
+                  "code": "H4CLPWDH"
                 },
                 "plan": {
-                  "name": "plano de teste",
-                  "id": 123
+                  "name": "MENSUAL",
+                  "id": 1327615
                 },
-                "status": "ACTIVE"
+                "status": "INACTIVE"
               },
               "buyer": {
-                "checkout_phone_code": "999999999",
                 "address": {
-                  "zipcode": "38400123",
-                  "country": "Brasil",
-                  "number": "10",
-                  "address": "Avenida Francisco Galassi",
-                  "city": "Uberlândia",
-                  "state": "Minas Gerais",
-                  "neighborhood": "Tubalina",
-                  "complement": "Perto do shopping",
-                  "country_iso": "BR"
+                  "country": "Colombia",
+                  "country_iso": "CO"
                 },
-                "document": "69526128664",
-                "name": "Teste Comprador",
-                "last_name": "Comprador",
-                "checkout_phone": "99999999900",
-                "first_name": "Teste",
-                "email": "testeComprador271101postman15@example.com",
-                "document_type": "CPF"
+                "document": "",
+                "name": "Libia Rendòn",
+                "last_name": "Rendòn",
+                "first_name": "Libia",
+                "email": "wilders2013@gmail.com",
+                "document_type": ""
               }
             },
-            "id": "2e9f4366-10c8-4a60-8f65-8653e589a22e",
-            "creation_date": 1781138219152,
+            "id": "04a8ddc9-d161-4ad7-abd7-1ad3a0496644",
+            "creation_date": 1781474990134,
             "event": "PURCHASE_APPROVED",
             "version": "2.0.0"
           },
@@ -1110,6 +1210,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2026-06-16T13:19:02.549Z",
-  "versionId": "665b131f-9311-4155-9602-68f8b4ccc7ae"
+  "updatedAt": "2026-06-17T22:02:32.899Z",
+  "versionId": "9247f601-760f-4e17-b72b-5ebed94fe152"
 }
