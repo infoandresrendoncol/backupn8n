@@ -1,9 +1,9 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2026-06-17T22:02:55.000Z",
-    "createdAt": "2026-06-17T22:02:32.900Z",
-    "versionId": "9247f601-760f-4e17-b72b-5ebed94fe152",
+    "updatedAt": "2026-06-18T17:44:32.000Z",
+    "createdAt": "2026-06-18T17:44:29.832Z",
+    "versionId": "625aa173-afe8-498b-a60e-5207139e8b26",
     "workflowId": "XxOrZZPOy4fzHpW1",
     "nodes": [
       {
@@ -199,7 +199,7 @@
           "url": "https://unnichat.com.br/a/start/EhsM0SkIAo7ZX84JFKaK",
           "sendBody": true,
           "specifyBody": "json",
-          "jsonBody": "={\n  \"data\": {\n    \"number\": \"\",\n    \"tag\": \"Aprobado SPM\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
+          "jsonBody": "={\n  \"data\": {\n    \"number\": \"{{ $('Transacción en Hotmart').item.json.body.data.buyer.checkout_phone }}\",\n    \"tag\": \"Aprobado SPM\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
           "options": {}
         },
         "type": "n8n-nodes-base.httpRequest",
@@ -214,7 +214,7 @@
       {
         "parameters": {
           "method": "POST",
-          "url": "https://unnichat.com.br/a/start/EhsM0SkIAo7ZX84JFKaK",
+          "url": "https://unnichat.com.br/a/start/tTLonzJMKttAHlVBxpYt",
           "sendBody": true,
           "specifyBody": "json",
           "jsonBody": "={\n  \"data\": {\n    \"number\": \"{{ $('Transacción en Hotmart').item.json.body.data.buyer.checkout_phone }}\",\n    \"tag\": \"Aprobado SPM\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
@@ -524,11 +524,11 @@
     },
     "nodeGroups": [],
     "authors": "BE Online",
-    "name": "Version 9247f601",
+    "name": "Version 625aa173",
     "description": "",
     "autosaved": true
   },
-  "activeVersionId": "9247f601-760f-4e17-b72b-5ebed94fe152",
+  "activeVersionId": "625aa173-afe8-498b-a60e-5207139e8b26",
   "connections": {
     "Agregar a Flodesk": {
       "main": [
@@ -839,7 +839,7 @@
         "url": "https://unnichat.com.br/a/start/EhsM0SkIAo7ZX84JFKaK",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"data\": {\n    \"number\": \"\",\n    \"tag\": \"Aprobado SPM\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
+        "jsonBody": "={\n  \"data\": {\n    \"number\": \"{{ $('Transacción en Hotmart').item.json.body.data.buyer.checkout_phone }}\",\n    \"tag\": \"Aprobado SPM\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
@@ -854,7 +854,7 @@
     {
       "parameters": {
         "method": "POST",
-        "url": "https://unnichat.com.br/a/start/EhsM0SkIAo7ZX84JFKaK",
+        "url": "https://unnichat.com.br/a/start/tTLonzJMKttAHlVBxpYt",
         "sendBody": true,
         "specifyBody": "json",
         "jsonBody": "={\n  \"data\": {\n    \"number\": \"{{ $('Transacción en Hotmart').item.json.body.data.buyer.checkout_phone }}\",\n    \"tag\": \"Aprobado SPM\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
@@ -1060,15 +1060,15 @@
           "headers": {
             "host": "contenedor1-n8n.vqn37t.easypanel.host",
             "user-agent": "Jodd HTTP",
-            "content-length": "2130",
+            "content-length": "2163",
             "content-type": "application/json",
-            "x-forwarded-for": "3.239.65.84",
+            "x-forwarded-for": "54.172.233.163",
             "x-forwarded-host": "contenedor1-n8n.vqn37t.easypanel.host",
             "x-forwarded-port": "443",
             "x-forwarded-proto": "https",
             "x-forwarded-server": "ca87c8df81ee",
             "x-hotmart-hottok": "YtViCAYahcDsQiswYQMj45MK9ZNwUn49356628",
-            "x-real-ip": "3.239.65.84",
+            "x-real-ip": "54.172.233.163",
             "accept-encoding": "gzip"
           },
           "params": {},
@@ -1076,8 +1076,10 @@
           "body": {
             "data": {
               "product": {
+                "support_email": "",
                 "has_co_production": true,
                 "name": "El salón de la profe Mónica",
+                "warranty_date": "2026-06-24T00:00:00Z",
                 "is_physical_product": false,
                 "id": 7869343,
                 "ucode": "e4f87095-2823-41cd-be72-9c20efce5e53",
@@ -1091,13 +1093,13 @@
                 },
                 {
                   "currency_conversion": {
-                    "converted_value": 10723.19,
+                    "converted_value": 10579.8,
                     "converted_to_currency": "COP",
-                    "conversion_rate": 3492.894475
+                    "conversion_rate": 3435
                   },
                   "currency_value": "USD",
                   "source": "PRODUCER",
-                  "value": 3.07
+                  "value": 3.08
                 }
               ],
               "purchase": {
@@ -1112,12 +1114,13 @@
                   "name": "Colombia"
                 },
                 "origin": {
-                  "xcod": "{\"co\":\"VID01 - 05/26\",\"vid\":\"120247656296400516\",\"vsrc\":\"metaads\",\"u\":\"ebfd7e51-4fe9-4be9-a9d6-dda9081ae072\",\"url\":\"www.laprofemonica.co/suscripcion-accedeahora\",\"r\":\"instagram.com/\",\"v\":1}",
-                  "sck": "s=metaads|m=Instagram_Feed|c=00 - [AUTO] - A+ / VID01 - 05/26|co=VID01 - 05/26|utm_id=120247656296380516|t=120247656296460516"
+                  "xcod": "{\"co\":\"VID07 - 05/26\",\"vid\":\"120247748137350516\",\"vsrc\":\"metaads\",\"u\":\"597b1f9a-831b-4ce0-b9d6-bd69df2f9e9a\",\"url\":\"www.laprofemonica.co/suscripcion-accedeahora\",\"r\":\"m.facebook.com/\",\"v\":1}",
+                  "sck": "s=metaads|m=Facebook_Mobile_Reels|c=00 - [AUTO] - A+ / VID07 - 05/26|co=VID07 - 05/26|utm_id=120247656296380516|t=120247748137340516"
                 },
                 "order_bump": {
                   "is_order_bump": false
                 },
+                "approved_date": 1781738172000,
                 "offer": {
                   "code": "2z01xh9g",
                   "coupon_code": "SALON",
@@ -1125,25 +1128,25 @@
                   "description": "Primer pago $29"
                 },
                 "is_funnel": false,
-                "order_date": 1781474972000,
+                "order_date": 1781738166000,
+                "date_next_charge": 1784289600000,
                 "price": {
                   "currency_value": "COP",
-                  "value": 106867
+                  "value": 105094
                 },
-                "buyer_ip": "190.24.38.80",
+                "buyer_ip": "206.84.80.35",
                 "payment": {
-                  "refusal_reason": "Cartão inválido. Verifique os dados do cartão e tente realizar a compra novamente.",
                   "installments_number": 1,
                   "type": "CREDIT_CARD"
                 },
                 "full_price": {
                   "currency_value": "COP",
-                  "value": 106867
+                  "value": 105094
                 },
                 "business_model": "A",
                 "invoice_by": "SELLER",
-                "transaction": "HP3248178637",
-                "status": "CANCELED"
+                "transaction": "HP0545609296",
+                "status": "APPROVED"
               },
               "affiliates": [
                 {
@@ -1158,29 +1161,29 @@
               },
               "subscription": {
                 "subscriber": {
-                  "code": "H4CLPWDH"
+                  "code": "G04D7BOL"
                 },
                 "plan": {
                   "name": "MENSUAL",
                   "id": 1327615
                 },
-                "status": "INACTIVE"
+                "status": "ACTIVE"
               },
               "buyer": {
                 "address": {
                   "country": "Colombia",
                   "country_iso": "CO"
                 },
-                "document": "",
-                "name": "Libia Rendòn",
-                "last_name": "Rendòn",
-                "first_name": "Libia",
-                "email": "wilders2013@gmail.com",
-                "document_type": ""
+                "document": "1088596301",
+                "name": "Guido Alpala",
+                "last_name": "Alpala",
+                "checkout_phone": "573127728494",
+                "first_name": "Guido",
+                "email": "guidoalpala@gmail.com"
               }
             },
-            "id": "04a8ddc9-d161-4ad7-abd7-1ad3a0496644",
-            "creation_date": 1781474990134,
+            "id": "6b8bcd8b-9dd9-4343-a648-5fc8dcbf95b3",
+            "creation_date": 1781738184443,
             "event": "PURCHASE_APPROVED",
             "version": "2.0.0"
           },
@@ -1210,6 +1213,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2026-06-17T22:02:32.899Z",
-  "versionId": "9247f601-760f-4e17-b72b-5ebed94fe152"
+  "updatedAt": "2026-06-18T17:44:29.831Z",
+  "versionId": "625aa173-afe8-498b-a60e-5207139e8b26"
 }
