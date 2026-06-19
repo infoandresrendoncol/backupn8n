@@ -1,9 +1,9 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2026-04-27T21:40:09.000Z",
-    "createdAt": "2026-04-27T21:27:13.706Z",
-    "versionId": "375f82d2-e3a7-4acf-be18-c1d90b53b1f4",
+    "updatedAt": "2026-06-18T17:21:21.000Z",
+    "createdAt": "2026-06-18T17:21:14.246Z",
+    "versionId": "9e18b789-a414-4d0b-a5e0-e478654c66af",
     "workflowId": "KNg0D06iJSwiXj9P",
     "nodes": [
       {
@@ -15,8 +15,8 @@
         "type": "n8n-nodes-base.webhook",
         "typeVersion": 2.1,
         "position": [
-          -192,
-          16
+          -256,
+          32
         ],
         "id": "aece4126-45e8-491c-9dbd-f51febd50ebd",
         "name": "Webhook",
@@ -28,14 +28,14 @@
           "url": "https://unnichat.com.br/a/start/xc4Dz3RtYH411fatCS3s",
           "sendBody": true,
           "specifyBody": "json",
-          "jsonBody": "={\n  \"data\": {\n    \"number\": \"{{ $json.body.data.buyer.checkout_phone }}\",\n    \"tag\": \"global\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
+          "jsonBody": "={\n  \"data\": {\n    \"number\": \"{{ $('Webhook').item.json.body.data.buyer.checkout_phone }}\",\n    \"tag\": \"global\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
           "options": {}
         },
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.2,
         "position": [
-          208,
-          128
+          480,
+          -336
         ],
         "id": "367f56c2-c68d-46c3-bb67-56f9b31cbd31",
         "name": "Agregar contacto Unnichat"
@@ -54,8 +54,8 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.2,
         "position": [
-          208,
-          -128
+          256,
+          -336
         ],
         "id": "1f4dafd1-5f4c-477d-8f4b-213a6299a9af",
         "name": "Agregar a Flodesk",
@@ -73,10 +73,170 @@
           }
         },
         "onError": "continueRegularOutput"
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "https://unnichat.com.br/a/start/D7cjCaKs5rY8Ir1dATUr",
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "={\n  \"data\": {\n    \"number\": \"{{ $('Webhook').item.json.body.data.buyer.checkout_phone }}\",\n    \"tag\": \"global\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          432,
+          0
+        ],
+        "id": "ccc364b4-65d0-47a1-b4a4-01fa17b65789",
+        "name": "Agregar contacto Unnichat1"
+      },
+      {
+        "parameters": {
+          "rules": {
+            "values": [
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 3
+                  },
+                  "conditions": [
+                    {
+                      "leftValue": "={{ $json.body.event }}",
+                      "rightValue": "PURCHASE_APPROVED",
+                      "operator": {
+                        "type": "string",
+                        "operation": "equals"
+                      },
+                      "id": "4d58b8ff-ed09-4b42-9f66-a22137c1c29a"
+                    }
+                  ],
+                  "combinator": "and"
+                }
+              },
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 3
+                  },
+                  "conditions": [
+                    {
+                      "id": "54484fe3-6fd8-4f3d-b47e-210225671768",
+                      "leftValue": "={{ $json.body.event }}",
+                      "rightValue": "PURCHASE_REFUNDED",
+                      "operator": {
+                        "type": "string",
+                        "operation": "equals",
+                        "name": "filter.operator.equals"
+                      }
+                    }
+                  ],
+                  "combinator": "and"
+                }
+              },
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 3
+                  },
+                  "conditions": [
+                    {
+                      "id": "6438856b-b043-4537-a0a6-6b7d201baf48",
+                      "leftValue": "={{ $json.body.event }}",
+                      "rightValue": "PURCHASE_OUT_OF_SHOPPING_CART",
+                      "operator": {
+                        "type": "string",
+                        "operation": "equals",
+                        "name": "filter.operator.equals"
+                      }
+                    }
+                  ],
+                  "combinator": "and"
+                }
+              },
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 3
+                  },
+                  "conditions": [
+                    {
+                      "id": "9f9328ea-d47b-4cd9-9911-094d55462d1a",
+                      "leftValue": "={{ $json.body.event }}",
+                      "rightValue": "SUBSCRIPTION_CANCELED",
+                      "operator": {
+                        "type": "string",
+                        "operation": "equals",
+                        "name": "filter.operator.equals"
+                      }
+                    }
+                  ],
+                  "combinator": "and"
+                }
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.switch",
+        "typeVersion": 3.4,
+        "position": [
+          -16,
+          0
+        ],
+        "id": "a534c8b8-e4d2-4ae1-b2c2-7ff8ecd97ac8",
+        "name": "Aprobado / Cancelado / Carrito Abandonado /Reembolsado"
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "https://unnichat.com.br/a/start/pAut7ntIbAkxSyctmWQN",
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "={\n  \"data\": {\n    \"number\": \"{{ $('Webhook').item.json.body.data.buyer.checkout_phone }}\",\n    \"tag\": \"global\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          432,
+          272
+        ],
+        "id": "6d50f7fe-83eb-4b78-93b8-731ad6f41a4a",
+        "name": "Agregar contacto Unnichat2"
       }
     ],
     "connections": {
       "Webhook": {
+        "main": [
+          [
+            {
+              "node": "Aprobado / Cancelado / Carrito Abandonado /Reembolsado",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Agregar a Flodesk": {
+        "main": [
+          []
+        ]
+      },
+      "Aprobado / Cancelado / Carrito Abandonado /Reembolsado": {
         "main": [
           [
             {
@@ -89,28 +249,44 @@
               "type": "main",
               "index": 0
             }
+          ],
+          [
+            {
+              "node": "Agregar contacto Unnichat1",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Agregar contacto Unnichat1",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Agregar contacto Unnichat2",
+              "type": "main",
+              "index": 0
+            }
           ]
-        ]
-      },
-      "Agregar a Flodesk": {
-        "main": [
-          []
         ]
       }
     },
     "nodeGroups": [],
     "authors": "BE Online",
-    "name": "Version 375f82d2",
+    "name": "Version 9e18b789",
     "description": "",
     "autosaved": true
   },
-  "activeVersionId": "375f82d2-e3a7-4acf-be18-c1d90b53b1f4",
+  "activeVersionId": "9e18b789-a414-4d0b-a5e0-e478654c66af",
   "connections": {
     "Webhook": {
       "main": [
         [
           {
-            "node": "Aprobado / Cancelado - Reembolsado",
+            "node": "Aprobado / Cancelado / Carrito Abandonado /Reembolsado",
             "type": "main",
             "index": 0
           }
@@ -122,7 +298,7 @@
         []
       ]
     },
-    "Aprobado / Cancelado - Reembolsado": {
+    "Aprobado / Cancelado / Carrito Abandonado /Reembolsado": {
       "main": [
         [
           {
@@ -132,6 +308,27 @@
           },
           {
             "node": "Agregar contacto Unnichat",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Agregar contacto Unnichat1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Agregar contacto Unnichat1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Agregar contacto Unnichat2",
             "type": "main",
             "index": 0
           }
@@ -145,7 +342,7 @@
   "meta": {
     "templateCredsSetupCompleted": true
   },
-  "name": "Alexandra - Ventas - ETH",
+  "name": "Alexandra - ETH - Ventas / Checkout / Reembolsos",
   "nodes": [
     {
       "parameters": {
@@ -156,8 +353,8 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2.1,
       "position": [
-        -192,
-        16
+        -256,
+        32
       ],
       "id": "aece4126-45e8-491c-9dbd-f51febd50ebd",
       "name": "Webhook",
@@ -169,13 +366,13 @@
         "url": "https://unnichat.com.br/a/start/xc4Dz3RtYH411fatCS3s",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"data\": {\n    \"number\": \"{{ $json.body.data.buyer.checkout_phone }}\",\n    \"tag\": \"global\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
+        "jsonBody": "={\n  \"data\": {\n    \"number\": \"{{ $('Webhook').item.json.body.data.buyer.checkout_phone }}\",\n    \"tag\": \"global\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        448,
+        480,
         -336
       ],
       "id": "367f56c2-c68d-46c3-bb67-56f9b31cbd31",
@@ -214,6 +411,24 @@
         }
       },
       "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://unnichat.com.br/a/start/D7cjCaKs5rY8Ir1dATUr",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"data\": {\n    \"number\": \"{{ $('Webhook').item.json.body.data.buyer.checkout_phone }}\",\n    \"tag\": \"global\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        432,
+        0
+      ],
+      "id": "ccc364b4-65d0-47a1-b4a4-01fa17b65789",
+      "name": "Agregar contacto Unnichat1"
     },
     {
       "parameters": {
@@ -274,6 +489,29 @@
                 },
                 "conditions": [
                   {
+                    "id": "6438856b-b043-4537-a0a6-6b7d201baf48",
+                    "leftValue": "={{ $json.body.event }}",
+                    "rightValue": "PURCHASE_OUT_OF_SHOPPING_CART",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
                     "id": "9f9328ea-d47b-4cd9-9911-094d55462d1a",
                     "leftValue": "={{ $json.body.event }}",
                     "rightValue": "SUBSCRIPTION_CANCELED",
@@ -298,10 +536,210 @@
         0
       ],
       "id": "a534c8b8-e4d2-4ae1-b2c2-7ff8ecd97ac8",
-      "name": "Aprobado / Cancelado - Reembolsado"
+      "name": "Aprobado / Cancelado / Carrito Abandonado /Reembolsado"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://unnichat.com.br/a/start/pAut7ntIbAkxSyctmWQN",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"data\": {\n    \"number\": \"{{ $('Webhook').item.json.body.data.buyer.checkout_phone }}\",\n    \"tag\": \"global\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        432,
+        272
+      ],
+      "id": "6d50f7fe-83eb-4b78-93b8-731ad6f41a4a",
+      "name": "Agregar contacto Unnichat2"
     }
   ],
-  "pinData": {},
+  "pinData": {
+    "Webhook": [
+      {
+        "json": {
+          "headers": {
+            "host": "contenedor1-n8n.vqn37t.easypanel.host",
+            "user-agent": "Jodd HTTP",
+            "content-length": "2514",
+            "content-type": "application/json",
+            "x-forwarded-for": "3.85.232.19",
+            "x-forwarded-host": "contenedor1-n8n.vqn37t.easypanel.host",
+            "x-forwarded-port": "443",
+            "x-forwarded-proto": "https",
+            "x-forwarded-server": "ca87c8df81ee",
+            "x-hotmart-hottok": "p3pyMTUj7l7z86JGfalI9JMXTpiyBq85599017-fc1a-4b36-9723-828cee66c3e2",
+            "x-real-ip": "3.85.232.19",
+            "accept-encoding": "gzip"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "data": {
+              "product": {
+                "support_email": "support@hotmart.com.br",
+                "has_co_production": false,
+                "name": "Produto test postback2",
+                "warranty_date": "2017-12-27T00:00:00Z",
+                "is_physical_product": false,
+                "id": 0,
+                "ucode": "fb056612-bcc6-4217-9e6d-2a5d1110ac2f",
+                "product_format_id": 1,
+                "content": {
+                  "has_physical_products": true,
+                  "products": [
+                    {
+                      "name": "How to Make Clear Ice",
+                      "is_physical_product": false,
+                      "id": 4774438,
+                      "ucode": "559fef42-3406-4d82-b775-d09bd33936b1"
+                    },
+                    {
+                      "name": "Organizador de Poeira",
+                      "is_physical_product": true,
+                      "id": 4999597,
+                      "ucode": "099e7644-b7d1-43d6-82a9-ec6be0118a4b"
+                    }
+                  ]
+                }
+              },
+              "shipping": {
+                "carrier": {
+                  "service": "SEDEX",
+                  "name": "CORREIOS"
+                },
+                "cost": {
+                  "currency_value": "BRL",
+                  "value": 25.5
+                },
+                "estimated_delivery_days": 7,
+                "fulfillment": {
+                  "service": "MANUAL"
+                }
+              },
+              "commissions": [
+                {
+                  "currency_value": "BRL",
+                  "source": "MARKETPLACE",
+                  "value": 149.5
+                },
+                {
+                  "currency_value": "BRL",
+                  "source": "PRODUCER",
+                  "value": 1350.5
+                }
+              ],
+              "purchase": {
+                "original_offer_price": {
+                  "currency_value": "BRL",
+                  "value": 1500
+                },
+                "checkout_country": {
+                  "iso": "BR",
+                  "name": "Brasil"
+                },
+                "sckPaymentLink": "sckPaymentLinkTest",
+                "order_bump": {
+                  "parent_purchase_transaction": "HP02316330308193",
+                  "is_order_bump": true
+                },
+                "variants": {
+                  "attributes": [
+                    {
+                      "name": "Tamanho",
+                      "value": "Médio"
+                    },
+                    {
+                      "name": "Cor",
+                      "value": "Azul"
+                    }
+                  ],
+                  "sku": "HTM_SANDBOX-01"
+                },
+                "approved_date": 1511783346000,
+                "offer": {
+                  "code": "test",
+                  "coupon_code": "SHHUHA"
+                },
+                "is_funnel": false,
+                "event_tickets": {
+                  "amount": 1781733244028
+                },
+                "order_date": 1511783344000,
+                "price": {
+                  "currency_value": "BRL",
+                  "value": 1500
+                },
+                "buyer_ip": "00.00.00.00",
+                "payment": {
+                  "installments_number": 12,
+                  "type": "CREDIT_CARD"
+                },
+                "full_price": {
+                  "currency_value": "BRL",
+                  "value": 1500
+                },
+                "business_model": "I",
+                "transaction": "HP16015479281022",
+                "status": "REFUNDED"
+              },
+              "affiliates": [
+                {
+                  "affiliate_code": "Q58388177J",
+                  "name": "Affiliate name"
+                }
+              ],
+              "producer": {
+                "legal_nature": "Pessoa Física",
+                "document": "12345678965",
+                "name": "Producer Test Name"
+              },
+              "subscription": {
+                "subscriber": {
+                  "code": "I9OT62C3"
+                },
+                "plan": {
+                  "name": "plano de teste",
+                  "id": 123
+                },
+                "status": "ACTIVE"
+              },
+              "buyer": {
+                "checkout_phone_code": "999999999",
+                "address": {
+                  "zipcode": "38400123",
+                  "country": "Brasil",
+                  "number": "10",
+                  "address": "Avenida Francisco Galassi",
+                  "city": "Uberlândia",
+                  "state": "Minas Gerais",
+                  "neighborhood": "Tubalina",
+                  "complement": "Perto do shopping",
+                  "country_iso": "BR"
+                },
+                "document": "69526128664",
+                "name": "Teste Comprador",
+                "last_name": "Comprador",
+                "checkout_phone": "99999999900",
+                "first_name": "Teste",
+                "email": "testeComprador271101postman15@example.com",
+                "document_type": "CPF"
+              }
+            },
+            "id": "2b7fc2ab-57ff-43ad-baf0-45a1c0ac263f",
+            "creation_date": 1781733244032,
+            "event": "PURCHASE_REFUNDED",
+            "version": "2.0.0"
+          },
+          "webhookUrl": "https://contenedor1-n8n.vqn37t.easypanel.host/webhook/ventas-eth-alexandra",
+          "executionMode": "production"
+        }
+      }
+    ]
+  },
   "repo_name": "backupn8n",
   "repo_owner": "infoandresrendoncol",
   "repo_path": "backup/",
@@ -322,6 +760,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2026-06-17T21:56:18.068Z",
-  "versionId": "689cce39-6eca-46c8-bfab-258525b6473e"
+  "updatedAt": "2026-06-18T17:24:13.462Z",
+  "versionId": "9e18b789-a414-4d0b-a5e0-e478654c66af"
 }
