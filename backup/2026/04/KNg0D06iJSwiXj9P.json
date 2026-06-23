@@ -1,9 +1,9 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2026-06-18T17:21:21.000Z",
-    "createdAt": "2026-06-18T17:21:14.246Z",
-    "versionId": "9e18b789-a414-4d0b-a5e0-e478654c66af",
+    "updatedAt": "2026-06-22T16:29:17.000Z",
+    "createdAt": "2026-06-22T16:26:58.331Z",
+    "versionId": "0dd3a81b-8243-4827-a2ba-db599fabe4ff",
     "workflowId": "KNg0D06iJSwiXj9P",
     "nodes": [
       {
@@ -130,7 +130,7 @@
                     {
                       "id": "54484fe3-6fd8-4f3d-b47e-210225671768",
                       "leftValue": "={{ $json.body.event }}",
-                      "rightValue": "PURCHASE_REFUNDED",
+                      "rightValue": "PURCHASE_CANCELED",
                       "operator": {
                         "type": "string",
                         "operation": "equals",
@@ -176,7 +176,7 @@
                     {
                       "id": "9f9328ea-d47b-4cd9-9911-094d55462d1a",
                       "leftValue": "={{ $json.body.event }}",
-                      "rightValue": "SUBSCRIPTION_CANCELED",
+                      "rightValue": "PURCHASE_REFUNDED",
                       "operator": {
                         "type": "string",
                         "operation": "equals",
@@ -276,11 +276,11 @@
     },
     "nodeGroups": [],
     "authors": "BE Online",
-    "name": "Version 9e18b789",
+    "name": "Version 0dd3a81b",
     "description": "",
     "autosaved": true
   },
-  "activeVersionId": "9e18b789-a414-4d0b-a5e0-e478654c66af",
+  "activeVersionId": "0dd3a81b-8243-4827-a2ba-db599fabe4ff",
   "connections": {
     "Webhook": {
       "main": [
@@ -468,7 +468,7 @@
                   {
                     "id": "54484fe3-6fd8-4f3d-b47e-210225671768",
                     "leftValue": "={{ $json.body.event }}",
-                    "rightValue": "PURCHASE_REFUNDED",
+                    "rightValue": "PURCHASE_CANCELED",
                     "operator": {
                       "type": "string",
                       "operation": "equals",
@@ -514,7 +514,7 @@
                   {
                     "id": "9f9328ea-d47b-4cd9-9911-094d55462d1a",
                     "leftValue": "={{ $json.body.event }}",
-                    "rightValue": "SUBSCRIPTION_CANCELED",
+                    "rightValue": "PURCHASE_REFUNDED",
                     "operator": {
                       "type": "string",
                       "operation": "equals",
@@ -760,6 +760,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2026-06-18T17:24:13.462Z",
-  "versionId": "9e18b789-a414-4d0b-a5e0-e478654c66af"
+  "updatedAt": "2026-06-22T16:26:58.329Z",
+  "versionId": "0dd3a81b-8243-4827-a2ba-db599fabe4ff"
 }
