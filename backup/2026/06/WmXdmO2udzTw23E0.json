@@ -1,0 +1,241 @@
+{
+  "active": true,
+  "activeVersion": {
+    "updatedAt": "2026-06-23T20:14:10.000Z",
+    "createdAt": "2026-06-23T20:13:23.648Z",
+    "versionId": "5efe5889-5061-4f5c-bebc-4a08a213f47d",
+    "workflowId": "WmXdmO2udzTw23E0",
+    "nodes": [
+      {
+        "parameters": {
+          "httpMethod": "POST",
+          "path": "lista-espera-signature",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.webhook",
+        "typeVersion": 2.1,
+        "position": [
+          -192,
+          16
+        ],
+        "id": "4e47e0cc-238e-40ea-9e35-eda5f9aa228b",
+        "name": "Webhook",
+        "webhookId": "d34e04c2-e91d-4007-976b-5b88a1a00d29"
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "=https://api.flodesk.com/v1/subscribers/",
+          "authentication": "genericCredentialType",
+          "genericAuthType": "httpBasicAuth",
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "={\n  \"email\": \"{{ $json.body.submission.fields.Correo }}\",\n  \"segment_ids\": [\"6a29675e408417928279d0c6\"]\n}",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          160,
+          16
+        ],
+        "id": "f44ce812-e091-4eae-a5bf-970cd4e9391b",
+        "name": "Agregar a Flodesk",
+        "retryOnFail": false,
+        "maxTries": 5,
+        "waitBetweenTries": 5000,
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "hSaP4d59L4OoJOce",
+            "name": "Flodesk Alex"
+          },
+          "httpBasicAuth": {
+            "id": "QvDqcChg1nnswrDt",
+            "name": "FLODESK ALEX"
+          }
+        },
+        "onError": "continueRegularOutput"
+      }
+    ],
+    "connections": {
+      "Webhook": {
+        "main": [
+          [
+            {
+              "node": "Agregar a Flodesk",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Agregar a Flodesk": {
+        "main": [
+          []
+        ]
+      }
+    },
+    "nodeGroups": [],
+    "authors": "BE Online",
+    "name": "Version 5efe5889",
+    "description": "",
+    "autosaved": true
+  },
+  "activeVersionId": "5efe5889-5061-4f5c-bebc-4a08a213f47d",
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Agregar a Flodesk",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Agregar a Flodesk": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "createdAt": "2026-06-23T20:08:36.230Z",
+  "id": "WmXdmO2udzTw23E0",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Alexandra - Lista de espera ADE Signature",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "lista-espera-signature",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -192,
+        16
+      ],
+      "id": "4e47e0cc-238e-40ea-9e35-eda5f9aa228b",
+      "name": "Webhook",
+      "webhookId": "d34e04c2-e91d-4007-976b-5b88a1a00d29"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.flodesk.com/v1/subscribers/",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"email\": \"{{ $json.body.submission.fields.Correo }}\",\n  \"segment_ids\": [\"6a29675e408417928279d0c6\"]\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        160,
+        16
+      ],
+      "id": "f44ce812-e091-4eae-a5bf-970cd4e9391b",
+      "name": "Agregar a Flodesk",
+      "retryOnFail": false,
+      "maxTries": 5,
+      "waitBetweenTries": 5000,
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "hSaP4d59L4OoJOce",
+          "name": "Flodesk Alex"
+        },
+        "httpBasicAuth": {
+          "id": "QvDqcChg1nnswrDt",
+          "name": "FLODESK ALEX"
+        }
+      },
+      "onError": "continueRegularOutput"
+    }
+  ],
+  "pinData": {
+    "Webhook": [
+      {
+        "json": {
+          "headers": {
+            "host": "contenedor1-n8n.vqn37t.easypanel.host",
+            "user-agent": "AtomiForm/1.0",
+            "content-length": "1477",
+            "accept": "application/json, text/plain, */*",
+            "accept-encoding": "gzip, compress, deflate, br",
+            "content-type": "application/json",
+            "x-form-id": "1039c18d-24fd-4985-8452-b00fc70355a9",
+            "x-forwarded-for": "24.199.100.93",
+            "x-forwarded-host": "contenedor1-n8n.vqn37t.easypanel.host",
+            "x-forwarded-port": "443",
+            "x-forwarded-proto": "https",
+            "x-forwarded-server": "730fdd9182ea",
+            "x-real-ip": "24.199.100.93",
+            "x-webhook-id": "13c2c6e3-7530-448c-b34c-1631d194f53a"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "event": "form_submission",
+            "id": "e01e43ba-655c-4df5-8094-5fa907d0a80c",
+            "form": {
+              "id": "1039c18d-24fd-4985-8452-b00fc70355a9",
+              "name": "Formulario Reto: Escribe, Publica y vende tu libro"
+            },
+            "submission": {
+              "submittedAt": "2026-02-18T17:20:09.237Z",
+              "fields": {
+                "Correo": "newtime28082024@gmail.com",
+                "¿Qué tan cerca estás de cumplir tu sueño de ver tu libro publicado y disponible para lectores reales?": "Ya escribí parte de mi libro, pero no sé cómo seguir o cómo hacerlo llegar a lectores reales.",
+                "UTM Campaign": "00 - [AUTO] - A+ [IMG06 - ADE 03/26]",
+                "UTM Source": "metaads",
+                "UTM Medium": "Facebook_Mobile_Feed",
+                "UTM Content": "IMG06 - ADE 03/26",
+                "UTM Term": "120239337001200724"
+              },
+              "metadata": {
+                "page": {
+                  "id": "6tFbiqGFthcyuVuOkI7b",
+                  "url": "https://www.autordeexito.com/ADE-registro?utm_source=metaads&utm_medium=Facebook_Mobile_Feed&utm_campaign=00+-+%5BAUTO%5D+-+A%2B+%5BIMG06+-+ADE+03%2F26%5D&utm_content=IMG06+-+ADE+03%2F26&vk_source=metaads&vk_ad_id=120239337001210724&fbclid=IwZXh0bgNhZW0BMABhZGlkAastCj931ERzcnRjBmFwcF9pZAwzNTA2ODU1MzE3MjgAAR67LVCKY90AwBMOmxTGljRyNGZZh0FhBJlqg1AG3A_Amym5e_JHySJjBcbXyw_aem_qjs3btF2ffDe5llH8LJZfQ&utm_id=120239332657450724&utm_term=120239337001200724",
+                  "name": "ADE-registro"
+                },
+                "userAgent": "Mozilla/5.0 (Linux; Android 15; V2343 Build/AP3A.240905.015.A2_SCNONFC; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/145.0.7632.52 Mobile Safari/537.36 [FB_IAB/FB4A;FBAV/548.1.0.51.64;IABMV/1;]",
+                "ip": "2803:e5e3:2a03:1400:dfd0:13c2:1dae:add2"
+              }
+            }
+          },
+          "webhookUrl": "https://contenedor1-n8n.vqn37t.easypanel.host/webhook/registro-alexandra-ADE",
+          "executionMode": "production"
+        }
+      }
+    ]
+  },
+  "repo_name": "backupn8n",
+  "repo_owner": "infoandresrendoncol",
+  "repo_path": "backup/",
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false,
+    "binaryMode": "separate"
+  },
+  "shared": [
+    {
+      "updatedAt": "2026-06-23T20:08:36.236Z",
+      "createdAt": "2026-06-23T20:08:36.236Z",
+      "role": "workflow:owner",
+      "workflowId": "WmXdmO2udzTw23E0",
+      "projectId": "4KmSbENK2cGxsjaf"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2026-06-23T20:13:23.647Z",
+  "versionId": "5efe5889-5061-4f5c-bebc-4a08a213f47d"
+}
