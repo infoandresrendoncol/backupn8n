@@ -1,9 +1,9 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2026-03-27T20:14:30.000Z",
-    "createdAt": "2026-03-27T19:39:30.283Z",
-    "versionId": "f84b6d23-1cf7-45af-b69d-18a71c623978",
+    "updatedAt": "2026-07-03T04:11:48.000Z",
+    "createdAt": "2026-07-03T04:11:42.435Z",
+    "versionId": "1256695c-20f7-4a62-a03c-3bfd7807fff3",
     "workflowId": "R3dLE3SaA6y3mXFq",
     "nodes": [
       {
@@ -25,37 +25,19 @@
       {
         "parameters": {
           "method": "POST",
-          "url": "https://unnichat.com.br/a/start/i5eMyBWxN5fuL3eekYiL",
-          "sendBody": true,
-          "specifyBody": "json",
-          "jsonBody": "={\n  \"id\": \"{{ $json.id || Math.floor(Math.random() * 1000000).toString() }}\",\n  \"data\": {\n    \"number\": \"{{ $json.body.submission.fields.Celular }}\",\n    \"tag\": \"global\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
-          "options": {}
-        },
-        "type": "n8n-nodes-base.httpRequest",
-        "typeVersion": 4.2,
-        "position": [
-          208,
-          224
-        ],
-        "id": "1eef2be3-df72-4809-9bab-38274e2dd970",
-        "name": "Agregar contacto Unnichat"
-      },
-      {
-        "parameters": {
-          "method": "POST",
           "url": "=https://api.flodesk.com/v1/subscribers/",
           "authentication": "genericCredentialType",
           "genericAuthType": "httpBasicAuth",
           "sendBody": true,
           "specifyBody": "json",
-          "jsonBody": "={\n  \"email\": \"{{ $json.body.submission.fields.Correo }}\",\n  \"mobile_number\": \"{{ $json.body.submission.fields.Celular }}\",\n  \"segment_ids\": [\"6980f9c59cc5305073f73f08\"]\n}",
+          "jsonBody": "={\n  \"email\": \"{{ $('Webhook').item.json.body.submission.fields.Correo }}\",\n  \"segment_ids\": [\"6a46d423a4df0178f6dcbd6c\"]\n}",
           "options": {}
         },
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.2,
         "position": [
-          -16,
-          256
+          272,
+          128
         ],
         "id": "5c1dd33b-46e5-4eea-87eb-309785f6bdf5",
         "name": "Agregar a Flodesk",
@@ -79,29 +61,28 @@
           "operation": "append",
           "documentId": {
             "__rl": true,
-            "value": "https://docs.google.com/spreadsheets/d/1cRXbAmRmFEs5TebO4tWc0_s3Er4VC-Wyq-Ie9LGQXYA",
+            "value": "https://docs.google.com/spreadsheets/d/1XKI-YfciJntlzkPPhE8Rvd12lZeyFAAnBwNfT7ZwFG8/edit?gid=0#gid=0",
             "mode": "url"
           },
           "sheetName": {
             "__rl": true,
             "value": "gid=0",
             "mode": "list",
-            "cachedResultName": "UTMs",
-            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1cRXbAmRmFEs5TebO4tWc0_s3Er4VC-Wyq-Ie9LGQXYA/edit#gid=0"
+            "cachedResultName": "Registrados",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1XKI-YfciJntlzkPPhE8Rvd12lZeyFAAnBwNfT7ZwFG8/edit#gid=0"
           },
           "columns": {
             "mappingMode": "defineBelow",
             "value": {
               "EMAIL": "={{ $('Webhook').item.json.body.submission.fields.Correo }}",
-              "TELEFONO": "=",
-              "PREGUNTA CUALIFICACIÓN": "={{ $json.Pregunta_cualificacion }}",
+              "FECHA": "={{ $now.setZone('America/Bogota').toFormat('yyyy-MM-dd HH:mm:ss') }}",
               "CAMPAÑA": "={{ $('Webhook').item.json.body.submission.fields[\"UTM Campaign\"] }}",
               "FUENTE": "={{ $('Webhook').item.json.body.submission.fields[\"UTM Source\"] }}",
               "MEDIO": "={{ $('Webhook').item.json.body.submission.fields[\"UTM Medium\"] }}",
               "TERMINO": "={{ $('Webhook').item.json.body.submission.fields[\"UTM Term\"] }}",
               "CONTENIDO": "={{ $('Webhook').item.json.body.submission.fields[\"UTM Content\"] }}",
               "IP": "={{ $('Webhook').item.json.body.submission.metadata.ip }}",
-              "FECHA": "={{ $('Webhook').item.json.body.submission.submittedAt }}"
+              "PREGUNTA CUALIFICACIÓN": "={{ $json.Pregunta_cualificacion }}"
             },
             "matchingColumns": [],
             "schema": [
@@ -204,15 +185,15 @@
         "type": "n8n-nodes-base.googleSheets",
         "typeVersion": 4.7,
         "position": [
-          208,
-          -208
+          272,
+          -144
         ],
         "id": "ef45b9d6-ca99-44bd-821a-be60c860c1ea",
         "name": "Conteo de leads",
         "credentials": {
           "googleSheetsOAuth2Api": {
-            "id": "RVzGPXmtbwg7e3zT",
-            "name": "SHEET INFO.ANDRES"
+            "id": "uniCNvqoYoprQPic",
+            "name": "SHEET INFO.HOLDINGS"
           }
         }
       },
@@ -264,6 +245,11 @@
               "node": "Conteo de leads",
               "type": "main",
               "index": 0
+            },
+            {
+              "node": "Agregar a Flodesk",
+              "type": "main",
+              "index": 0
             }
           ]
         ]
@@ -271,11 +257,11 @@
     },
     "nodeGroups": [],
     "authors": "BE Online",
-    "name": "Version f84b6d23",
+    "name": "Version 1256695c",
     "description": "",
     "autosaved": true
   },
-  "activeVersionId": "f84b6d23-1cf7-45af-b69d-18a71c623978",
+  "activeVersionId": "1256695c-20f7-4a62-a03c-3bfd7807fff3",
   "connections": {
     "Webhook": {
       "main": [
@@ -298,6 +284,11 @@
         [
           {
             "node": "Conteo de leads",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Agregar a Flodesk",
             "type": "main",
             "index": 0
           }
@@ -332,37 +323,19 @@
     {
       "parameters": {
         "method": "POST",
-        "url": "https://unnichat.com.br/a/start/i5eMyBWxN5fuL3eekYiL",
-        "sendBody": true,
-        "specifyBody": "json",
-        "jsonBody": "={\n  \"id\": \"{{ $json.id || Math.floor(Math.random() * 1000000).toString() }}\",\n  \"data\": {\n    \"number\": \"{{ $json.body.submission.fields.Celular }}\",\n    \"tag\": \"global\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.2,
-      "position": [
-        208,
-        224
-      ],
-      "id": "1eef2be3-df72-4809-9bab-38274e2dd970",
-      "name": "Agregar contacto Unnichat"
-    },
-    {
-      "parameters": {
-        "method": "POST",
         "url": "=https://api.flodesk.com/v1/subscribers/",
         "authentication": "genericCredentialType",
         "genericAuthType": "httpBasicAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"email\": \"{{ $json.body.submission.fields.Correo }}\",\n  \"mobile_number\": \"{{ $json.body.submission.fields.Celular }}\",\n  \"segment_ids\": [\"6980f9c59cc5305073f73f08\"]\n}",
+        "jsonBody": "={\n  \"email\": \"{{ $('Webhook').item.json.body.submission.fields.Correo }}\",\n  \"segment_ids\": [\"6a46d423a4df0178f6dcbd6c\"]\n}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        -16,
-        256
+        272,
+        128
       ],
       "id": "5c1dd33b-46e5-4eea-87eb-309785f6bdf5",
       "name": "Agregar a Flodesk",
@@ -386,29 +359,28 @@
         "operation": "append",
         "documentId": {
           "__rl": true,
-          "value": "https://docs.google.com/spreadsheets/d/1cRXbAmRmFEs5TebO4tWc0_s3Er4VC-Wyq-Ie9LGQXYA",
+          "value": "https://docs.google.com/spreadsheets/d/1XKI-YfciJntlzkPPhE8Rvd12lZeyFAAnBwNfT7ZwFG8/edit?gid=0#gid=0",
           "mode": "url"
         },
         "sheetName": {
           "__rl": true,
           "value": "gid=0",
           "mode": "list",
-          "cachedResultName": "UTMs",
-          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1cRXbAmRmFEs5TebO4tWc0_s3Er4VC-Wyq-Ie9LGQXYA/edit#gid=0"
+          "cachedResultName": "Registrados",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1XKI-YfciJntlzkPPhE8Rvd12lZeyFAAnBwNfT7ZwFG8/edit#gid=0"
         },
         "columns": {
           "mappingMode": "defineBelow",
           "value": {
             "EMAIL": "={{ $('Webhook').item.json.body.submission.fields.Correo }}",
-            "TELEFONO": "=",
-            "PREGUNTA CUALIFICACIÓN": "={{ $json.Pregunta_cualificacion }}",
+            "FECHA": "={{ $now.setZone('America/Bogota').toFormat('yyyy-MM-dd HH:mm:ss') }}",
             "CAMPAÑA": "={{ $('Webhook').item.json.body.submission.fields[\"UTM Campaign\"] }}",
             "FUENTE": "={{ $('Webhook').item.json.body.submission.fields[\"UTM Source\"] }}",
             "MEDIO": "={{ $('Webhook').item.json.body.submission.fields[\"UTM Medium\"] }}",
             "TERMINO": "={{ $('Webhook').item.json.body.submission.fields[\"UTM Term\"] }}",
             "CONTENIDO": "={{ $('Webhook').item.json.body.submission.fields[\"UTM Content\"] }}",
             "IP": "={{ $('Webhook').item.json.body.submission.metadata.ip }}",
-            "FECHA": "={{ $('Webhook').item.json.body.submission.submittedAt }}"
+            "PREGUNTA CUALIFICACIÓN": "={{ $json.Pregunta_cualificacion }}"
           },
           "matchingColumns": [],
           "schema": [
@@ -511,15 +483,15 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        208,
-        -208
+        272,
+        -144
       ],
       "id": "ef45b9d6-ca99-44bd-821a-be60c860c1ea",
       "name": "Conteo de leads",
       "credentials": {
         "googleSheetsOAuth2Api": {
-          "id": "RVzGPXmtbwg7e3zT",
-          "name": "SHEET INFO.ANDRES"
+          "id": "uniCNvqoYoprQPic",
+          "name": "SHEET INFO.HOLDINGS"
         }
       }
     },
@@ -624,6 +596,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2026-03-27T19:39:30.282Z",
-  "versionId": "f84b6d23-1cf7-45af-b69d-18a71c623978"
+  "updatedAt": "2026-07-03T04:11:42.434Z",
+  "versionId": "1256695c-20f7-4a62-a03c-3bfd7807fff3"
 }
