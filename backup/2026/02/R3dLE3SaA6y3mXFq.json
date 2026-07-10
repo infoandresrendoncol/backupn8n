@@ -1,9 +1,9 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2026-07-03T04:11:48.000Z",
-    "createdAt": "2026-07-03T04:11:42.435Z",
-    "versionId": "1256695c-20f7-4a62-a03c-3bfd7807fff3",
+    "updatedAt": "2026-07-09T23:02:03.000Z",
+    "createdAt": "2026-07-09T23:01:51.596Z",
+    "versionId": "ef136b8b-16de-4d58-b0b7-19ef4be8d5b4",
     "workflowId": "R3dLE3SaA6y3mXFq",
     "nodes": [
       {
@@ -82,7 +82,8 @@
               "TERMINO": "={{ $('Webhook').item.json.body.submission.fields[\"UTM Term\"] }}",
               "CONTENIDO": "={{ $('Webhook').item.json.body.submission.fields[\"UTM Content\"] }}",
               "IP": "={{ $('Webhook').item.json.body.submission.metadata.ip }}",
-              "PREGUNTA CUALIFICACIÓN": "={{ $json.Pregunta_cualificacion }}"
+              "PREGUNTA CUALIFICACIÓN": "={{ $json.Pregunta_cualificacion }}",
+              "LANDING DE ORIGEN": "={{ $('Webhook').item.json.body.submission.metadata.page.url.split('?')[0] }}"
             },
             "matchingColumns": [],
             "schema": [
@@ -175,6 +176,16 @@
                 "display": true,
                 "type": "string",
                 "canBeUsedToMatch": true
+              },
+              {
+                "id": "LANDING DE ORIGEN",
+                "displayName": "LANDING DE ORIGEN",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
               }
             ],
             "attemptToConvertTypes": false,
@@ -257,11 +268,11 @@
     },
     "nodeGroups": [],
     "authors": "BE Online",
-    "name": "Version 1256695c",
+    "name": "Version ef136b8b",
     "description": "",
     "autosaved": true
   },
-  "activeVersionId": "1256695c-20f7-4a62-a03c-3bfd7807fff3",
+  "activeVersionId": "ef136b8b-16de-4d58-b0b7-19ef4be8d5b4",
   "connections": {
     "Webhook": {
       "main": [
@@ -380,7 +391,8 @@
             "TERMINO": "={{ $('Webhook').item.json.body.submission.fields[\"UTM Term\"] }}",
             "CONTENIDO": "={{ $('Webhook').item.json.body.submission.fields[\"UTM Content\"] }}",
             "IP": "={{ $('Webhook').item.json.body.submission.metadata.ip }}",
-            "PREGUNTA CUALIFICACIÓN": "={{ $json.Pregunta_cualificacion }}"
+            "PREGUNTA CUALIFICACIÓN": "={{ $json.Pregunta_cualificacion }}",
+            "LANDING DE ORIGEN": "={{ $('Webhook').item.json.body.submission.metadata.page.url.split('?')[0] }}"
           },
           "matchingColumns": [],
           "schema": [
@@ -473,6 +485,16 @@
               "display": true,
               "type": "string",
               "canBeUsedToMatch": true
+            },
+            {
+              "id": "LANDING DE ORIGEN",
+              "displayName": "LANDING DE ORIGEN",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
             }
           ],
           "attemptToConvertTypes": false,
@@ -596,6 +618,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2026-07-03T04:11:42.434Z",
-  "versionId": "1256695c-20f7-4a62-a03c-3bfd7807fff3"
+  "updatedAt": "2026-07-09T23:01:51.595Z",
+  "versionId": "ef136b8b-16de-4d58-b0b7-19ef4be8d5b4"
 }
