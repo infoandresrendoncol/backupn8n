@@ -310,6 +310,11 @@
             "node": "Agregar contacto Unnichat",
             "type": "main",
             "index": 0
+          },
+          {
+            "node": "Create spreadsheet",
+            "type": "main",
+            "index": 0
           }
         ],
         [
@@ -392,8 +397,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        256,
-        -336
+        192,
+        -368
       ],
       "id": "1f4dafd1-5f4c-477d-8f4b-213a6299a9af",
       "name": "Agregar a Flodesk",
@@ -555,6 +560,26 @@
       ],
       "id": "6d50f7fe-83eb-4b78-93b8-731ad6f41a4a",
       "name": "Agregar contacto Unnichat2"
+    },
+    {
+      "parameters": {
+        "resource": "spreadsheet",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        128,
+        32
+      ],
+      "id": "42792e5e-7218-4c06-9d7b-b363cfd1eb77",
+      "name": "Create spreadsheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "uniCNvqoYoprQPic",
+          "name": "SHEET INFO.HOLDINGS"
+        }
+      }
     }
   ],
   "pinData": {
@@ -760,6 +785,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2026-06-22T16:26:58.329Z",
-  "versionId": "0dd3a81b-8243-4827-a2ba-db599fabe4ff"
+  "updatedAt": "2026-07-22T23:39:15.615Z",
+  "versionId": "8be0c4d0-c3f0-4328-add4-150d2eb3f213"
 }
