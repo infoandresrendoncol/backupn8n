@@ -569,8 +569,8 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        128,
-        32
+        48,
+        256
       ],
       "id": "42792e5e-7218-4c06-9d7b-b363cfd1eb77",
       "name": "Create spreadsheet",
@@ -785,6 +785,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2026-07-22T23:39:15.615Z",
-  "versionId": "8be0c4d0-c3f0-4328-add4-150d2eb3f213"
+  "updatedAt": "2026-07-23T21:24:02.133Z",
+  "versionId": "6bd6ea05-25e5-4789-893e-ccf72b16096e"
 }
