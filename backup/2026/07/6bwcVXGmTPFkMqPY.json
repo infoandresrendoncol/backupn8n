@@ -1,0 +1,1285 @@
+{
+  "active": true,
+  "activeVersion": {
+    "updatedAt": "2026-07-26T21:35:15.000Z",
+    "createdAt": "2026-07-26T21:35:03.338Z",
+    "versionId": "b53f45ac-5772-4a72-ad2b-fd0ae9f61a96",
+    "workflowId": "6bwcVXGmTPFkMqPY",
+    "nodes": [
+      {
+        "parameters": {
+          "httpMethod": "POST",
+          "path": "checkout-ade-y-signature",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.webhook",
+        "typeVersion": 2.1,
+        "position": [
+          0,
+          32
+        ],
+        "id": "3c0bdf27-ccee-4d93-b516-0123316bed5e",
+        "name": "Webhook",
+        "webhookId": "72476439-b9f0-4f0d-88d9-5c0d4ddcc930"
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "=https://api.flodesk.com/v1/subscribers",
+          "authentication": "genericCredentialType",
+          "genericAuthType": "httpBasicAuth",
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "={\n  \"email\": \"{{ $('Webhook').item.json.data.buyer.email }}\",\n  \"first_name\": \"{{ $('Webhook').item.json.data.buyer.first_name }}\",\n  \"segment_ids\": [\"6a6655a59e079c6fbafad2c8\"]\n}",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          736,
+          -176
+        ],
+        "id": "b7079dd9-ae7c-4699-b8a8-c9d1a9378501",
+        "name": "Agregar a Flodesk",
+        "retryOnFail": false,
+        "maxTries": 5,
+        "waitBetweenTries": 5000,
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "hSaP4d59L4OoJOce",
+            "name": "Flodesk Alex"
+          },
+          "httpBasicAuth": {
+            "id": "QvDqcChg1nnswrDt",
+            "name": "FLODESK ALEX"
+          }
+        },
+        "onError": "continueRegularOutput"
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "https://unnichat.com.br/a/start/pgW3m39UzBjsxkhBZW8N",
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "={\n  \"id\": \"{{ $json.id || Math.floor(Math.random() * 1000000).toString() }}\",\n  \"data\": {\n    \"number\": \"{{ $('Webhook').item.json.body.data.buyer.checkout_phone }}\",\n    \"tag\": \"global\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          960,
+          -176
+        ],
+        "id": "3d150b0d-6d03-4606-a267-8310ec598903",
+        "name": "Agregar contacto Unnichat"
+      },
+      {
+        "parameters": {
+          "rules": {
+            "values": [
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 3
+                  },
+                  "conditions": [
+                    {
+                      "leftValue": "Autor de éxito",
+                      "rightValue": "={{ $json.data.product.name }}",
+                      "operator": {
+                        "type": "string",
+                        "operation": "equals"
+                      },
+                      "id": "7fe5e97d-fed9-4d49-8894-73d684b6e23e"
+                    }
+                  ],
+                  "combinator": "and"
+                }
+              },
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 3
+                  },
+                  "conditions": [
+                    {
+                      "id": "366216d0-19be-475e-a820-e4d39198ccad",
+                      "leftValue": "Autor de Éxito Signature",
+                      "rightValue": "={{ $json.data.product.name }}",
+                      "operator": {
+                        "type": "string",
+                        "operation": "equals"
+                      }
+                    }
+                  ],
+                  "combinator": "and"
+                }
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.switch",
+        "typeVersion": 3.4,
+        "position": [
+          208,
+          32
+        ],
+        "id": "2682358a-e0ea-4fc1-81f4-70cb0e88f970",
+        "name": "ADE o Signature"
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "=https://api.flodesk.com/v1/subscribers",
+          "authentication": "genericCredentialType",
+          "genericAuthType": "httpBasicAuth",
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "={\n  \"email\": \"{{ $('Webhook').item.json.data.buyer.email }}\",\n  \"first_name\": \"{{ $('Webhook').item.json.data.buyer.first_name }}\",\n  \"segment_ids\": [\"6a6655c433d05fd3413f2cd1\"]\n}",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          736,
+          112
+        ],
+        "id": "2b62d3eb-de14-48fa-9a97-0bd723403e11",
+        "name": "Agregar a Flodesk1",
+        "retryOnFail": false,
+        "maxTries": 5,
+        "waitBetweenTries": 5000,
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "hSaP4d59L4OoJOce",
+            "name": "Flodesk Alex"
+          },
+          "httpBasicAuth": {
+            "id": "QvDqcChg1nnswrDt",
+            "name": "FLODESK ALEX"
+          }
+        },
+        "onError": "continueRegularOutput"
+      },
+      {
+        "parameters": {
+          "rules": {
+            "values": [
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 2
+                  },
+                  "conditions": [
+                    {
+                      "leftValue": "={{ $('Webhook').item.json.event }}",
+                      "rightValue": "PURCHASE_BILLET_PRINTED",
+                      "operator": {
+                        "type": "string",
+                        "operation": "equals"
+                      },
+                      "id": "26888965-7100-40a1-a8b3-eef968b28b2a"
+                    }
+                  ],
+                  "combinator": "and"
+                }
+              },
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 2
+                  },
+                  "conditions": [
+                    {
+                      "id": "84306705-0989-4d36-b59a-f5972aebfeb8",
+                      "leftValue": "={{ $('Webhook').item.json.event }}",
+                      "rightValue": "PURCHASE_COMPLETE",
+                      "operator": {
+                        "type": "string",
+                        "operation": "equals",
+                        "name": "filter.operator.equals"
+                      }
+                    }
+                  ],
+                  "combinator": "and"
+                }
+              },
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 2
+                  },
+                  "conditions": [
+                    {
+                      "id": "7c52240a-4074-4ae3-90b9-f1000c18948a",
+                      "leftValue": "={{ $('Webhook').item.json.event }}",
+                      "rightValue": "PURCHASE_APPROVED",
+                      "operator": {
+                        "type": "string",
+                        "operation": "equals",
+                        "name": "filter.operator.equals"
+                      }
+                    }
+                  ],
+                  "combinator": "and"
+                }
+              },
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 2
+                  },
+                  "conditions": [
+                    {
+                      "id": "5aee3900-62ec-49db-95f7-2414abffbb70",
+                      "leftValue": "={{ $('Webhook').item.json.event }}",
+                      "rightValue": "PURCHASE_CANCELED",
+                      "operator": {
+                        "type": "string",
+                        "operation": "equals",
+                        "name": "filter.operator.equals"
+                      }
+                    }
+                  ],
+                  "combinator": "and"
+                }
+              },
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 2
+                  },
+                  "conditions": [
+                    {
+                      "id": "46cbfbb2-61e7-49af-b098-78314696d446",
+                      "leftValue": "={{ $('Webhook').item.json.event }}",
+                      "rightValue": "PURCHASE_OUT_OF_SHOPPING_CART",
+                      "operator": {
+                        "type": "string",
+                        "operation": "equals",
+                        "name": "filter.operator.equals"
+                      }
+                    }
+                  ],
+                  "combinator": "and"
+                }
+              },
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 2
+                  },
+                  "conditions": [
+                    {
+                      "id": "ec18ffb3-1644-45dc-8f3a-a6238c654d83",
+                      "leftValue": "={{ $('Webhook').item.json.event }}",
+                      "rightValue": "PURCHASE_DELAYED",
+                      "operator": {
+                        "type": "string",
+                        "operation": "equals",
+                        "name": "filter.operator.equals"
+                      }
+                    }
+                  ],
+                  "combinator": "and"
+                }
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.switch",
+        "typeVersion": 3.2,
+        "position": [
+          448,
+          80
+        ],
+        "id": "7aa1ff3f-cb98-4f6a-b1e7-052c12cf29d5",
+        "name": "Evento Checkout - Signature"
+      },
+      {
+        "parameters": {
+          "rules": {
+            "values": [
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 2
+                  },
+                  "conditions": [
+                    {
+                      "leftValue": "={{ $('Webhook').item.json.event }}",
+                      "rightValue": "PURCHASE_BILLET_PRINTED",
+                      "operator": {
+                        "type": "string",
+                        "operation": "equals"
+                      },
+                      "id": "26888965-7100-40a1-a8b3-eef968b28b2a"
+                    }
+                  ],
+                  "combinator": "and"
+                }
+              },
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 2
+                  },
+                  "conditions": [
+                    {
+                      "id": "84306705-0989-4d36-b59a-f5972aebfeb8",
+                      "leftValue": "={{ $('Webhook').item.json.event }}",
+                      "rightValue": "PURCHASE_COMPLETE",
+                      "operator": {
+                        "type": "string",
+                        "operation": "equals",
+                        "name": "filter.operator.equals"
+                      }
+                    }
+                  ],
+                  "combinator": "and"
+                }
+              },
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 2
+                  },
+                  "conditions": [
+                    {
+                      "id": "7c52240a-4074-4ae3-90b9-f1000c18948a",
+                      "leftValue": "={{ $('Webhook').item.json.event }}",
+                      "rightValue": "PURCHASE_APPROVED",
+                      "operator": {
+                        "type": "string",
+                        "operation": "equals",
+                        "name": "filter.operator.equals"
+                      }
+                    }
+                  ],
+                  "combinator": "and"
+                }
+              },
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 2
+                  },
+                  "conditions": [
+                    {
+                      "id": "5aee3900-62ec-49db-95f7-2414abffbb70",
+                      "leftValue": "={{ $('Webhook').item.json.event }}",
+                      "rightValue": "PURCHASE_CANCELED",
+                      "operator": {
+                        "type": "string",
+                        "operation": "equals",
+                        "name": "filter.operator.equals"
+                      }
+                    }
+                  ],
+                  "combinator": "and"
+                }
+              },
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 2
+                  },
+                  "conditions": [
+                    {
+                      "id": "46cbfbb2-61e7-49af-b098-78314696d446",
+                      "leftValue": "={{ $('Webhook').item.json.event }}",
+                      "rightValue": "PURCHASE_OUT_OF_SHOPPING_CART",
+                      "operator": {
+                        "type": "string",
+                        "operation": "equals",
+                        "name": "filter.operator.equals"
+                      }
+                    }
+                  ],
+                  "combinator": "and"
+                }
+              },
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 2
+                  },
+                  "conditions": [
+                    {
+                      "id": "ec18ffb3-1644-45dc-8f3a-a6238c654d83",
+                      "leftValue": "={{ $('Webhook').item.json.event }}",
+                      "rightValue": "PURCHASE_DELAYED",
+                      "operator": {
+                        "type": "string",
+                        "operation": "equals",
+                        "name": "filter.operator.equals"
+                      }
+                    }
+                  ],
+                  "combinator": "and"
+                }
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.switch",
+        "typeVersion": 3.2,
+        "position": [
+          448,
+          -208
+        ],
+        "id": "42b64915-d2d6-42c9-95df-181ea8a70fb5",
+        "name": "Evento Checkout - ADE"
+      }
+    ],
+    "connections": {
+      "Webhook": {
+        "main": [
+          [
+            {
+              "node": "ADE o Signature",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Agregar a Flodesk": {
+        "main": [
+          [
+            {
+              "node": "Agregar contacto Unnichat",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "ADE o Signature": {
+        "main": [
+          [
+            {
+              "node": "Evento Checkout - ADE",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Evento Checkout - Signature",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Agregar a Flodesk1": {
+        "main": [
+          []
+        ]
+      },
+      "Evento Checkout - Signature": {
+        "main": [
+          [],
+          [
+            {
+              "node": "Agregar a Flodesk1",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Agregar a Flodesk1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Evento Checkout - ADE": {
+        "main": [
+          [],
+          [
+            {
+              "node": "Agregar a Flodesk",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Agregar a Flodesk",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [],
+          [],
+          []
+        ]
+      }
+    },
+    "nodeGroups": [],
+    "authors": "BE Online",
+    "name": "Version b53f45ac",
+    "description": "",
+    "autosaved": true
+  },
+  "activeVersionId": "b53f45ac-5772-4a72-ad2b-fd0ae9f61a96",
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "ADE o Signature",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Agregar a Flodesk": {
+      "main": [
+        [
+          {
+            "node": "Agregar contacto Unnichat",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "ADE o Signature": {
+      "main": [
+        [
+          {
+            "node": "Evento Checkout - ADE",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Evento Checkout - Signature",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Agregar a Flodesk1": {
+      "main": [
+        []
+      ]
+    },
+    "Evento Checkout - Signature": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Agregar a Flodesk1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Agregar a Flodesk1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Evento Checkout - ADE": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Agregar a Flodesk",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Agregar a Flodesk",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [],
+        [],
+        []
+      ]
+    }
+  },
+  "createdAt": "2026-07-26T16:06:34.069Z",
+  "id": "6bwcVXGmTPFkMqPY",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Alex - Eventos Checkout - ADE",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "checkout-ade-y-signature",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        32
+      ],
+      "id": "3c0bdf27-ccee-4d93-b516-0123316bed5e",
+      "name": "Webhook",
+      "webhookId": "72476439-b9f0-4f0d-88d9-5c0d4ddcc930"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.flodesk.com/v1/subscribers",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"email\": \"{{ $('Webhook').item.json.data.buyer.email }}\",\n  \"first_name\": \"{{ $('Webhook').item.json.data.buyer.first_name }}\",\n  \"segment_ids\": [\"6a6655a59e079c6fbafad2c8\"]\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        736,
+        -176
+      ],
+      "id": "b7079dd9-ae7c-4699-b8a8-c9d1a9378501",
+      "name": "Agregar a Flodesk",
+      "retryOnFail": false,
+      "maxTries": 5,
+      "waitBetweenTries": 5000,
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "hSaP4d59L4OoJOce",
+          "name": "Flodesk Alex"
+        },
+        "httpBasicAuth": {
+          "id": "QvDqcChg1nnswrDt",
+          "name": "FLODESK ALEX"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://unnichat.com.br/a/start/pgW3m39UzBjsxkhBZW8N",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"id\": \"{{ $json.id || Math.floor(Math.random() * 1000000).toString() }}\",\n  \"data\": {\n    \"number\": \"{{ $('Webhook').item.json.body.data.buyer.checkout_phone }}\",\n    \"tag\": \"global\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        960,
+        -176
+      ],
+      "id": "3d150b0d-6d03-4606-a267-8310ec598903",
+      "name": "Agregar contacto Unnichat"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "Autor de éxito",
+                    "rightValue": "={{ $json.data.product.name }}",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "7fe5e97d-fed9-4d49-8894-73d684b6e23e"
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "366216d0-19be-475e-a820-e4d39198ccad",
+                    "leftValue": "Autor de Éxito Signature",
+                    "rightValue": "={{ $json.data.product.name }}",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        208,
+        32
+      ],
+      "id": "2682358a-e0ea-4fc1-81f4-70cb0e88f970",
+      "name": "ADE o Signature"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.flodesk.com/v1/subscribers",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"email\": \"{{ $('Webhook').item.json.data.buyer.email }}\",\n  \"first_name\": \"{{ $('Webhook').item.json.data.buyer.first_name }}\",\n  \"segment_ids\": [\"6a6655c433d05fd3413f2cd1\"]\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        736,
+        112
+      ],
+      "id": "2b62d3eb-de14-48fa-9a97-0bd723403e11",
+      "name": "Agregar a Flodesk1",
+      "retryOnFail": false,
+      "maxTries": 5,
+      "waitBetweenTries": 5000,
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "hSaP4d59L4OoJOce",
+          "name": "Flodesk Alex"
+        },
+        "httpBasicAuth": {
+          "id": "QvDqcChg1nnswrDt",
+          "name": "FLODESK ALEX"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $('Webhook').item.json.event }}",
+                    "rightValue": "PURCHASE_BILLET_PRINTED",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "26888965-7100-40a1-a8b3-eef968b28b2a"
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "84306705-0989-4d36-b59a-f5972aebfeb8",
+                    "leftValue": "={{ $('Webhook').item.json.event }}",
+                    "rightValue": "PURCHASE_COMPLETE",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "7c52240a-4074-4ae3-90b9-f1000c18948a",
+                    "leftValue": "={{ $('Webhook').item.json.event }}",
+                    "rightValue": "PURCHASE_APPROVED",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "5aee3900-62ec-49db-95f7-2414abffbb70",
+                    "leftValue": "={{ $('Webhook').item.json.event }}",
+                    "rightValue": "PURCHASE_CANCELED",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "46cbfbb2-61e7-49af-b098-78314696d446",
+                    "leftValue": "={{ $('Webhook').item.json.event }}",
+                    "rightValue": "PURCHASE_OUT_OF_SHOPPING_CART",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "ec18ffb3-1644-45dc-8f3a-a6238c654d83",
+                    "leftValue": "={{ $('Webhook').item.json.event }}",
+                    "rightValue": "PURCHASE_DELAYED",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        448,
+        80
+      ],
+      "id": "7aa1ff3f-cb98-4f6a-b1e7-052c12cf29d5",
+      "name": "Evento Checkout - Signature"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $('Webhook').item.json.event }}",
+                    "rightValue": "PURCHASE_BILLET_PRINTED",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "26888965-7100-40a1-a8b3-eef968b28b2a"
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "84306705-0989-4d36-b59a-f5972aebfeb8",
+                    "leftValue": "={{ $('Webhook').item.json.event }}",
+                    "rightValue": "PURCHASE_COMPLETE",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "7c52240a-4074-4ae3-90b9-f1000c18948a",
+                    "leftValue": "={{ $('Webhook').item.json.event }}",
+                    "rightValue": "PURCHASE_APPROVED",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "5aee3900-62ec-49db-95f7-2414abffbb70",
+                    "leftValue": "={{ $('Webhook').item.json.event }}",
+                    "rightValue": "PURCHASE_CANCELED",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "46cbfbb2-61e7-49af-b098-78314696d446",
+                    "leftValue": "={{ $('Webhook').item.json.event }}",
+                    "rightValue": "PURCHASE_OUT_OF_SHOPPING_CART",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "ec18ffb3-1644-45dc-8f3a-a6238c654d83",
+                    "leftValue": "={{ $('Webhook').item.json.event }}",
+                    "rightValue": "PURCHASE_DELAYED",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        448,
+        -208
+      ],
+      "id": "42b64915-d2d6-42c9-95df-181ea8a70fb5",
+      "name": "Evento Checkout - ADE"
+    }
+  ],
+  "pinData": {
+    "Webhook": [
+      {
+        "json": {
+          "id": "410e013c-43fc-4ea4-ac56-7dc07f4e9599",
+          "creation_date": 1784986680476,
+          "event": "PURCHASE_APPROVED",
+          "version": "2.0.0",
+          "data": {
+            "product": {
+              "id": 2881523,
+              "ucode": "fc2826db-3753-4070-88ca-007f2807959d",
+              "name": "Autor de éxito",
+              "warranty_date": "2026-08-24T00:00:00Z",
+              "support_email": "ade@alexandracastrillon.com",
+              "has_co_production": true,
+              "is_physical_product": false,
+              "product_format_id": 8
+            },
+            "affiliates": [
+              {
+                "affiliate_code": "E104716901L",
+                "name": "Monica Haydee Villa Bernal"
+              }
+            ],
+            "buyer": {
+              "email": "ednagodoy.oficial@gmail.com",
+              "name": "Edna Ruth Godoy Parra",
+              "first_name": "Edna",
+              "last_name": "Parra",
+              "checkout_phone": "573108760413",
+              "address": {
+                "city": "Ricaurte",
+                "country": "Colombia",
+                "country_iso": "CO",
+                "state": "Cundinamarca",
+                "neighborhood": "",
+                "zipcode": "252410",
+                "address": "CL 2 # 18 - 209 ap. 303A Torre 2",
+                "number": "",
+                "complement": ""
+              },
+              "document": "",
+              "document_type": ""
+            },
+            "producer": {
+              "name": "Alexandra Castrillón Gómez",
+              "document": "PE123198",
+              "legal_nature": "Pessoa Física"
+            },
+            "commissions": [
+              {
+                "value": 6.19,
+                "source": "MARKETPLACE",
+                "currency_value": "USD"
+              },
+              {
+                "value": 24.6,
+                "source": "PRODUCER",
+                "currency_value": "USD",
+                "currency_conversion": {
+                  "converted_value": 24.6,
+                  "converted_to_currency": "USD",
+                  "conversion_rate": 1
+                }
+              }
+            ],
+            "purchase": {
+              "approved_date": 1784986578000,
+              "full_price": {
+                "value": 230235,
+                "currency_value": "COP"
+              },
+              "price": {
+                "value": 230235,
+                "currency_value": "COP"
+              },
+              "checkout_country": {
+                "name": "Colombia",
+                "iso": "CO"
+              },
+              "order_bump": {
+                "is_order_bump": false
+              },
+              "buyer_ip": "79.49.204.10",
+              "original_offer_price": {
+                "value": 71.35,
+                "currency_value": "USD"
+              },
+              "order_date": 1784986575000,
+              "status": "APPROVED",
+              "transaction": "HP0426779591",
+              "payment": {
+                "installments_number": 12,
+                "type": "CREDIT_CARD"
+              },
+              "offer": {
+                "code": "ndqyv7wg",
+                "name": "12 CUOTAS INTL $547"
+              },
+              "invoice_by": "SELLER",
+              "subscription_anticipation_purchase": false,
+              "date_next_charge": 1787659200000,
+              "recurrence_number": 4,
+              "is_funnel": false,
+              "business_model": "A"
+            },
+            "subscription": {
+              "status": "ACTIVE",
+              "subscriber": {
+                "code": "KZKHCK63"
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  "repo_name": "backupn8n",
+  "repo_owner": "infoandresrendoncol",
+  "repo_path": "backup/",
+  "settings": {
+    "executionOrder": "v1",
+    "callerPolicy": "workflowsFromSameOwner",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "shared": [
+    {
+      "updatedAt": "2026-07-26T16:06:34.077Z",
+      "createdAt": "2026-07-26T16:06:34.077Z",
+      "role": "workflow:owner",
+      "workflowId": "6bwcVXGmTPFkMqPY",
+      "projectId": "4KmSbENK2cGxsjaf"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2026-07-26T21:35:03.337Z",
+  "versionId": "b53f45ac-5772-4a72-ad2b-fd0ae9f61a96"
+}
