@@ -1,9 +1,9 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2026-07-29T20:43:45.000Z",
-    "createdAt": "2026-07-29T20:41:08.539Z",
-    "versionId": "580dcde9-93b6-4409-a5f3-a2a93a9d6d54",
+    "updatedAt": "2026-08-03T17:36:22.000Z",
+    "createdAt": "2026-08-03T17:36:17.305Z",
+    "versionId": "9970996f-418d-4556-aee3-5f980e5529c0",
     "workflowId": "6bwcVXGmTPFkMqPY",
     "nodes": [
       {
@@ -744,7 +744,7 @@
           "url": "https://unnichat.com.br/a/start/6JWI7w6ly2ApXe2c37V1",
           "sendBody": true,
           "specifyBody": "json",
-          "jsonBody": "={\n  \"id\": \"\"{{ $('Webhook').item.json.body.data.buyer.document }}\",\n  \"data\": {\n    \"number\": \"{{ $('Webhook').item.json.body.data.buyer.checkout_phone }}\",\n    \"tag\": \"global\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
+          "jsonBody": "={\n  \"id\": \"{{ $('Webhook').item.json.body.data.buyer.document }}\",\n  \"data\": {\n    \"number\": \"{{ $('Webhook').item.json.body.data.buyer.checkout_phone }}\",\n    \"tag\": \"global\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
           "options": {}
         },
         "type": "n8n-nodes-base.httpRequest",
@@ -780,7 +780,7 @@
           "url": "https://unnichat.com.br/a/start/a12k1sRJXLLX9BNJFRNS",
           "sendBody": true,
           "specifyBody": "json",
-          "jsonBody": "={\n  \"id\": \"{{ $json.id || Math.floor(Math.random() * 1000000).toString() }}\",\n  \"data\": {\n    \"number\": \"{{ $('Webhook').item.json.body.data.buyer.checkout_phone }}\",\n    \"tag\": \"global\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
+          "jsonBody": "={\n  \"id\": \"{{ $json.id || Math.floor(Math.random() * 1000000).toString() }}\",\n  \"data\": {\n    \"number\": \"{{ $('Webhook').item.json.body.data.buyer.phone }}\",\n    \"tag\": \"global\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
           "options": {}
         },
         "type": "n8n-nodes-base.httpRequest",
@@ -1118,11 +1118,11 @@
     },
     "nodeGroups": [],
     "authors": "BE Online",
-    "name": "Version 580dcde9",
+    "name": "Version 9970996f",
     "description": "",
     "autosaved": true
   },
-  "activeVersionId": "580dcde9-93b6-4409-a5f3-a2a93a9d6d54",
+  "activeVersionId": "9970996f-418d-4556-aee3-5f980e5529c0",
   "connections": {
     "Webhook": {
       "main": [
@@ -2104,7 +2104,7 @@
         "url": "https://unnichat.com.br/a/start/6JWI7w6ly2ApXe2c37V1",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"id\": \"\"{{ $('Webhook').item.json.body.data.buyer.document }}\",\n  \"data\": {\n    \"number\": \"{{ $('Webhook').item.json.body.data.buyer.checkout_phone }}\",\n    \"tag\": \"global\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
+        "jsonBody": "={\n  \"id\": \"{{ $('Webhook').item.json.body.data.buyer.document }}\",\n  \"data\": {\n    \"number\": \"{{ $('Webhook').item.json.body.data.buyer.checkout_phone }}\",\n    \"tag\": \"global\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
@@ -2140,7 +2140,7 @@
         "url": "https://unnichat.com.br/a/start/a12k1sRJXLLX9BNJFRNS",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"id\": \"{{ $json.id || Math.floor(Math.random() * 1000000).toString() }}\",\n  \"data\": {\n    \"number\": \"{{ $('Webhook').item.json.body.data.buyer.checkout_phone }}\",\n    \"tag\": \"global\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
+        "jsonBody": "={\n  \"id\": \"{{ $json.id || Math.floor(Math.random() * 1000000).toString() }}\",\n  \"data\": {\n    \"number\": \"{{ $('Webhook').item.json.body.data.buyer.phone }}\",\n    \"tag\": \"global\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
@@ -2248,179 +2248,43 @@
           "headers": {
             "host": "contenedor1-n8n.vqn37t.easypanel.host",
             "user-agent": "Jodd HTTP",
-            "content-length": "2599",
+            "content-length": "406",
             "content-type": "application/json",
-            "x-forwarded-for": "100.52.205.125",
+            "x-forwarded-for": "98.92.33.42",
             "x-forwarded-host": "contenedor1-n8n.vqn37t.easypanel.host",
             "x-forwarded-port": "443",
             "x-forwarded-proto": "https",
             "x-forwarded-server": "cbddb8c293f4",
             "x-hotmart-hottok": "p3pyMTUj7l7z86JGfalI9JMXTpiyBq85599017-fc1a-4b36-9723-828cee66c3e2",
-            "x-real-ip": "100.52.205.125",
+            "x-real-ip": "98.92.33.42",
             "accept-encoding": "gzip"
           },
           "params": {},
           "query": {},
           "body": {
             "data": {
+              "offer": {
+                "code": "b6mjgqpg"
+              },
               "product": {
-                "support_email": "support@hotmart.com.br",
-                "has_co_production": false,
                 "name": "Autor de éxito",
-                "warranty_date": "2017-12-27T00:00:00Z",
-                "is_physical_product": false,
-                "id": 0,
-                "ucode": "fb056612-bcc6-4217-9e6d-2a5d1110ac2f",
-                "product_format_id": 1,
-                "content": {
-                  "has_physical_products": true,
-                  "products": [
-                    {
-                      "name": "How to Make Clear Ice",
-                      "is_physical_product": false,
-                      "id": 4774438,
-                      "ucode": "559fef42-3406-4d82-b775-d09bd33936b1"
-                    },
-                    {
-                      "name": "Organizador de Poeira",
-                      "is_physical_product": true,
-                      "id": 4999597,
-                      "ucode": "099e7644-b7d1-43d6-82a9-ec6be0118a4b"
-                    }
-                  ]
-                }
+                "id": 2881523
               },
-              "shipping": {
-                "carrier": {
-                  "service": "SEDEX",
-                  "name": "CORREIOS"
-                },
-                "cost": {
-                  "currency_value": "BRL",
-                  "value": 25.5
-                },
-                "estimated_delivery_days": 7,
-                "fulfillment": {
-                  "service": "MANUAL"
-                }
+              "checkout_country": {
+                "iso": "CO",
+                "name": "Colombia"
               },
-              "commissions": [
-                {
-                  "currency_value": "BRL",
-                  "source": "MARKETPLACE",
-                  "value": 149.5
-                },
-                {
-                  "currency_value": "BRL",
-                  "source": "PRODUCER",
-                  "value": 1350.5
-                }
-              ],
-              "purchase": {
-                "original_offer_price": {
-                  "currency_value": "BRL",
-                  "value": 1500
-                },
-                "checkout_country": {
-                  "iso": "BR",
-                  "name": "Brasil"
-                },
-                "sckPaymentLink": "sckPaymentLinkTest",
-                "order_bump": {
-                  "parent_purchase_transaction": "HP02316330308193",
-                  "is_order_bump": true
-                },
-                "variants": {
-                  "attributes": [
-                    {
-                      "name": "Tamanho",
-                      "value": "Médio"
-                    },
-                    {
-                      "name": "Cor",
-                      "value": "Azul"
-                    }
-                  ],
-                  "sku": "HTM_SANDBOX-01"
-                },
-                "approved_date": 1511783346000,
-                "offer": {
-                  "metadata": {
-                    "variant": "premium",
-                    "campaign": "summer_sale_2026",
-                    "source": "landing_page"
-                  },
-                  "code": "test",
-                  "coupon_code": "SHHUHA"
-                },
-                "is_funnel": false,
-                "event_tickets": {
-                  "amount": 1785352648316
-                },
-                "order_date": 1511783344000,
-                "price": {
-                  "currency_value": "BRL",
-                  "value": 1500
-                },
-                "buyer_ip": "00.00.00.00",
-                "payment": {
-                  "installments_number": 12,
-                  "type": "CREDIT_CARD"
-                },
-                "full_price": {
-                  "currency_value": "BRL",
-                  "value": 1500
-                },
-                "business_model": "I",
-                "transaction": "HP16015479281022",
-                "status": "EXPIRED"
-              },
-              "affiliates": [
-                {
-                  "affiliate_code": "Q58388177J",
-                  "name": "Affiliate name"
-                }
-              ],
-              "producer": {
-                "legal_nature": "Pessoa Física",
-                "document": "12345678965",
-                "name": "Producer Test Name"
-              },
-              "subscription": {
-                "subscriber": {
-                  "code": "I9OT62C3"
-                },
-                "plan": {
-                  "name": "plano de teste",
-                  "id": 123
-                },
-                "status": "ACTIVE"
-              },
+              "buyer_ip": "181.63.25.130",
+              "affiliate": true,
               "buyer": {
-                "checkout_phone_code": "999999999",
-                "address": {
-                  "zipcode": "38400123",
-                  "country": "Brasil",
-                  "number": "10",
-                  "address": "Avenida Francisco Galassi",
-                  "city": "Uberlândia",
-                  "state": "Minas Gerais",
-                  "neighborhood": "Tubalina",
-                  "complement": "Perto do shopping",
-                  "country_iso": "BR"
-                },
-                "document": "69526128664",
-                "name": "Teste Comprador",
-                "last_name": "Comprador",
-                "checkout_phone": "99999999900",
-                "first_name": "Teste",
-                "email": "testeComprador271101postman15@example.com",
-                "document_type": "CPF"
+                "phone": "573102351988",
+                "name": "DIANA RESTREPO ",
+                "email": "restrepodiana@gmail.com"
               }
             },
-            "id": "ac7515ef-18bd-4c7f-a94e-f8ee482d670e",
-            "creation_date": 1785352648319,
-            "event": "PURCHASE_APPROVED",
+            "id": "47576fca-66ff-4c24-ae77-28ff367de83c",
+            "creation_date": 1785696009881,
+            "event": "PURCHASE_OUT_OF_SHOPPING_CART",
             "version": "2.0.0"
           },
           "webhookUrl": "https://contenedor1-n8n.vqn37t.easypanel.host/webhook/checkout-ade-y-signature",
@@ -2450,6 +2314,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2026-07-29T20:41:08.538Z",
-  "versionId": "580dcde9-93b6-4409-a5f3-a2a93a9d6d54"
+  "updatedAt": "2026-08-03T17:36:17.303Z",
+  "versionId": "9970996f-418d-4556-aee3-5f980e5529c0"
 }
