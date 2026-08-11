@@ -1,0 +1,615 @@
+{
+  "active": true,
+  "activeVersion": {
+    "updatedAt": "2026-08-10T16:04:58.000Z",
+    "createdAt": "2026-08-10T16:04:46.995Z",
+    "versionId": "a6224b69-a4e0-49c1-ab31-e32a01392789",
+    "workflowId": "ZSgppiRUWNXHcXJ7",
+    "nodes": [
+      {
+        "parameters": {
+          "httpMethod": "POST",
+          "path": "registro-udea-sep-2026",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.webhook",
+        "typeVersion": 2.1,
+        "position": [
+          -192,
+          16
+        ],
+        "id": "833ee1ae-0bea-4125-a731-c05e502343f9",
+        "name": "Webhook",
+        "webhookId": "a203051b-1585-4b11-b630-a18647b042d0"
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "=https://api.flodesk.com/v1/subscribers/",
+          "authentication": "genericCredentialType",
+          "genericAuthType": "httpBasicAuth",
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "={\n  \"email\": \"{{ $('Webhook').item.json.body.submission.fields.Correo }}\",\n  \"segment_ids\": [\"6a74ee9d8a167a70cc4e67e3\"]\n}",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          272,
+          128
+        ],
+        "id": "111ff6a8-5caa-4e8e-8f42-f4b118821646",
+        "name": "Agregar a Flodesk",
+        "retryOnFail": false,
+        "maxTries": 5,
+        "waitBetweenTries": 5000,
+        "credentials": {
+          "httpBasicAuth": {
+            "id": "gRxGvIuBu6QU8sll",
+            "name": "FLODESK FUTUROS"
+          }
+        },
+        "onError": "continueRegularOutput"
+      },
+      {
+        "parameters": {
+          "operation": "append",
+          "documentId": {
+            "__rl": true,
+            "value": "https://docs.google.com/spreadsheets/d/1sQ2URumSK77Opatsd9emmwkmem8x0jmLlWLaXUB0rkU/edit?usp=sharing",
+            "mode": "url"
+          },
+          "sheetName": {
+            "__rl": true,
+            "value": "gid=0",
+            "mode": "list",
+            "cachedResultName": "Registrados",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1XKI-YfciJntlzkPPhE8Rvd12lZeyFAAnBwNfT7ZwFG8/edit#gid=0"
+          },
+          "columns": {
+            "mappingMode": "defineBelow",
+            "value": {
+              "EMAIL": "={{ $('Webhook').item.json.body.submission.fields.Correo }}",
+              "FECHA": "={{ $now.setZone('America/Bogota').toFormat('yyyy-MM-dd HH:mm:ss') }}",
+              "CAMPAÑA": "={{ $('Webhook').item.json.body.submission.fields[\"UTM Campaign\"] }}",
+              "FUENTE": "={{ $('Webhook').item.json.body.submission.fields[\"UTM Source\"] }}",
+              "MEDIO": "={{ $('Webhook').item.json.body.submission.fields[\"UTM Medium\"] }}",
+              "TERMINO": "={{ $('Webhook').item.json.body.submission.fields[\"UTM Term\"] }}",
+              "CONTENIDO": "={{ $('Webhook').item.json.body.submission.fields[\"UTM Content\"] }}",
+              "IP": "={{ $('Webhook').item.json.body.submission.metadata.ip }}",
+              "PREGUNTA CUALIFICACIÓN": "={{ $json.Pregunta_cualificacion }}",
+              "LANDING DE ORIGEN": "={{ $('Webhook').item.json.body.submission.metadata.page.url.split('?')[0] }}"
+            },
+            "matchingColumns": [],
+            "schema": [
+              {
+                "id": "EMAIL",
+                "displayName": "EMAIL",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "TELEFONO",
+                "displayName": "TELEFONO",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "FECHA",
+                "displayName": "FECHA",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "CAMPAÑA",
+                "displayName": "CAMPAÑA",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "FUENTE",
+                "displayName": "FUENTE",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "MEDIO",
+                "displayName": "MEDIO",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "TERMINO",
+                "displayName": "TERMINO",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "CONTENIDO",
+                "displayName": "CONTENIDO",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "PREGUNTA CUALIFICACIÓN",
+                "displayName": "PREGUNTA CUALIFICACIÓN",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "IP",
+                "displayName": "IP",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "LANDING DE ORIGEN",
+                "displayName": "LANDING DE ORIGEN",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              }
+            ],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": false
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.googleSheets",
+        "typeVersion": 4.7,
+        "position": [
+          272,
+          -144
+        ],
+        "id": "ab6f9f11-82fa-4922-8858-f54fef8f8db3",
+        "name": "Conteo de leads",
+        "credentials": {
+          "googleSheetsOAuth2Api": {
+            "id": "uniCNvqoYoprQPic",
+            "name": "SHEET INFO.HOLDINGS"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "f6ade06f-bf89-4342-b4e7-3190542b019e",
+                "name": "Pregunta_cualificacion",
+                "value": "={{ $json.body.submission.fields[\"¿Qué tan cerca estás de cumplir tu sueño de ver tu libro publicado y disponible para lectores reales?\"] }}",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          16,
+          16
+        ],
+        "id": "e8679b47-21ba-4d5b-abb9-14dad853b901",
+        "name": "Edit Fields"
+      }
+    ],
+    "connections": {
+      "Webhook": {
+        "main": [
+          [
+            {
+              "node": "Edit Fields",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Agregar a Flodesk": {
+        "main": [
+          []
+        ]
+      },
+      "Edit Fields": {
+        "main": [
+          [
+            {
+              "node": "Conteo de leads",
+              "type": "main",
+              "index": 0
+            },
+            {
+              "node": "Agregar a Flodesk",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "nodeGroups": [],
+    "authors": "BE Online",
+    "name": "Version a6224b69",
+    "description": "",
+    "autosaved": true
+  },
+  "activeVersionId": "a6224b69-a4e0-49c1-ab31-e32a01392789",
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Agregar a Flodesk": {
+      "main": [
+        []
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Conteo de leads",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Agregar a Flodesk",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2026-08-10T15:24:31.394Z",
+  "id": "ZSgppiRUWNXHcXJ7",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Futuros - Registro - UdeA",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "registro-udea-sep-2026",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -192,
+        16
+      ],
+      "id": "833ee1ae-0bea-4125-a731-c05e502343f9",
+      "name": "Webhook",
+      "webhookId": "a203051b-1585-4b11-b630-a18647b042d0"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.flodesk.com/v1/subscribers/",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"email\": \"{{ $('Webhook').item.json.body.submission.fields.Correo }}\",\n  \"segment_ids\": [\"6a74ee9d8a167a70cc4e67e3\"]\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        272,
+        128
+      ],
+      "id": "111ff6a8-5caa-4e8e-8f42-f4b118821646",
+      "name": "Agregar a Flodesk",
+      "retryOnFail": false,
+      "maxTries": 5,
+      "waitBetweenTries": 5000,
+      "credentials": {
+        "httpBasicAuth": {
+          "id": "gRxGvIuBu6QU8sll",
+          "name": "FLODESK FUTUROS"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "https://docs.google.com/spreadsheets/d/1sQ2URumSK77Opatsd9emmwkmem8x0jmLlWLaXUB0rkU/edit?usp=sharing",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Registrados",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1XKI-YfciJntlzkPPhE8Rvd12lZeyFAAnBwNfT7ZwFG8/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "EMAIL": "={{ $('Webhook').item.json.body.submission.fields.Correo }}",
+            "FECHA": "={{ $now.setZone('America/Bogota').toFormat('yyyy-MM-dd HH:mm:ss') }}",
+            "CAMPAÑA": "={{ $('Webhook').item.json.body.submission.fields[\"UTM Campaign\"] }}",
+            "FUENTE": "={{ $('Webhook').item.json.body.submission.fields[\"UTM Source\"] }}",
+            "MEDIO": "={{ $('Webhook').item.json.body.submission.fields[\"UTM Medium\"] }}",
+            "TERMINO": "={{ $('Webhook').item.json.body.submission.fields[\"UTM Term\"] }}",
+            "CONTENIDO": "={{ $('Webhook').item.json.body.submission.fields[\"UTM Content\"] }}",
+            "IP": "={{ $('Webhook').item.json.body.submission.metadata.ip }}",
+            "PREGUNTA CUALIFICACIÓN": "={{ $json.Pregunta_cualificacion }}",
+            "LANDING DE ORIGEN": "={{ $('Webhook').item.json.body.submission.metadata.page.url.split('?')[0] }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "EMAIL",
+              "displayName": "EMAIL",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "TELEFONO",
+              "displayName": "TELEFONO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "FECHA",
+              "displayName": "FECHA",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "CAMPAÑA",
+              "displayName": "CAMPAÑA",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "FUENTE",
+              "displayName": "FUENTE",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "MEDIO",
+              "displayName": "MEDIO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "TERMINO",
+              "displayName": "TERMINO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "CONTENIDO",
+              "displayName": "CONTENIDO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "PREGUNTA CUALIFICACIÓN",
+              "displayName": "PREGUNTA CUALIFICACIÓN",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "IP",
+              "displayName": "IP",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "LANDING DE ORIGEN",
+              "displayName": "LANDING DE ORIGEN",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        272,
+        -144
+      ],
+      "id": "ab6f9f11-82fa-4922-8858-f54fef8f8db3",
+      "name": "Conteo de leads",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "uniCNvqoYoprQPic",
+          "name": "SHEET INFO.HOLDINGS"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "f6ade06f-bf89-4342-b4e7-3190542b019e",
+              "name": "Pregunta_cualificacion",
+              "value": "={{ $json.body.submission.fields[\"¿Qué tan cerca estás de cumplir tu sueño de ver tu libro publicado y disponible para lectores reales?\"] }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        16,
+        16
+      ],
+      "id": "e8679b47-21ba-4d5b-abb9-14dad853b901",
+      "name": "Edit Fields"
+    }
+  ],
+  "pinData": {
+    "Webhook": [
+      {
+        "json": {
+          "headers": {
+            "host": "contenedor1-n8n.vqn37t.easypanel.host",
+            "user-agent": "AtomiForm/1.0",
+            "content-length": "1477",
+            "accept": "application/json, text/plain, */*",
+            "accept-encoding": "gzip, compress, deflate, br",
+            "content-type": "application/json",
+            "x-form-id": "1039c18d-24fd-4985-8452-b00fc70355a9",
+            "x-forwarded-for": "24.199.100.93",
+            "x-forwarded-host": "contenedor1-n8n.vqn37t.easypanel.host",
+            "x-forwarded-port": "443",
+            "x-forwarded-proto": "https",
+            "x-forwarded-server": "730fdd9182ea",
+            "x-real-ip": "24.199.100.93",
+            "x-webhook-id": "13c2c6e3-7530-448c-b34c-1631d194f53a"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "event": "form_submission",
+            "id": "e01e43ba-655c-4df5-8094-5fa907d0a80c",
+            "form": {
+              "id": "1039c18d-24fd-4985-8452-b00fc70355a9",
+              "name": "Formulario Reto: Escribe, Publica y vende tu libro"
+            },
+            "submission": {
+              "submittedAt": "2026-02-18T17:20:09.237Z",
+              "fields": {
+                "Correo": "newtime28082024@gmail.com",
+                "¿Qué tan cerca estás de cumplir tu sueño de ver tu libro publicado y disponible para lectores reales?": "Ya escribí parte de mi libro, pero no sé cómo seguir o cómo hacerlo llegar a lectores reales.",
+                "UTM Campaign": "00 - [AUTO] - A+ [IMG06 - ADE 03/26]",
+                "UTM Source": "metaads",
+                "UTM Medium": "Facebook_Mobile_Feed",
+                "UTM Content": "IMG06 - ADE 03/26",
+                "UTM Term": "120239337001200724"
+              },
+              "metadata": {
+                "page": {
+                  "id": "6tFbiqGFthcyuVuOkI7b",
+                  "url": "https://www.autordeexito.com/ADE-registro?utm_source=metaads&utm_medium=Facebook_Mobile_Feed&utm_campaign=00+-+%5BAUTO%5D+-+A%2B+%5BIMG06+-+ADE+03%2F26%5D&utm_content=IMG06+-+ADE+03%2F26&vk_source=metaads&vk_ad_id=120239337001210724&fbclid=IwZXh0bgNhZW0BMABhZGlkAastCj931ERzcnRjBmFwcF9pZAwzNTA2ODU1MzE3MjgAAR67LVCKY90AwBMOmxTGljRyNGZZh0FhBJlqg1AG3A_Amym5e_JHySJjBcbXyw_aem_qjs3btF2ffDe5llH8LJZfQ&utm_id=120239332657450724&utm_term=120239337001200724",
+                  "name": "ADE-registro"
+                },
+                "userAgent": "Mozilla/5.0 (Linux; Android 15; V2343 Build/AP3A.240905.015.A2_SCNONFC; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/145.0.7632.52 Mobile Safari/537.36 [FB_IAB/FB4A;FBAV/548.1.0.51.64;IABMV/1;]",
+                "ip": "2803:e5e3:2a03:1400:dfd0:13c2:1dae:add2"
+              }
+            }
+          },
+          "webhookUrl": "https://contenedor1-n8n.vqn37t.easypanel.host/webhook/registro-alexandra-ADE",
+          "executionMode": "production"
+        }
+      }
+    ]
+  },
+  "repo_name": "backupn8n",
+  "repo_owner": "infoandresrendoncol",
+  "repo_path": "backup/",
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false,
+    "binaryMode": "separate"
+  },
+  "shared": [
+    {
+      "updatedAt": "2026-08-10T15:24:31.403Z",
+      "createdAt": "2026-08-10T15:24:31.403Z",
+      "role": "workflow:owner",
+      "workflowId": "ZSgppiRUWNXHcXJ7",
+      "projectId": "4KmSbENK2cGxsjaf"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2026-08-10T16:04:46.993Z",
+  "versionId": "a6224b69-a4e0-49c1-ab31-e32a01392789"
+}
