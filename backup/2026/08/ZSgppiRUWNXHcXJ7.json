@@ -1,9 +1,9 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2026-08-10T16:04:58.000Z",
-    "createdAt": "2026-08-10T16:04:46.995Z",
-    "versionId": "a6224b69-a4e0-49c1-ab31-e32a01392789",
+    "updatedAt": "2026-08-14T19:01:21.000Z",
+    "createdAt": "2026-08-14T19:01:12.301Z",
+    "versionId": "82637531-606c-4659-9d02-daf6208291ac",
     "workflowId": "ZSgppiRUWNXHcXJ7",
     "nodes": [
       {
@@ -211,7 +211,7 @@
               {
                 "id": "f6ade06f-bf89-4342-b4e7-3190542b019e",
                 "name": "Pregunta_cualificacion",
-                "value": "={{ $json.body.submission.fields[\"¿Qué tan cerca estás de cumplir tu sueño de ver tu libro publicado y disponible para lectores reales?\"] }}",
+                "value": "={{ $json.body.submission.fields[\"¿Cuál de las siguientes opciones describe mejor tu situación actual frente al examen de residencia médica de la UdeA?\"] }}",
                 "type": "string"
               }
             ]
@@ -264,11 +264,11 @@
     },
     "nodeGroups": [],
     "authors": "BE Online",
-    "name": "Version a6224b69",
+    "name": "Version 82637531",
     "description": "",
     "autosaved": true
   },
-  "activeVersionId": "a6224b69-a4e0-49c1-ab31-e32a01392789",
+  "activeVersionId": "82637531-606c-4659-9d02-daf6208291ac",
   "connections": {
     "Webhook": {
       "main": [
@@ -516,7 +516,7 @@
             {
               "id": "f6ade06f-bf89-4342-b4e7-3190542b019e",
               "name": "Pregunta_cualificacion",
-              "value": "={{ $json.body.submission.fields[\"¿Qué tan cerca estás de cumplir tu sueño de ver tu libro publicado y disponible para lectores reales?\"] }}",
+              "value": "={{ $json.body.submission.fields[\"¿Cuál de las siguientes opciones describe mejor tu situación actual frente al examen de residencia médica de la UdeA?\"] }}",
               "type": "string"
             }
           ]
@@ -540,16 +540,16 @@
           "headers": {
             "host": "contenedor1-n8n.vqn37t.easypanel.host",
             "user-agent": "AtomiForm/1.0",
-            "content-length": "1477",
+            "content-length": "1694",
             "accept": "application/json, text/plain, */*",
             "accept-encoding": "gzip, compress, deflate, br",
             "content-type": "application/json",
-            "x-form-id": "1039c18d-24fd-4985-8452-b00fc70355a9",
+            "x-form-id": "13009a12-d238-4a8e-bbe5-46fc4809c572",
             "x-forwarded-for": "24.199.100.93",
             "x-forwarded-host": "contenedor1-n8n.vqn37t.easypanel.host",
             "x-forwarded-port": "443",
             "x-forwarded-proto": "https",
-            "x-forwarded-server": "730fdd9182ea",
+            "x-forwarded-server": "cbddb8c293f4",
             "x-real-ip": "24.199.100.93",
             "x-webhook-id": "13c2c6e3-7530-448c-b34c-1631d194f53a"
           },
@@ -557,34 +557,34 @@
           "query": {},
           "body": {
             "event": "form_submission",
-            "id": "e01e43ba-655c-4df5-8094-5fa907d0a80c",
+            "id": "f1105d38-9e34-4d95-9bca-a50dd8df3d95",
             "form": {
-              "id": "1039c18d-24fd-4985-8452-b00fc70355a9",
-              "name": "Formulario Reto: Escribe, Publica y vende tu libro"
+              "id": "13009a12-d238-4a8e-bbe5-46fc4809c572",
+              "name": "Formulario Reto: Escribe, Publica y vende tu libro 07/26"
             },
             "submission": {
-              "submittedAt": "2026-02-18T17:20:09.237Z",
+              "submittedAt": "2026-08-14T18:31:22.241Z",
               "fields": {
-                "Correo": "newtime28082024@gmail.com",
-                "¿Qué tan cerca estás de cumplir tu sueño de ver tu libro publicado y disponible para lectores reales?": "Ya escribí parte de mi libro, pero no sé cómo seguir o cómo hacerlo llegar a lectores reales.",
-                "UTM Campaign": "00 - [AUTO] - A+ [IMG06 - ADE 03/26]",
+                "Correo": "liliars10294@hotmail.com",
+                "¿Cuál de las siguientes opciones describe mejor tu situación actual frente al examen de residencia médica de la UdeA?": "Soy médico, me he presentado y aún no he pasado.",
+                "UTM Campaign": "Cloud Computing - [W] - [LEADS] - Test Anuncios - P. Frío - [UdeA 2027] [10/08/2026] - Copia",
                 "UTM Source": "metaads",
                 "UTM Medium": "Facebook_Mobile_Feed",
-                "UTM Content": "IMG06 - ADE 03/26",
-                "UTM Term": "120239337001200724"
+                "UTM Content": "IMG01 - IA 26",
+                "UTM Term": "120252113196750127"
               },
               "metadata": {
                 "page": {
-                  "id": "6tFbiqGFthcyuVuOkI7b",
-                  "url": "https://www.autordeexito.com/ADE-registro?utm_source=metaads&utm_medium=Facebook_Mobile_Feed&utm_campaign=00+-+%5BAUTO%5D+-+A%2B+%5BIMG06+-+ADE+03%2F26%5D&utm_content=IMG06+-+ADE+03%2F26&vk_source=metaads&vk_ad_id=120239337001210724&fbclid=IwZXh0bgNhZW0BMABhZGlkAastCj931ERzcnRjBmFwcF9pZAwzNTA2ODU1MzE3MjgAAR67LVCKY90AwBMOmxTGljRyNGZZh0FhBJlqg1AG3A_Amym5e_JHySJjBcbXyw_aem_qjs3btF2ffDe5llH8LJZfQ&utm_id=120239332657450724&utm_term=120239337001200724",
-                  "name": "ADE-registro"
+                  "id": "6LCJvDYX9cBsa7yuAvGz",
+                  "url": "https://udea.cursofuturosresidentes.com/residenciaUdeA-registro?utm_source=metaads&utm_medium=Facebook_Mobile_Feed&utm_campaign=Cloud+Computing+-+%5BW%5D+-+%5BLEADS%5D+-+Test+Anuncios+-+P.+Fr%C3%ADo+-+%5BUdeA+2027%5D+%5B10%2F08%2F2026%5D+-+Copia&utm_content=IMG01+-+IA+26&vk_source=metaads&vk_ad_id=120252113196960127&fbclid=IwcGRvZgVmZGlkFlDH32w7FUU_Q1HZgJeYY6xSRSFuEllleHRuA2FlbQEwAGFkaWQBqzio7U8sH3NydGMGYXBwX2lkCjY2Mjg1NjgzNzkAAR4bOgYqzzruXpJ0EgMyfQO4i4NUN0zAECKBG0r59zDcX4Di5nx6vko3l8rTkw_aem_UbUPsX6jrESkidAzvecBbg&utm_id=120252113196750127_v2_s11_e7737&utm_term=120252113196750127",
+                  "name": "residenciaUdeA-registro"
                 },
-                "userAgent": "Mozilla/5.0 (Linux; Android 15; V2343 Build/AP3A.240905.015.A2_SCNONFC; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/145.0.7632.52 Mobile Safari/537.36 [FB_IAB/FB4A;FBAV/548.1.0.51.64;IABMV/1;]",
-                "ip": "2803:e5e3:2a03:1400:dfd0:13c2:1dae:add2"
+                "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 18_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/22G86 Safari/604.1 [FBAN/FBIOS;FBAV/573.0.0.47.73;FBBV/1032158285;FBDV/iPhone14,7;FBMD/iPhone;FBSN/iOS;FBSV/18.6;FBSS/3;FBID/phone;FBLC/es_LA;FBOP/5;FBRV/1040291019;IABMV/1]",
+                "ip": "191.156.36.179"
               }
             }
           },
-          "webhookUrl": "https://contenedor1-n8n.vqn37t.easypanel.host/webhook/registro-alexandra-ADE",
+          "webhookUrl": "https://contenedor1-n8n.vqn37t.easypanel.host/webhook/registro-udea-sep-2026",
           "executionMode": "production"
         }
       }
@@ -610,6 +610,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2026-08-10T16:04:46.993Z",
-  "versionId": "a6224b69-a4e0-49c1-ab31-e32a01392789"
+  "updatedAt": "2026-08-14T19:01:12.300Z",
+  "versionId": "82637531-606c-4659-9d02-daf6208291ac"
 }
