@@ -1,9 +1,9 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2026-08-03T17:36:22.000Z",
-    "createdAt": "2026-08-03T17:36:17.305Z",
-    "versionId": "9970996f-418d-4556-aee3-5f980e5529c0",
+    "updatedAt": "2026-08-24T21:25:23.000Z",
+    "createdAt": "2026-08-24T20:06:26.128Z",
+    "versionId": "f17ed79e-c5ea-48ba-9865-aa72f598fd2a",
     "workflowId": "6bwcVXGmTPFkMqPY",
     "nodes": [
       {
@@ -37,7 +37,7 @@
                   "conditions": [
                     {
                       "id": "84306705-0989-4d36-b59a-f5972aebfeb8",
-                      "leftValue": "={{ $('Webhook').item.json.body.event }}",
+                      "leftValue": "={{ $('Webhook').item.json.event }}",
                       "rightValue": "PURCHASE_COMPLETE",
                       "operator": {
                         "type": "string",
@@ -60,7 +60,7 @@
                   "conditions": [
                     {
                       "id": "7c52240a-4074-4ae3-90b9-f1000c18948a",
-                      "leftValue": "={{ $('Webhook').item.json.body.event }}",
+                      "leftValue": "={{ $('Webhook').item.json.event }}",
                       "rightValue": "PURCHASE_APPROVED",
                       "operator": {
                         "type": "string",
@@ -99,7 +99,7 @@
                   },
                   "conditions": [
                     {
-                      "leftValue": "={{ $('Webhook').item.json.body.event }}",
+                      "leftValue": "={{ $('Webhook').item.json.event }}",
                       "rightValue": "PURCHASE_BILLET_PRINTED",
                       "operator": {
                         "type": "string",
@@ -122,7 +122,7 @@
                   "conditions": [
                     {
                       "id": "84306705-0989-4d36-b59a-f5972aebfeb8",
-                      "leftValue": "={{ $('Webhook').item.json.body.event }}",
+                      "leftValue": "={{ $('Webhook').item.json.event }}",
                       "rightValue": "PURCHASE_COMPLETE",
                       "operator": {
                         "type": "string",
@@ -145,7 +145,7 @@
                   "conditions": [
                     {
                       "id": "7c52240a-4074-4ae3-90b9-f1000c18948a",
-                      "leftValue": "={{ $('Webhook').item.json.body.event }}",
+                      "leftValue": "={{ $('Webhook').item.json.event }}",
                       "rightValue": "PURCHASE_APPROVED",
                       "operator": {
                         "type": "string",
@@ -168,7 +168,7 @@
                   "conditions": [
                     {
                       "id": "5aee3900-62ec-49db-95f7-2414abffbb70",
-                      "leftValue": "={{ $('Webhook').item.json.body.event }}",
+                      "leftValue": "={{ $('Webhook').item.json.event }}",
                       "rightValue": "PURCHASE_CANCELED",
                       "operator": {
                         "type": "string",
@@ -191,7 +191,7 @@
                   "conditions": [
                     {
                       "id": "46cbfbb2-61e7-49af-b098-78314696d446",
-                      "leftValue": "={{ $('Webhook').item.json.body.event }}",
+                      "leftValue": "={{ $('Webhook').item.json.event }}",
                       "rightValue": "PURCHASE_OUT_OF_SHOPPING_CART",
                       "operator": {
                         "type": "string",
@@ -214,7 +214,7 @@
                   "conditions": [
                     {
                       "id": "ec18ffb3-1644-45dc-8f3a-a6238c654d83",
-                      "leftValue": "={{ $('Webhook').item.json.body.event }}",
+                      "leftValue": "={{ $('Webhook').item.json.event }}",
                       "rightValue": "PURCHASE_DELAYED",
                       "operator": {
                         "type": "string",
@@ -237,7 +237,7 @@
                   "conditions": [
                     {
                       "id": "5c30cb02-12d2-4d43-86d6-2b3eea6b14d6",
-                      "leftValue": "={{ $('Webhook').item.json.body.event }}",
+                      "leftValue": "={{ $('Webhook').item.json.event }}",
                       "rightValue": "PURCHASE_PROTEST",
                       "operator": {
                         "type": "string",
@@ -260,7 +260,7 @@
                   "conditions": [
                     {
                       "id": "d1502dff-1217-4796-a53b-07add971e423",
-                      "leftValue": "={{ $('Webhook').item.json.body.event }}",
+                      "leftValue": "={{ $('Webhook').item.json.event }}",
                       "rightValue": "PURCHASE_REFUNDED",
                       "operator": {
                         "type": "string",
@@ -293,7 +293,7 @@
           "genericAuthType": "httpBasicAuth",
           "sendBody": true,
           "specifyBody": "json",
-          "jsonBody": "={\n  \"email\": \"{{ $('Webhook').item.json.body.data.buyer.email }}\",\n  \"first_name\": \"{{ $('Webhook').item.json.body.data.buyer.name }}\",\n  \"segment_ids\": [\"6a6655a59e079c6fbafad2c8\"]\n}",
+          "jsonBody": "={\n  \"email\": \"{{ $('Webhook').item.json.data.buyer.email }}\",\n  \"first_name\": \"{{ $('Webhook').item.json.data.buyer.name }}\",\n  \"segment_ids\": [\"6a6655a59e079c6fbafad2c8\"]\n}",
           "options": {}
         },
         "type": "n8n-nodes-base.httpRequest",
@@ -327,7 +327,7 @@
           "genericAuthType": "httpBasicAuth",
           "sendBody": true,
           "specifyBody": "json",
-          "jsonBody": "={\n  \"email\": \"{{ $('Webhook').item.json.body.data.buyer.email }}\",\n  \"first_name\": \"{{ $('Webhook').item.json.body.data.buyer.name }}\",\n  \"segment_ids\": [\"6a6a186d2db46a250a10d69b\"]\n}",
+          "jsonBody": "={\n  \"email\": \"{{ $('Webhook').item.json.data.buyer.email }}\",\n  \"first_name\": \"{{ $('Webhook').item.json.data.buyer.name }}\",\n  \"segment_ids\": [\"6a6a186d2db46a250a10d69b\"]\n}",
           "options": {}
         },
         "type": "n8n-nodes-base.httpRequest",
@@ -361,7 +361,7 @@
           "genericAuthType": "httpBasicAuth",
           "sendBody": true,
           "specifyBody": "json",
-          "jsonBody": "={\n  \"email\": \"{{ $('Webhook').item.json.body.data.buyer.email }}\",\n  \"first_name\": \"{{ $('Webhook').item.json.body.data.buyer.name }}\",\n  \"segment_ids\": [\"6a6a184a9cefd38aba0017e4\"]\n}",
+          "jsonBody": "={\n  \"email\": \"{{ $('Webhook').item.json.data.buyer.email }}\",\n  \"first_name\": \"{{ $('Webhook').item.json.data.buyer.name }}\",\n  \"segment_ids\": [\"6a6a184a9cefd38aba0017e4\"]\n}",
           "options": {}
         },
         "type": "n8n-nodes-base.httpRequest",
@@ -395,7 +395,7 @@
           "genericAuthType": "httpBasicAuth",
           "sendBody": true,
           "specifyBody": "json",
-          "jsonBody": "={\n  \"email\": \"{{ $('Webhook').item.json.body.data.buyer.email }}\",\n  \"first_name\": \"{{ $('Webhook').item.json.body.data.buyer.name }}\",\n  \"segment_ids\": [\"6a6a1887a200b0beebb18359\"]\n}",
+          "jsonBody": "={\n  \"email\": \"{{ $('Webhook').item.json.data.buyer.email }}\",\n  \"first_name\": \"{{ $('Webhook').item.json.data.buyer.name }}\",\n  \"segment_ids\": [\"6a6a1887a200b0beebb18359\"]\n}",
           "options": {}
         },
         "type": "n8n-nodes-base.httpRequest",
@@ -429,7 +429,7 @@
           "genericAuthType": "httpBasicAuth",
           "sendBody": true,
           "specifyBody": "json",
-          "jsonBody": "={\n  \"email\": \"{{ $('Webhook').item.json.body.data.buyer.email }}\",\n  \"first_name\": \"{{ $('Webhook').item.json.body.data.buyer.name }}\",\n  \"segment_ids\": [\"6a6a18a06cc4ffd6163d1bda\"]\n}",
+          "jsonBody": "={\n  \"email\": \"{{ $('Webhook').item.json.data.buyer.email }}\",\n  \"first_name\": \"{{ $('Webhook').item.json.data.buyer.name }}\",\n  \"segment_ids\": [\"6a6a18a06cc4ffd6163d1bda\"]\n}",
           "options": {}
         },
         "type": "n8n-nodes-base.httpRequest",
@@ -463,7 +463,7 @@
           "genericAuthType": "httpBasicAuth",
           "sendBody": true,
           "specifyBody": "json",
-          "jsonBody": "={\n  \"email\": \"{{ $('Webhook').item.json.body.data.buyer.email }}\",\n  \"first_name\": \"{{ $('Webhook').item.json.body.data.buyer.name }}\",\n  \"segment_ids\": [\"69b355132b584b8353a2e763\"]\n}",
+          "jsonBody": "={\n  \"email\": \"{{ $('Webhook').item.json.data.buyer.email }}\",\n  \"first_name\": \"{{ $('Webhook').item.json.data.buyer.name }}\",\n  \"segment_ids\": [\"69b355132b584b8353a2e763\"]\n}",
           "options": {}
         },
         "type": "n8n-nodes-base.httpRequest",
@@ -497,7 +497,7 @@
           "genericAuthType": "httpBasicAuth",
           "sendBody": true,
           "specifyBody": "json",
-          "jsonBody": "={\n  \"email\": \"{{ $('Webhook').item.json.body.data.buyer.email }}\",\n  \"first_name\": \"{{ $('Webhook').item.json.body.data.buyer.name }}\",\n  \"segment_ids\": [\"6a03976c721cf74951b84520\"]\n}",
+          "jsonBody": "={\n  \"email\": \"{{ $('Webhook').item.json.data.buyer.email }}\",\n  \"first_name\": \"{{ $('Webhook').item.json.data.buyer.name }}\",\n  \"segment_ids\": [\"6a03976c721cf74951b84520\"]\n}",
           "options": {}
         },
         "type": "n8n-nodes-base.httpRequest",
@@ -531,7 +531,7 @@
           "genericAuthType": "httpBasicAuth",
           "sendBody": true,
           "specifyBody": "json",
-          "jsonBody": "={\n  \"email\": \"{{ $('Webhook').item.json.body.data.buyer.email }}\",\n  \"first_name\": \"{{ $('Webhook').item.json.body.data.buyer.name }}\",\n  \"segment_ids\": [\"6a2ac1a6a91e8af8f205820c\"]\n}",
+          "jsonBody": "={\n  \"email\": \"{{ $('Webhook').item.json.data.buyer.email }}\",\n  \"first_name\": \"{{ $('Webhook').item.json.data.buyer.name }}\",\n  \"segment_ids\": [\"6a2ac1a6a91e8af8f205820c\"]\n}",
           "options": {}
         },
         "type": "n8n-nodes-base.httpRequest",
@@ -565,7 +565,7 @@
           "genericAuthType": "httpBasicAuth",
           "sendBody": true,
           "specifyBody": "json",
-          "jsonBody": "={\n  \"email\": \"{{ $('Webhook').item.json.body.data.buyer.email }}\",\n  \"first_name\": \"{{ $('Webhook').item.json.body.data.buyer.name }}\",\n  \"segment_ids\": [\"6a68d9cb94e231d1cf53088a\"]\n}",
+          "jsonBody": "={\n  \"email\": \"{{ $('Webhook').item.json.data.buyer.email }}\",\n  \"first_name\": \"{{ $('Webhook').item.json.data.buyer.name }}\",\n  \"segment_ids\": [\"6a68d9cb94e231d1cf53088a\"]\n}",
           "options": {}
         },
         "type": "n8n-nodes-base.httpRequest",
@@ -606,7 +606,7 @@
                   "conditions": [
                     {
                       "leftValue": "Autor de éxito",
-                      "rightValue": "={{ $json.body.data.product.name }}",
+                      "rightValue": "={{ $json.data.product.name }}",
                       "operator": {
                         "type": "string",
                         "operation": "equals"
@@ -629,7 +629,7 @@
                     {
                       "id": "366216d0-19be-475e-a820-e4d39198ccad",
                       "leftValue": "Autor de Éxito Signature",
-                      "rightValue": "={{ $json.body.data.product.name }}",
+                      "rightValue": "={{ $json.data.product.name }}",
                       "operator": {
                         "type": "string",
                         "operation": "equals"
@@ -694,7 +694,7 @@
           "genericAuthType": "httpBasicAuth",
           "sendBody": true,
           "specifyBody": "json",
-          "jsonBody": "={\n  \"email\": \"{{ $('Webhook').item.json.body.data.buyer.email }}\",\n  \"first_name\": \"{{ $('Webhook').item.json.body.data.buyer.name }}\",\n  \"segment_ids\": [\"6a6a18c96ee38e03a5799512\"]\n}",
+          "jsonBody": "={\n  \"email\": \"{{ $('Webhook').item.json.data.buyer.email }}\",\n  \"first_name\": \"{{ $('Webhook').item.json.data.buyer.name }}\",\n  \"segment_ids\": [\"6a6a18c96ee38e03a5799512\"]\n}",
           "options": {}
         },
         "type": "n8n-nodes-base.httpRequest",
@@ -726,7 +726,7 @@
           "url": "https://unnichat.com.br/a/start/usNsJ1AERRuIp29SLdS8",
           "sendBody": true,
           "specifyBody": "json",
-          "jsonBody": "={\n  \"id\": \"{{ $json.id || Math.floor(Math.random() * 1000000).toString() }}\",\n  \"data\": {\n    \"number\": \"{{ $('Webhook').item.json.body.data.buyer.checkout_phone }}\",\n    \"tag\": \"global\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
+          "jsonBody": "={\n  \"id\": \"{{ $json.id || Math.floor(Math.random() * 1000000).toString() }}\",\n  \"data\": {\n    \"number\": \"{{ $('Webhook').item.json.data.buyer.checkout_phone }}\",\n    \"tag\": \"global\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
           "options": {}
         },
         "type": "n8n-nodes-base.httpRequest",
@@ -744,7 +744,7 @@
           "url": "https://unnichat.com.br/a/start/6JWI7w6ly2ApXe2c37V1",
           "sendBody": true,
           "specifyBody": "json",
-          "jsonBody": "={\n  \"id\": \"{{ $('Webhook').item.json.body.data.buyer.document }}\",\n  \"data\": {\n    \"number\": \"{{ $('Webhook').item.json.body.data.buyer.checkout_phone }}\",\n    \"tag\": \"global\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
+          "jsonBody": "={\n  \"id\": \"{{ $('Webhook').item.json.data.buyer.document }}\",\n  \"data\": {\n    \"number\": \"{{ $('Webhook').item.json.data.buyer.checkout_phone }}\",\n    \"tag\": \"global\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
           "options": {}
         },
         "type": "n8n-nodes-base.httpRequest",
@@ -762,7 +762,7 @@
           "url": "https://unnichat.com.br/a/start/l2LW3R3TV3LTSQVdu7p1",
           "sendBody": true,
           "specifyBody": "json",
-          "jsonBody": "={\n  \"id\": \"{{ $json.id || Math.floor(Math.random() * 1000000).toString() }}\",\n  \"data\": {\n    \"number\": \"{{ $('Webhook').item.json.body.data.buyer.checkout_phone }}\",\n    \"tag\": \"global\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
+          "jsonBody": "={\n  \"id\": \"{{ $json.id || Math.floor(Math.random() * 1000000).toString() }}\",\n  \"data\": {\n    \"number\": \"{{ $('Webhook').item.json.data.buyer.checkout_phone }}\",\n    \"tag\": \"global\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
           "options": {}
         },
         "type": "n8n-nodes-base.httpRequest",
@@ -780,7 +780,7 @@
           "url": "https://unnichat.com.br/a/start/a12k1sRJXLLX9BNJFRNS",
           "sendBody": true,
           "specifyBody": "json",
-          "jsonBody": "={\n  \"id\": \"{{ $json.id || Math.floor(Math.random() * 1000000).toString() }}\",\n  \"data\": {\n    \"number\": \"{{ $('Webhook').item.json.body.data.buyer.phone }}\",\n    \"tag\": \"global\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
+          "jsonBody": "={\n  \"id\": \"{{ $json.id || Math.floor(Math.random() * 1000000).toString() }}\",\n  \"data\": {\n    \"number\": \"{{ $('Webhook').item.json.data.buyer.phone }}\",\n    \"tag\": \"global\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
           "options": {}
         },
         "type": "n8n-nodes-base.httpRequest",
@@ -798,7 +798,7 @@
           "url": "https://unnichat.com.br/a/start/6RDS5rrFuBS63vNTSLL2",
           "sendBody": true,
           "specifyBody": "json",
-          "jsonBody": "={\n  \"id\": \"{{ $json.id || Math.floor(Math.random() * 1000000).toString() }}\",\n  \"data\": {\n    \"number\": \"{{ $('Webhook').item.json.body.data.buyer.checkout_phone }}\",\n    \"tag\": \"global\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
+          "jsonBody": "={\n  \"id\": \"{{ $json.id || Math.floor(Math.random() * 1000000).toString() }}\",\n  \"data\": {\n    \"number\": \"{{ $('Webhook').item.json.data.buyer.checkout_phone }}\",\n    \"tag\": \"global\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
           "options": {}
         },
         "type": "n8n-nodes-base.httpRequest",
@@ -818,7 +818,7 @@
           "genericAuthType": "httpBasicAuth",
           "sendBody": true,
           "specifyBody": "json",
-          "jsonBody": "={\n  \"email\": \"{{ $('Webhook').item.json.body.data.buyer.email }}\",\n  \"first_name\": \"{{ $('Webhook').item.json.body.data.buyer.name }}\",\n  \"segment_ids\": [\"6a6a18b71b2f37f3e8ecc649\"]\n}",
+          "jsonBody": "={\n  \"email\": \"{{ $('Webhook').item.json.data.buyer.email }}\",\n  \"first_name\": \"{{ $('Webhook').item.json.data.buyer.name }}\",\n  \"segment_ids\": [\"6a6a18b71b2f37f3e8ecc649\"]\n}",
           "options": {}
         },
         "type": "n8n-nodes-base.httpRequest",
@@ -850,7 +850,7 @@
           "url": "https://unnichat.com.br/a/start/AvAd989Hyea6JWSKfjhe",
           "sendBody": true,
           "specifyBody": "json",
-          "jsonBody": "={\n  \"id\": \"{{ $json.id || Math.floor(Math.random() * 1000000).toString() }}\",\n  \"data\": {\n    \"number\": \"{{ $('Webhook').item.json.body.data.buyer.checkout_phone }}\",\n    \"tag\": \"global\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
+          "jsonBody": "={\n  \"id\": \"{{ $json.id || Math.floor(Math.random() * 1000000).toString() }}\",\n  \"data\": {\n    \"number\": \"{{ $('Webhook').item.json.data.buyer.checkout_phone }}\",\n    \"tag\": \"global\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
           "options": {}
         },
         "type": "n8n-nodes-base.httpRequest",
@@ -868,7 +868,7 @@
           "url": "https://unnichat.com.br/a/start/hI71w0JM56uUDuAalLd1",
           "sendBody": true,
           "specifyBody": "json",
-          "jsonBody": "={\n  \"id\": \"{{ $json.id || Math.floor(Math.random() * 1000000).toString() }}\",\n  \"data\": {\n    \"number\": \"{{ $('Webhook').item.json.body.data.buyer.checkout_phone }}\",\n    \"tag\": \"global\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
+          "jsonBody": "={\n  \"id\": \"{{ $json.id || Math.floor(Math.random() * 1000000).toString() }}\",\n  \"data\": {\n    \"number\": \"{{ $('Webhook').item.json.data.buyer.checkout_phone }}\",\n    \"tag\": \"global\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
           "options": {}
         },
         "type": "n8n-nodes-base.httpRequest",
@@ -879,6 +879,45 @@
         ],
         "id": "8a533ff9-8032-4ab3-b1f3-03102ef69c16",
         "name": "Unnichat - Reembolso procesado"
+      },
+      {
+        "parameters": {
+          "rules": {
+            "values": [
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 3
+                  },
+                  "conditions": [
+                    {
+                      "leftValue": "={{ $('Webhook').item.json.data.purchase.payment.installments_number }}",
+                      "rightValue": 1,
+                      "operator": {
+                        "type": "number",
+                        "operation": "equals"
+                      },
+                      "id": "b9189966-a77c-4cbb-81e9-da0dd2e4e237"
+                    }
+                  ],
+                  "combinator": "and"
+                }
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.switch",
+        "typeVersion": 3.4,
+        "position": [
+          720,
+          -400
+        ],
+        "id": "05707b64-be6d-4b09-8ff1-e6041de9ef6a",
+        "name": "Primera cuota"
       }
     ],
     "connections": {
@@ -922,14 +961,14 @@
           ],
           [
             {
-              "node": "Flodesk - [JUL 2026] - Estudiantes - ADE",
+              "node": "Primera cuota",
               "type": "main",
               "index": 0
             }
           ],
           [
             {
-              "node": "Flodesk - [JUL 2026] - Estudiantes - ADE",
+              "node": "Primera cuota",
               "type": "main",
               "index": 0
             }
@@ -1114,15 +1153,26 @@
             }
           ]
         ]
+      },
+      "Primera cuota": {
+        "main": [
+          [
+            {
+              "node": "Flodesk - [JUL 2026] - Estudiantes - ADE",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
       }
     },
     "nodeGroups": [],
     "authors": "BE Online",
-    "name": "Version 9970996f",
+    "name": "Version f17ed79e",
     "description": "",
     "autosaved": true
   },
-  "activeVersionId": "9970996f-418d-4556-aee3-5f980e5529c0",
+  "activeVersionId": "f17ed79e-c5ea-48ba-9865-aa72f598fd2a",
   "connections": {
     "Webhook": {
       "main": [
@@ -1164,14 +1214,14 @@
         ],
         [
           {
-            "node": "Flodesk - [JUL 2026] - Estudiantes - ADE",
+            "node": "Primera cuota",
             "type": "main",
             "index": 0
           }
         ],
         [
           {
-            "node": "Flodesk - [JUL 2026] - Estudiantes - ADE",
+            "node": "Primera cuota",
             "type": "main",
             "index": 0
           }
@@ -1356,6 +1406,17 @@
           }
         ]
       ]
+    },
+    "Primera cuota": {
+      "main": [
+        [
+          {
+            "node": "Flodesk - [JUL 2026] - Estudiantes - ADE",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2026-07-26T16:06:34.069Z",
@@ -1397,7 +1458,7 @@
                 "conditions": [
                   {
                     "id": "84306705-0989-4d36-b59a-f5972aebfeb8",
-                    "leftValue": "={{ $('Webhook').item.json.body.event }}",
+                    "leftValue": "={{ $('Webhook').item.json.event }}",
                     "rightValue": "PURCHASE_COMPLETE",
                     "operator": {
                       "type": "string",
@@ -1420,7 +1481,7 @@
                 "conditions": [
                   {
                     "id": "7c52240a-4074-4ae3-90b9-f1000c18948a",
-                    "leftValue": "={{ $('Webhook').item.json.body.event }}",
+                    "leftValue": "={{ $('Webhook').item.json.event }}",
                     "rightValue": "PURCHASE_APPROVED",
                     "operator": {
                       "type": "string",
@@ -1459,7 +1520,7 @@
                 },
                 "conditions": [
                   {
-                    "leftValue": "={{ $('Webhook').item.json.body.event }}",
+                    "leftValue": "={{ $('Webhook').item.json.event }}",
                     "rightValue": "PURCHASE_BILLET_PRINTED",
                     "operator": {
                       "type": "string",
@@ -1482,7 +1543,7 @@
                 "conditions": [
                   {
                     "id": "84306705-0989-4d36-b59a-f5972aebfeb8",
-                    "leftValue": "={{ $('Webhook').item.json.body.event }}",
+                    "leftValue": "={{ $('Webhook').item.json.event }}",
                     "rightValue": "PURCHASE_COMPLETE",
                     "operator": {
                       "type": "string",
@@ -1505,7 +1566,7 @@
                 "conditions": [
                   {
                     "id": "7c52240a-4074-4ae3-90b9-f1000c18948a",
-                    "leftValue": "={{ $('Webhook').item.json.body.event }}",
+                    "leftValue": "={{ $('Webhook').item.json.event }}",
                     "rightValue": "PURCHASE_APPROVED",
                     "operator": {
                       "type": "string",
@@ -1528,7 +1589,7 @@
                 "conditions": [
                   {
                     "id": "5aee3900-62ec-49db-95f7-2414abffbb70",
-                    "leftValue": "={{ $('Webhook').item.json.body.event }}",
+                    "leftValue": "={{ $('Webhook').item.json.event }}",
                     "rightValue": "PURCHASE_CANCELED",
                     "operator": {
                       "type": "string",
@@ -1551,7 +1612,7 @@
                 "conditions": [
                   {
                     "id": "46cbfbb2-61e7-49af-b098-78314696d446",
-                    "leftValue": "={{ $('Webhook').item.json.body.event }}",
+                    "leftValue": "={{ $('Webhook').item.json.event }}",
                     "rightValue": "PURCHASE_OUT_OF_SHOPPING_CART",
                     "operator": {
                       "type": "string",
@@ -1574,7 +1635,7 @@
                 "conditions": [
                   {
                     "id": "ec18ffb3-1644-45dc-8f3a-a6238c654d83",
-                    "leftValue": "={{ $('Webhook').item.json.body.event }}",
+                    "leftValue": "={{ $('Webhook').item.json.event }}",
                     "rightValue": "PURCHASE_DELAYED",
                     "operator": {
                       "type": "string",
@@ -1597,7 +1658,7 @@
                 "conditions": [
                   {
                     "id": "5c30cb02-12d2-4d43-86d6-2b3eea6b14d6",
-                    "leftValue": "={{ $('Webhook').item.json.body.event }}",
+                    "leftValue": "={{ $('Webhook').item.json.event }}",
                     "rightValue": "PURCHASE_PROTEST",
                     "operator": {
                       "type": "string",
@@ -1620,7 +1681,7 @@
                 "conditions": [
                   {
                     "id": "d1502dff-1217-4796-a53b-07add971e423",
-                    "leftValue": "={{ $('Webhook').item.json.body.event }}",
+                    "leftValue": "={{ $('Webhook').item.json.event }}",
                     "rightValue": "PURCHASE_REFUNDED",
                     "operator": {
                       "type": "string",
@@ -1653,7 +1714,7 @@
         "genericAuthType": "httpBasicAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"email\": \"{{ $('Webhook').item.json.body.data.buyer.email }}\",\n  \"first_name\": \"{{ $('Webhook').item.json.body.data.buyer.name }}\",\n  \"segment_ids\": [\"6a6655a59e079c6fbafad2c8\"]\n}",
+        "jsonBody": "={\n  \"email\": \"{{ $('Webhook').item.json.data.buyer.email }}\",\n  \"first_name\": \"{{ $('Webhook').item.json.data.buyer.name }}\",\n  \"segment_ids\": [\"6a6655a59e079c6fbafad2c8\"]\n}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
@@ -1687,7 +1748,7 @@
         "genericAuthType": "httpBasicAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"email\": \"{{ $('Webhook').item.json.body.data.buyer.email }}\",\n  \"first_name\": \"{{ $('Webhook').item.json.body.data.buyer.name }}\",\n  \"segment_ids\": [\"6a6a186d2db46a250a10d69b\"]\n}",
+        "jsonBody": "={\n  \"email\": \"{{ $('Webhook').item.json.data.buyer.email }}\",\n  \"first_name\": \"{{ $('Webhook').item.json.data.buyer.name }}\",\n  \"segment_ids\": [\"6a6a186d2db46a250a10d69b\"]\n}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
@@ -1721,7 +1782,7 @@
         "genericAuthType": "httpBasicAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"email\": \"{{ $('Webhook').item.json.body.data.buyer.email }}\",\n  \"first_name\": \"{{ $('Webhook').item.json.body.data.buyer.name }}\",\n  \"segment_ids\": [\"6a6a184a9cefd38aba0017e4\"]\n}",
+        "jsonBody": "={\n  \"email\": \"{{ $('Webhook').item.json.data.buyer.email }}\",\n  \"first_name\": \"{{ $('Webhook').item.json.data.buyer.name }}\",\n  \"segment_ids\": [\"6a6a184a9cefd38aba0017e4\"]\n}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
@@ -1755,7 +1816,7 @@
         "genericAuthType": "httpBasicAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"email\": \"{{ $('Webhook').item.json.body.data.buyer.email }}\",\n  \"first_name\": \"{{ $('Webhook').item.json.body.data.buyer.name }}\",\n  \"segment_ids\": [\"6a6a1887a200b0beebb18359\"]\n}",
+        "jsonBody": "={\n  \"email\": \"{{ $('Webhook').item.json.data.buyer.email }}\",\n  \"first_name\": \"{{ $('Webhook').item.json.data.buyer.name }}\",\n  \"segment_ids\": [\"6a6a1887a200b0beebb18359\"]\n}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
@@ -1789,7 +1850,7 @@
         "genericAuthType": "httpBasicAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"email\": \"{{ $('Webhook').item.json.body.data.buyer.email }}\",\n  \"first_name\": \"{{ $('Webhook').item.json.body.data.buyer.name }}\",\n  \"segment_ids\": [\"6a6a18a06cc4ffd6163d1bda\"]\n}",
+        "jsonBody": "={\n  \"email\": \"{{ $('Webhook').item.json.data.buyer.email }}\",\n  \"first_name\": \"{{ $('Webhook').item.json.data.buyer.name }}\",\n  \"segment_ids\": [\"6a6a18a06cc4ffd6163d1bda\"]\n}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
@@ -1823,7 +1884,7 @@
         "genericAuthType": "httpBasicAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"email\": \"{{ $('Webhook').item.json.body.data.buyer.email }}\",\n  \"first_name\": \"{{ $('Webhook').item.json.body.data.buyer.name }}\",\n  \"segment_ids\": [\"69b355132b584b8353a2e763\"]\n}",
+        "jsonBody": "={\n  \"email\": \"{{ $('Webhook').item.json.data.buyer.email }}\",\n  \"first_name\": \"{{ $('Webhook').item.json.data.buyer.name }}\",\n  \"segment_ids\": [\"69b355132b584b8353a2e763\"]\n}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
@@ -1857,7 +1918,7 @@
         "genericAuthType": "httpBasicAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"email\": \"{{ $('Webhook').item.json.body.data.buyer.email }}\",\n  \"first_name\": \"{{ $('Webhook').item.json.body.data.buyer.name }}\",\n  \"segment_ids\": [\"6a03976c721cf74951b84520\"]\n}",
+        "jsonBody": "={\n  \"email\": \"{{ $('Webhook').item.json.data.buyer.email }}\",\n  \"first_name\": \"{{ $('Webhook').item.json.data.buyer.name }}\",\n  \"segment_ids\": [\"6a03976c721cf74951b84520\"]\n}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
@@ -1891,7 +1952,7 @@
         "genericAuthType": "httpBasicAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"email\": \"{{ $('Webhook').item.json.body.data.buyer.email }}\",\n  \"first_name\": \"{{ $('Webhook').item.json.body.data.buyer.name }}\",\n  \"segment_ids\": [\"6a2ac1a6a91e8af8f205820c\"]\n}",
+        "jsonBody": "={\n  \"email\": \"{{ $('Webhook').item.json.data.buyer.email }}\",\n  \"first_name\": \"{{ $('Webhook').item.json.data.buyer.name }}\",\n  \"segment_ids\": [\"6a2ac1a6a91e8af8f205820c\"]\n}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
@@ -1925,7 +1986,7 @@
         "genericAuthType": "httpBasicAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"email\": \"{{ $('Webhook').item.json.body.data.buyer.email }}\",\n  \"first_name\": \"{{ $('Webhook').item.json.body.data.buyer.name }}\",\n  \"segment_ids\": [\"6a68d9cb94e231d1cf53088a\"]\n}",
+        "jsonBody": "={\n  \"email\": \"{{ $('Webhook').item.json.data.buyer.email }}\",\n  \"first_name\": \"{{ $('Webhook').item.json.data.buyer.name }}\",\n  \"segment_ids\": [\"6a68d9cb94e231d1cf53088a\"]\n}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
@@ -1966,7 +2027,7 @@
                 "conditions": [
                   {
                     "leftValue": "Autor de éxito",
-                    "rightValue": "={{ $json.body.data.product.name }}",
+                    "rightValue": "={{ $json.data.product.name }}",
                     "operator": {
                       "type": "string",
                       "operation": "equals"
@@ -1989,7 +2050,7 @@
                   {
                     "id": "366216d0-19be-475e-a820-e4d39198ccad",
                     "leftValue": "Autor de Éxito Signature",
-                    "rightValue": "={{ $json.body.data.product.name }}",
+                    "rightValue": "={{ $json.data.product.name }}",
                     "operator": {
                       "type": "string",
                       "operation": "equals"
@@ -2054,7 +2115,7 @@
         "genericAuthType": "httpBasicAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"email\": \"{{ $('Webhook').item.json.body.data.buyer.email }}\",\n  \"first_name\": \"{{ $('Webhook').item.json.body.data.buyer.name }}\",\n  \"segment_ids\": [\"6a6a18c96ee38e03a5799512\"]\n}",
+        "jsonBody": "={\n  \"email\": \"{{ $('Webhook').item.json.data.buyer.email }}\",\n  \"first_name\": \"{{ $('Webhook').item.json.data.buyer.name }}\",\n  \"segment_ids\": [\"6a6a18c96ee38e03a5799512\"]\n}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
@@ -2086,7 +2147,7 @@
         "url": "https://unnichat.com.br/a/start/usNsJ1AERRuIp29SLdS8",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"id\": \"{{ $json.id || Math.floor(Math.random() * 1000000).toString() }}\",\n  \"data\": {\n    \"number\": \"{{ $('Webhook').item.json.body.data.buyer.checkout_phone }}\",\n    \"tag\": \"global\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
+        "jsonBody": "={\n  \"id\": \"{{ $json.id || Math.floor(Math.random() * 1000000).toString() }}\",\n  \"data\": {\n    \"number\": \"{{ $('Webhook').item.json.data.buyer.checkout_phone }}\",\n    \"tag\": \"global\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
@@ -2104,7 +2165,7 @@
         "url": "https://unnichat.com.br/a/start/6JWI7w6ly2ApXe2c37V1",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"id\": \"{{ $('Webhook').item.json.body.data.buyer.document }}\",\n  \"data\": {\n    \"number\": \"{{ $('Webhook').item.json.body.data.buyer.checkout_phone }}\",\n    \"tag\": \"global\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
+        "jsonBody": "={\n  \"id\": \"{{ $('Webhook').item.json.data.buyer.document }}\",\n  \"data\": {\n    \"number\": \"{{ $('Webhook').item.json.data.buyer.checkout_phone }}\",\n    \"tag\": \"global\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
@@ -2122,7 +2183,7 @@
         "url": "https://unnichat.com.br/a/start/l2LW3R3TV3LTSQVdu7p1",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"id\": \"{{ $json.id || Math.floor(Math.random() * 1000000).toString() }}\",\n  \"data\": {\n    \"number\": \"{{ $('Webhook').item.json.body.data.buyer.checkout_phone }}\",\n    \"tag\": \"global\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
+        "jsonBody": "={\n  \"id\": \"{{ $json.id || Math.floor(Math.random() * 1000000).toString() }}\",\n  \"data\": {\n    \"number\": \"{{ $('Webhook').item.json.data.buyer.checkout_phone }}\",\n    \"tag\": \"global\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
@@ -2140,7 +2201,7 @@
         "url": "https://unnichat.com.br/a/start/a12k1sRJXLLX9BNJFRNS",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"id\": \"{{ $json.id || Math.floor(Math.random() * 1000000).toString() }}\",\n  \"data\": {\n    \"number\": \"{{ $('Webhook').item.json.body.data.buyer.phone }}\",\n    \"tag\": \"global\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
+        "jsonBody": "={\n  \"id\": \"{{ $json.id || Math.floor(Math.random() * 1000000).toString() }}\",\n  \"data\": {\n    \"number\": \"{{ $('Webhook').item.json.data.buyer.phone }}\",\n    \"tag\": \"global\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
@@ -2158,7 +2219,7 @@
         "url": "https://unnichat.com.br/a/start/6RDS5rrFuBS63vNTSLL2",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"id\": \"{{ $json.id || Math.floor(Math.random() * 1000000).toString() }}\",\n  \"data\": {\n    \"number\": \"{{ $('Webhook').item.json.body.data.buyer.checkout_phone }}\",\n    \"tag\": \"global\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
+        "jsonBody": "={\n  \"id\": \"{{ $json.id || Math.floor(Math.random() * 1000000).toString() }}\",\n  \"data\": {\n    \"number\": \"{{ $('Webhook').item.json.data.buyer.checkout_phone }}\",\n    \"tag\": \"global\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
@@ -2178,7 +2239,7 @@
         "genericAuthType": "httpBasicAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"email\": \"{{ $('Webhook').item.json.body.data.buyer.email }}\",\n  \"first_name\": \"{{ $('Webhook').item.json.body.data.buyer.name }}\",\n  \"segment_ids\": [\"6a6a18b71b2f37f3e8ecc649\"]\n}",
+        "jsonBody": "={\n  \"email\": \"{{ $('Webhook').item.json.data.buyer.email }}\",\n  \"first_name\": \"{{ $('Webhook').item.json.data.buyer.name }}\",\n  \"segment_ids\": [\"6a6a18b71b2f37f3e8ecc649\"]\n}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
@@ -2210,7 +2271,7 @@
         "url": "https://unnichat.com.br/a/start/AvAd989Hyea6JWSKfjhe",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"id\": \"{{ $json.id || Math.floor(Math.random() * 1000000).toString() }}\",\n  \"data\": {\n    \"number\": \"{{ $('Webhook').item.json.body.data.buyer.checkout_phone }}\",\n    \"tag\": \"global\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
+        "jsonBody": "={\n  \"id\": \"{{ $json.id || Math.floor(Math.random() * 1000000).toString() }}\",\n  \"data\": {\n    \"number\": \"{{ $('Webhook').item.json.data.buyer.checkout_phone }}\",\n    \"tag\": \"global\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
@@ -2228,7 +2289,7 @@
         "url": "https://unnichat.com.br/a/start/hI71w0JM56uUDuAalLd1",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"id\": \"{{ $json.id || Math.floor(Math.random() * 1000000).toString() }}\",\n  \"data\": {\n    \"number\": \"{{ $('Webhook').item.json.body.data.buyer.checkout_phone }}\",\n    \"tag\": \"global\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
+        "jsonBody": "={\n  \"id\": \"{{ $json.id || Math.floor(Math.random() * 1000000).toString() }}\",\n  \"data\": {\n    \"number\": \"{{ $('Webhook').item.json.data.buyer.checkout_phone }}\",\n    \"tag\": \"global\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
@@ -2239,56 +2300,151 @@
       ],
       "id": "8a533ff9-8032-4ab3-b1f3-03102ef69c16",
       "name": "Unnichat - Reembolso procesado"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $('Webhook').item.json.data.purchase.payment.installments_number }}",
+                    "rightValue": 1,
+                    "operator": {
+                      "type": "number",
+                      "operation": "equals"
+                    },
+                    "id": "b9189966-a77c-4cbb-81e9-da0dd2e4e237"
+                  }
+                ],
+                "combinator": "and"
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        720,
+        -400
+      ],
+      "id": "05707b64-be6d-4b09-8ff1-e6041de9ef6a",
+      "name": "Primera cuota"
     }
   ],
   "pinData": {
     "Webhook": [
       {
         "json": {
-          "headers": {
-            "host": "contenedor1-n8n.vqn37t.easypanel.host",
-            "user-agent": "Jodd HTTP",
-            "content-length": "406",
-            "content-type": "application/json",
-            "x-forwarded-for": "98.92.33.42",
-            "x-forwarded-host": "contenedor1-n8n.vqn37t.easypanel.host",
-            "x-forwarded-port": "443",
-            "x-forwarded-proto": "https",
-            "x-forwarded-server": "cbddb8c293f4",
-            "x-hotmart-hottok": "p3pyMTUj7l7z86JGfalI9JMXTpiyBq85599017-fc1a-4b36-9723-828cee66c3e2",
-            "x-real-ip": "98.92.33.42",
-            "accept-encoding": "gzip"
-          },
-          "params": {},
-          "query": {},
-          "body": {
-            "data": {
-              "offer": {
-                "code": "b6mjgqpg"
+          "id": "cad05e95-aaec-4571-ba3a-5455d9ac9478",
+          "creation_date": 1785769072294,
+          "event": "PURCHASE_APPROVED",
+          "version": "2.0.0",
+          "data": {
+            "product": {
+              "id": 2881523,
+              "ucode": "fc2826db-3753-4070-88ca-007f2807959d",
+              "name": "Autor de éxito",
+              "warranty_date": "2026-09-02T00:00:00Z",
+              "support_email": "ade@alexandracastrillon.com",
+              "has_co_production": true,
+              "is_physical_product": false,
+              "product_format_id": 8
+            },
+            "affiliates": [
+              {
+                "affiliate_code": "",
+                "name": ""
+              }
+            ],
+            "buyer": {
+              "email": "mariavate@hotmail.com",
+              "name": "María Victoria Atehortua",
+              "first_name": "María",
+              "last_name": "Atehortua",
+              "checkout_phone": "573332645170",
+              "address": {
+                "country": "Colombia",
+                "country_iso": "CO"
               },
-              "product": {
-                "name": "Autor de éxito",
-                "id": 2881523
+              "document": "",
+              "document_type": ""
+            },
+            "producer": {
+              "name": "Alexandra Castrillón Gómez",
+              "document": "PE123198",
+              "legal_nature": "Pessoa Física"
+            },
+            "commissions": [
+              {
+                "value": 46.52,
+                "source": "MARKETPLACE",
+                "currency_value": "USD"
+              },
+              {
+                "value": 249.92,
+                "source": "PRODUCER",
+                "currency_value": "USD",
+                "currency_conversion": {
+                  "converted_value": 249.92,
+                  "converted_to_currency": "USD",
+                  "conversion_rate": 1
+                }
+              }
+            ],
+            "purchase": {
+              "approved_date": 1785769061000,
+              "full_price": {
+                "value": 1863454,
+                "currency_value": "COP"
+              },
+              "price": {
+                "value": 1863454,
+                "currency_value": "COP"
               },
               "checkout_country": {
-                "iso": "CO",
-                "name": "Colombia"
+                "name": "Colombia",
+                "iso": "CO"
               },
-              "buyer_ip": "181.63.25.130",
-              "affiliate": true,
-              "buyer": {
-                "phone": "573102351988",
-                "name": "DIANA RESTREPO ",
-                "email": "restrepodiana@gmail.com"
-              }
-            },
-            "id": "47576fca-66ff-4c24-ae77-28ff367de83c",
-            "creation_date": 1785696009881,
-            "event": "PURCHASE_OUT_OF_SHOPPING_CART",
-            "version": "2.0.0"
-          },
-          "webhookUrl": "https://contenedor1-n8n.vqn37t.easypanel.host/webhook/checkout-ade-y-signature",
-          "executionMode": "production"
+              "order_bump": {
+                "is_order_bump": false
+              },
+              "origin": {
+                "sck": "c=ventas-ADE|m=wa-leads|s=org-whatsapp",
+                "xcod": "{\"vsrc\":\"org-whatsapp\",\"u\":\"7f333000-3e95-41d4-8d3e-af34e1dfb848\",\"url\":\"www.autordeexito.com/ADE-accedeahora\",\"r\":\"alexandra.autordeexito.com/\",\"v\":1}"
+              },
+              "buyer_ip": "181.53.99.161",
+              "original_offer_price": {
+                "value": 577.09,
+                "currency_value": "USD"
+              },
+              "order_date": 1785768982000,
+              "status": "APPROVED",
+              "transaction": "HP2828788279",
+              "payment": {
+                "installments_number": 1,
+                "type": "NEQUI"
+              },
+              "offer": {
+                "code": "b6mjgqpg",
+                "name": "Una sola cuota",
+                "description": "Pago de contado"
+              },
+              "invoice_by": "SELLER",
+              "subscription_anticipation_purchase": false,
+              "is_funnel": true,
+              "business_model": "A"
+            }
+          }
         }
       }
     ]
@@ -2314,6 +2470,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2026-08-03T17:36:17.303Z",
-  "versionId": "9970996f-418d-4556-aee3-5f980e5529c0"
+  "updatedAt": "2026-08-24T20:06:26.126Z",
+  "versionId": "f17ed79e-c5ea-48ba-9865-aa72f598fd2a"
 }
