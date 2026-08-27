@@ -1,0 +1,1304 @@
+{
+  "active": false,
+  "activeVersion": null,
+  "activeVersionId": null,
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "ADE o Signature",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Evento Checkout - Signature": {
+      "main": [
+        [
+          {
+            "node": "Flodesk - [JUL 2026] - Estudiantes - Signature",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Flodesk - [JUL 2026] - Estudiantes - Signature",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Evento Checkout - ADE": {
+      "main": [
+        [
+          {
+            "node": "Flodesk - [JUL 2026] - A la espera de pago - ADE",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Primera cuota",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Primera cuota",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Flodesk - [JUL 2026] - Compra cancelada - ADE",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Flodesk - [JUL 2026] - Abandono de carrito - ADE",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Flodesk - [JUL 2026] - Pago retrasado - ADE",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Flodesk - [JUL 2026] - Solicitud de reembolso - ADE",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Flodesk - [JUL 2026] - Reembolso procesado - ADE",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Flodesk - [JUL 2026] - Estudiantes - ADE": {
+      "main": [
+        [
+          {
+            "node": "Flodesk - Compradores ADE",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Unnichat - Compra Aprobada",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Flodesk - [JUL 2026] - Compra cancelada - ADE": {
+      "main": [
+        [
+          {
+            "node": "Unnichat - Compra cancelada",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Flodesk - [JUL 2026] - Abandono de carrito - ADE": {
+      "main": [
+        [
+          {
+            "node": "Unnichat - Abandono de carrito",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Flodesk - Compradores ADE": {
+      "main": [
+        [
+          {
+            "node": "Flodesk - PP",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Flodesk - PP": {
+      "main": [
+        [
+          {
+            "node": "Flodesk - Escritor",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Flodesk - Escritor": {
+      "main": [
+        [
+          {
+            "node": "Flodesk - ADE-6",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "ADE o Signature": {
+      "main": [
+        [
+          {
+            "node": "Evento Checkout - ADE",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Evento Checkout - Signature",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Flodesk - [JUL 2026] - Estudiantes - Signature": {
+      "main": [
+        [
+          {
+            "node": "Flodesk - [JUL 2026] - Estudiantes - ADE",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Flodesk - [JUL 2026] - A la espera de pago - ADE": {
+      "main": [
+        [
+          {
+            "node": "Unnichat - Espera de pago",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Flodesk - [JUL 2026] - Pago retrasado - ADE": {
+      "main": [
+        [
+          {
+            "node": "Unnichat - Pago atrasado",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Flodesk - [JUL 2026] - Solicitud de reembolso - ADE": {
+      "main": [
+        [
+          {
+            "node": "Unnichat - Solicitud de reembolso",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Flodesk - [JUL 2026] - Reembolso procesado - ADE": {
+      "main": [
+        [
+          {
+            "node": "Unnichat - Reembolso procesado",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Primera cuota": {
+      "main": [
+        [
+          {
+            "node": "Flodesk - [JUL 2026] - Estudiantes - ADE",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2026-08-26T17:11:38.347Z",
+  "id": "9WNaQmMiCEmzpHMp",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Futuros - Eventos Checkout - UdeA",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "compras-udea-sep2026",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        32
+      ],
+      "id": "821b4b9d-fc74-433d-a393-69d55d4f9ee5",
+      "name": "Webhook",
+      "webhookId": "eca3773d-9297-4c6d-8030-9170220a46d7"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "84306705-0989-4d36-b59a-f5972aebfeb8",
+                    "leftValue": "={{ $('Webhook').item.json.event }}",
+                    "rightValue": "PURCHASE_COMPLETE",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "7c52240a-4074-4ae3-90b9-f1000c18948a",
+                    "leftValue": "={{ $('Webhook').item.json.event }}",
+                    "rightValue": "PURCHASE_APPROVED",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        432,
+        528
+      ],
+      "id": "12eecdec-a657-4a84-a362-66d7298f80a8",
+      "name": "Evento Checkout - Signature"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $('Webhook').item.json.event }}",
+                    "rightValue": "PURCHASE_BILLET_PRINTED",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "26888965-7100-40a1-a8b3-eef968b28b2a"
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "84306705-0989-4d36-b59a-f5972aebfeb8",
+                    "leftValue": "={{ $('Webhook').item.json.event }}",
+                    "rightValue": "PURCHASE_COMPLETE",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "7c52240a-4074-4ae3-90b9-f1000c18948a",
+                    "leftValue": "={{ $('Webhook').item.json.event }}",
+                    "rightValue": "PURCHASE_APPROVED",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "5aee3900-62ec-49db-95f7-2414abffbb70",
+                    "leftValue": "={{ $('Webhook').item.json.event }}",
+                    "rightValue": "PURCHASE_CANCELED",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "46cbfbb2-61e7-49af-b098-78314696d446",
+                    "leftValue": "={{ $('Webhook').item.json.event }}",
+                    "rightValue": "PURCHASE_OUT_OF_SHOPPING_CART",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "ec18ffb3-1644-45dc-8f3a-a6238c654d83",
+                    "leftValue": "={{ $('Webhook').item.json.event }}",
+                    "rightValue": "PURCHASE_DELAYED",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "5c30cb02-12d2-4d43-86d6-2b3eea6b14d6",
+                    "leftValue": "={{ $('Webhook').item.json.event }}",
+                    "rightValue": "PURCHASE_PROTEST",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "d1502dff-1217-4796-a53b-07add971e423",
+                    "leftValue": "={{ $('Webhook').item.json.event }}",
+                    "rightValue": "PURCHASE_REFUNDED",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        432,
+        -336
+      ],
+      "id": "089f1855-57ed-4c16-a2c2-023e7d3ba520",
+      "name": "Evento Checkout - ADE"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.flodesk.com/v1/subscribers",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"email\": \"{{ $('Webhook').item.json.data.buyer.email }}\",\n  \"first_name\": \"{{ $('Webhook').item.json.data.buyer.name }}\",\n  \"segment_ids\": [\"6a6655a59e079c6fbafad2c8\"]\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        944,
+        -512
+      ],
+      "id": "771012dd-e65f-4140-83b1-4af7cce9ed39",
+      "name": "Flodesk - [JUL 2026] - Estudiantes - ADE",
+      "retryOnFail": false,
+      "maxTries": 5,
+      "waitBetweenTries": 5000,
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "hSaP4d59L4OoJOce",
+          "name": "Flodesk Alex"
+        },
+        "httpBasicAuth": {
+          "id": "QvDqcChg1nnswrDt",
+          "name": "FLODESK ALEX"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.flodesk.com/v1/subscribers",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"email\": \"{{ $('Webhook').item.json.data.buyer.email }}\",\n  \"first_name\": \"{{ $('Webhook').item.json.data.buyer.name }}\",\n  \"segment_ids\": [\"6a6a186d2db46a250a10d69b\"]\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        944,
+        -336
+      ],
+      "id": "f4fb250a-1b13-4225-84ff-660ec7fe8288",
+      "name": "Flodesk - [JUL 2026] - Compra cancelada - ADE",
+      "retryOnFail": false,
+      "maxTries": 5,
+      "waitBetweenTries": 5000,
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "hSaP4d59L4OoJOce",
+          "name": "Flodesk Alex"
+        },
+        "httpBasicAuth": {
+          "id": "QvDqcChg1nnswrDt",
+          "name": "FLODESK ALEX"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.flodesk.com/v1/subscribers",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"email\": \"{{ $('Webhook').item.json.data.buyer.email }}\",\n  \"first_name\": \"{{ $('Webhook').item.json.data.buyer.name }}\",\n  \"segment_ids\": [\"6a6a184a9cefd38aba0017e4\"]\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        944,
+        -160
+      ],
+      "id": "4f64c375-fb33-4c32-b0bc-b3a5b0b268ad",
+      "name": "Flodesk - [JUL 2026] - Abandono de carrito - ADE",
+      "retryOnFail": false,
+      "maxTries": 5,
+      "waitBetweenTries": 5000,
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "hSaP4d59L4OoJOce",
+          "name": "Flodesk Alex"
+        },
+        "httpBasicAuth": {
+          "id": "QvDqcChg1nnswrDt",
+          "name": "FLODESK ALEX"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.flodesk.com/v1/subscribers",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"email\": \"{{ $('Webhook').item.json.data.buyer.email }}\",\n  \"first_name\": \"{{ $('Webhook').item.json.data.buyer.name }}\",\n  \"segment_ids\": [\"6a6a1887a200b0beebb18359\"]\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        944,
+        16
+      ],
+      "id": "d32f11ac-374c-464f-baad-4dd3dc8ec040",
+      "name": "Flodesk - [JUL 2026] - Pago retrasado - ADE",
+      "retryOnFail": false,
+      "maxTries": 5,
+      "waitBetweenTries": 5000,
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "hSaP4d59L4OoJOce",
+          "name": "Flodesk Alex"
+        },
+        "httpBasicAuth": {
+          "id": "QvDqcChg1nnswrDt",
+          "name": "FLODESK ALEX"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.flodesk.com/v1/subscribers",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"email\": \"{{ $('Webhook').item.json.data.buyer.email }}\",\n  \"first_name\": \"{{ $('Webhook').item.json.data.buyer.name }}\",\n  \"segment_ids\": [\"6a6a18a06cc4ffd6163d1bda\"]\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        944,
+        -688
+      ],
+      "id": "95852976-ef30-4f35-8982-17f2040b5226",
+      "name": "Flodesk - [JUL 2026] - A la espera de pago - ADE",
+      "retryOnFail": false,
+      "maxTries": 5,
+      "waitBetweenTries": 5000,
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "hSaP4d59L4OoJOce",
+          "name": "Flodesk Alex"
+        },
+        "httpBasicAuth": {
+          "id": "QvDqcChg1nnswrDt",
+          "name": "FLODESK ALEX"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.flodesk.com/v1/subscribers",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"email\": \"{{ $('Webhook').item.json.data.buyer.email }}\",\n  \"first_name\": \"{{ $('Webhook').item.json.data.buyer.name }}\",\n  \"segment_ids\": [\"69b355132b584b8353a2e763\"]\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1248,
+        -544
+      ],
+      "id": "4e2c54ca-b658-45a7-bacb-71a663fe628a",
+      "name": "Flodesk - Compradores ADE",
+      "retryOnFail": false,
+      "maxTries": 5,
+      "waitBetweenTries": 5000,
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "hSaP4d59L4OoJOce",
+          "name": "Flodesk Alex"
+        },
+        "httpBasicAuth": {
+          "id": "QvDqcChg1nnswrDt",
+          "name": "FLODESK ALEX"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.flodesk.com/v1/subscribers",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"email\": \"{{ $('Webhook').item.json.data.buyer.email }}\",\n  \"first_name\": \"{{ $('Webhook').item.json.data.buyer.name }}\",\n  \"segment_ids\": [\"6a03976c721cf74951b84520\"]\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1680,
+        -544
+      ],
+      "id": "2c8c6ac0-24fc-4cd3-b977-f3c171fc16f4",
+      "name": "Flodesk - Escritor",
+      "retryOnFail": false,
+      "maxTries": 5,
+      "waitBetweenTries": 5000,
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "hSaP4d59L4OoJOce",
+          "name": "Flodesk Alex"
+        },
+        "httpBasicAuth": {
+          "id": "QvDqcChg1nnswrDt",
+          "name": "FLODESK ALEX"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.flodesk.com/v1/subscribers",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"email\": \"{{ $('Webhook').item.json.data.buyer.email }}\",\n  \"first_name\": \"{{ $('Webhook').item.json.data.buyer.name }}\",\n  \"segment_ids\": [\"6a2ac1a6a91e8af8f205820c\"]\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1472,
+        -544
+      ],
+      "id": "870b371b-3779-49cf-a641-5b27993e6d2b",
+      "name": "Flodesk - PP",
+      "retryOnFail": false,
+      "maxTries": 5,
+      "waitBetweenTries": 5000,
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "hSaP4d59L4OoJOce",
+          "name": "Flodesk Alex"
+        },
+        "httpBasicAuth": {
+          "id": "QvDqcChg1nnswrDt",
+          "name": "FLODESK ALEX"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.flodesk.com/v1/subscribers",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"email\": \"{{ $('Webhook').item.json.data.buyer.email }}\",\n  \"first_name\": \"{{ $('Webhook').item.json.data.buyer.name }}\",\n  \"segment_ids\": [\"6a68d9cb94e231d1cf53088a\"]\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1872,
+        -544
+      ],
+      "id": "6b1a7dd4-0e7c-4e2f-a194-452f76795de0",
+      "name": "Flodesk - ADE-6",
+      "retryOnFail": false,
+      "maxTries": 5,
+      "waitBetweenTries": 5000,
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "hSaP4d59L4OoJOce",
+          "name": "Flodesk Alex"
+        },
+        "httpBasicAuth": {
+          "id": "QvDqcChg1nnswrDt",
+          "name": "FLODESK ALEX"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "Autor de éxito",
+                    "rightValue": "={{ $json.data.product.name }}",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "7fe5e97d-fed9-4d49-8894-73d684b6e23e"
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "366216d0-19be-475e-a820-e4d39198ccad",
+                    "leftValue": "Autor de Éxito Signature",
+                    "rightValue": "={{ $json.data.product.name }}",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        208,
+        32
+      ],
+      "id": "cdcef128-91d5-436b-a096-516d827e3e3f",
+      "name": "ADE o Signature"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.flodesk.com/v1/subscribers",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"email\": \"{{ $('Webhook').item.json.body.data.buyer.email }}\",\n  \"first_name\": \"{{ $('Webhook').item.json.body.data.buyer.name }}\",\n  \"segment_ids\": [\"6a6655c433d05fd3413f2cd1\"]\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        672,
+        528
+      ],
+      "id": "840cc8f4-2a8b-4874-a19f-c1ac33ca277d",
+      "name": "Flodesk - [JUL 2026] - Estudiantes - Signature",
+      "retryOnFail": false,
+      "maxTries": 5,
+      "waitBetweenTries": 5000,
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "hSaP4d59L4OoJOce",
+          "name": "Flodesk Alex"
+        },
+        "httpBasicAuth": {
+          "id": "QvDqcChg1nnswrDt",
+          "name": "FLODESK ALEX"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.flodesk.com/v1/subscribers",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"email\": \"{{ $('Webhook').item.json.data.buyer.email }}\",\n  \"first_name\": \"{{ $('Webhook').item.json.data.buyer.name }}\",\n  \"segment_ids\": [\"6a6a18c96ee38e03a5799512\"]\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        944,
+        400
+      ],
+      "id": "1e733b0c-c5d0-488e-b717-d4f9c3be5d57",
+      "name": "Flodesk - [JUL 2026] - Reembolso procesado - ADE",
+      "retryOnFail": false,
+      "maxTries": 5,
+      "waitBetweenTries": 5000,
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "hSaP4d59L4OoJOce",
+          "name": "Flodesk Alex"
+        },
+        "httpBasicAuth": {
+          "id": "QvDqcChg1nnswrDt",
+          "name": "FLODESK ALEX"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://unnichat.com.br/a/start/usNsJ1AERRuIp29SLdS8",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"id\": \"{{ $json.id || Math.floor(Math.random() * 1000000).toString() }}\",\n  \"data\": {\n    \"number\": \"{{ $('Webhook').item.json.data.buyer.checkout_phone }}\",\n    \"tag\": \"global\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1376,
+        -368
+      ],
+      "id": "e668b60c-d765-4f76-843a-112437ab76ec",
+      "name": "Unnichat - Compra Aprobada"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://unnichat.com.br/a/start/6JWI7w6ly2ApXe2c37V1",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"id\": \"{{ $('Webhook').item.json.data.buyer.document }}\",\n  \"data\": {\n    \"number\": \"{{ $('Webhook').item.json.data.buyer.checkout_phone }}\",\n    \"tag\": \"global\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1168,
+        -688
+      ],
+      "id": "898667d5-9306-43f1-8185-6b8dce966b16",
+      "name": "Unnichat - Espera de pago"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://unnichat.com.br/a/start/l2LW3R3TV3LTSQVdu7p1",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"id\": \"{{ $json.id || Math.floor(Math.random() * 1000000).toString() }}\",\n  \"data\": {\n    \"number\": \"{{ $('Webhook').item.json.data.buyer.checkout_phone }}\",\n    \"tag\": \"global\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1168,
+        -336
+      ],
+      "id": "fd77a3cb-2fd2-4ec5-bbea-54182e138971",
+      "name": "Unnichat - Compra cancelada"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://unnichat.com.br/a/start/a12k1sRJXLLX9BNJFRNS",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"id\": \"{{ $json.id || Math.floor(Math.random() * 1000000).toString() }}\",\n  \"data\": {\n    \"number\": \"{{ $('Webhook').item.json.data.buyer.phone }}\",\n    \"tag\": \"global\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1168,
+        -160
+      ],
+      "id": "e280e030-45b0-4abb-aed9-46596719fde9",
+      "name": "Unnichat - Abandono de carrito"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://unnichat.com.br/a/start/6RDS5rrFuBS63vNTSLL2",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"id\": \"{{ $json.id || Math.floor(Math.random() * 1000000).toString() }}\",\n  \"data\": {\n    \"number\": \"{{ $('Webhook').item.json.data.buyer.checkout_phone }}\",\n    \"tag\": \"global\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1168,
+        16
+      ],
+      "id": "cb401c8f-36e3-494e-9aee-8cb1b0359436",
+      "name": "Unnichat - Pago atrasado"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.flodesk.com/v1/subscribers",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"email\": \"{{ $('Webhook').item.json.data.buyer.email }}\",\n  \"first_name\": \"{{ $('Webhook').item.json.data.buyer.name }}\",\n  \"segment_ids\": [\"6a6a18b71b2f37f3e8ecc649\"]\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        944,
+        208
+      ],
+      "id": "29ce5bdf-4070-4b77-8fb6-7f76b7d57a74",
+      "name": "Flodesk - [JUL 2026] - Solicitud de reembolso - ADE",
+      "retryOnFail": false,
+      "maxTries": 5,
+      "waitBetweenTries": 5000,
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "hSaP4d59L4OoJOce",
+          "name": "Flodesk Alex"
+        },
+        "httpBasicAuth": {
+          "id": "QvDqcChg1nnswrDt",
+          "name": "FLODESK ALEX"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://unnichat.com.br/a/start/AvAd989Hyea6JWSKfjhe",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"id\": \"{{ $json.id || Math.floor(Math.random() * 1000000).toString() }}\",\n  \"data\": {\n    \"number\": \"{{ $('Webhook').item.json.data.buyer.checkout_phone }}\",\n    \"tag\": \"global\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1184,
+        208
+      ],
+      "id": "8d214d2a-e5f5-45ac-a146-5e3a90d3893f",
+      "name": "Unnichat - Solicitud de reembolso"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://unnichat.com.br/a/start/hI71w0JM56uUDuAalLd1",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"id\": \"{{ $json.id || Math.floor(Math.random() * 1000000).toString() }}\",\n  \"data\": {\n    \"number\": \"{{ $('Webhook').item.json.data.buyer.checkout_phone }}\",\n    \"tag\": \"global\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1184,
+        400
+      ],
+      "id": "68fe538c-0dcb-4d74-bc9a-0483b7df07da",
+      "name": "Unnichat - Reembolso procesado"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $('Webhook').item.json.data.purchase.payment.installments_number }}",
+                    "rightValue": 1,
+                    "operator": {
+                      "type": "number",
+                      "operation": "equals"
+                    },
+                    "id": "b9189966-a77c-4cbb-81e9-da0dd2e4e237"
+                  }
+                ],
+                "combinator": "and"
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        720,
+        -400
+      ],
+      "id": "9e558bff-98ed-4592-865d-81a9f9b2b047",
+      "name": "Primera cuota"
+    }
+  ],
+  "pinData": {
+    "Webhook": [
+      {
+        "json": {
+          "id": "cad05e95-aaec-4571-ba3a-5455d9ac9478",
+          "creation_date": 1785769072294,
+          "event": "PURCHASE_APPROVED",
+          "version": "2.0.0",
+          "data": {
+            "product": {
+              "id": 2881523,
+              "ucode": "fc2826db-3753-4070-88ca-007f2807959d",
+              "name": "Autor de éxito",
+              "warranty_date": "2026-09-02T00:00:00Z",
+              "support_email": "ade@alexandracastrillon.com",
+              "has_co_production": true,
+              "is_physical_product": false,
+              "product_format_id": 8
+            },
+            "affiliates": [
+              {
+                "affiliate_code": "",
+                "name": ""
+              }
+            ],
+            "buyer": {
+              "email": "mariavate@hotmail.com",
+              "name": "María Victoria Atehortua",
+              "first_name": "María",
+              "last_name": "Atehortua",
+              "checkout_phone": "573332645170",
+              "address": {
+                "country": "Colombia",
+                "country_iso": "CO"
+              },
+              "document": "",
+              "document_type": ""
+            },
+            "producer": {
+              "name": "Alexandra Castrillón Gómez",
+              "document": "PE123198",
+              "legal_nature": "Pessoa Física"
+            },
+            "commissions": [
+              {
+                "value": 46.52,
+                "source": "MARKETPLACE",
+                "currency_value": "USD"
+              },
+              {
+                "value": 249.92,
+                "source": "PRODUCER",
+                "currency_value": "USD",
+                "currency_conversion": {
+                  "converted_value": 249.92,
+                  "converted_to_currency": "USD",
+                  "conversion_rate": 1
+                }
+              }
+            ],
+            "purchase": {
+              "approved_date": 1785769061000,
+              "full_price": {
+                "value": 1863454,
+                "currency_value": "COP"
+              },
+              "price": {
+                "value": 1863454,
+                "currency_value": "COP"
+              },
+              "checkout_country": {
+                "name": "Colombia",
+                "iso": "CO"
+              },
+              "order_bump": {
+                "is_order_bump": false
+              },
+              "origin": {
+                "sck": "c=ventas-ADE|m=wa-leads|s=org-whatsapp",
+                "xcod": "{\"vsrc\":\"org-whatsapp\",\"u\":\"7f333000-3e95-41d4-8d3e-af34e1dfb848\",\"url\":\"www.autordeexito.com/ADE-accedeahora\",\"r\":\"alexandra.autordeexito.com/\",\"v\":1}"
+              },
+              "buyer_ip": "181.53.99.161",
+              "original_offer_price": {
+                "value": 577.09,
+                "currency_value": "USD"
+              },
+              "order_date": 1785768982000,
+              "status": "APPROVED",
+              "transaction": "HP2828788279",
+              "payment": {
+                "installments_number": 1,
+                "type": "NEQUI"
+              },
+              "offer": {
+                "code": "b6mjgqpg",
+                "name": "Una sola cuota",
+                "description": "Pago de contado"
+              },
+              "invoice_by": "SELLER",
+              "subscription_anticipation_purchase": false,
+              "is_funnel": true,
+              "business_model": "A"
+            }
+          }
+        }
+      }
+    ]
+  },
+  "repo_name": "backupn8n",
+  "repo_owner": "infoandresrendoncol",
+  "repo_path": "backup/",
+  "settings": {
+    "executionOrder": "v1",
+    "callerPolicy": "workflowsFromSameOwner",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "shared": [
+    {
+      "updatedAt": "2026-08-26T17:11:38.353Z",
+      "createdAt": "2026-08-26T17:11:38.353Z",
+      "role": "workflow:owner",
+      "workflowId": "9WNaQmMiCEmzpHMp",
+      "projectId": "4KmSbENK2cGxsjaf"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2026-08-26T17:13:40.247Z",
+  "versionId": "b4642602-885b-45a5-9240-169cfaa51944"
+}
