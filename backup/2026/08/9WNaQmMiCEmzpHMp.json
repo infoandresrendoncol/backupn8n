@@ -1,7 +1,481 @@
 {
-  "active": false,
-  "activeVersion": null,
-  "activeVersionId": null,
+  "active": true,
+  "activeVersion": {
+    "updatedAt": "2026-09-01T22:04:39.000Z",
+    "createdAt": "2026-09-01T22:04:28.010Z",
+    "versionId": "d3488579-d9ad-440e-b33b-eb5e8fddbe85",
+    "workflowId": "9WNaQmMiCEmzpHMp",
+    "nodes": [
+      {
+        "parameters": {
+          "httpMethod": "POST",
+          "path": "compras-udea-sep2026",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.webhook",
+        "typeVersion": 2.1,
+        "position": [
+          0,
+          32
+        ],
+        "id": "821b4b9d-fc74-433d-a393-69d55d4f9ee5",
+        "name": "Webhook",
+        "webhookId": "eca3773d-9297-4c6d-8030-9170220a46d7"
+      },
+      {
+        "parameters": {
+          "rules": {
+            "values": [
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 3
+                  },
+                  "conditions": [
+                    {
+                      "leftValue": "Intensivo UdeA 2027",
+                      "rightValue": "={{ $json.payload.products[0].productName }}",
+                      "operator": {
+                        "type": "string",
+                        "operation": "equals"
+                      },
+                      "id": "7fe5e97d-fed9-4d49-8894-73d684b6e23e"
+                    }
+                  ],
+                  "combinator": "and"
+                }
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.switch",
+        "typeVersion": 3.4,
+        "position": [
+          208,
+          32
+        ],
+        "id": "cdcef128-91d5-436b-a096-516d827e3e3f",
+        "name": "¿Es UdeA?"
+      },
+      {
+        "parameters": {
+          "rules": {
+            "values": [
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 2
+                  },
+                  "conditions": [
+                    {
+                      "id": "7c52240a-4074-4ae3-90b9-f1000c18948a",
+                      "leftValue": "={{ $('Webhook').item.json.event }}",
+                      "rightValue": "payment.completed",
+                      "operator": {
+                        "type": "string",
+                        "operation": "equals",
+                        "name": "filter.operator.equals"
+                      }
+                    }
+                  ],
+                  "combinator": "and"
+                }
+              },
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 2
+                  },
+                  "conditions": [
+                    {
+                      "id": "63f5e80f-6abd-4a67-a209-e4937248f293",
+                      "leftValue": "={{ $('Webhook').item.json.event }}",
+                      "rightValue": "order.payment_failed",
+                      "operator": {
+                        "type": "string",
+                        "operation": "equals"
+                      }
+                    }
+                  ],
+                  "combinator": "and"
+                }
+              },
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 2
+                  },
+                  "conditions": [
+                    {
+                      "id": "85f56d92-7df5-411e-908f-14eb3b65b684",
+                      "leftValue": "={{ $json.event }}",
+                      "rightValue": "order.canceled",
+                      "operator": {
+                        "type": "string",
+                        "operation": "equals"
+                      }
+                    }
+                  ],
+                  "combinator": "and"
+                }
+              },
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 2
+                  },
+                  "conditions": [
+                    {
+                      "id": "ee526af0-f3ef-45c7-b837-ddc94fcab86a",
+                      "leftValue": "={{ $('Webhook').item.json.event }}",
+                      "rightValue": "checkout.abandoned",
+                      "operator": {
+                        "type": "string",
+                        "operation": "equals"
+                      }
+                    }
+                  ],
+                  "combinator": "and"
+                }
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.switch",
+        "typeVersion": 3.2,
+        "position": [
+          432,
+          -16
+        ],
+        "id": "089f1855-57ed-4c16-a2c2-023e7d3ba520",
+        "name": "Evento Checkout"
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "=https://api.flodesk.com/v1/subscribers",
+          "authentication": "genericCredentialType",
+          "genericAuthType": "httpBasicAuth",
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "={\n  \"email\": \"{{ $('Webhook').item.json.payload.customer.email }}\",\n  \"segment_ids\": [\"6a919d82cdd2b5430c442d7e\"]\n}",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          768,
+          -320
+        ],
+        "id": "95852976-ef30-4f35-8982-17f2040b5226",
+        "name": "Flodesk -  [LAN 09/2026] - Compras UdeA",
+        "retryOnFail": false,
+        "maxTries": 5,
+        "waitBetweenTries": 5000,
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "hSaP4d59L4OoJOce",
+            "name": "Flodesk Alex"
+          },
+          "httpBasicAuth": {
+            "id": "gRxGvIuBu6QU8sll",
+            "name": "FLODESK FUTUROS"
+          }
+        },
+        "onError": "continueRegularOutput"
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "=https://api.flodesk.com/v1/subscribers",
+          "authentication": "genericCredentialType",
+          "genericAuthType": "httpBasicAuth",
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "={\n  \"email\": \"{{ $('Webhook').item.json.payload.customer.email }}\",\n  \"segment_ids\": [\"6a919dec62b239d132389651\"]\n}",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          768,
+          -96
+        ],
+        "id": "f9b845c9-9b97-4500-8fa9-c876f43b0808",
+        "name": "Flodesk -  [LAN 09/2026] - Pago Rechazado/Cancelado UdeA",
+        "retryOnFail": false,
+        "maxTries": 5,
+        "waitBetweenTries": 5000,
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "hSaP4d59L4OoJOce",
+            "name": "Flodesk Alex"
+          },
+          "httpBasicAuth": {
+            "id": "gRxGvIuBu6QU8sll",
+            "name": "FLODESK FUTUROS"
+          }
+        },
+        "onError": "continueRegularOutput"
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "=https://api.flodesk.com/v1/subscribers",
+          "authentication": "genericCredentialType",
+          "genericAuthType": "httpBasicAuth",
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "={\n  \"email\": \"{{ $('Webhook').item.json.payload.customer.email }}\",\n  \"segment_ids\": [\"6a919dd21aa84da40097ef8f\"]\n}",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          768,
+          96
+        ],
+        "id": "7f1eda39-e480-4a21-924d-c540a44c27b6",
+        "name": "Flodesk -  [LAN 09/2026] - Carrito Abandonado UdeA",
+        "retryOnFail": false,
+        "maxTries": 5,
+        "waitBetweenTries": 5000,
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "hSaP4d59L4OoJOce",
+            "name": "Flodesk Alex"
+          },
+          "httpBasicAuth": {
+            "id": "gRxGvIuBu6QU8sll",
+            "name": "FLODESK FUTUROS"
+          }
+        },
+        "onError": "continueRegularOutput"
+      },
+      {
+        "parameters": {
+          "operation": "append",
+          "documentId": {
+            "__rl": true,
+            "value": "https://docs.google.com/spreadsheets/d/1cW41lYngD88hvFxZAE5mhwRym1AU5eeUK07QnqNRt1U/edit?gid=0#gid=0",
+            "mode": "url"
+          },
+          "sheetName": {
+            "__rl": true,
+            "value": "gid=0",
+            "mode": "list",
+            "cachedResultName": "Hoja 1",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1cW41lYngD88hvFxZAE5mhwRym1AU5eeUK07QnqNRt1U/edit#gid=0"
+          },
+          "columns": {
+            "mappingMode": "defineBelow",
+            "value": {
+              "FECHA": "={{ $('Webhook').item.json.timestamp }}",
+              "NUMERO DE ORDEN": "={{ $('Webhook').item.json.payload.orderNumber }}",
+              "PASARELA": "={{ $('Webhook').item.json.payload.gateway }}",
+              "ID PRODUCTO": "={{ $('Webhook').item.json.payload.products[0].productId }}",
+              "PRODUCTO": "={{ $('Webhook').item.json.payload.products[0].productName }}",
+              "PRECIO TOTAL": "={{ $('Webhook').item.json.payload.products[0].totalPrice }}",
+              "MONEDA": "={{ $('Webhook').item.json.payload.currency }}",
+              "CORREO": "={{ $('Webhook').item.json.payload.customer.email }}",
+              "TELEFONO": "={{ $('Webhook').item.json.payload.customer.phone }}"
+            },
+            "matchingColumns": [],
+            "schema": [
+              {
+                "id": "FECHA",
+                "displayName": "FECHA",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "NUMERO DE ORDEN",
+                "displayName": "NUMERO DE ORDEN",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "PASARELA",
+                "displayName": "PASARELA",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "ID PRODUCTO",
+                "displayName": "ID PRODUCTO",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "PRODUCTO",
+                "displayName": "PRODUCTO",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "PRECIO TOTAL",
+                "displayName": "PRECIO TOTAL",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "MONEDA",
+                "displayName": "MONEDA",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "CORREO",
+                "displayName": "CORREO",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "TELEFONO",
+                "displayName": "TELEFONO",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              }
+            ],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": false
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.googleSheets",
+        "typeVersion": 4.7,
+        "position": [
+          992,
+          -336
+        ],
+        "id": "3dbd22b9-c9cb-4d90-856b-bf2a9f19db6d",
+        "name": "Append row in sheet",
+        "credentials": {
+          "googleSheetsOAuth2Api": {
+            "id": "uniCNvqoYoprQPic",
+            "name": "SHEET INFO.HOLDINGS"
+          }
+        }
+      }
+    ],
+    "connections": {
+      "Webhook": {
+        "main": [
+          [
+            {
+              "node": "¿Es UdeA?",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "¿Es UdeA?": {
+        "main": [
+          [
+            {
+              "node": "Evento Checkout",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Evento Checkout": {
+        "main": [
+          [
+            {
+              "node": "Flodesk -  [LAN 09/2026] - Compras UdeA",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Flodesk -  [LAN 09/2026] - Pago Rechazado/Cancelado UdeA",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Flodesk -  [LAN 09/2026] - Pago Rechazado/Cancelado UdeA",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Flodesk -  [LAN 09/2026] - Carrito Abandonado UdeA",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Flodesk -  [LAN 09/2026] - Compras UdeA": {
+        "main": [
+          [
+            {
+              "node": "Append row in sheet",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "nodeGroups": [],
+    "authors": "BE Online",
+    "name": "Version d3488579",
+    "description": "",
+    "autosaved": true
+  },
+  "activeVersionId": "d3488579-d9ad-440e-b33b-eb5e8fddbe85",
   "connections": {
     "Webhook": {
       "main": [
@@ -54,13 +528,6 @@
             "type": "main",
             "index": 0
           }
-        ],
-        [
-          {
-            "node": "Flodesk -  [LAN 09/2026] - Espera/Atraso de pago UdeA",
-            "type": "main",
-            "index": 0
-          }
         ]
       ]
     },
@@ -68,7 +535,7 @@
       "main": [
         [
           {
-            "node": "Unnichat - Espera de pago",
+            "node": "Append row in sheet",
             "type": "main",
             "index": 0
           }
@@ -99,24 +566,6 @@
       "id": "821b4b9d-fc74-433d-a393-69d55d4f9ee5",
       "name": "Webhook",
       "webhookId": "eca3773d-9297-4c6d-8030-9170220a46d7"
-    },
-    {
-      "parameters": {
-        "method": "POST",
-        "url": "https://unnichat.com.br/a/start/6JWI7w6ly2ApXe2c37V1",
-        "sendBody": true,
-        "specifyBody": "json",
-        "jsonBody": "={\n  \"id\": \"{{ $('Webhook').item.json.data.buyer.document }}\",\n  \"data\": {\n    \"number\": \"{{ $('Webhook').item.json.data.buyer.checkout_phone }}\",\n    \"tag\": \"global\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.2,
-      "position": [
-        1072,
-        -320
-      ],
-      "id": "898667d5-9306-43f1-8185-6b8dce966b16",
-      "name": "Unnichat - Espera de pago"
     },
     {
       "parameters": {
@@ -173,7 +622,7 @@
                   {
                     "id": "7c52240a-4074-4ae3-90b9-f1000c18948a",
                     "leftValue": "={{ $('Webhook').item.json.event }}",
-                    "rightValue": "payment.completed ",
+                    "rightValue": "payment.completed",
                     "operator": {
                       "type": "string",
                       "operation": "equals",
@@ -241,28 +690,6 @@
                     "id": "ee526af0-f3ef-45c7-b837-ddc94fcab86a",
                     "leftValue": "={{ $('Webhook').item.json.event }}",
                     "rightValue": "checkout.abandoned",
-                    "operator": {
-                      "type": "string",
-                      "operation": "equals"
-                    }
-                  }
-                ],
-                "combinator": "and"
-              }
-            },
-            {
-              "conditions": {
-                "options": {
-                  "caseSensitive": true,
-                  "leftValue": "",
-                  "typeValidation": "strict",
-                  "version": 2
-                },
-                "conditions": [
-                  {
-                    "id": "c8f2bd6c-9fb5-428b-b274-69fbd6fb09dd",
-                    "leftValue": "={{ $('Webhook').item.json.event }}",
-                    "rightValue": "order.pending",
                     "operator": {
                       "type": "string",
                       "operation": "equals"
@@ -389,37 +816,135 @@
     },
     {
       "parameters": {
-        "method": "POST",
-        "url": "=https://api.flodesk.com/v1/subscribers",
-        "authentication": "genericCredentialType",
-        "genericAuthType": "httpBasicAuth",
-        "sendBody": true,
-        "specifyBody": "json",
-        "jsonBody": "={\n  \"email\": \"{{ $('Webhook').item.json.payload.customer.email }}\",\n  \"segment_ids\": [\"6a919eba409f4d20ee86d084\"]\n}",
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "https://docs.google.com/spreadsheets/d/1cW41lYngD88hvFxZAE5mhwRym1AU5eeUK07QnqNRt1U/edit?gid=0#gid=0",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Hoja 1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1cW41lYngD88hvFxZAE5mhwRym1AU5eeUK07QnqNRt1U/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "FECHA": "={{ $('Webhook').item.json.timestamp }}",
+            "NUMERO DE ORDEN": "={{ $('Webhook').item.json.payload.orderNumber }}",
+            "PASARELA": "={{ $('Webhook').item.json.payload.gateway }}",
+            "ID PRODUCTO": "={{ $('Webhook').item.json.payload.products[0].productId }}",
+            "PRODUCTO": "={{ $('Webhook').item.json.payload.products[0].productName }}",
+            "PRECIO TOTAL": "={{ $('Webhook').item.json.payload.products[0].totalPrice }}",
+            "MONEDA": "={{ $('Webhook').item.json.payload.currency }}",
+            "CORREO": "={{ $('Webhook').item.json.payload.customer.email }}",
+            "TELEFONO": "={{ $('Webhook').item.json.payload.customer.phone }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "FECHA",
+              "displayName": "FECHA",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "NUMERO DE ORDEN",
+              "displayName": "NUMERO DE ORDEN",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "PASARELA",
+              "displayName": "PASARELA",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "ID PRODUCTO",
+              "displayName": "ID PRODUCTO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "PRODUCTO",
+              "displayName": "PRODUCTO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "PRECIO TOTAL",
+              "displayName": "PRECIO TOTAL",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "MONEDA",
+              "displayName": "MONEDA",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "CORREO",
+              "displayName": "CORREO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "TELEFONO",
+              "displayName": "TELEFONO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
         "options": {}
       },
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.2,
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
       "position": [
-        784,
-        304
+        992,
+        -336
       ],
-      "id": "421f0bcc-7867-488c-921e-ceb0a1405f6b",
-      "name": "Flodesk -  [LAN 09/2026] - Espera/Atraso de pago UdeA",
-      "retryOnFail": false,
-      "maxTries": 5,
-      "waitBetweenTries": 5000,
+      "id": "3dbd22b9-c9cb-4d90-856b-bf2a9f19db6d",
+      "name": "Append row in sheet",
       "credentials": {
-        "httpHeaderAuth": {
-          "id": "hSaP4d59L4OoJOce",
-          "name": "Flodesk Alex"
-        },
-        "httpBasicAuth": {
-          "id": "gRxGvIuBu6QU8sll",
-          "name": "FLODESK FUTUROS"
+        "googleSheetsOAuth2Api": {
+          "id": "uniCNvqoYoprQPic",
+          "name": "SHEET INFO.HOLDINGS"
         }
-      },
-      "onError": "continueRegularOutput"
+      }
     }
   ],
   "pinData": {
@@ -437,7 +962,7 @@
             "amount": 179000,
             "currency": "COP",
             "customer": {
-              "email": "...",
+              "email": "wilders2013@gmail.com",
               "givenName": "...",
               "familyName": "...",
               "identityDocument": "...",
@@ -445,7 +970,7 @@
             },
             "products": [
               {
-                "productId": 29,
+                "productId": 10,
                 "variantId": 36,
                 "productName": "Intensivo UdeA 2027",
                 "quantity": 1,
@@ -479,7 +1004,7 @@
   ],
   "staticData": null,
   "tags": [],
-  "triggerCount": 0,
-  "updatedAt": "2026-08-28T14:50:25.367Z",
-  "versionId": "5272fd19-654c-4e8d-ad97-6f40131e1d51"
+  "triggerCount": 1,
+  "updatedAt": "2026-09-01T22:04:28.008Z",
+  "versionId": "d3488579-d9ad-440e-b33b-eb5e8fddbe85"
 }
