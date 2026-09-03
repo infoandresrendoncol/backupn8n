@@ -1,9 +1,9 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2026-09-01T22:04:39.000Z",
-    "createdAt": "2026-09-01T22:04:28.010Z",
-    "versionId": "d3488579-d9ad-440e-b33b-eb5e8fddbe85",
+    "updatedAt": "2026-09-02T23:22:41.000Z",
+    "createdAt": "2026-09-02T23:22:32.254Z",
+    "versionId": "45e60030-883a-4d8d-882f-8b968337a7a5",
     "workflowId": "9WNaQmMiCEmzpHMp",
     "nodes": [
       {
@@ -295,7 +295,8 @@
               "PRECIO TOTAL": "={{ $('Webhook').item.json.payload.products[0].totalPrice }}",
               "MONEDA": "={{ $('Webhook').item.json.payload.currency }}",
               "CORREO": "={{ $('Webhook').item.json.payload.customer.email }}",
-              "TELEFONO": "={{ $('Webhook').item.json.payload.customer.phone }}"
+              "TELEFONO": "={{ $('Webhook').item.json.payload.customer.phone }}",
+              "CUOTAS": "={{ $('Webhook').item.json.payload.products[0].quantity }}"
             },
             "matchingColumns": [],
             "schema": [
@@ -343,6 +344,16 @@
                 "display": true,
                 "type": "string",
                 "canBeUsedToMatch": true
+              },
+              {
+                "id": "CUOTAS",
+                "displayName": "CUOTAS",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
               },
               {
                 "id": "PRECIO TOTAL",
@@ -471,11 +482,11 @@
     },
     "nodeGroups": [],
     "authors": "BE Online",
-    "name": "Version d3488579",
+    "name": "Version 45e60030",
     "description": "",
     "autosaved": true
   },
-  "activeVersionId": "d3488579-d9ad-440e-b33b-eb5e8fddbe85",
+  "activeVersionId": "45e60030-883a-4d8d-882f-8b968337a7a5",
   "connections": {
     "Webhook": {
       "main": [
@@ -840,7 +851,8 @@
             "PRECIO TOTAL": "={{ $('Webhook').item.json.payload.products[0].totalPrice }}",
             "MONEDA": "={{ $('Webhook').item.json.payload.currency }}",
             "CORREO": "={{ $('Webhook').item.json.payload.customer.email }}",
-            "TELEFONO": "={{ $('Webhook').item.json.payload.customer.phone }}"
+            "TELEFONO": "={{ $('Webhook').item.json.payload.customer.phone }}",
+            "CUOTAS": "={{ $('Webhook').item.json.payload.products[0].quantity }}"
           },
           "matchingColumns": [],
           "schema": [
@@ -888,6 +900,16 @@
               "display": true,
               "type": "string",
               "canBeUsedToMatch": true
+            },
+            {
+              "id": "CUOTAS",
+              "displayName": "CUOTAS",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
             },
             {
               "id": "PRECIO TOTAL",
@@ -1005,6 +1027,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2026-09-01T22:04:28.008Z",
-  "versionId": "d3488579-d9ad-440e-b33b-eb5e8fddbe85"
+  "updatedAt": "2026-09-02T23:22:32.249Z",
+  "versionId": "45e60030-883a-4d8d-882f-8b968337a7a5"
 }
