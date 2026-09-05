@@ -1,9 +1,9 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2026-09-02T23:22:41.000Z",
-    "createdAt": "2026-09-02T23:22:32.254Z",
-    "versionId": "45e60030-883a-4d8d-882f-8b968337a7a5",
+    "updatedAt": "2026-09-04T16:26:24.000Z",
+    "createdAt": "2026-09-04T16:26:21.169Z",
+    "versionId": "50a39064-fb75-4760-80db-181ac4c4f3b3",
     "workflowId": "9WNaQmMiCEmzpHMp",
     "nodes": [
       {
@@ -37,7 +37,7 @@
                   "conditions": [
                     {
                       "leftValue": "Intensivo UdeA 2027",
-                      "rightValue": "={{ $json.payload.products[0].productName }}",
+                      "rightValue": "={{ $json.body.payload.product.productName }}",
                       "operator": {
                         "type": "string",
                         "operation": "equals"
@@ -76,7 +76,7 @@
                   "conditions": [
                     {
                       "id": "7c52240a-4074-4ae3-90b9-f1000c18948a",
-                      "leftValue": "={{ $('Webhook').item.json.event }}",
+                      "leftValue": "={{ $('Webhook').item.json.body.event }}",
                       "rightValue": "payment.completed",
                       "operator": {
                         "type": "string",
@@ -99,7 +99,7 @@
                   "conditions": [
                     {
                       "id": "63f5e80f-6abd-4a67-a209-e4937248f293",
-                      "leftValue": "={{ $('Webhook').item.json.event }}",
+                      "leftValue": "={{ $('Webhook').item.json.body.event }}",
                       "rightValue": "order.payment_failed",
                       "operator": {
                         "type": "string",
@@ -121,7 +121,7 @@
                   "conditions": [
                     {
                       "id": "85f56d92-7df5-411e-908f-14eb3b65b684",
-                      "leftValue": "={{ $json.event }}",
+                      "leftValue": "={{ $('Webhook').item.json.body.event }}",
                       "rightValue": "order.canceled",
                       "operator": {
                         "type": "string",
@@ -143,7 +143,7 @@
                   "conditions": [
                     {
                       "id": "ee526af0-f3ef-45c7-b837-ddc94fcab86a",
-                      "leftValue": "={{ $('Webhook').item.json.event }}",
+                      "leftValue": "={{ $('Webhook').item.json.body.event }}",
                       "rightValue": "checkout.abandoned",
                       "operator": {
                         "type": "string",
@@ -175,7 +175,7 @@
           "genericAuthType": "httpBasicAuth",
           "sendBody": true,
           "specifyBody": "json",
-          "jsonBody": "={\n  \"email\": \"{{ $('Webhook').item.json.payload.customer.email }}\",\n  \"segment_ids\": [\"6a919d82cdd2b5430c442d7e\"]\n}",
+          "jsonBody": "={\n  \"email\": \"{{ $('Webhook').item.json.body.payload.customer.email }}\",\n  \"segment_ids\": [\"6a919d82cdd2b5430c442d7e\"]\n}",
           "options": {}
         },
         "type": "n8n-nodes-base.httpRequest",
@@ -209,7 +209,7 @@
           "genericAuthType": "httpBasicAuth",
           "sendBody": true,
           "specifyBody": "json",
-          "jsonBody": "={\n  \"email\": \"{{ $('Webhook').item.json.payload.customer.email }}\",\n  \"segment_ids\": [\"6a919dec62b239d132389651\"]\n}",
+          "jsonBody": "={\n  \"email\": \"{{ $('Webhook').item.json.body.payload.customer.email }}\",\n  \"segment_ids\": [\"6a919dec62b239d132389651\"]\n}",
           "options": {}
         },
         "type": "n8n-nodes-base.httpRequest",
@@ -243,7 +243,7 @@
           "genericAuthType": "httpBasicAuth",
           "sendBody": true,
           "specifyBody": "json",
-          "jsonBody": "={\n  \"email\": \"{{ $('Webhook').item.json.payload.customer.email }}\",\n  \"segment_ids\": [\"6a919dd21aa84da40097ef8f\"]\n}",
+          "jsonBody": "={\n  \"email\": \"{{ $('Webhook').item.json.body.payload.customer.email }}\",\n  \"segment_ids\": [\"6a919dd21aa84da40097ef8f\"]\n}",
           "options": {}
         },
         "type": "n8n-nodes-base.httpRequest",
@@ -287,16 +287,16 @@
           "columns": {
             "mappingMode": "defineBelow",
             "value": {
-              "FECHA": "={{ $('Webhook').item.json.timestamp }}",
-              "NUMERO DE ORDEN": "={{ $('Webhook').item.json.payload.orderNumber }}",
-              "PASARELA": "={{ $('Webhook').item.json.payload.gateway }}",
-              "ID PRODUCTO": "={{ $('Webhook').item.json.payload.products[0].productId }}",
-              "PRODUCTO": "={{ $('Webhook').item.json.payload.products[0].productName }}",
-              "PRECIO TOTAL": "={{ $('Webhook').item.json.payload.products[0].totalPrice }}",
-              "MONEDA": "={{ $('Webhook').item.json.payload.currency }}",
-              "CORREO": "={{ $('Webhook').item.json.payload.customer.email }}",
-              "TELEFONO": "={{ $('Webhook').item.json.payload.customer.phone }}",
-              "CUOTAS": "={{ $('Webhook').item.json.payload.products[0].quantity }}"
+              "FECHA": "={{ $('Webhook').item.json.body.timestamp }}",
+              "NUMERO DE ORDEN": "={{ $('Webhook').item.json.body.timestamp }}",
+              "PASARELA": "={{ $('Webhook').item.json.body.payload.gateway }}",
+              "ID PRODUCTO": "={{ $('Webhook').item.json.body.payload.products[0].productId }}",
+              "PRODUCTO": "={{ $('Webhook').item.json.body.payload.products[0].productName }}",
+              "PRECIO TOTAL": "={{ $('Webhook').item.json.body.payload.products[0].unitPrice }}",
+              "MONEDA": "=",
+              "CORREO": "={{ $('Webhook').item.json.body.payload.customer.email }}",
+              "TELEFONO": "={{ $('Webhook').item.json.body.payload.customer.phone }}",
+              "CUOTAS": "={{ $('Webhook').item.json.body.payload.products[0].quantity }}"
             },
             "matchingColumns": [],
             "schema": [
@@ -482,11 +482,11 @@
     },
     "nodeGroups": [],
     "authors": "BE Online",
-    "name": "Version 45e60030",
+    "name": "Version 50a39064",
     "description": "",
-    "autosaved": true
+    "autosaved": false
   },
-  "activeVersionId": "45e60030-883a-4d8d-882f-8b968337a7a5",
+  "activeVersionId": "50a39064-fb75-4760-80db-181ac4c4f3b3",
   "connections": {
     "Webhook": {
       "main": [
@@ -593,7 +593,7 @@
                 "conditions": [
                   {
                     "leftValue": "Intensivo UdeA 2027",
-                    "rightValue": "={{ $json.payload.products[0].productName }}",
+                    "rightValue": "={{ $json.body.payload.product.productName }}",
                     "operator": {
                       "type": "string",
                       "operation": "equals"
@@ -632,7 +632,7 @@
                 "conditions": [
                   {
                     "id": "7c52240a-4074-4ae3-90b9-f1000c18948a",
-                    "leftValue": "={{ $('Webhook').item.json.event }}",
+                    "leftValue": "={{ $('Webhook').item.json.body.event }}",
                     "rightValue": "payment.completed",
                     "operator": {
                       "type": "string",
@@ -655,7 +655,7 @@
                 "conditions": [
                   {
                     "id": "63f5e80f-6abd-4a67-a209-e4937248f293",
-                    "leftValue": "={{ $('Webhook').item.json.event }}",
+                    "leftValue": "={{ $('Webhook').item.json.body.event }}",
                     "rightValue": "order.payment_failed",
                     "operator": {
                       "type": "string",
@@ -677,7 +677,7 @@
                 "conditions": [
                   {
                     "id": "85f56d92-7df5-411e-908f-14eb3b65b684",
-                    "leftValue": "={{ $json.event }}",
+                    "leftValue": "={{ $('Webhook').item.json.body.event }}",
                     "rightValue": "order.canceled",
                     "operator": {
                       "type": "string",
@@ -699,7 +699,7 @@
                 "conditions": [
                   {
                     "id": "ee526af0-f3ef-45c7-b837-ddc94fcab86a",
-                    "leftValue": "={{ $('Webhook').item.json.event }}",
+                    "leftValue": "={{ $('Webhook').item.json.body.event }}",
                     "rightValue": "checkout.abandoned",
                     "operator": {
                       "type": "string",
@@ -731,7 +731,7 @@
         "genericAuthType": "httpBasicAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"email\": \"{{ $('Webhook').item.json.payload.customer.email }}\",\n  \"segment_ids\": [\"6a919d82cdd2b5430c442d7e\"]\n}",
+        "jsonBody": "={\n  \"email\": \"{{ $('Webhook').item.json.body.payload.customer.email }}\",\n  \"segment_ids\": [\"6a919d82cdd2b5430c442d7e\"]\n}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
@@ -765,7 +765,7 @@
         "genericAuthType": "httpBasicAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"email\": \"{{ $('Webhook').item.json.payload.customer.email }}\",\n  \"segment_ids\": [\"6a919dec62b239d132389651\"]\n}",
+        "jsonBody": "={\n  \"email\": \"{{ $('Webhook').item.json.body.payload.customer.email }}\",\n  \"segment_ids\": [\"6a919dec62b239d132389651\"]\n}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
@@ -799,7 +799,7 @@
         "genericAuthType": "httpBasicAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"email\": \"{{ $('Webhook').item.json.payload.customer.email }}\",\n  \"segment_ids\": [\"6a919dd21aa84da40097ef8f\"]\n}",
+        "jsonBody": "={\n  \"email\": \"{{ $('Webhook').item.json.body.payload.customer.email }}\",\n  \"segment_ids\": [\"6a919dd21aa84da40097ef8f\"]\n}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
@@ -843,16 +843,16 @@
         "columns": {
           "mappingMode": "defineBelow",
           "value": {
-            "FECHA": "={{ $('Webhook').item.json.timestamp }}",
-            "NUMERO DE ORDEN": "={{ $('Webhook').item.json.payload.orderNumber }}",
-            "PASARELA": "={{ $('Webhook').item.json.payload.gateway }}",
-            "ID PRODUCTO": "={{ $('Webhook').item.json.payload.products[0].productId }}",
-            "PRODUCTO": "={{ $('Webhook').item.json.payload.products[0].productName }}",
-            "PRECIO TOTAL": "={{ $('Webhook').item.json.payload.products[0].totalPrice }}",
-            "MONEDA": "={{ $('Webhook').item.json.payload.currency }}",
-            "CORREO": "={{ $('Webhook').item.json.payload.customer.email }}",
-            "TELEFONO": "={{ $('Webhook').item.json.payload.customer.phone }}",
-            "CUOTAS": "={{ $('Webhook').item.json.payload.products[0].quantity }}"
+            "FECHA": "={{ $('Webhook').item.json.body.timestamp }}",
+            "NUMERO DE ORDEN": "={{ $('Webhook').item.json.body.timestamp }}",
+            "PASARELA": "={{ $('Webhook').item.json.body.payload.gateway }}",
+            "ID PRODUCTO": "={{ $('Webhook').item.json.body.payload.products[0].productId }}",
+            "PRODUCTO": "={{ $('Webhook').item.json.body.payload.products[0].productName }}",
+            "PRECIO TOTAL": "={{ $('Webhook').item.json.body.payload.products[0].unitPrice }}",
+            "MONEDA": "=",
+            "CORREO": "={{ $('Webhook').item.json.body.payload.customer.email }}",
+            "TELEFONO": "={{ $('Webhook').item.json.body.payload.customer.phone }}",
+            "CUOTAS": "={{ $('Webhook').item.json.body.payload.products[0].quantity }}"
           },
           "matchingColumns": [],
           "schema": [
@@ -973,35 +973,70 @@
     "Webhook": [
       {
         "json": {
-          "event": "payment.completed",
-          "timestamp": "2026-08-27T15:00:00.000Z",
-          "environment": "production",
-          "payload": {
-            "orderId": 308,
-            "orderNumber": "ORD-000308",
-            "transactionId": "383356450",
-            "gateway": "epayco",
-            "amount": 179000,
-            "currency": "COP",
-            "customer": {
-              "email": "wilders2013@gmail.com",
-              "givenName": "...",
-              "familyName": "...",
-              "identityDocument": "...",
-              "phone": "..."
-            },
-            "products": [
-              {
-                "productId": 10,
-                "variantId": 36,
-                "productName": "Intensivo UdeA 2027",
+          "headers": {
+            "host": "contenedor1-n8n.vqn37t.easypanel.host",
+            "user-agent": "axios/1.15.0",
+            "content-length": "888",
+            "accept": "application/json, text/plain, */*",
+            "accept-encoding": "gzip, compress, deflate, br",
+            "content-type": "application/json",
+            "x-forwarded-for": "190.158.28.65",
+            "x-forwarded-host": "contenedor1-n8n.vqn37t.easypanel.host",
+            "x-forwarded-port": "443",
+            "x-forwarded-proto": "https",
+            "x-forwarded-server": "cbddb8c293f4",
+            "x-real-ip": "190.158.28.65"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "event": "payment.completed",
+            "payload": {
+              "amount": 1790000,
+              "gateway": "epayco",
+              "orderId": 2015,
+              "product": {
                 "quantity": 1,
-                "totalPrice": 179000
-              }
-            ],
-            "filtered": true,
-            "orderAmount": 179000
-          }
+                "productId": 10,
+                "unitPrice": 1790000,
+                "variantId": 61,
+                "totalPrice": 1790000,
+                "productName": "Intensivo UdeA 2027",
+                "variantName": "Pago de contado"
+              },
+              "currency": "COP",
+              "customer": {
+                "email": "catalinaestradagomez@gmail.com",
+                "phone": "+573122555029",
+                "userId": null,
+                "givenName": "Diana Catalina",
+                "familyName": "Estrada Gomez",
+                "identityType": "CC",
+                "identityDocument": "1005095434"
+              },
+              "products": [
+                {
+                  "quantity": 1,
+                  "productId": 10,
+                  "unitPrice": 1790000,
+                  "variantId": 61,
+                  "totalPrice": 1790000,
+                  "productName": "Intensivo UdeA 2027",
+                  "variantName": "Pago de contado"
+                }
+              ],
+              "comercial": null,
+              "orderNumber": "ORD-002017",
+              "subscription": null,
+              "customerEmail": "catalinaestradagomez@gmail.com",
+              "transactionId": "384557062178848894",
+              "isSubscriptionRenewal": false
+            },
+            "timestamp": "2026-09-04T02:30:49.624Z",
+            "environment": "production"
+          },
+          "webhookUrl": "https://contenedor1-n8n.vqn37t.easypanel.host/webhook/compras-udea-sep2026",
+          "executionMode": "production"
         }
       }
     ]
@@ -1027,6 +1062,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2026-09-02T23:22:32.249Z",
-  "versionId": "45e60030-883a-4d8d-882f-8b968337a7a5"
+  "updatedAt": "2026-09-04T16:26:21.439Z",
+  "versionId": "50a39064-fb75-4760-80db-181ac4c4f3b3"
 }
