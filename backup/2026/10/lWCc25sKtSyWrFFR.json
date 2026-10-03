@@ -1,0 +1,271 @@
+{
+  "active": true,
+  "activeVersion": {
+    "updatedAt": "2026-10-02T18:35:00.000Z",
+    "createdAt": "2026-10-02T18:34:55.783Z",
+    "versionId": "b1be4704-c445-423e-962b-2d39a46ea73d",
+    "workflowId": "lWCc25sKtSyWrFFR",
+    "nodes": [
+      {
+        "parameters": {
+          "httpMethod": "POST",
+          "path": "tally-lkmi",
+          "options": {}
+        },
+        "id": "ce8d81d1-0379-4385-bb6a-cd9a7453e18c",
+        "name": "Webhook Tally",
+        "type": "n8n-nodes-base.webhook",
+        "typeVersion": 2,
+        "position": [
+          -1296,
+          112
+        ],
+        "webhookId": "a1b2c3d4-0001-4000-8000-0000000000a1"
+      },
+      {
+        "parameters": {
+          "jsCode": "const body = $input.first().json.body || $input.first().json;\nconst fields = (body.data && body.data.fields) || [];\nconst out = { email: '', respuesta: '', respuesta_texto: '', calificado: false, utm_source: '', utm_medium: '', utm_campaign: '', utm_content: '', utm_term: '' };\nfor (const f of fields) {\n  if (f.type === 'INPUT_EMAIL') {\n    out.email = f.value || '';\n  } else if (f.type === 'MULTIPLE_CHOICE') {\n    const id = Array.isArray(f.value) ? f.value[0] : f.value;\n    const opts = f.options || [];\n    const idx = opts.findIndex(o => o.id === id);\n    if (idx >= 0) { out.respuesta = String.fromCharCode(65 + idx); out.respuesta_texto = opts[idx].text; }\n  } else if (typeof f.label === 'string' && f.label.indexOf('utm_') === 0) {\n    out[f.label] = f.value || '';\n  }\n}\nout.calificado = ['A', 'B'].includes(out.respuesta);\nreturn [{ json: out }];"
+        },
+        "id": "32bd5a08-b1d9-4a90-9a6b-6edd552e7c58",
+        "name": "Preparar datos",
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          -1040,
+          112
+        ]
+      },
+      {
+        "parameters": {
+          "email": "={{ $json.email }}",
+          "updateIfExists": true,
+          "additionalFields": {}
+        },
+        "id": "0a601580-d12d-4eae-9634-852995aa5e30",
+        "name": "Crear contacto",
+        "type": "n8n-nodes-base.activeCampaign",
+        "typeVersion": 1,
+        "position": [
+          -784,
+          112
+        ],
+        "credentials": {
+          "activeCampaignApi": {
+            "id": "MvVNTLdt8rrpt0zz",
+            "name": "ActiveCampaign Lea"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "resource": "contactList",
+          "listId": 17,
+          "contactId": "={{ $('Crear contacto').item.json.id }}"
+        },
+        "id": "5f2f8443-89bc-449a-9f6e-afd9d9dcb4ef",
+        "name": "Agregar a lista",
+        "type": "n8n-nodes-base.activeCampaign",
+        "typeVersion": 1,
+        "position": [
+          -528,
+          112
+        ],
+        "credentials": {
+          "activeCampaignApi": {
+            "id": "MvVNTLdt8rrpt0zz",
+            "name": "ActiveCampaign Lea"
+          }
+        }
+      }
+    ],
+    "connections": {
+      "Webhook Tally": {
+        "main": [
+          [
+            {
+              "node": "Preparar datos",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Preparar datos": {
+        "main": [
+          [
+            {
+              "node": "Crear contacto",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Crear contacto": {
+        "main": [
+          [
+            {
+              "node": "Agregar a lista",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Agregar a lista": {
+        "main": [
+          []
+        ]
+      }
+    },
+    "nodeGroups": [],
+    "authors": "BE Online",
+    "name": "Version b1be4704",
+    "description": "",
+    "autosaved": true
+  },
+  "activeVersionId": "b1be4704-c445-423e-962b-2d39a46ea73d",
+  "connections": {
+    "Webhook Tally": {
+      "main": [
+        [
+          {
+            "node": "Preparar datos",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Preparar datos": {
+      "main": [
+        [
+          {
+            "node": "Crear contacto",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Crear contacto": {
+      "main": [
+        [
+          {
+            "node": "Agregar a lista",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Agregar a lista": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "createdAt": "2026-10-02T17:17:50.188Z",
+  "id": "lWCc25sKtSyWrFFR",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "My workflow 8",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "tally-lkmi",
+        "options": {}
+      },
+      "id": "ce8d81d1-0379-4385-bb6a-cd9a7453e18c",
+      "name": "Webhook Tally",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        -1296,
+        112
+      ],
+      "webhookId": "a1b2c3d4-0001-4000-8000-0000000000a1"
+    },
+    {
+      "parameters": {
+        "jsCode": "const body = $input.first().json.body || $input.first().json;\nconst fields = (body.data && body.data.fields) || [];\nconst out = { email: '', respuesta: '', respuesta_texto: '', calificado: false, utm_source: '', utm_medium: '', utm_campaign: '', utm_content: '', utm_term: '' };\nfor (const f of fields) {\n  if (f.type === 'INPUT_EMAIL') {\n    out.email = f.value || '';\n  } else if (f.type === 'MULTIPLE_CHOICE') {\n    const id = Array.isArray(f.value) ? f.value[0] : f.value;\n    const opts = f.options || [];\n    const idx = opts.findIndex(o => o.id === id);\n    if (idx >= 0) { out.respuesta = String.fromCharCode(65 + idx); out.respuesta_texto = opts[idx].text; }\n  } else if (typeof f.label === 'string' && f.label.indexOf('utm_') === 0) {\n    out[f.label] = f.value || '';\n  }\n}\nout.calificado = ['A', 'B'].includes(out.respuesta);\nreturn [{ json: out }];"
+      },
+      "id": "32bd5a08-b1d9-4a90-9a6b-6edd552e7c58",
+      "name": "Preparar datos",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1040,
+        112
+      ]
+    },
+    {
+      "parameters": {
+        "email": "={{ $json.email }}",
+        "updateIfExists": true,
+        "additionalFields": {}
+      },
+      "id": "0a601580-d12d-4eae-9634-852995aa5e30",
+      "name": "Crear contacto",
+      "type": "n8n-nodes-base.activeCampaign",
+      "typeVersion": 1,
+      "position": [
+        -784,
+        112
+      ],
+      "credentials": {
+        "activeCampaignApi": {
+          "id": "MvVNTLdt8rrpt0zz",
+          "name": "ActiveCampaign Lea"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "contactList",
+        "listId": 17,
+        "contactId": "={{ $('Crear contacto').item.json.id }}"
+      },
+      "id": "5f2f8443-89bc-449a-9f6e-afd9d9dcb4ef",
+      "name": "Agregar a lista",
+      "type": "n8n-nodes-base.activeCampaign",
+      "typeVersion": 1,
+      "position": [
+        -528,
+        112
+      ],
+      "credentials": {
+        "activeCampaignApi": {
+          "id": "MvVNTLdt8rrpt0zz",
+          "name": "ActiveCampaign Lea"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "repo_name": "backupn8n",
+  "repo_owner": "infoandresrendoncol",
+  "repo_path": "backup/",
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "shared": [
+    {
+      "updatedAt": "2026-10-02T17:17:50.201Z",
+      "createdAt": "2026-10-02T17:17:50.201Z",
+      "role": "workflow:owner",
+      "workflowId": "lWCc25sKtSyWrFFR",
+      "projectId": "4KmSbENK2cGxsjaf"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2026-10-02T18:34:55.781Z",
+  "versionId": "b1be4704-c445-423e-962b-2d39a46ea73d"
+}
