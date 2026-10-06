@@ -1,9 +1,9 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2026-10-02T18:35:00.000Z",
-    "createdAt": "2026-10-02T18:34:55.783Z",
-    "versionId": "b1be4704-c445-423e-962b-2d39a46ea73d",
+    "updatedAt": "2026-10-05T21:55:35.000Z",
+    "createdAt": "2026-10-05T21:55:25.236Z",
+    "versionId": "645504e3-1678-41c2-a176-a86ad48aa6fc",
     "workflowId": "lWCc25sKtSyWrFFR",
     "nodes": [
       {
@@ -24,7 +24,7 @@
       },
       {
         "parameters": {
-          "jsCode": "const body = $input.first().json.body || $input.first().json;\nconst fields = (body.data && body.data.fields) || [];\nconst out = { email: '', respuesta: '', respuesta_texto: '', calificado: false, utm_source: '', utm_medium: '', utm_campaign: '', utm_content: '', utm_term: '' };\nfor (const f of fields) {\n  if (f.type === 'INPUT_EMAIL') {\n    out.email = f.value || '';\n  } else if (f.type === 'MULTIPLE_CHOICE') {\n    const id = Array.isArray(f.value) ? f.value[0] : f.value;\n    const opts = f.options || [];\n    const idx = opts.findIndex(o => o.id === id);\n    if (idx >= 0) { out.respuesta = String.fromCharCode(65 + idx); out.respuesta_texto = opts[idx].text; }\n  } else if (typeof f.label === 'string' && f.label.indexOf('utm_') === 0) {\n    out[f.label] = f.value || '';\n  }\n}\nout.calificado = ['A', 'B'].includes(out.respuesta);\nreturn [{ json: out }];"
+          "jsCode": "const body = $input.first().json.body || $input.first().json; const fields = (body.data && body.data.fields) || []; const out = { email: '', respuesta: '', respuesta_texto: '', calificado: false, pagina_registro: '', utm_source: '', utm_medium: '', utm_campaign: '', utm_content: '', utm_term: '' }; for (const f of fields) { if (f.type === 'INPUT_EMAIL') { out.email = f.value || ''; } else if (f.type === 'MULTIPLE_CHOICE') { const id = Array.isArray(f.value) ? f.value[0] : f.value; const opts = f.options || []; const idx = opts.findIndex(o => o.id === id); if (idx >= 0) { out.respuesta = String.fromCharCode(65 + idx); out.respuesta_texto = opts[idx].text; } } else if (typeof f.label === 'string' && (f.label.indexOf('utm_') === 0 || f.label === 'pagina_registro')) { out[f.label] = f.value || ''; } } out.calificado = ['A', 'B'].includes(out.respuesta); return [{ json: out }];"
         },
         "id": "32bd5a08-b1d9-4a90-9a6b-6edd552e7c58",
         "name": "Preparar datos",
@@ -76,6 +76,24 @@
             "name": "ActiveCampaign Lea"
           }
         }
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "https://pixel.vkdigital.com.br/lead/webhook?oid=abyGS7sqegPmVN8X8ru5",
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "={{ (() => { const c = ($json.utm_content || '').trim(); let co = c; let url = $json.pagina_registro || ''; if (c.startsWith('{')) { try { const j = JSON.parse(c); co = j.co || ''; if (!url && j.url) { url = 'https://' + j.url; } } catch (e) { co = ''; } } return JSON.stringify({ id_lancamento: 'llzhp2rSIFpM2vqpBBqs', email: $json.email, url: url, utm_campaign: $json.utm_campaign, utm_source: $json.utm_source, utm_term: $json.utm_term, utm_medium: $json.utm_medium, utm_content: co, vk_source: $json.utm_source, vk_ad_id: co }); })() }}",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          -800,
+          352
+        ],
+        "name": "Enviar a VK Metrics",
+        "id": "e85674c5-170a-4728-adef-28adb03f1238"
       }
     ],
     "connections": {
@@ -95,6 +113,11 @@
           [
             {
               "node": "Crear contacto",
+              "type": "main",
+              "index": 0
+            },
+            {
+              "node": "Enviar a VK Metrics",
               "type": "main",
               "index": 0
             }
@@ -120,11 +143,11 @@
     },
     "nodeGroups": [],
     "authors": "BE Online",
-    "name": "Version b1be4704",
+    "name": "Version 645504e3",
     "description": "",
     "autosaved": true
   },
-  "activeVersionId": "b1be4704-c445-423e-962b-2d39a46ea73d",
+  "activeVersionId": "645504e3-1678-41c2-a176-a86ad48aa6fc",
   "connections": {
     "Webhook Tally": {
       "main": [
@@ -142,6 +165,11 @@
         [
           {
             "node": "Crear contacto",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Enviar a VK Metrics",
             "type": "main",
             "index": 0
           }
@@ -191,7 +219,7 @@
     },
     {
       "parameters": {
-        "jsCode": "const body = $input.first().json.body || $input.first().json;\nconst fields = (body.data && body.data.fields) || [];\nconst out = { email: '', respuesta: '', respuesta_texto: '', calificado: false, utm_source: '', utm_medium: '', utm_campaign: '', utm_content: '', utm_term: '' };\nfor (const f of fields) {\n  if (f.type === 'INPUT_EMAIL') {\n    out.email = f.value || '';\n  } else if (f.type === 'MULTIPLE_CHOICE') {\n    const id = Array.isArray(f.value) ? f.value[0] : f.value;\n    const opts = f.options || [];\n    const idx = opts.findIndex(o => o.id === id);\n    if (idx >= 0) { out.respuesta = String.fromCharCode(65 + idx); out.respuesta_texto = opts[idx].text; }\n  } else if (typeof f.label === 'string' && f.label.indexOf('utm_') === 0) {\n    out[f.label] = f.value || '';\n  }\n}\nout.calificado = ['A', 'B'].includes(out.respuesta);\nreturn [{ json: out }];"
+        "jsCode": "const body = $input.first().json.body || $input.first().json; const fields = (body.data && body.data.fields) || []; const out = { email: '', respuesta: '', respuesta_texto: '', calificado: false, pagina_registro: '', utm_source: '', utm_medium: '', utm_campaign: '', utm_content: '', utm_term: '' }; for (const f of fields) { if (f.type === 'INPUT_EMAIL') { out.email = f.value || ''; } else if (f.type === 'MULTIPLE_CHOICE') { const id = Array.isArray(f.value) ? f.value[0] : f.value; const opts = f.options || []; const idx = opts.findIndex(o => o.id === id); if (idx >= 0) { out.respuesta = String.fromCharCode(65 + idx); out.respuesta_texto = opts[idx].text; } } else if (typeof f.label === 'string' && (f.label.indexOf('utm_') === 0 || f.label === 'pagina_registro')) { out[f.label] = f.value || ''; } } out.calificado = ['A', 'B'].includes(out.respuesta); return [{ json: out }];"
       },
       "id": "32bd5a08-b1d9-4a90-9a6b-6edd552e7c58",
       "name": "Preparar datos",
@@ -243,9 +271,147 @@
           "name": "ActiveCampaign Lea"
         }
       }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://pixel.vkdigital.com.br/lead/webhook?oid=abyGS7sqegPmVN8X8ru5",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ (() => { const c = ($json.utm_content || '').trim(); let co = c; let url = $json.pagina_registro || ''; if (c.startsWith('{')) { try { const j = JSON.parse(c); co = j.co || ''; if (!url && j.url) { url = 'https://' + j.url; } } catch (e) { co = ''; } } return JSON.stringify({ id_lancamento: 'llzhp2rSIFpM2vqpBBqs', email: $json.email, url: url, utm_campaign: $json.utm_campaign, utm_source: $json.utm_source, utm_term: $json.utm_term, utm_medium: $json.utm_medium, utm_content: co, vk_source: $json.utm_source, vk_ad_id: co }); })() }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -800,
+        352
+      ],
+      "name": "Enviar a VK Metrics",
+      "id": "e85674c5-170a-4728-adef-28adb03f1238"
     }
   ],
-  "pinData": {},
+  "pinData": {
+    "Webhook Tally": [
+      {
+        "json": {
+          "headers": {
+            "host": "contenedor1-n8n.vqn37t.easypanel.host",
+            "user-agent": "Tally Webhooks",
+            "content-length": "3180",
+            "accept": "application/json, text/plain, */*",
+            "accept-encoding": "gzip, compress, deflate, br",
+            "baggage": "sentry-environment=production,sentry-release=e17a784cca4ee53fc66b5a05323143840513c3ca,sentry-public_key=6af4b6673f1648edaa8fef3f2ca43405,sentry-trace_id=854abe34fe2c4329a4801d20e6d63c13,sentry-org_id=407628,sentry-sampled=false,sentry-sample_rand=0.43042157905797274,sentry-sample_rate=0",
+            "content-type": "application/json",
+            "sentry-trace": "854abe34fe2c4329a4801d20e6d63c13-aec63823e8130ce6-0",
+            "x-forwarded-for": "34.96.62.106",
+            "x-forwarded-host": "contenedor1-n8n.vqn37t.easypanel.host",
+            "x-forwarded-port": "443",
+            "x-forwarded-proto": "https",
+            "x-forwarded-server": "cbddb8c293f4",
+            "x-real-ip": "34.96.62.106"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "eventId": "ba837a4c-4c4f-4881-83fd-ef7aee83d928",
+            "eventType": "FORM_RESPONSE",
+            "createdAt": "2026-10-05T17:35:53.489Z",
+            "data": {
+              "responseId": "db4Q8dd",
+              "submissionId": "db4Q8dd",
+              "respondentId": "RGyB7rv",
+              "formId": "ODONPR",
+              "formName": "[OCT 2026] Formulario de registro [Evento - La Nueva Somática]",
+              "createdAt": "2026-10-05T17:35:53.000Z",
+              "submissionPdfUrl": "https://api.tally.so/forms/ODONPR/submissions/db4Q8dd/pdf?accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJtaXNzaW9uSWQiOiJkYjRROGRkIiwiZm9ybUlkIjoiT0RPTlBSIiwiaWF0IjoxNzkxMjIxNzUzfQ.E6eHJ6yyymT2TNZgoN6RZfMyJDkwUMh8PyPpkh557To&signature=011f57b3eb133f5638479b5400351f6fe6597ed8bc13b0d3e44d50e3f5494e36",
+              "submissionPreviewUrl": "https://tally.so/forms/ODONPR/submissions/db4Q8dd/preview?accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJtaXNzaW9uSWQiOiJkYjRROGRkIiwiZm9ybUlkIjoiT0RPTlBSIiwiaWF0IjoxNzkxMjIxNzUzfQ.E6eHJ6yyymT2TNZgoN6RZfMyJDkwUMh8PyPpkh557To&signature=011f57b3eb133f5638479b5400351f6fe6597ed8bc13b0d3e44d50e3f5494e36",
+              "fields": [
+                {
+                  "key": "question_j94Ad1",
+                  "label": "Escribe tú correo electrónico",
+                  "type": "INPUT_EMAIL",
+                  "value": "testvk@gmail.com"
+                },
+                {
+                  "key": "question_0jqBbZ_52a88cc2-c88d-4635-84c0-3f32d470b657",
+                  "label": "utm_source",
+                  "type": "HIDDEN_FIELDS",
+                  "value": null
+                },
+                {
+                  "key": "question_0jqBbZ_0b905eed-7e70-485d-8a49-f3146b2dade5",
+                  "label": "utm_medium",
+                  "type": "HIDDEN_FIELDS",
+                  "value": null
+                },
+                {
+                  "key": "question_0jqBbZ_23a67012-9e8b-4e90-a147-75fb1c39ab48",
+                  "label": "utm_campaign",
+                  "type": "HIDDEN_FIELDS",
+                  "value": null
+                },
+                {
+                  "key": "question_0jqBbZ_e98d602e-4fb6-481b-a300-5c7e15c9f91e",
+                  "label": "utm_content",
+                  "type": "HIDDEN_FIELDS",
+                  "value": null
+                },
+                {
+                  "key": "question_0jqBbZ_3ca507f3-6df9-403c-8a59-dbd36a2151b7",
+                  "label": "utm_term",
+                  "type": "HIDDEN_FIELDS",
+                  "value": null
+                },
+                {
+                  "key": "question_2xdGqM",
+                  "label": "¿Cuál de estas opciones describe mejor tu situación hoy?",
+                  "type": "MULTIPLE_CHOICE",
+                  "value": [
+                    "e3ed08aa-3dc1-4c31-bee4-229036040184"
+                  ],
+                  "options": [
+                    {
+                      "id": "e3ed08aa-3dc1-4c31-bee4-229036040184",
+                      "text": "Acompaño a otras personas como profesional de la salud o del bienestar (psicóloga, fisioterapeuta, médica, terapeuta, coach, profe de yoga o Pilates) y siento que mis herramientas ya no alcanzan para generar cambios profundos."
+                    },
+                    {
+                      "id": "9a36e6c4-7f47-44f7-96b3-d6ed982a2de5",
+                      "text": "Tengo formación y experiencia en bienestar y quiero sumar una metodología sólida y reconocida que me diferencie en lo que hago."
+                    },
+                    {
+                      "id": "87ace323-2080-4104-991a-b32aa2cf34d3",
+                      "text": "Trabajo en una profesión fuera del bienestar, llevo años en mi propio proceso de transformación y quiero convertir ese recorrido en una nueva profesión con propósito."
+                    },
+                    {
+                      "id": "e490ff96-4ed1-40ab-8321-4ce09e0fe85e",
+                      "text": "Todavía no acompaño a otras personas, pero me interesa la somática y quiero explorar si puede ser mi camino profesional."
+                    },
+                    {
+                      "id": "cfeb6aeb-e178-49fc-b1f9-617e4c549408",
+                      "text": "Busco sobre todo sentirme mejor en mi cuerpo y bienestar para mí, no para trabajar con otras personas."
+                    },
+                    {
+                      "id": "aa84ca45-4230-4bcc-9576-6be25d824c32",
+                      "text": "Por ahora solo estoy mirando, sin un interés concreto."
+                    }
+                  ]
+                },
+                {
+                  "key": "question_xNb5kk_9da6466f-b2d6-4c59-968b-a961fe924766",
+                  "label": "destino",
+                  "type": "CALCULATED_FIELDS",
+                  "value": "gracias"
+                }
+              ]
+            }
+          },
+          "webhookUrl": "https://contenedor1-n8n.vqn37t.easypanel.host/webhook/tally-lkmi",
+          "executionMode": "production"
+        }
+      }
+    ]
+  },
   "repo_name": "backupn8n",
   "repo_owner": "infoandresrendoncol",
   "repo_path": "backup/",
@@ -266,6 +432,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2026-10-02T18:34:55.781Z",
-  "versionId": "b1be4704-c445-423e-962b-2d39a46ea73d"
+  "updatedAt": "2026-10-05T21:55:25.235Z",
+  "versionId": "645504e3-1678-41c2-a176-a86ad48aa6fc"
 }
