@@ -1,9 +1,9 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2026-10-05T21:55:35.000Z",
-    "createdAt": "2026-10-05T21:55:25.236Z",
-    "versionId": "645504e3-1678-41c2-a176-a86ad48aa6fc",
+    "updatedAt": "2026-10-09T16:55:14.000Z",
+    "createdAt": "2026-10-09T16:53:51.923Z",
+    "versionId": "2d8e4da6-00d8-47b2-879d-3616b27563ac",
     "workflowId": "lWCc25sKtSyWrFFR",
     "nodes": [
       {
@@ -83,17 +83,35 @@
           "url": "https://pixel.vkdigital.com.br/lead/webhook?oid=abyGS7sqegPmVN8X8ru5",
           "sendBody": true,
           "specifyBody": "json",
-          "jsonBody": "={{ (() => { const c = ($json.utm_content || '').trim(); let co = c; let url = $json.pagina_registro || ''; if (c.startsWith('{')) { try { const j = JSON.parse(c); co = j.co || ''; if (!url && j.url) { url = 'https://' + j.url; } } catch (e) { co = ''; } } return JSON.stringify({ id_lancamento: 'llzhp2rSIFpM2vqpBBqs', email: $json.email, url: url, utm_campaign: $json.utm_campaign, utm_source: $json.utm_source, utm_term: $json.utm_term, utm_medium: $json.utm_medium, utm_content: co, vk_source: $json.utm_source, vk_ad_id: co }); })() }}",
+          "jsonBody": "={{ (() => { const fields = (($('Webhook Tally').first().json.body || {}).data || {}).fields || []; const g = (l) => { const f = fields.find(x => x.label === l); return (f && f.value) ? String(f.value) : ''; }; const c = ($json.utm_content || '').trim(); let co = c; let vid = ''; let url = $json.pagina_registro || ''; if (c.startsWith('{')) { try { const j = JSON.parse(c); co = j.co || ''; vid = j.vid || ''; if (!url && j.url) { url = 'https://' + j.url; } } catch (e) { co = ''; } } return JSON.stringify({ id_lancamento: 'llzhp2rSIFpM2vqpBBqs', email: $json.email, url: url, utm_campaign: $json.utm_campaign, utm_source: $json.utm_source, utm_term: $json.utm_term, utm_medium: $json.utm_medium, utm_content: co, vk_source: $json.utm_source, vk_ad_id: g('vk_ad_id') || vid }); })() }}",
           "options": {}
         },
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.2,
         "position": [
-          -800,
-          352
+          -880,
+          480
         ],
         "name": "Enviar a VK Metrics",
-        "id": "e85674c5-170a-4728-adef-28adb03f1238"
+        "id": "ada44fe2-e970-4c72-a56b-558a7172daf9"
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "https://metrics.be-online.co/api/public/lead-webhook?oid=0b71f5e278e643f99ef8bfa9a570a677c465a1f5ec6d456f9f898820c109957e&launch=895f7ea6-c944-4530-acd9-fa962f856df2",
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "={{ (() => { const fields = (($('Webhook Tally').first().json.body || {}).data || {}).fields || []; const g = (l) => { const f = fields.find(x => x.label === l); return (f && f.value) ? String(f.value) : ''; }; const c = ($json.utm_content || '').trim(); let co = c; let vid = ''; let url = $json.pagina_registro || ''; if (c.startsWith('{')) { try { const j = JSON.parse(c); co = j.co || ''; vid = j.vid || ''; if (!url && j.url) { url = 'https://' + j.url; } } catch (e) { co = ''; } } return JSON.stringify({ email: $json.email, url: url, utm_source: $json.utm_source, utm_medium: $json.utm_medium, utm_campaign: $json.utm_campaign, utm_content: co, utm_term: $json.utm_term, st_source: $json.utm_source, st_ad_id: g('vk_ad_id') || vid, id_lancamento: '895f7ea6-c944-4530-acd9-fa962f856df2' }); })() }}",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          -560,
+          480
+        ],
+        "id": "73e9ed53-2b96-4929-b4a2-48a93c36c29e",
+        "name": "Enviar a Scale Tracker"
       }
     ],
     "connections": {
@@ -120,6 +138,11 @@
               "node": "Enviar a VK Metrics",
               "type": "main",
               "index": 0
+            },
+            {
+              "node": "Enviar a Scale Tracker",
+              "type": "main",
+              "index": 0
             }
           ]
         ]
@@ -143,11 +166,11 @@
     },
     "nodeGroups": [],
     "authors": "BE Online",
-    "name": "Version 645504e3",
+    "name": "Version 2d8e4da6",
     "description": "",
     "autosaved": true
   },
-  "activeVersionId": "645504e3-1678-41c2-a176-a86ad48aa6fc",
+  "activeVersionId": "2d8e4da6-00d8-47b2-879d-3616b27563ac",
   "connections": {
     "Webhook Tally": {
       "main": [
@@ -170,6 +193,11 @@
           },
           {
             "node": "Enviar a VK Metrics",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Enviar a Scale Tracker",
             "type": "main",
             "index": 0
           }
@@ -278,17 +306,35 @@
         "url": "https://pixel.vkdigital.com.br/lead/webhook?oid=abyGS7sqegPmVN8X8ru5",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{ (() => { const c = ($json.utm_content || '').trim(); let co = c; let url = $json.pagina_registro || ''; if (c.startsWith('{')) { try { const j = JSON.parse(c); co = j.co || ''; if (!url && j.url) { url = 'https://' + j.url; } } catch (e) { co = ''; } } return JSON.stringify({ id_lancamento: 'llzhp2rSIFpM2vqpBBqs', email: $json.email, url: url, utm_campaign: $json.utm_campaign, utm_source: $json.utm_source, utm_term: $json.utm_term, utm_medium: $json.utm_medium, utm_content: co, vk_source: $json.utm_source, vk_ad_id: co }); })() }}",
+        "jsonBody": "={{ (() => { const fields = (($('Webhook Tally').first().json.body || {}).data || {}).fields || []; const g = (l) => { const f = fields.find(x => x.label === l); return (f && f.value) ? String(f.value) : ''; }; const c = ($json.utm_content || '').trim(); let co = c; let vid = ''; let url = $json.pagina_registro || ''; if (c.startsWith('{')) { try { const j = JSON.parse(c); co = j.co || ''; vid = j.vid || ''; if (!url && j.url) { url = 'https://' + j.url; } } catch (e) { co = ''; } } return JSON.stringify({ id_lancamento: 'llzhp2rSIFpM2vqpBBqs', email: $json.email, url: url, utm_campaign: $json.utm_campaign, utm_source: $json.utm_source, utm_term: $json.utm_term, utm_medium: $json.utm_medium, utm_content: co, vk_source: $json.utm_source, vk_ad_id: g('vk_ad_id') || vid }); })() }}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        -800,
-        352
+        -880,
+        480
       ],
       "name": "Enviar a VK Metrics",
-      "id": "e85674c5-170a-4728-adef-28adb03f1238"
+      "id": "ada44fe2-e970-4c72-a56b-558a7172daf9"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://metrics.be-online.co/api/public/lead-webhook?oid=0b71f5e278e643f99ef8bfa9a570a677c465a1f5ec6d456f9f898820c109957e&launch=895f7ea6-c944-4530-acd9-fa962f856df2",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ (() => { const fields = (($('Webhook Tally').first().json.body || {}).data || {}).fields || []; const g = (l) => { const f = fields.find(x => x.label === l); return (f && f.value) ? String(f.value) : ''; }; const c = ($json.utm_content || '').trim(); let co = c; let vid = ''; let url = $json.pagina_registro || ''; if (c.startsWith('{')) { try { const j = JSON.parse(c); co = j.co || ''; vid = j.vid || ''; if (!url && j.url) { url = 'https://' + j.url; } } catch (e) { co = ''; } } return JSON.stringify({ email: $json.email, url: url, utm_source: $json.utm_source, utm_medium: $json.utm_medium, utm_campaign: $json.utm_campaign, utm_content: co, utm_term: $json.utm_term, st_source: $json.utm_source, st_ad_id: g('vk_ad_id') || vid, id_lancamento: '895f7ea6-c944-4530-acd9-fa962f856df2' }); })() }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -560,
+        480
+      ],
+      "id": "73e9ed53-2b96-4929-b4a2-48a93c36c29e",
+      "name": "Enviar a Scale Tracker"
     }
   ],
   "pinData": {
@@ -432,6 +478,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2026-10-05T21:55:25.235Z",
-  "versionId": "645504e3-1678-41c2-a176-a86ad48aa6fc"
+  "updatedAt": "2026-10-09T16:53:51.922Z",
+  "versionId": "2d8e4da6-00d8-47b2-879d-3616b27563ac"
 }
