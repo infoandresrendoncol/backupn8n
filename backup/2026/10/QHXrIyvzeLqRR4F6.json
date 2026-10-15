@@ -1,0 +1,447 @@
+{
+  "active": true,
+  "activeVersion": {
+    "updatedAt": "2026-10-14T17:18:35.000Z",
+    "createdAt": "2026-10-14T17:17:15.681Z",
+    "versionId": "7413e91d-2eb4-42c1-9ba5-85a2013dff39",
+    "workflowId": "QHXrIyvzeLqRR4F6",
+    "nodes": [
+      {
+        "parameters": {
+          "httpMethod": "POST",
+          "path": "registro-bf-superoferta",
+          "options": {}
+        },
+        "name": "Webhook Atomicat",
+        "type": "n8n-nodes-base.webhook",
+        "typeVersion": 2,
+        "position": [
+          -304,
+          112
+        ],
+        "webhookId": "registro-bf-superoferta",
+        "id": "a35ea1d3-9bf8-435e-98ca-ce1de2722519"
+      },
+      {
+        "parameters": {
+          "operation": "append",
+          "documentId": {
+            "__rl": true,
+            "value": "1S4ap7hKlse2dS4iIJ4Fgs3MSLeuNEZhlLczmfDdsOkE",
+            "mode": "id"
+          },
+          "sheetName": {
+            "__rl": true,
+            "value": "gid=0",
+            "mode": "id"
+          },
+          "columns": {
+            "mappingMode": "defineBelow",
+            "value": {
+              "Fecha": "={{ $now.toFormat('yyyy-MM-dd HH:mm:ss') }}",
+              "Email": "={{ $json.body.submission.fields['Escribe tu Email'] }}",
+              "UTM_Campaign": "={{ $json.body.submission.fields['UTM Campaign'] }}",
+              "UTM_Source": "={{ $json.body.submission.fields['UTM Source'] }}",
+              "UTM_Medium": "={{ $json.body.submission.fields['UTM Medium'] }}",
+              "UTM_Content": "={{ $json.body.submission.fields['UTM Content'] }}",
+              "UTM_Term": "={{ $json.body.submission.fields['UTM Term'] }}"
+            },
+            "matchingColumns": [],
+            "schema": [
+              {
+                "id": "Fecha",
+                "displayName": "Fecha",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "Email",
+                "displayName": "Email",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "UTM_Campaign",
+                "displayName": "UTM_Campaign",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "UTM_Source",
+                "displayName": "UTM_Source",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "UTM_Medium",
+                "displayName": "UTM_Medium",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "UTM_Content",
+                "displayName": "UTM_Content",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "UTM_Term",
+                "displayName": "UTM_Term",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              }
+            ],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": false
+          },
+          "options": {}
+        },
+        "name": "Agregar a Google Sheets",
+        "type": "n8n-nodes-base.googleSheets",
+        "typeVersion": 4.5,
+        "position": [
+          48,
+          48
+        ],
+        "id": "d3a50e15-f53e-48a3-a3bf-05e8e9298c91",
+        "credentials": {
+          "googleSheetsOAuth2Api": {
+            "id": "uniCNvqoYoprQPic",
+            "name": "SHEET INFO.HOLDINGS"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "https://api.flodesk.com/v1/subscribers",
+          "authentication": "genericCredentialType",
+          "genericAuthType": "httpBasicAuth",
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "={{ JSON.stringify({ email: $json.body.submission.fields['Escribe tu Email'], segment_ids: ['6acfa112d6341e5cd0e31008'] }) }}",
+          "options": {}
+        },
+        "name": "Agregar a segmento Flodesk",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          48,
+          256
+        ],
+        "id": "d287c75c-1c28-4916-89b1-dae32d34cd1b",
+        "credentials": {
+          "httpBasicAuth": {
+            "id": "QvDqcChg1nnswrDt",
+            "name": "FLODESK ALEX"
+          }
+        }
+      }
+    ],
+    "connections": {
+      "Webhook Atomicat": {
+        "main": [
+          [
+            {
+              "node": "Agregar a Google Sheets",
+              "type": "main",
+              "index": 0
+            },
+            {
+              "node": "Agregar a segmento Flodesk",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "nodeGroups": [],
+    "authors": "BE Online",
+    "name": "Version 7413e91d",
+    "description": "",
+    "autosaved": true
+  },
+  "activeVersionId": "7413e91d-2eb4-42c1-9ba5-85a2013dff39",
+  "connections": {
+    "Webhook Atomicat": {
+      "main": [
+        [
+          {
+            "node": "Agregar a Google Sheets",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Agregar a segmento Flodesk",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2026-10-14T16:46:30.306Z",
+  "id": "QHXrIyvzeLqRR4F6",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Registro BF Superoferta a Sheets y Flodesk",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "registro-bf-superoferta",
+        "options": {}
+      },
+      "name": "Webhook Atomicat",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        -304,
+        112
+      ],
+      "webhookId": "registro-bf-superoferta",
+      "id": "a35ea1d3-9bf8-435e-98ca-ce1de2722519"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1S4ap7hKlse2dS4iIJ4Fgs3MSLeuNEZhlLczmfDdsOkE",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "id"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Fecha": "={{ $now.toFormat('yyyy-MM-dd HH:mm:ss') }}",
+            "Email": "={{ $json.body.submission.fields['Escribe tu Email'] }}",
+            "UTM_Campaign": "={{ $json.body.submission.fields['UTM Campaign'] }}",
+            "UTM_Source": "={{ $json.body.submission.fields['UTM Source'] }}",
+            "UTM_Medium": "={{ $json.body.submission.fields['UTM Medium'] }}",
+            "UTM_Content": "={{ $json.body.submission.fields['UTM Content'] }}",
+            "UTM_Term": "={{ $json.body.submission.fields['UTM Term'] }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Fecha",
+              "displayName": "Fecha",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "UTM_Campaign",
+              "displayName": "UTM_Campaign",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "UTM_Source",
+              "displayName": "UTM_Source",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "UTM_Medium",
+              "displayName": "UTM_Medium",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "UTM_Content",
+              "displayName": "UTM_Content",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "UTM_Term",
+              "displayName": "UTM_Term",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "name": "Agregar a Google Sheets",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        48,
+        48
+      ],
+      "id": "d3a50e15-f53e-48a3-a3bf-05e8e9298c91",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "uniCNvqoYoprQPic",
+          "name": "SHEET INFO.HOLDINGS"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.flodesk.com/v1/subscribers",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ email: $json.body.submission.fields['Escribe tu Email'], segment_ids: ['6acfa112d6341e5cd0e31008'] }) }}",
+        "options": {}
+      },
+      "name": "Agregar a segmento Flodesk",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        48,
+        256
+      ],
+      "id": "d287c75c-1c28-4916-89b1-dae32d34cd1b",
+      "credentials": {
+        "httpBasicAuth": {
+          "id": "QvDqcChg1nnswrDt",
+          "name": "FLODESK ALEX"
+        }
+      }
+    }
+  ],
+  "pinData": {
+    "Webhook Atomicat": [
+      {
+        "json": {
+          "headers": {
+            "host": "contenedor1-n8n.vqn37t.easypanel.host",
+            "user-agent": "AtomiForm/1.0",
+            "content-length": "793",
+            "accept": "application/json, text/plain, */*",
+            "accept-encoding": "gzip, compress, deflate, br",
+            "content-type": "application/json",
+            "x-form-id": "18381314-e4be-4dc2-8c51-d982b9307a80",
+            "x-forwarded-for": "24.199.100.93",
+            "x-forwarded-host": "contenedor1-n8n.vqn37t.easypanel.host",
+            "x-forwarded-port": "443",
+            "x-forwarded-proto": "https",
+            "x-forwarded-server": "cbddb8c293f4",
+            "x-real-ip": "24.199.100.93",
+            "x-webhook-id": "cf17d829-5871-4f90-b3ea-d965612099a5"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "event": "form_submission",
+            "id": "40a0a31e-b811-42ef-b214-5d82f6b5f39a",
+            "form": {
+              "id": "18381314-e4be-4dc2-8c51-d982b9307a80",
+              "name": "Formulario BF Superoferta"
+            },
+            "submission": {
+              "submittedAt": "2026-10-14T17:07:56.462Z",
+              "fields": {
+                "Escribe tu Email": "wildertest@gmail.com",
+                "UTM Campaign": "bf-superoferta-test",
+                "UTM Source": "test",
+                "UTM Medium": "n8n",
+                "UTM Content": "prueba-01",
+                "UTM Term": "prueba-term"
+              },
+              "metadata": {
+                "page": {
+                  "id": "ZYgcIsc3KVXm69NycPsF",
+                  "url": "https://www.autordeexito.com/blackfriday-registro?utm_source=test&utm_medium=n8n&utm_campaign=bf-superoferta-test&utm_content=prueba-01&utm_term=prueba-term",
+                  "name": "blackfriday-registro"
+                },
+                "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
+                "ip": "190.68.203.38"
+              }
+            }
+          },
+          "webhookUrl": "https://contenedor1-n8n.vqn37t.easypanel.host/webhook/registro-bf-superoferta",
+          "executionMode": "production"
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      }
+    ]
+  },
+  "repo_name": "backupn8n",
+  "repo_owner": "infoandresrendoncol",
+  "repo_path": "backup/",
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "shared": [
+    {
+      "updatedAt": "2026-10-14T16:46:30.313Z",
+      "createdAt": "2026-10-14T16:46:30.313Z",
+      "role": "workflow:owner",
+      "workflowId": "QHXrIyvzeLqRR4F6",
+      "projectId": "4KmSbENK2cGxsjaf"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2026-10-14T17:17:15.680Z",
+  "versionId": "7413e91d-2eb4-42c1-9ba5-85a2013dff39"
+}
