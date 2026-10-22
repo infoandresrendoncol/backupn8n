@@ -1,0 +1,1079 @@
+{
+  "active": true,
+  "activeVersion": {
+    "updatedAt": "2026-10-22T02:19:35.000Z",
+    "createdAt": "2026-10-22T02:17:56.459Z",
+    "versionId": "f45ae468-0c7d-4157-92cd-d486910f1f22",
+    "workflowId": "FC2WSM73W2Bfhtmt",
+    "nodes": [
+      {
+        "parameters": {
+          "multipleMethods": false,
+          "httpMethod": "POST",
+          "path": "checkout-lea-kaufman",
+          "authentication": "none",
+          "responseMode": "onReceived",
+          "contentTypeNotice": "",
+          "options": {}
+        },
+        "id": "725a914c-d74e-4193-8097-60c72ac14cf1",
+        "name": "Webhook",
+        "type": "n8n-nodes-base.webhook",
+        "typeVersion": 2.1,
+        "position": [
+          0,
+          300
+        ],
+        "webhookId": "26c5acf9-5504-4d67-b762-b16b28342758"
+      },
+      {
+        "parameters": {
+          "mode": "rules",
+          "rules": {
+            "values": [
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 2
+                  },
+                  "conditions": [
+                    {
+                      "id": "3ae769a8-061e-47d6-8e04-3b8ee54589ea",
+                      "leftValue": "={{ $('Webhook').item.json.body.event }}",
+                      "rightValue": "PURCHASE_BILLET_PRINTED",
+                      "operator": {
+                        "type": "string",
+                        "operation": "equals"
+                      }
+                    }
+                  ],
+                  "combinator": "and"
+                },
+                "renameOutput": false
+              },
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 2
+                  },
+                  "conditions": [
+                    {
+                      "id": "8a16515f-7210-4662-8ce0-79188e8f535e",
+                      "leftValue": "={{ $('Webhook').item.json.body.event }}",
+                      "rightValue": "PURCHASE_COMPLETE",
+                      "operator": {
+                        "type": "string",
+                        "operation": "equals"
+                      }
+                    }
+                  ],
+                  "combinator": "and"
+                },
+                "renameOutput": false
+              },
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 2
+                  },
+                  "conditions": [
+                    {
+                      "id": "c08089e6-8f75-4af7-9fb7-e9f300edcc78",
+                      "leftValue": "={{ $('Webhook').item.json.body.event }}",
+                      "rightValue": "PURCHASE_APPROVED",
+                      "operator": {
+                        "type": "string",
+                        "operation": "equals"
+                      }
+                    }
+                  ],
+                  "combinator": "and"
+                },
+                "renameOutput": false
+              },
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 2
+                  },
+                  "conditions": [
+                    {
+                      "id": "5b7ba2b5-302a-41f1-a18c-f7e22c16d44d",
+                      "leftValue": "={{ $('Webhook').item.json.body.event }}",
+                      "rightValue": "PURCHASE_CANCELED",
+                      "operator": {
+                        "type": "string",
+                        "operation": "equals"
+                      }
+                    }
+                  ],
+                  "combinator": "and"
+                },
+                "renameOutput": false
+              },
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 2
+                  },
+                  "conditions": [
+                    {
+                      "id": "7529bafc-dfe4-4855-b655-0c50cf791e52",
+                      "leftValue": "={{ $('Webhook').item.json.body.event }}",
+                      "rightValue": "PURCHASE_OUT_OF_SHOPPING_CART",
+                      "operator": {
+                        "type": "string",
+                        "operation": "equals"
+                      }
+                    }
+                  ],
+                  "combinator": "and"
+                },
+                "renameOutput": false
+              },
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 2
+                  },
+                  "conditions": [
+                    {
+                      "id": "f9d19736-fdff-49d5-904c-fa9016cd3fb2",
+                      "leftValue": "={{ $('Webhook').item.json.body.event }}",
+                      "rightValue": "PURCHASE_DELAYED",
+                      "operator": {
+                        "type": "string",
+                        "operation": "equals"
+                      }
+                    }
+                  ],
+                  "combinator": "and"
+                },
+                "renameOutput": false
+              },
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 2
+                  },
+                  "conditions": [
+                    {
+                      "id": "3de10d09-78aa-4c2c-b897-04eb20dc2a65",
+                      "leftValue": "={{ $('Webhook').item.json.body.event }}",
+                      "rightValue": "PURCHASE_PROTEST",
+                      "operator": {
+                        "type": "string",
+                        "operation": "equals"
+                      }
+                    }
+                  ],
+                  "combinator": "and"
+                },
+                "renameOutput": false
+              },
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 2
+                  },
+                  "conditions": [
+                    {
+                      "id": "0de7ade4-31f2-417d-9122-87194fdc446c",
+                      "leftValue": "={{ $('Webhook').item.json.body.event }}",
+                      "rightValue": "PURCHASE_REFUNDED",
+                      "operator": {
+                        "type": "string",
+                        "operation": "equals"
+                      }
+                    }
+                  ],
+                  "combinator": "and"
+                },
+                "renameOutput": false
+              }
+            ]
+          },
+          "options": {}
+        },
+        "id": "60eaf5df-73fc-4421-b1a1-85ad50fde6e9",
+        "name": "Evento Checkout - Lea",
+        "type": "n8n-nodes-base.switch",
+        "typeVersion": 3.2,
+        "position": [
+          300,
+          300
+        ]
+      },
+      {
+        "parameters": {
+          "mode": "rules",
+          "rules": {
+            "values": [
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 3
+                  },
+                  "conditions": [
+                    {
+                      "id": "f1cecafa-5fb6-424a-89ca-4fe57420c900",
+                      "leftValue": "={{ $('Webhook').item.json.body.data.purchase.recurrence_number ?? 1 }}",
+                      "rightValue": 1,
+                      "operator": {
+                        "type": "number",
+                        "operation": "equals"
+                      }
+                    }
+                  ],
+                  "combinator": "and"
+                },
+                "renameOutput": false
+              }
+            ]
+          },
+          "looseTypeValidation": false,
+          "options": {}
+        },
+        "id": "9eceda49-6c18-42b6-bae8-9780a67e2b72",
+        "name": "Primera cuota",
+        "type": "n8n-nodes-base.switch",
+        "typeVersion": 3.4,
+        "position": [
+          600,
+          120
+        ]
+      },
+      {
+        "parameters": {
+          "curlImport": "",
+          "method": "POST",
+          "url": "https://unnichat.com.br/a/start/FgJ34BDffetOWlJdFkef",
+          "authentication": "none",
+          "provideSslCertificates": false,
+          "sendQuery": false,
+          "sendHeaders": false,
+          "sendBody": true,
+          "contentType": "json",
+          "specifyBody": "json",
+          "jsonBody": "={\n  \"id\": \"{{ $json.id || Math.floor(Math.random() * 1000000).toString() }}\",\n  \"data\": {\n    \"number\": \"{{ $('Webhook').item.json.body.data.buyer.checkout_phone }}\",\n    \"tag\": \"global\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
+          "options": {},
+          "infoMessage": ""
+        },
+        "id": "434e2ce5-c283-4599-b817-4462dc76fb9c",
+        "name": "Unnichat - Espera de pago",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          900,
+          -60
+        ]
+      },
+      {
+        "parameters": {
+          "curlImport": "",
+          "method": "POST",
+          "url": "https://unnichat.com.br/a/start/KPewNXuVfywhLF3N5Yhy",
+          "authentication": "none",
+          "provideSslCertificates": false,
+          "sendQuery": false,
+          "sendHeaders": false,
+          "sendBody": true,
+          "contentType": "json",
+          "specifyBody": "json",
+          "jsonBody": "={\n  \"id\": \"{{ $json.id || Math.floor(Math.random() * 1000000).toString() }}\",\n  \"data\": {\n    \"number\": \"{{ $('Webhook').item.json.body.data.buyer.checkout_phone }}\",\n    \"tag\": \"global\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
+          "options": {},
+          "infoMessage": ""
+        },
+        "id": "73c3457d-1315-4475-906e-eda35fab7e61",
+        "name": "Unnichat - Compra aprobada",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          900,
+          100
+        ]
+      },
+      {
+        "parameters": {
+          "curlImport": "",
+          "method": "POST",
+          "url": "https://unnichat.com.br/a/start/E9EfhIsPOPCquvh2mJ0Y",
+          "authentication": "none",
+          "provideSslCertificates": false,
+          "sendQuery": false,
+          "sendHeaders": false,
+          "sendBody": true,
+          "contentType": "json",
+          "specifyBody": "json",
+          "jsonBody": "={\n  \"id\": \"{{ $json.id || Math.floor(Math.random() * 1000000).toString() }}\",\n  \"data\": {\n    \"number\": \"{{ $('Webhook').item.json.body.data.buyer.checkout_phone }}\",\n    \"tag\": \"global\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
+          "options": {},
+          "infoMessage": ""
+        },
+        "id": "f3456bca-f2a9-4eeb-9498-b31cc79992e0",
+        "name": "Unnichat - Compra cancelada",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          900,
+          260
+        ]
+      },
+      {
+        "parameters": {
+          "curlImport": "",
+          "method": "POST",
+          "url": "https://unnichat.com.br/a/start/rTXZeYwjlOaVdIcrxtUJ",
+          "authentication": "none",
+          "provideSslCertificates": false,
+          "sendQuery": false,
+          "sendHeaders": false,
+          "sendBody": true,
+          "contentType": "json",
+          "specifyBody": "json",
+          "jsonBody": "={\n  \"id\": \"{{ $json.id || Math.floor(Math.random() * 1000000).toString() }}\",\n  \"data\": {\n    \"number\": \"{{ $('Webhook').item.json.body.data.buyer.phone }}\",\n    \"tag\": \"global\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
+          "options": {},
+          "infoMessage": ""
+        },
+        "id": "7435a994-7fe2-4061-b865-60108c46ee53",
+        "name": "Unnichat - Abandono de carrito",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          900,
+          420
+        ]
+      },
+      {
+        "parameters": {
+          "curlImport": "",
+          "method": "POST",
+          "url": "https://unnichat.com.br/a/start/8sRWE8RiC5kTsD2Ks2CQ",
+          "authentication": "none",
+          "provideSslCertificates": false,
+          "sendQuery": false,
+          "sendHeaders": false,
+          "sendBody": true,
+          "contentType": "json",
+          "specifyBody": "json",
+          "jsonBody": "={\n  \"id\": \"{{ $json.id || Math.floor(Math.random() * 1000000).toString() }}\",\n  \"data\": {\n    \"number\": \"{{ $('Webhook').item.json.body.data.buyer.checkout_phone }}\",\n    \"tag\": \"global\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
+          "options": {},
+          "infoMessage": ""
+        },
+        "id": "b0a88926-ac8e-4877-a146-9f4956f24378",
+        "name": "Unnichat - Pago atrasado",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          900,
+          580
+        ]
+      },
+      {
+        "parameters": {
+          "curlImport": "",
+          "method": "POST",
+          "url": "https://unnichat.com.br/a/start/mSjHhV0zqczOYuYhYQmk",
+          "authentication": "none",
+          "provideSslCertificates": false,
+          "sendQuery": false,
+          "sendHeaders": false,
+          "sendBody": true,
+          "contentType": "json",
+          "specifyBody": "json",
+          "jsonBody": "={\n  \"id\": \"{{ $json.id || Math.floor(Math.random() * 1000000).toString() }}\",\n  \"data\": {\n    \"number\": \"{{ $('Webhook').item.json.body.data.buyer.checkout_phone }}\",\n    \"tag\": \"global\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
+          "options": {},
+          "infoMessage": ""
+        },
+        "id": "77982633-22bb-4a7d-9dae-b56b5d9c7f60",
+        "name": "Unnichat - Solicitud de reembolso",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          900,
+          740
+        ]
+      },
+      {
+        "parameters": {
+          "curlImport": "",
+          "method": "POST",
+          "url": "https://unnichat.com.br/a/start/jIsP4keUqwbfoeL6uXxt",
+          "authentication": "none",
+          "provideSslCertificates": false,
+          "sendQuery": false,
+          "sendHeaders": false,
+          "sendBody": true,
+          "contentType": "json",
+          "specifyBody": "json",
+          "jsonBody": "={\n  \"id\": \"{{ $json.id || Math.floor(Math.random() * 1000000).toString() }}\",\n  \"data\": {\n    \"number\": \"{{ $('Webhook').item.json.body.data.buyer.checkout_phone }}\",\n    \"tag\": \"global\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
+          "options": {},
+          "infoMessage": ""
+        },
+        "id": "4aeae4e8-b986-41d5-ae15-4e7fb65ed2bb",
+        "name": "Unnichat - Reembolso procesado",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          900,
+          900
+        ]
+      }
+    ],
+    "connections": {
+      "Webhook": {
+        "main": [
+          [
+            {
+              "node": "Evento Checkout - Lea",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Evento Checkout - Lea": {
+        "main": [
+          [
+            {
+              "node": "Unnichat - Espera de pago",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [],
+          [
+            {
+              "node": "Primera cuota",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Unnichat - Compra cancelada",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Unnichat - Abandono de carrito",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Unnichat - Pago atrasado",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Unnichat - Solicitud de reembolso",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Unnichat - Reembolso procesado",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Primera cuota": {
+        "main": [
+          [
+            {
+              "node": "Unnichat - Compra aprobada",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "nodeGroups": [],
+    "authors": "BE Online",
+    "name": "Version f45ae468",
+    "description": "",
+    "autosaved": false
+  },
+  "activeVersionId": "f45ae468-0c7d-4157-92cd-d486910f1f22",
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Evento Checkout - Lea",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Evento Checkout - Lea": {
+      "main": [
+        [
+          {
+            "node": "Unnichat - Espera de pago",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [],
+        [
+          {
+            "node": "Primera cuota",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Unnichat - Compra cancelada",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Unnichat - Abandono de carrito",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Unnichat - Pago atrasado",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Unnichat - Solicitud de reembolso",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Unnichat - Reembolso procesado",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Primera cuota": {
+      "main": [
+        [
+          {
+            "node": "Unnichat - Compra aprobada",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2026-10-22T01:59:48.380Z",
+  "id": "FC2WSM73W2Bfhtmt",
+  "isArchived": false,
+  "meta": null,
+  "name": "Lea - Eventos Checkout - LK MI",
+  "nodes": [
+    {
+      "parameters": {
+        "multipleMethods": false,
+        "httpMethod": "POST",
+        "path": "checkout-lea-kaufman",
+        "authentication": "none",
+        "responseMode": "onReceived",
+        "contentTypeNotice": "",
+        "options": {}
+      },
+      "id": "725a914c-d74e-4193-8097-60c72ac14cf1",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        300
+      ],
+      "webhookId": "26c5acf9-5504-4d67-b762-b16b28342758"
+    },
+    {
+      "parameters": {
+        "mode": "rules",
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "3ae769a8-061e-47d6-8e04-3b8ee54589ea",
+                    "leftValue": "={{ $('Webhook').item.json.body.event }}",
+                    "rightValue": "PURCHASE_BILLET_PRINTED",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": false
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "8a16515f-7210-4662-8ce0-79188e8f535e",
+                    "leftValue": "={{ $('Webhook').item.json.body.event }}",
+                    "rightValue": "PURCHASE_COMPLETE",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": false
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "c08089e6-8f75-4af7-9fb7-e9f300edcc78",
+                    "leftValue": "={{ $('Webhook').item.json.body.event }}",
+                    "rightValue": "PURCHASE_APPROVED",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": false
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "5b7ba2b5-302a-41f1-a18c-f7e22c16d44d",
+                    "leftValue": "={{ $('Webhook').item.json.body.event }}",
+                    "rightValue": "PURCHASE_CANCELED",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": false
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "7529bafc-dfe4-4855-b655-0c50cf791e52",
+                    "leftValue": "={{ $('Webhook').item.json.body.event }}",
+                    "rightValue": "PURCHASE_OUT_OF_SHOPPING_CART",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": false
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "f9d19736-fdff-49d5-904c-fa9016cd3fb2",
+                    "leftValue": "={{ $('Webhook').item.json.body.event }}",
+                    "rightValue": "PURCHASE_DELAYED",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": false
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "3de10d09-78aa-4c2c-b897-04eb20dc2a65",
+                    "leftValue": "={{ $('Webhook').item.json.body.event }}",
+                    "rightValue": "PURCHASE_PROTEST",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": false
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "0de7ade4-31f2-417d-9122-87194fdc446c",
+                    "leftValue": "={{ $('Webhook').item.json.body.event }}",
+                    "rightValue": "PURCHASE_REFUNDED",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": false
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "60eaf5df-73fc-4421-b1a1-85ad50fde6e9",
+      "name": "Evento Checkout - Lea",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        300,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "rules",
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "f1cecafa-5fb6-424a-89ca-4fe57420c900",
+                    "leftValue": "={{ $('Webhook').item.json.body.data.purchase.recurrence_number ?? 1 }}",
+                    "rightValue": 1,
+                    "operator": {
+                      "type": "number",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": false
+            }
+          ]
+        },
+        "looseTypeValidation": false,
+        "options": {}
+      },
+      "id": "9eceda49-6c18-42b6-bae8-9780a67e2b72",
+      "name": "Primera cuota",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        600,
+        120
+      ]
+    },
+    {
+      "parameters": {
+        "curlImport": "",
+        "method": "POST",
+        "url": "https://unnichat.com.br/a/start/FgJ34BDffetOWlJdFkef",
+        "authentication": "none",
+        "provideSslCertificates": false,
+        "sendQuery": false,
+        "sendHeaders": false,
+        "sendBody": true,
+        "contentType": "json",
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"id\": \"{{ $json.id || Math.floor(Math.random() * 1000000).toString() }}\",\n  \"data\": {\n    \"number\": \"{{ $('Webhook').item.json.body.data.buyer.checkout_phone }}\",\n    \"tag\": \"global\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
+        "options": {},
+        "infoMessage": ""
+      },
+      "id": "434e2ce5-c283-4599-b817-4462dc76fb9c",
+      "name": "Unnichat - Espera de pago",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        900,
+        -60
+      ]
+    },
+    {
+      "parameters": {
+        "curlImport": "",
+        "method": "POST",
+        "url": "https://unnichat.com.br/a/start/KPewNXuVfywhLF3N5Yhy",
+        "authentication": "none",
+        "provideSslCertificates": false,
+        "sendQuery": false,
+        "sendHeaders": false,
+        "sendBody": true,
+        "contentType": "json",
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"id\": \"{{ $json.id || Math.floor(Math.random() * 1000000).toString() }}\",\n  \"data\": {\n    \"number\": \"{{ $('Webhook').item.json.body.data.buyer.checkout_phone }}\",\n    \"tag\": \"global\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
+        "options": {},
+        "infoMessage": ""
+      },
+      "id": "73c3457d-1315-4475-906e-eda35fab7e61",
+      "name": "Unnichat - Compra aprobada",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        900,
+        100
+      ]
+    },
+    {
+      "parameters": {
+        "curlImport": "",
+        "method": "POST",
+        "url": "https://unnichat.com.br/a/start/E9EfhIsPOPCquvh2mJ0Y",
+        "authentication": "none",
+        "provideSslCertificates": false,
+        "sendQuery": false,
+        "sendHeaders": false,
+        "sendBody": true,
+        "contentType": "json",
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"id\": \"{{ $json.id || Math.floor(Math.random() * 1000000).toString() }}\",\n  \"data\": {\n    \"number\": \"{{ $('Webhook').item.json.body.data.buyer.checkout_phone }}\",\n    \"tag\": \"global\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
+        "options": {},
+        "infoMessage": ""
+      },
+      "id": "f3456bca-f2a9-4eeb-9498-b31cc79992e0",
+      "name": "Unnichat - Compra cancelada",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        900,
+        260
+      ]
+    },
+    {
+      "parameters": {
+        "curlImport": "",
+        "method": "POST",
+        "url": "https://unnichat.com.br/a/start/rTXZeYwjlOaVdIcrxtUJ",
+        "authentication": "none",
+        "provideSslCertificates": false,
+        "sendQuery": false,
+        "sendHeaders": false,
+        "sendBody": true,
+        "contentType": "json",
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"id\": \"{{ $json.id || Math.floor(Math.random() * 1000000).toString() }}\",\n  \"data\": {\n    \"number\": \"{{ $('Webhook').item.json.body.data.buyer.phone }}\",\n    \"tag\": \"global\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
+        "options": {},
+        "infoMessage": ""
+      },
+      "id": "7435a994-7fe2-4061-b865-60108c46ee53",
+      "name": "Unnichat - Abandono de carrito",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        900,
+        420
+      ]
+    },
+    {
+      "parameters": {
+        "curlImport": "",
+        "method": "POST",
+        "url": "https://unnichat.com.br/a/start/8sRWE8RiC5kTsD2Ks2CQ",
+        "authentication": "none",
+        "provideSslCertificates": false,
+        "sendQuery": false,
+        "sendHeaders": false,
+        "sendBody": true,
+        "contentType": "json",
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"id\": \"{{ $json.id || Math.floor(Math.random() * 1000000).toString() }}\",\n  \"data\": {\n    \"number\": \"{{ $('Webhook').item.json.body.data.buyer.checkout_phone }}\",\n    \"tag\": \"global\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
+        "options": {},
+        "infoMessage": ""
+      },
+      "id": "b0a88926-ac8e-4877-a146-9f4956f24378",
+      "name": "Unnichat - Pago atrasado",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        900,
+        580
+      ]
+    },
+    {
+      "parameters": {
+        "curlImport": "",
+        "method": "POST",
+        "url": "https://unnichat.com.br/a/start/mSjHhV0zqczOYuYhYQmk",
+        "authentication": "none",
+        "provideSslCertificates": false,
+        "sendQuery": false,
+        "sendHeaders": false,
+        "sendBody": true,
+        "contentType": "json",
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"id\": \"{{ $json.id || Math.floor(Math.random() * 1000000).toString() }}\",\n  \"data\": {\n    \"number\": \"{{ $('Webhook').item.json.body.data.buyer.checkout_phone }}\",\n    \"tag\": \"global\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
+        "options": {},
+        "infoMessage": ""
+      },
+      "id": "77982633-22bb-4a7d-9dae-b56b5d9c7f60",
+      "name": "Unnichat - Solicitud de reembolso",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        900,
+        740
+      ]
+    },
+    {
+      "parameters": {
+        "curlImport": "",
+        "method": "POST",
+        "url": "https://unnichat.com.br/a/start/jIsP4keUqwbfoeL6uXxt",
+        "authentication": "none",
+        "provideSslCertificates": false,
+        "sendQuery": false,
+        "sendHeaders": false,
+        "sendBody": true,
+        "contentType": "json",
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"id\": \"{{ $json.id || Math.floor(Math.random() * 1000000).toString() }}\",\n  \"data\": {\n    \"number\": \"{{ $('Webhook').item.json.body.data.buyer.checkout_phone }}\",\n    \"tag\": \"global\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
+        "options": {},
+        "infoMessage": ""
+      },
+      "id": "4aeae4e8-b986-41d5-ae15-4e7fb65ed2bb",
+      "name": "Unnichat - Reembolso procesado",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        900,
+        900
+      ]
+    }
+  ],
+  "pinData": null,
+  "repo_name": "backupn8n",
+  "repo_owner": "infoandresrendoncol",
+  "repo_path": "backup/",
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "updatedAt": "2026-10-22T01:59:48.389Z",
+      "createdAt": "2026-10-22T01:59:48.389Z",
+      "role": "workflow:owner",
+      "workflowId": "FC2WSM73W2Bfhtmt",
+      "projectId": "4KmSbENK2cGxsjaf"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2026-10-22T02:17:56.457Z",
+  "versionId": "f45ae468-0c7d-4157-92cd-d486910f1f22"
+}
