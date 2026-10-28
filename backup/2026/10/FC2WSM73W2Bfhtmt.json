@@ -1,9 +1,9 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2026-10-22T02:19:35.000Z",
-    "createdAt": "2026-10-22T02:17:56.459Z",
-    "versionId": "f45ae468-0c7d-4157-92cd-d486910f1f22",
+    "updatedAt": "2026-10-27T17:59:34.000Z",
+    "createdAt": "2026-10-27T17:58:40.545Z",
+    "versionId": "f3504828-4b41-4265-b807-b28ee62243e1",
     "workflowId": "FC2WSM73W2Bfhtmt",
     "nodes": [
       {
@@ -444,6 +444,328 @@
           900,
           900
         ]
+      },
+      {
+        "id": "bcf3f6a2-4a92-4a95-98f7-28c185815ca8",
+        "name": "AC - A la espera de pago - Crear contacto",
+        "type": "n8n-nodes-base.activeCampaign",
+        "typeVersion": 1,
+        "position": [
+          1200,
+          -60
+        ],
+        "credentials": {
+          "activeCampaignApi": {
+            "id": "MvVNTLdt8rrpt0zz",
+            "name": "ActiveCampaign Lea"
+          }
+        },
+        "parameters": {
+          "email": "={{ $('Webhook').item.json.body.data.buyer.email }}",
+          "updateIfExists": true,
+          "additionalFields": {
+            "firstName": "={{ $('Webhook').item.json.body.data.buyer.first_name || ($('Webhook').item.json.body.data.buyer.name || \"\").split(\" \")[0] }}",
+            "lastName": "={{ $('Webhook').item.json.body.data.buyer.last_name || ($('Webhook').item.json.body.data.buyer.name || \"\").split(\" \").slice(1).join(\" \") }}",
+            "phone": "={{ $('Webhook').item.json.body.data.buyer.checkout_phone || $('Webhook').item.json.body.data.buyer.phone }}"
+          }
+        }
+      },
+      {
+        "id": "e3d1a4c4-16e9-4be9-b7f8-f47a367d9c2c",
+        "name": "AC - A la espera de pago - Agregar a lista",
+        "type": "n8n-nodes-base.activeCampaign",
+        "typeVersion": 1,
+        "position": [
+          1450,
+          -60
+        ],
+        "credentials": {
+          "activeCampaignApi": {
+            "id": "MvVNTLdt8rrpt0zz",
+            "name": "ActiveCampaign Lea"
+          }
+        },
+        "parameters": {
+          "resource": "contactList",
+          "listId": 23,
+          "contactId": "={{ $('AC - A la espera de pago - Crear contacto').item.json.id }}"
+        }
+      },
+      {
+        "id": "3d56d277-6cca-45aa-a682-5e6f9d6fc2b5",
+        "name": "AC - Compra aprobada - Crear contacto",
+        "type": "n8n-nodes-base.activeCampaign",
+        "typeVersion": 1,
+        "position": [
+          1200,
+          100
+        ],
+        "credentials": {
+          "activeCampaignApi": {
+            "id": "MvVNTLdt8rrpt0zz",
+            "name": "ActiveCampaign Lea"
+          }
+        },
+        "parameters": {
+          "email": "={{ $('Webhook').item.json.body.data.buyer.email }}",
+          "updateIfExists": true,
+          "additionalFields": {
+            "firstName": "={{ $('Webhook').item.json.body.data.buyer.first_name || ($('Webhook').item.json.body.data.buyer.name || \"\").split(\" \")[0] }}",
+            "lastName": "={{ $('Webhook').item.json.body.data.buyer.last_name || ($('Webhook').item.json.body.data.buyer.name || \"\").split(\" \").slice(1).join(\" \") }}",
+            "phone": "={{ $('Webhook').item.json.body.data.buyer.checkout_phone || $('Webhook').item.json.body.data.buyer.phone }}"
+          }
+        }
+      },
+      {
+        "id": "b0029c92-2fe5-4aff-b3fb-2adf3d81ba01",
+        "name": "AC - Compra aprobada - Agregar a lista",
+        "type": "n8n-nodes-base.activeCampaign",
+        "typeVersion": 1,
+        "position": [
+          1450,
+          100
+        ],
+        "credentials": {
+          "activeCampaignApi": {
+            "id": "MvVNTLdt8rrpt0zz",
+            "name": "ActiveCampaign Lea"
+          }
+        },
+        "parameters": {
+          "resource": "contactList",
+          "listId": 22,
+          "contactId": "={{ $('AC - Compra aprobada - Crear contacto').item.json.id }}"
+        }
+      },
+      {
+        "id": "c6b7ca62-5d3f-4e4a-a594-8e077f929157",
+        "name": "AC - Compra cancelada - Crear contacto",
+        "type": "n8n-nodes-base.activeCampaign",
+        "typeVersion": 1,
+        "position": [
+          1200,
+          260
+        ],
+        "credentials": {
+          "activeCampaignApi": {
+            "id": "MvVNTLdt8rrpt0zz",
+            "name": "ActiveCampaign Lea"
+          }
+        },
+        "parameters": {
+          "email": "={{ $('Webhook').item.json.body.data.buyer.email }}",
+          "updateIfExists": true,
+          "additionalFields": {
+            "firstName": "={{ $('Webhook').item.json.body.data.buyer.first_name || ($('Webhook').item.json.body.data.buyer.name || \"\").split(\" \")[0] }}",
+            "lastName": "={{ $('Webhook').item.json.body.data.buyer.last_name || ($('Webhook').item.json.body.data.buyer.name || \"\").split(\" \").slice(1).join(\" \") }}",
+            "phone": "={{ $('Webhook').item.json.body.data.buyer.checkout_phone || $('Webhook').item.json.body.data.buyer.phone }}"
+          }
+        }
+      },
+      {
+        "id": "ef0287db-9846-4dc1-93b3-5bead1ed12fa",
+        "name": "AC - Compra cancelada - Agregar a lista",
+        "type": "n8n-nodes-base.activeCampaign",
+        "typeVersion": 1,
+        "position": [
+          1450,
+          260
+        ],
+        "credentials": {
+          "activeCampaignApi": {
+            "id": "MvVNTLdt8rrpt0zz",
+            "name": "ActiveCampaign Lea"
+          }
+        },
+        "parameters": {
+          "resource": "contactList",
+          "listId": 24,
+          "contactId": "={{ $('AC - Compra cancelada - Crear contacto').item.json.id }}"
+        }
+      },
+      {
+        "id": "1682ab42-c254-4583-ba56-023093c97ae3",
+        "name": "AC - Abandono de carrito - Crear contacto",
+        "type": "n8n-nodes-base.activeCampaign",
+        "typeVersion": 1,
+        "position": [
+          1200,
+          420
+        ],
+        "credentials": {
+          "activeCampaignApi": {
+            "id": "MvVNTLdt8rrpt0zz",
+            "name": "ActiveCampaign Lea"
+          }
+        },
+        "parameters": {
+          "email": "={{ $('Webhook').item.json.body.data.buyer.email }}",
+          "updateIfExists": true,
+          "additionalFields": {
+            "firstName": "={{ $('Webhook').item.json.body.data.buyer.first_name || ($('Webhook').item.json.body.data.buyer.name || \"\").split(\" \")[0] }}",
+            "lastName": "={{ $('Webhook').item.json.body.data.buyer.last_name || ($('Webhook').item.json.body.data.buyer.name || \"\").split(\" \").slice(1).join(\" \") }}",
+            "phone": "={{ $('Webhook').item.json.body.data.buyer.checkout_phone || $('Webhook').item.json.body.data.buyer.phone }}"
+          }
+        }
+      },
+      {
+        "id": "2da814ad-ca7e-4ffc-8911-81a45b402f4b",
+        "name": "AC - Abandono de carrito - Agregar a lista",
+        "type": "n8n-nodes-base.activeCampaign",
+        "typeVersion": 1,
+        "position": [
+          1450,
+          420
+        ],
+        "credentials": {
+          "activeCampaignApi": {
+            "id": "MvVNTLdt8rrpt0zz",
+            "name": "ActiveCampaign Lea"
+          }
+        },
+        "parameters": {
+          "resource": "contactList",
+          "listId": 20,
+          "contactId": "={{ $('AC - Abandono de carrito - Crear contacto').item.json.id }}"
+        }
+      },
+      {
+        "id": "91ed2b95-7095-4c27-83e7-6f40e0fe88c9",
+        "name": "AC - Pago retrasado - Crear contacto",
+        "type": "n8n-nodes-base.activeCampaign",
+        "typeVersion": 1,
+        "position": [
+          1200,
+          580
+        ],
+        "credentials": {
+          "activeCampaignApi": {
+            "id": "MvVNTLdt8rrpt0zz",
+            "name": "ActiveCampaign Lea"
+          }
+        },
+        "parameters": {
+          "email": "={{ $('Webhook').item.json.body.data.buyer.email }}",
+          "updateIfExists": true,
+          "additionalFields": {
+            "firstName": "={{ $('Webhook').item.json.body.data.buyer.first_name || ($('Webhook').item.json.body.data.buyer.name || \"\").split(\" \")[0] }}",
+            "lastName": "={{ $('Webhook').item.json.body.data.buyer.last_name || ($('Webhook').item.json.body.data.buyer.name || \"\").split(\" \").slice(1).join(\" \") }}",
+            "phone": "={{ $('Webhook').item.json.body.data.buyer.checkout_phone || $('Webhook').item.json.body.data.buyer.phone }}"
+          }
+        }
+      },
+      {
+        "id": "f24dcf8d-66ec-492a-9247-9fadc0457ae6",
+        "name": "AC - Pago retrasado - Agregar a lista",
+        "type": "n8n-nodes-base.activeCampaign",
+        "typeVersion": 1,
+        "position": [
+          1450,
+          580
+        ],
+        "credentials": {
+          "activeCampaignApi": {
+            "id": "MvVNTLdt8rrpt0zz",
+            "name": "ActiveCampaign Lea"
+          }
+        },
+        "parameters": {
+          "resource": "contactList",
+          "listId": 21,
+          "contactId": "={{ $('AC - Pago retrasado - Crear contacto').item.json.id }}"
+        }
+      },
+      {
+        "id": "09ad14ce-54ac-478f-bbef-e740b6d52323",
+        "name": "AC - Solicitud de reembolso - Crear contacto",
+        "type": "n8n-nodes-base.activeCampaign",
+        "typeVersion": 1,
+        "position": [
+          1200,
+          740
+        ],
+        "credentials": {
+          "activeCampaignApi": {
+            "id": "MvVNTLdt8rrpt0zz",
+            "name": "ActiveCampaign Lea"
+          }
+        },
+        "parameters": {
+          "email": "={{ $('Webhook').item.json.body.data.buyer.email }}",
+          "updateIfExists": true,
+          "additionalFields": {
+            "firstName": "={{ $('Webhook').item.json.body.data.buyer.first_name || ($('Webhook').item.json.body.data.buyer.name || \"\").split(\" \")[0] }}",
+            "lastName": "={{ $('Webhook').item.json.body.data.buyer.last_name || ($('Webhook').item.json.body.data.buyer.name || \"\").split(\" \").slice(1).join(\" \") }}",
+            "phone": "={{ $('Webhook').item.json.body.data.buyer.checkout_phone || $('Webhook').item.json.body.data.buyer.phone }}"
+          }
+        }
+      },
+      {
+        "id": "15edbfee-50de-44d4-820b-17189cda80e6",
+        "name": "AC - Solicitud de reembolso - Agregar a lista",
+        "type": "n8n-nodes-base.activeCampaign",
+        "typeVersion": 1,
+        "position": [
+          1450,
+          740
+        ],
+        "credentials": {
+          "activeCampaignApi": {
+            "id": "MvVNTLdt8rrpt0zz",
+            "name": "ActiveCampaign Lea"
+          }
+        },
+        "parameters": {
+          "resource": "contactList",
+          "listId": 25,
+          "contactId": "={{ $('AC - Solicitud de reembolso - Crear contacto').item.json.id }}"
+        }
+      },
+      {
+        "id": "19a761e8-7b9e-4f01-8045-0f36d6a1e638",
+        "name": "AC - Reembolso aprobado - Crear contacto",
+        "type": "n8n-nodes-base.activeCampaign",
+        "typeVersion": 1,
+        "position": [
+          1200,
+          900
+        ],
+        "credentials": {
+          "activeCampaignApi": {
+            "id": "MvVNTLdt8rrpt0zz",
+            "name": "ActiveCampaign Lea"
+          }
+        },
+        "parameters": {
+          "email": "={{ $('Webhook').item.json.body.data.buyer.email }}",
+          "updateIfExists": true,
+          "additionalFields": {
+            "firstName": "={{ $('Webhook').item.json.body.data.buyer.first_name || ($('Webhook').item.json.body.data.buyer.name || \"\").split(\" \")[0] }}",
+            "lastName": "={{ $('Webhook').item.json.body.data.buyer.last_name || ($('Webhook').item.json.body.data.buyer.name || \"\").split(\" \").slice(1).join(\" \") }}",
+            "phone": "={{ $('Webhook').item.json.body.data.buyer.checkout_phone || $('Webhook').item.json.body.data.buyer.phone }}"
+          }
+        }
+      },
+      {
+        "id": "c54337e9-0631-4806-9bdf-67d173be4ed8",
+        "name": "AC - Reembolso aprobado - Agregar a lista",
+        "type": "n8n-nodes-base.activeCampaign",
+        "typeVersion": 1,
+        "position": [
+          1450,
+          900
+        ],
+        "credentials": {
+          "activeCampaignApi": {
+            "id": "MvVNTLdt8rrpt0zz",
+            "name": "ActiveCampaign Lea"
+          }
+        },
+        "parameters": {
+          "resource": "contactList",
+          "listId": 26,
+          "contactId": "={{ $('AC - Reembolso aprobado - Crear contacto').item.json.id }}"
+        }
       }
     ],
     "connections": {
@@ -465,6 +787,11 @@
               "node": "Unnichat - Espera de pago",
               "type": "main",
               "index": 0
+            },
+            {
+              "node": "AC - A la espera de pago - Crear contacto",
+              "type": "main",
+              "index": 0
             }
           ],
           [],
@@ -480,11 +807,21 @@
               "node": "Unnichat - Compra cancelada",
               "type": "main",
               "index": 0
+            },
+            {
+              "node": "AC - Compra cancelada - Crear contacto",
+              "type": "main",
+              "index": 0
             }
           ],
           [
             {
               "node": "Unnichat - Abandono de carrito",
+              "type": "main",
+              "index": 0
+            },
+            {
+              "node": "AC - Abandono de carrito - Crear contacto",
               "type": "main",
               "index": 0
             }
@@ -494,6 +831,11 @@
               "node": "Unnichat - Pago atrasado",
               "type": "main",
               "index": 0
+            },
+            {
+              "node": "AC - Pago retrasado - Crear contacto",
+              "type": "main",
+              "index": 0
             }
           ],
           [
@@ -501,11 +843,21 @@
               "node": "Unnichat - Solicitud de reembolso",
               "type": "main",
               "index": 0
+            },
+            {
+              "node": "AC - Solicitud de reembolso - Crear contacto",
+              "type": "main",
+              "index": 0
             }
           ],
           [
             {
               "node": "Unnichat - Reembolso procesado",
+              "type": "main",
+              "index": 0
+            },
+            {
+              "node": "AC - Reembolso aprobado - Crear contacto",
               "type": "main",
               "index": 0
             }
@@ -519,6 +871,88 @@
               "node": "Unnichat - Compra aprobada",
               "type": "main",
               "index": 0
+            },
+            {
+              "node": "AC - Compra aprobada - Crear contacto",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "AC - A la espera de pago - Crear contacto": {
+        "main": [
+          [
+            {
+              "node": "AC - A la espera de pago - Agregar a lista",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "AC - Compra aprobada - Crear contacto": {
+        "main": [
+          [
+            {
+              "node": "AC - Compra aprobada - Agregar a lista",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "AC - Compra cancelada - Crear contacto": {
+        "main": [
+          [
+            {
+              "node": "AC - Compra cancelada - Agregar a lista",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "AC - Abandono de carrito - Crear contacto": {
+        "main": [
+          [
+            {
+              "node": "AC - Abandono de carrito - Agregar a lista",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "AC - Pago retrasado - Crear contacto": {
+        "main": [
+          [
+            {
+              "node": "AC - Pago retrasado - Agregar a lista",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "AC - Solicitud de reembolso - Crear contacto": {
+        "main": [
+          [
+            {
+              "node": "AC - Solicitud de reembolso - Agregar a lista",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "AC - Reembolso aprobado - Crear contacto": {
+        "main": [
+          [
+            {
+              "node": "AC - Reembolso aprobado - Agregar a lista",
+              "type": "main",
+              "index": 0
             }
           ]
         ]
@@ -526,11 +960,11 @@
     },
     "nodeGroups": [],
     "authors": "BE Online",
-    "name": "Version f45ae468",
+    "name": "Version f3504828",
     "description": "",
     "autosaved": false
   },
-  "activeVersionId": "f45ae468-0c7d-4157-92cd-d486910f1f22",
+  "activeVersionId": "f3504828-4b41-4265-b807-b28ee62243e1",
   "connections": {
     "Webhook": {
       "main": [
@@ -550,6 +984,11 @@
             "node": "Unnichat - Espera de pago",
             "type": "main",
             "index": 0
+          },
+          {
+            "node": "AC - A la espera de pago - Crear contacto",
+            "type": "main",
+            "index": 0
           }
         ],
         [],
@@ -565,11 +1004,21 @@
             "node": "Unnichat - Compra cancelada",
             "type": "main",
             "index": 0
+          },
+          {
+            "node": "AC - Compra cancelada - Crear contacto",
+            "type": "main",
+            "index": 0
           }
         ],
         [
           {
             "node": "Unnichat - Abandono de carrito",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "AC - Abandono de carrito - Crear contacto",
             "type": "main",
             "index": 0
           }
@@ -579,6 +1028,11 @@
             "node": "Unnichat - Pago atrasado",
             "type": "main",
             "index": 0
+          },
+          {
+            "node": "AC - Pago retrasado - Crear contacto",
+            "type": "main",
+            "index": 0
           }
         ],
         [
@@ -586,11 +1040,21 @@
             "node": "Unnichat - Solicitud de reembolso",
             "type": "main",
             "index": 0
+          },
+          {
+            "node": "AC - Solicitud de reembolso - Crear contacto",
+            "type": "main",
+            "index": 0
           }
         ],
         [
           {
             "node": "Unnichat - Reembolso procesado",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "AC - Reembolso aprobado - Crear contacto",
             "type": "main",
             "index": 0
           }
@@ -602,6 +1066,88 @@
         [
           {
             "node": "Unnichat - Compra aprobada",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "AC - Compra aprobada - Crear contacto",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AC - A la espera de pago - Crear contacto": {
+      "main": [
+        [
+          {
+            "node": "AC - A la espera de pago - Agregar a lista",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AC - Compra aprobada - Crear contacto": {
+      "main": [
+        [
+          {
+            "node": "AC - Compra aprobada - Agregar a lista",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AC - Compra cancelada - Crear contacto": {
+      "main": [
+        [
+          {
+            "node": "AC - Compra cancelada - Agregar a lista",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AC - Abandono de carrito - Crear contacto": {
+      "main": [
+        [
+          {
+            "node": "AC - Abandono de carrito - Agregar a lista",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AC - Pago retrasado - Crear contacto": {
+      "main": [
+        [
+          {
+            "node": "AC - Pago retrasado - Agregar a lista",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AC - Solicitud de reembolso - Crear contacto": {
+      "main": [
+        [
+          {
+            "node": "AC - Solicitud de reembolso - Agregar a lista",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AC - Reembolso aprobado - Crear contacto": {
+      "main": [
+        [
+          {
+            "node": "AC - Reembolso aprobado - Agregar a lista",
             "type": "main",
             "index": 0
           }
@@ -1053,6 +1599,328 @@
         900,
         900
       ]
+    },
+    {
+      "id": "bcf3f6a2-4a92-4a95-98f7-28c185815ca8",
+      "name": "AC - A la espera de pago - Crear contacto",
+      "type": "n8n-nodes-base.activeCampaign",
+      "typeVersion": 1,
+      "position": [
+        1200,
+        -60
+      ],
+      "credentials": {
+        "activeCampaignApi": {
+          "id": "MvVNTLdt8rrpt0zz",
+          "name": "ActiveCampaign Lea"
+        }
+      },
+      "parameters": {
+        "email": "={{ $('Webhook').item.json.body.data.buyer.email }}",
+        "updateIfExists": true,
+        "additionalFields": {
+          "firstName": "={{ $('Webhook').item.json.body.data.buyer.first_name || ($('Webhook').item.json.body.data.buyer.name || \"\").split(\" \")[0] }}",
+          "lastName": "={{ $('Webhook').item.json.body.data.buyer.last_name || ($('Webhook').item.json.body.data.buyer.name || \"\").split(\" \").slice(1).join(\" \") }}",
+          "phone": "={{ $('Webhook').item.json.body.data.buyer.checkout_phone || $('Webhook').item.json.body.data.buyer.phone }}"
+        }
+      }
+    },
+    {
+      "id": "e3d1a4c4-16e9-4be9-b7f8-f47a367d9c2c",
+      "name": "AC - A la espera de pago - Agregar a lista",
+      "type": "n8n-nodes-base.activeCampaign",
+      "typeVersion": 1,
+      "position": [
+        1450,
+        -60
+      ],
+      "credentials": {
+        "activeCampaignApi": {
+          "id": "MvVNTLdt8rrpt0zz",
+          "name": "ActiveCampaign Lea"
+        }
+      },
+      "parameters": {
+        "resource": "contactList",
+        "listId": 23,
+        "contactId": "={{ $('AC - A la espera de pago - Crear contacto').item.json.id }}"
+      }
+    },
+    {
+      "id": "3d56d277-6cca-45aa-a682-5e6f9d6fc2b5",
+      "name": "AC - Compra aprobada - Crear contacto",
+      "type": "n8n-nodes-base.activeCampaign",
+      "typeVersion": 1,
+      "position": [
+        1200,
+        100
+      ],
+      "credentials": {
+        "activeCampaignApi": {
+          "id": "MvVNTLdt8rrpt0zz",
+          "name": "ActiveCampaign Lea"
+        }
+      },
+      "parameters": {
+        "email": "={{ $('Webhook').item.json.body.data.buyer.email }}",
+        "updateIfExists": true,
+        "additionalFields": {
+          "firstName": "={{ $('Webhook').item.json.body.data.buyer.first_name || ($('Webhook').item.json.body.data.buyer.name || \"\").split(\" \")[0] }}",
+          "lastName": "={{ $('Webhook').item.json.body.data.buyer.last_name || ($('Webhook').item.json.body.data.buyer.name || \"\").split(\" \").slice(1).join(\" \") }}",
+          "phone": "={{ $('Webhook').item.json.body.data.buyer.checkout_phone || $('Webhook').item.json.body.data.buyer.phone }}"
+        }
+      }
+    },
+    {
+      "id": "b0029c92-2fe5-4aff-b3fb-2adf3d81ba01",
+      "name": "AC - Compra aprobada - Agregar a lista",
+      "type": "n8n-nodes-base.activeCampaign",
+      "typeVersion": 1,
+      "position": [
+        1450,
+        100
+      ],
+      "credentials": {
+        "activeCampaignApi": {
+          "id": "MvVNTLdt8rrpt0zz",
+          "name": "ActiveCampaign Lea"
+        }
+      },
+      "parameters": {
+        "resource": "contactList",
+        "listId": 22,
+        "contactId": "={{ $('AC - Compra aprobada - Crear contacto').item.json.id }}"
+      }
+    },
+    {
+      "id": "c6b7ca62-5d3f-4e4a-a594-8e077f929157",
+      "name": "AC - Compra cancelada - Crear contacto",
+      "type": "n8n-nodes-base.activeCampaign",
+      "typeVersion": 1,
+      "position": [
+        1200,
+        260
+      ],
+      "credentials": {
+        "activeCampaignApi": {
+          "id": "MvVNTLdt8rrpt0zz",
+          "name": "ActiveCampaign Lea"
+        }
+      },
+      "parameters": {
+        "email": "={{ $('Webhook').item.json.body.data.buyer.email }}",
+        "updateIfExists": true,
+        "additionalFields": {
+          "firstName": "={{ $('Webhook').item.json.body.data.buyer.first_name || ($('Webhook').item.json.body.data.buyer.name || \"\").split(\" \")[0] }}",
+          "lastName": "={{ $('Webhook').item.json.body.data.buyer.last_name || ($('Webhook').item.json.body.data.buyer.name || \"\").split(\" \").slice(1).join(\" \") }}",
+          "phone": "={{ $('Webhook').item.json.body.data.buyer.checkout_phone || $('Webhook').item.json.body.data.buyer.phone }}"
+        }
+      }
+    },
+    {
+      "id": "ef0287db-9846-4dc1-93b3-5bead1ed12fa",
+      "name": "AC - Compra cancelada - Agregar a lista",
+      "type": "n8n-nodes-base.activeCampaign",
+      "typeVersion": 1,
+      "position": [
+        1450,
+        260
+      ],
+      "credentials": {
+        "activeCampaignApi": {
+          "id": "MvVNTLdt8rrpt0zz",
+          "name": "ActiveCampaign Lea"
+        }
+      },
+      "parameters": {
+        "resource": "contactList",
+        "listId": 24,
+        "contactId": "={{ $('AC - Compra cancelada - Crear contacto').item.json.id }}"
+      }
+    },
+    {
+      "id": "1682ab42-c254-4583-ba56-023093c97ae3",
+      "name": "AC - Abandono de carrito - Crear contacto",
+      "type": "n8n-nodes-base.activeCampaign",
+      "typeVersion": 1,
+      "position": [
+        1200,
+        420
+      ],
+      "credentials": {
+        "activeCampaignApi": {
+          "id": "MvVNTLdt8rrpt0zz",
+          "name": "ActiveCampaign Lea"
+        }
+      },
+      "parameters": {
+        "email": "={{ $('Webhook').item.json.body.data.buyer.email }}",
+        "updateIfExists": true,
+        "additionalFields": {
+          "firstName": "={{ $('Webhook').item.json.body.data.buyer.first_name || ($('Webhook').item.json.body.data.buyer.name || \"\").split(\" \")[0] }}",
+          "lastName": "={{ $('Webhook').item.json.body.data.buyer.last_name || ($('Webhook').item.json.body.data.buyer.name || \"\").split(\" \").slice(1).join(\" \") }}",
+          "phone": "={{ $('Webhook').item.json.body.data.buyer.checkout_phone || $('Webhook').item.json.body.data.buyer.phone }}"
+        }
+      }
+    },
+    {
+      "id": "2da814ad-ca7e-4ffc-8911-81a45b402f4b",
+      "name": "AC - Abandono de carrito - Agregar a lista",
+      "type": "n8n-nodes-base.activeCampaign",
+      "typeVersion": 1,
+      "position": [
+        1450,
+        420
+      ],
+      "credentials": {
+        "activeCampaignApi": {
+          "id": "MvVNTLdt8rrpt0zz",
+          "name": "ActiveCampaign Lea"
+        }
+      },
+      "parameters": {
+        "resource": "contactList",
+        "listId": 20,
+        "contactId": "={{ $('AC - Abandono de carrito - Crear contacto').item.json.id }}"
+      }
+    },
+    {
+      "id": "91ed2b95-7095-4c27-83e7-6f40e0fe88c9",
+      "name": "AC - Pago retrasado - Crear contacto",
+      "type": "n8n-nodes-base.activeCampaign",
+      "typeVersion": 1,
+      "position": [
+        1200,
+        580
+      ],
+      "credentials": {
+        "activeCampaignApi": {
+          "id": "MvVNTLdt8rrpt0zz",
+          "name": "ActiveCampaign Lea"
+        }
+      },
+      "parameters": {
+        "email": "={{ $('Webhook').item.json.body.data.buyer.email }}",
+        "updateIfExists": true,
+        "additionalFields": {
+          "firstName": "={{ $('Webhook').item.json.body.data.buyer.first_name || ($('Webhook').item.json.body.data.buyer.name || \"\").split(\" \")[0] }}",
+          "lastName": "={{ $('Webhook').item.json.body.data.buyer.last_name || ($('Webhook').item.json.body.data.buyer.name || \"\").split(\" \").slice(1).join(\" \") }}",
+          "phone": "={{ $('Webhook').item.json.body.data.buyer.checkout_phone || $('Webhook').item.json.body.data.buyer.phone }}"
+        }
+      }
+    },
+    {
+      "id": "f24dcf8d-66ec-492a-9247-9fadc0457ae6",
+      "name": "AC - Pago retrasado - Agregar a lista",
+      "type": "n8n-nodes-base.activeCampaign",
+      "typeVersion": 1,
+      "position": [
+        1450,
+        580
+      ],
+      "credentials": {
+        "activeCampaignApi": {
+          "id": "MvVNTLdt8rrpt0zz",
+          "name": "ActiveCampaign Lea"
+        }
+      },
+      "parameters": {
+        "resource": "contactList",
+        "listId": 21,
+        "contactId": "={{ $('AC - Pago retrasado - Crear contacto').item.json.id }}"
+      }
+    },
+    {
+      "id": "09ad14ce-54ac-478f-bbef-e740b6d52323",
+      "name": "AC - Solicitud de reembolso - Crear contacto",
+      "type": "n8n-nodes-base.activeCampaign",
+      "typeVersion": 1,
+      "position": [
+        1200,
+        740
+      ],
+      "credentials": {
+        "activeCampaignApi": {
+          "id": "MvVNTLdt8rrpt0zz",
+          "name": "ActiveCampaign Lea"
+        }
+      },
+      "parameters": {
+        "email": "={{ $('Webhook').item.json.body.data.buyer.email }}",
+        "updateIfExists": true,
+        "additionalFields": {
+          "firstName": "={{ $('Webhook').item.json.body.data.buyer.first_name || ($('Webhook').item.json.body.data.buyer.name || \"\").split(\" \")[0] }}",
+          "lastName": "={{ $('Webhook').item.json.body.data.buyer.last_name || ($('Webhook').item.json.body.data.buyer.name || \"\").split(\" \").slice(1).join(\" \") }}",
+          "phone": "={{ $('Webhook').item.json.body.data.buyer.checkout_phone || $('Webhook').item.json.body.data.buyer.phone }}"
+        }
+      }
+    },
+    {
+      "id": "15edbfee-50de-44d4-820b-17189cda80e6",
+      "name": "AC - Solicitud de reembolso - Agregar a lista",
+      "type": "n8n-nodes-base.activeCampaign",
+      "typeVersion": 1,
+      "position": [
+        1450,
+        740
+      ],
+      "credentials": {
+        "activeCampaignApi": {
+          "id": "MvVNTLdt8rrpt0zz",
+          "name": "ActiveCampaign Lea"
+        }
+      },
+      "parameters": {
+        "resource": "contactList",
+        "listId": 25,
+        "contactId": "={{ $('AC - Solicitud de reembolso - Crear contacto').item.json.id }}"
+      }
+    },
+    {
+      "id": "19a761e8-7b9e-4f01-8045-0f36d6a1e638",
+      "name": "AC - Reembolso aprobado - Crear contacto",
+      "type": "n8n-nodes-base.activeCampaign",
+      "typeVersion": 1,
+      "position": [
+        1200,
+        900
+      ],
+      "credentials": {
+        "activeCampaignApi": {
+          "id": "MvVNTLdt8rrpt0zz",
+          "name": "ActiveCampaign Lea"
+        }
+      },
+      "parameters": {
+        "email": "={{ $('Webhook').item.json.body.data.buyer.email }}",
+        "updateIfExists": true,
+        "additionalFields": {
+          "firstName": "={{ $('Webhook').item.json.body.data.buyer.first_name || ($('Webhook').item.json.body.data.buyer.name || \"\").split(\" \")[0] }}",
+          "lastName": "={{ $('Webhook').item.json.body.data.buyer.last_name || ($('Webhook').item.json.body.data.buyer.name || \"\").split(\" \").slice(1).join(\" \") }}",
+          "phone": "={{ $('Webhook').item.json.body.data.buyer.checkout_phone || $('Webhook').item.json.body.data.buyer.phone }}"
+        }
+      }
+    },
+    {
+      "id": "c54337e9-0631-4806-9bdf-67d173be4ed8",
+      "name": "AC - Reembolso aprobado - Agregar a lista",
+      "type": "n8n-nodes-base.activeCampaign",
+      "typeVersion": 1,
+      "position": [
+        1450,
+        900
+      ],
+      "credentials": {
+        "activeCampaignApi": {
+          "id": "MvVNTLdt8rrpt0zz",
+          "name": "ActiveCampaign Lea"
+        }
+      },
+      "parameters": {
+        "resource": "contactList",
+        "listId": 26,
+        "contactId": "={{ $('AC - Reembolso aprobado - Crear contacto').item.json.id }}"
+      }
     }
   ],
   "pinData": null,
@@ -1074,6 +1942,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2026-10-22T02:17:56.457Z",
-  "versionId": "f45ae468-0c7d-4157-92cd-d486910f1f22"
+  "updatedAt": "2026-10-27T17:58:40.541Z",
+  "versionId": "f3504828-4b41-4265-b807-b28ee62243e1"
 }
