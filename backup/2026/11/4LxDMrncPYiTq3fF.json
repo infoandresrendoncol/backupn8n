@@ -1,0 +1,439 @@
+{
+  "active": true,
+  "activeVersion": {
+    "updatedAt": "2026-11-03T21:06:00.000Z",
+    "createdAt": "2026-11-03T21:05:54.575Z",
+    "versionId": "4d0e9c75-8bbf-4277-8ce4-f07d495bdf4c",
+    "workflowId": "4LxDMrncPYiTq3fF",
+    "nodes": [
+      {
+        "parameters": {
+          "httpMethod": "POST",
+          "path": "registro-bf-biofamilias",
+          "options": {}
+        },
+        "id": "04839488-58a1-4c6e-94a0-e0cbbd917d91",
+        "name": "Webhook Elementor",
+        "type": "n8n-nodes-base.webhook",
+        "typeVersion": 2,
+        "position": [
+          -304,
+          112
+        ],
+        "webhookId": "registro-bf-biofamilias"
+      },
+      {
+        "parameters": {
+          "operation": "append",
+          "documentId": {
+            "__rl": true,
+            "value": "1cRBazw9z-Gq2PguL_eTk-hEss1q7lGr0V6x7M97eW5U",
+            "mode": "id"
+          },
+          "sheetName": {
+            "__rl": true,
+            "value": "gid=0",
+            "mode": "id"
+          },
+          "columns": {
+            "mappingMode": "defineBelow",
+            "value": {
+              "Fecha": "={{ $now.toFormat('yyyy-MM-dd HH:mm:ss') }}",
+              "Email": "={{ $json.body['Escribe tu e-mail'] || $json.body['email'] || $json.body['Email'] }}",
+              "UTM_Campaign": "={{ $json.body['UTM Campaign'] || '' }}",
+              "UTM_Source": "={{ $json.body['UTM Source'] || '' }}",
+              "UTM_Medium": "={{ $json.body['UTM Medium'] || '' }}",
+              "UTM_Content": "={{ $json.body['UTM Content'] || '' }}",
+              "UTM_Term": "={{ $json.body['UTM Term'] || '' }}"
+            },
+            "matchingColumns": [],
+            "schema": [
+              {
+                "id": "Fecha",
+                "displayName": "Fecha",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "Email",
+                "displayName": "Email",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "UTM_Campaign",
+                "displayName": "UTM_Campaign",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "UTM_Source",
+                "displayName": "UTM_Source",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "UTM_Medium",
+                "displayName": "UTM_Medium",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "UTM_Content",
+                "displayName": "UTM_Content",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "UTM_Term",
+                "displayName": "UTM_Term",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              }
+            ]
+          },
+          "options": {}
+        },
+        "id": "a2acd6c7-1284-46c7-a624-4c0428b0b620",
+        "name": "Agregar a Google Sheets",
+        "type": "n8n-nodes-base.googleSheets",
+        "typeVersion": 4.5,
+        "position": [
+          0,
+          0
+        ],
+        "credentials": {
+          "googleSheetsOAuth2Api": {
+            "id": "uniCNvqoYoprQPic",
+            "name": "SHEET INFO.HOLDINGS"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "email": "={{ $json.body['Escribe tu e-mail'] || $json.body['email'] || $json.body['Email'] }}",
+          "updateIfExists": true,
+          "additionalFields": {}
+        },
+        "id": "c9b56fa7-5159-4270-9295-266ab69c5ec0",
+        "name": "Crear o actualizar contacto ActiveCampaign",
+        "type": "n8n-nodes-base.activeCampaign",
+        "typeVersion": 1,
+        "position": [
+          0,
+          224
+        ],
+        "credentials": {
+          "activeCampaignApi": {
+            "id": "cD8HXjLCEpMAfwTo",
+            "name": "ActiveCampaign Biofamilias"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "resource": "contactList",
+          "listId": 114,
+          "contactId": "={{ $json.id }}"
+        },
+        "id": "a93de282-e6cf-4008-aff6-24887251fd79",
+        "name": "Agregar a lista ActiveCampaign",
+        "type": "n8n-nodes-base.activeCampaign",
+        "typeVersion": 1,
+        "position": [
+          240,
+          224
+        ],
+        "credentials": {
+          "activeCampaignApi": {
+            "id": "cD8HXjLCEpMAfwTo",
+            "name": "ActiveCampaign Biofamilias"
+          }
+        }
+      }
+    ],
+    "connections": {
+      "Webhook Elementor": {
+        "main": [
+          [
+            {
+              "node": "Agregar a Google Sheets",
+              "type": "main",
+              "index": 0
+            },
+            {
+              "node": "Crear o actualizar contacto ActiveCampaign",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Crear o actualizar contacto ActiveCampaign": {
+        "main": [
+          [
+            {
+              "node": "Agregar a lista ActiveCampaign",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "nodeGroups": [],
+    "authors": "BE Online",
+    "name": "Version 4d0e9c75",
+    "description": "",
+    "autosaved": true
+  },
+  "activeVersionId": "4d0e9c75-8bbf-4277-8ce4-f07d495bdf4c",
+  "connections": {
+    "Webhook Elementor": {
+      "main": [
+        [
+          {
+            "node": "Agregar a Google Sheets",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Crear o actualizar contacto ActiveCampaign",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Crear o actualizar contacto ActiveCampaign": {
+      "main": [
+        [
+          {
+            "node": "Agregar a lista ActiveCampaign",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2026-11-03T20:18:01.364Z",
+  "id": "4LxDMrncPYiTq3fF",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Registro BF BioFamilias a Sheets y ActiveCampaign",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "registro-bf-biofamilias",
+        "options": {}
+      },
+      "id": "04839488-58a1-4c6e-94a0-e0cbbd917d91",
+      "name": "Webhook Elementor",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        -304,
+        112
+      ],
+      "webhookId": "registro-bf-biofamilias"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1cRBazw9z-Gq2PguL_eTk-hEss1q7lGr0V6x7M97eW5U",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "id"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Fecha": "={{ $now.toFormat('yyyy-MM-dd HH:mm:ss') }}",
+            "Email": "={{ $json.body['Escribe tu e-mail'] || $json.body['email'] || $json.body['Email'] }}",
+            "UTM_Campaign": "={{ $json.body['UTM Campaign'] || '' }}",
+            "UTM_Source": "={{ $json.body['UTM Source'] || '' }}",
+            "UTM_Medium": "={{ $json.body['UTM Medium'] || '' }}",
+            "UTM_Content": "={{ $json.body['UTM Content'] || '' }}",
+            "UTM_Term": "={{ $json.body['UTM Term'] || '' }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Fecha",
+              "displayName": "Fecha",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "UTM_Campaign",
+              "displayName": "UTM_Campaign",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "UTM_Source",
+              "displayName": "UTM_Source",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "UTM_Medium",
+              "displayName": "UTM_Medium",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "UTM_Content",
+              "displayName": "UTM_Content",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "UTM_Term",
+              "displayName": "UTM_Term",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "a2acd6c7-1284-46c7-a624-4c0428b0b620",
+      "name": "Agregar a Google Sheets",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        0,
+        0
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "uniCNvqoYoprQPic",
+          "name": "SHEET INFO.HOLDINGS"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "email": "={{ $json.body['Escribe tu e-mail'] || $json.body['email'] || $json.body['Email'] }}",
+        "updateIfExists": true,
+        "additionalFields": {}
+      },
+      "id": "c9b56fa7-5159-4270-9295-266ab69c5ec0",
+      "name": "Crear o actualizar contacto ActiveCampaign",
+      "type": "n8n-nodes-base.activeCampaign",
+      "typeVersion": 1,
+      "position": [
+        0,
+        224
+      ],
+      "credentials": {
+        "activeCampaignApi": {
+          "id": "cD8HXjLCEpMAfwTo",
+          "name": "ActiveCampaign Biofamilias"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "contactList",
+        "listId": 114,
+        "contactId": "={{ $json.id }}"
+      },
+      "id": "a93de282-e6cf-4008-aff6-24887251fd79",
+      "name": "Agregar a lista ActiveCampaign",
+      "type": "n8n-nodes-base.activeCampaign",
+      "typeVersion": 1,
+      "position": [
+        240,
+        224
+      ],
+      "credentials": {
+        "activeCampaignApi": {
+          "id": "cD8HXjLCEpMAfwTo",
+          "name": "ActiveCampaign Biofamilias"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "repo_name": "backupn8n",
+  "repo_owner": "infoandresrendoncol",
+  "repo_path": "backup/",
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false,
+    "binaryMode": "separate"
+  },
+  "shared": [
+    {
+      "updatedAt": "2026-11-03T20:18:01.370Z",
+      "createdAt": "2026-11-03T20:18:01.370Z",
+      "role": "workflow:owner",
+      "workflowId": "4LxDMrncPYiTq3fF",
+      "projectId": "4KmSbENK2cGxsjaf"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2026-11-03T21:05:54.574Z",
+  "versionId": "4d0e9c75-8bbf-4277-8ce4-f07d495bdf4c"
+}
