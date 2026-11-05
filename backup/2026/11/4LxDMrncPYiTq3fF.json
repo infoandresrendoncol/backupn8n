@@ -1,15 +1,19 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2026-11-03T21:06:00.000Z",
-    "createdAt": "2026-11-03T21:05:54.575Z",
-    "versionId": "4d0e9c75-8bbf-4277-8ce4-f07d495bdf4c",
+    "updatedAt": "2026-11-04T18:02:43.000Z",
+    "createdAt": "2026-11-04T18:02:23.535Z",
+    "versionId": "573bd027-d8ef-493a-8557-cca7f7174e09",
     "workflowId": "4LxDMrncPYiTq3fF",
     "nodes": [
       {
         "parameters": {
+          "multipleMethods": false,
           "httpMethod": "POST",
           "path": "registro-bf-biofamilias",
+          "authentication": "none",
+          "responseMode": "onReceived",
+          "contentTypeNotice": "",
           "options": {}
         },
         "id": "04839488-58a1-4c6e-94a0-e0cbbd917d91",
@@ -24,6 +28,8 @@
       },
       {
         "parameters": {
+          "authentication": "oAuth2",
+          "resource": "sheet",
           "operation": "append",
           "documentId": {
             "__rl": true,
@@ -39,7 +45,7 @@
             "mappingMode": "defineBelow",
             "value": {
               "Fecha": "={{ $now.toFormat('yyyy-MM-dd HH:mm:ss') }}",
-              "Email": "={{ $json.body['Escribe tu e-mail'] || $json.body['email'] || $json.body['Email'] }}",
+              "Email": "={{ ($json.body[Object.keys($json.body).find(k => /mail/i.test(k))] || '').trim() }}",
               "UTM_Campaign": "={{ $json.body['UTM Campaign'] || '' }}",
               "UTM_Source": "={{ $json.body['UTM Source'] || '' }}",
               "UTM_Medium": "={{ $json.body['UTM Medium'] || '' }}",
@@ -132,7 +138,9 @@
       },
       {
         "parameters": {
-          "email": "={{ $json.body['Escribe tu e-mail'] || $json.body['email'] || $json.body['Email'] }}",
+          "resource": "contact",
+          "operation": "create",
+          "email": "={{ ($json.body[Object.keys($json.body).find(k => /mail/i.test(k))] || '').trim() }}",
           "updateIfExists": true,
           "additionalFields": {}
         },
@@ -154,6 +162,7 @@
       {
         "parameters": {
           "resource": "contactList",
+          "operation": "add",
           "listId": 114,
           "contactId": "={{ $json.id }}"
         },
@@ -204,11 +213,11 @@
     },
     "nodeGroups": [],
     "authors": "BE Online",
-    "name": "Version 4d0e9c75",
+    "name": "Version 573bd027",
     "description": "",
-    "autosaved": true
+    "autosaved": false
   },
-  "activeVersionId": "4d0e9c75-8bbf-4277-8ce4-f07d495bdf4c",
+  "activeVersionId": "573bd027-d8ef-493a-8557-cca7f7174e09",
   "connections": {
     "Webhook Elementor": {
       "main": [
@@ -248,8 +257,12 @@
   "nodes": [
     {
       "parameters": {
+        "multipleMethods": false,
         "httpMethod": "POST",
         "path": "registro-bf-biofamilias",
+        "authentication": "none",
+        "responseMode": "onReceived",
+        "contentTypeNotice": "",
         "options": {}
       },
       "id": "04839488-58a1-4c6e-94a0-e0cbbd917d91",
@@ -264,6 +277,8 @@
     },
     {
       "parameters": {
+        "authentication": "oAuth2",
+        "resource": "sheet",
         "operation": "append",
         "documentId": {
           "__rl": true,
@@ -279,7 +294,7 @@
           "mappingMode": "defineBelow",
           "value": {
             "Fecha": "={{ $now.toFormat('yyyy-MM-dd HH:mm:ss') }}",
-            "Email": "={{ $json.body['Escribe tu e-mail'] || $json.body['email'] || $json.body['Email'] }}",
+            "Email": "={{ ($json.body[Object.keys($json.body).find(k => /mail/i.test(k))] || '').trim() }}",
             "UTM_Campaign": "={{ $json.body['UTM Campaign'] || '' }}",
             "UTM_Source": "={{ $json.body['UTM Source'] || '' }}",
             "UTM_Medium": "={{ $json.body['UTM Medium'] || '' }}",
@@ -372,7 +387,9 @@
     },
     {
       "parameters": {
-        "email": "={{ $json.body['Escribe tu e-mail'] || $json.body['email'] || $json.body['Email'] }}",
+        "resource": "contact",
+        "operation": "create",
+        "email": "={{ ($json.body[Object.keys($json.body).find(k => /mail/i.test(k))] || '').trim() }}",
         "updateIfExists": true,
         "additionalFields": {}
       },
@@ -394,6 +411,7 @@
     {
       "parameters": {
         "resource": "contactList",
+        "operation": "add",
         "listId": 114,
         "contactId": "={{ $json.id }}"
       },
@@ -434,6 +452,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2026-11-03T21:05:54.574Z",
-  "versionId": "4d0e9c75-8bbf-4277-8ce4-f07d495bdf4c"
+  "updatedAt": "2026-11-04T18:02:23.529Z",
+  "versionId": "573bd027-d8ef-493a-8557-cca7f7174e09"
 }
