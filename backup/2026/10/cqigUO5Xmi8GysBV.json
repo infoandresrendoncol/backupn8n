@@ -1,19 +1,15 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2026-10-27T19:10:26.000Z",
-    "createdAt": "2026-10-27T18:33:09.500Z",
-    "versionId": "be5ded52-7ed3-460a-8cbb-7ef93f54416e",
+    "updatedAt": "2026-11-09T14:02:59.000Z",
+    "createdAt": "2026-11-09T12:43:59.771Z",
+    "versionId": "e064f793-4c95-47a4-a88a-223e756480f4",
     "workflowId": "cqigUO5Xmi8GysBV",
     "nodes": [
       {
         "parameters": {
-          "multipleMethods": false,
           "httpMethod": "POST",
           "path": "checkout-alex-bf-superoferta",
-          "authentication": "none",
-          "responseMode": "onReceived",
-          "contentTypeNotice": "",
           "options": {}
         },
         "id": "2397efc0-0ca2-4bb5-9116-ee69a8cec1f6",
@@ -22,13 +18,12 @@
         "typeVersion": 2.1,
         "position": [
           0,
-          300
+          304
         ],
         "webhookId": "3f4d5177-b4a9-4f74-abcf-8ad1aa077eff"
       },
       {
         "parameters": {
-          "mode": "rules",
           "rules": {
             "values": [
               {
@@ -51,8 +46,7 @@
                     }
                   ],
                   "combinator": "and"
-                },
-                "renameOutput": false
+                }
               },
               {
                 "conditions": {
@@ -74,8 +68,7 @@
                     }
                   ],
                   "combinator": "and"
-                },
-                "renameOutput": false
+                }
               },
               {
                 "conditions": {
@@ -97,8 +90,7 @@
                     }
                   ],
                   "combinator": "and"
-                },
-                "renameOutput": false
+                }
               },
               {
                 "conditions": {
@@ -120,8 +112,7 @@
                     }
                   ],
                   "combinator": "and"
-                },
-                "renameOutput": false
+                }
               },
               {
                 "conditions": {
@@ -143,8 +134,7 @@
                     }
                   ],
                   "combinator": "and"
-                },
-                "renameOutput": false
+                }
               },
               {
                 "conditions": {
@@ -166,8 +156,7 @@
                     }
                   ],
                   "combinator": "and"
-                },
-                "renameOutput": false
+                }
               },
               {
                 "conditions": {
@@ -189,8 +178,7 @@
                     }
                   ],
                   "combinator": "and"
-                },
-                "renameOutput": false
+                }
               },
               {
                 "conditions": {
@@ -212,8 +200,7 @@
                     }
                   ],
                   "combinator": "and"
-                },
-                "renameOutput": false
+                }
               }
             ]
           },
@@ -224,13 +211,12 @@
         "type": "n8n-nodes-base.switch",
         "typeVersion": 3.2,
         "position": [
-          550,
-          300
+          560,
+          304
         ]
       },
       {
         "parameters": {
-          "mode": "rules",
           "rules": {
             "values": [
               {
@@ -253,12 +239,10 @@
                     }
                   ],
                   "combinator": "and"
-                },
-                "renameOutput": false
+                }
               }
             ]
           },
-          "looseTypeValidation": false,
           "options": {}
         },
         "id": "26a15069-f48f-49b9-a600-7d0bba52c866",
@@ -266,196 +250,138 @@
         "type": "n8n-nodes-base.switch",
         "typeVersion": 3.4,
         "position": [
-          850,
-          120
+          864,
+          128
         ]
       },
       {
         "parameters": {
-          "curlImport": "",
           "method": "POST",
           "url": "https://unnichat.com.br/a/start/hm7WGulBrQ3A3DzJ6lL3",
-          "authentication": "none",
-          "provideSslCertificates": false,
-          "sendQuery": false,
-          "sendHeaders": false,
           "sendBody": true,
-          "contentType": "json",
           "specifyBody": "json",
           "jsonBody": "={\n  \"id\": \"{{ $json.id || Math.floor(Math.random() * 1000000).toString() }}\",\n  \"data\": {\n    \"number\": \"{{ $('Webhook').item.json.body.data.buyer.checkout_phone }}\",\n    \"tag\": \"global\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
-          "options": {},
-          "infoMessage": ""
+          "options": {}
         },
         "id": "3ffa714f-5703-4ecd-86da-fe6d1dfe475e",
         "name": "Unnichat - Espera de pago",
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.2,
         "position": [
-          1150,
-          -60
+          1152,
+          -64
         ]
       },
       {
         "parameters": {
-          "curlImport": "",
           "method": "POST",
           "url": "https://unnichat.com.br/a/start/hMldjDF0BrtOJ3TBVyPW",
-          "authentication": "none",
-          "provideSslCertificates": false,
-          "sendQuery": false,
-          "sendHeaders": false,
           "sendBody": true,
-          "contentType": "json",
           "specifyBody": "json",
           "jsonBody": "={\n  \"id\": \"{{ $json.id || Math.floor(Math.random() * 1000000).toString() }}\",\n  \"data\": {\n    \"number\": \"{{ $('Webhook').item.json.body.data.buyer.checkout_phone }}\",\n    \"tag\": \"global\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
-          "options": {},
-          "infoMessage": ""
+          "options": {}
         },
         "id": "cd33ab3b-3e26-4a3a-b8ce-6709a60c81b0",
         "name": "Unnichat - Compra aprobada",
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.2,
         "position": [
-          1150,
-          100
+          1152,
+          112
         ]
       },
       {
         "parameters": {
-          "curlImport": "",
           "method": "POST",
           "url": "https://unnichat.com.br/a/start/XlmODiRH3rqZSTDdomid",
-          "authentication": "none",
-          "provideSslCertificates": false,
-          "sendQuery": false,
-          "sendHeaders": false,
           "sendBody": true,
-          "contentType": "json",
           "specifyBody": "json",
           "jsonBody": "={\n  \"id\": \"{{ $json.id || Math.floor(Math.random() * 1000000).toString() }}\",\n  \"data\": {\n    \"number\": \"{{ $('Webhook').item.json.body.data.buyer.checkout_phone }}\",\n    \"tag\": \"global\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
-          "options": {},
-          "infoMessage": ""
+          "options": {}
         },
         "id": "9f9a3925-2714-4e41-8144-5f24818fc693",
         "name": "Unnichat - Compra cancelada",
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.2,
         "position": [
-          1150,
-          260
+          1152,
+          272
         ]
       },
       {
         "parameters": {
-          "curlImport": "",
           "method": "POST",
           "url": "https://unnichat.com.br/a/start/0Dmm1wB74kGoTFMVttyB",
-          "authentication": "none",
-          "provideSslCertificates": false,
-          "sendQuery": false,
-          "sendHeaders": false,
           "sendBody": true,
-          "contentType": "json",
           "specifyBody": "json",
           "jsonBody": "={\n  \"id\": \"{{ $json.id || Math.floor(Math.random() * 1000000).toString() }}\",\n  \"data\": {\n    \"number\": \"{{ $('Webhook').item.json.body.data.buyer.phone }}\",\n    \"tag\": \"global\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
-          "options": {},
-          "infoMessage": ""
+          "options": {}
         },
         "id": "15b59226-07a9-4605-b571-5a449d5afe43",
         "name": "Unnichat - Abandono de carrito",
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.2,
         "position": [
-          1150,
-          420
+          1152,
+          432
         ]
       },
       {
         "parameters": {
-          "curlImport": "",
           "method": "POST",
           "url": "https://unnichat.com.br/a/start/WrPEV344a2iGy950nLAj",
-          "authentication": "none",
-          "provideSslCertificates": false,
-          "sendQuery": false,
-          "sendHeaders": false,
           "sendBody": true,
-          "contentType": "json",
           "specifyBody": "json",
           "jsonBody": "={\n  \"id\": \"{{ $json.id || Math.floor(Math.random() * 1000000).toString() }}\",\n  \"data\": {\n    \"number\": \"{{ $('Webhook').item.json.body.data.buyer.checkout_phone }}\",\n    \"tag\": \"global\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
-          "options": {},
-          "infoMessage": ""
+          "options": {}
         },
         "id": "630acf29-1848-442b-86a9-f8e415289333",
         "name": "Unnichat - Pago atrasado",
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.2,
         "position": [
-          1150,
-          580
+          1152,
+          592
         ]
       },
       {
         "parameters": {
-          "curlImport": "",
           "method": "POST",
           "url": "https://unnichat.com.br/a/start/3tgKJ3rCA9irfeJQDXBU",
-          "authentication": "none",
-          "provideSslCertificates": false,
-          "sendQuery": false,
-          "sendHeaders": false,
           "sendBody": true,
-          "contentType": "json",
           "specifyBody": "json",
           "jsonBody": "={\n  \"id\": \"{{ $json.id || Math.floor(Math.random() * 1000000).toString() }}\",\n  \"data\": {\n    \"number\": \"{{ $('Webhook').item.json.body.data.buyer.checkout_phone }}\",\n    \"tag\": \"global\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
-          "options": {},
-          "infoMessage": ""
+          "options": {}
         },
         "id": "83732b23-35fb-42bf-8e88-cf6cadd19df2",
         "name": "Unnichat - Solicitud de reembolso",
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.2,
         "position": [
-          1150,
-          740
+          1152,
+          752
         ]
       },
       {
         "parameters": {
-          "curlImport": "",
           "method": "POST",
           "url": "https://unnichat.com.br/a/start/TyOl0viybisLEebl7Kxu",
-          "authentication": "none",
-          "provideSslCertificates": false,
-          "sendQuery": false,
-          "sendHeaders": false,
           "sendBody": true,
-          "contentType": "json",
           "specifyBody": "json",
           "jsonBody": "={\n  \"id\": \"{{ $json.id || Math.floor(Math.random() * 1000000).toString() }}\",\n  \"data\": {\n    \"number\": \"{{ $('Webhook').item.json.body.data.buyer.checkout_phone }}\",\n    \"tag\": \"global\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
-          "options": {},
-          "infoMessage": ""
+          "options": {}
         },
         "id": "9098a0df-ec7d-4352-850f-fd72e7f815f0",
         "name": "Unnichat - Reembolso procesado",
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.2,
         "position": [
-          1150,
-          900
+          1152,
+          912
         ]
       },
       {
-        "id": "0c839f01-87c9-4aa6-90da-416e7dcc953e",
-        "name": "Producto BF Superoferta",
-        "type": "n8n-nodes-base.switch",
-        "typeVersion": 3.2,
-        "position": [
-          250,
-          300
-        ],
         "parameters": {
-          "mode": "rules",
           "rules": {
             "values": [
               {
@@ -487,14 +413,55 @@
                     }
                   ],
                   "combinator": "or"
-                },
-                "renameOutput": false
+                }
               }
             ]
           },
           "looseTypeValidation": true,
           "options": {}
-        }
+        },
+        "id": "0c839f01-87c9-4aa6-90da-416e7dcc953e",
+        "name": "Producto BF Superoferta",
+        "type": "n8n-nodes-base.switch",
+        "typeVersion": 3.2,
+        "position": [
+          256,
+          304
+        ]
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "=https://api.flodesk.com/v1/subscribers",
+          "authentication": "genericCredentialType",
+          "genericAuthType": "httpBasicAuth",
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "={\n  \"email\": \"{{ $('Webhook').item.json.body.data.buyer.email }}\",\n  \"first_name\": \"{{ $('Webhook').item.json.body.data.buyer.first_name }}\",\n  \"last_name\": \"{{ $('Webhook').item.json.body.data.buyer.last_name }}\",\n  \"segment_ids\": [\"6aeb5ff675536c02f65165e1\"]\n}",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          1440,
+          -128
+        ],
+        "id": "9558750f-8592-4cc7-bd65-6f93fe798fb4",
+        "name": "Flodesk - Compradores BF 2026",
+        "retryOnFail": false,
+        "maxTries": 5,
+        "waitBetweenTries": 5000,
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "hSaP4d59L4OoJOce",
+            "name": "Flodesk Alex"
+          },
+          "httpBasicAuth": {
+            "id": "QvDqcChg1nnswrDt",
+            "name": "FLODESK ALEX"
+          }
+        },
+        "onError": "continueRegularOutput"
       }
     ],
     "connections": {
@@ -570,6 +537,11 @@
               "node": "Unnichat - Compra aprobada",
               "type": "main",
               "index": 0
+            },
+            {
+              "node": "Flodesk - Compradores BF 2026",
+              "type": "main",
+              "index": 0
             }
           ]
         ]
@@ -584,15 +556,20 @@
             }
           ]
         ]
+      },
+      "Unnichat - Compra aprobada": {
+        "main": [
+          []
+        ]
       }
     },
     "nodeGroups": [],
     "authors": "BE Online",
-    "name": "Version be5ded52",
+    "name": "Version e064f793",
     "description": "",
-    "autosaved": false
+    "autosaved": true
   },
-  "activeVersionId": "be5ded52-7ed3-460a-8cbb-7ef93f54416e",
+  "activeVersionId": "e064f793-4c95-47a4-a88a-223e756480f4",
   "connections": {
     "Webhook": {
       "main": [
@@ -666,6 +643,11 @@
             "node": "Unnichat - Compra aprobada",
             "type": "main",
             "index": 0
+          },
+          {
+            "node": "Flodesk - Compradores BF 2026",
+            "type": "main",
+            "index": 0
           }
         ]
       ]
@@ -680,6 +662,11 @@
           }
         ]
       ]
+    },
+    "Unnichat - Compra aprobada": {
+      "main": [
+        []
+      ]
     }
   },
   "createdAt": "2026-10-27T18:32:43.950Z",
@@ -690,12 +677,8 @@
   "nodes": [
     {
       "parameters": {
-        "multipleMethods": false,
         "httpMethod": "POST",
         "path": "checkout-alex-bf-superoferta",
-        "authentication": "none",
-        "responseMode": "onReceived",
-        "contentTypeNotice": "",
         "options": {}
       },
       "id": "2397efc0-0ca2-4bb5-9116-ee69a8cec1f6",
@@ -704,13 +687,12 @@
       "typeVersion": 2.1,
       "position": [
         0,
-        300
+        304
       ],
       "webhookId": "3f4d5177-b4a9-4f74-abcf-8ad1aa077eff"
     },
     {
       "parameters": {
-        "mode": "rules",
         "rules": {
           "values": [
             {
@@ -733,8 +715,7 @@
                   }
                 ],
                 "combinator": "and"
-              },
-              "renameOutput": false
+              }
             },
             {
               "conditions": {
@@ -756,8 +737,7 @@
                   }
                 ],
                 "combinator": "and"
-              },
-              "renameOutput": false
+              }
             },
             {
               "conditions": {
@@ -779,8 +759,7 @@
                   }
                 ],
                 "combinator": "and"
-              },
-              "renameOutput": false
+              }
             },
             {
               "conditions": {
@@ -802,8 +781,7 @@
                   }
                 ],
                 "combinator": "and"
-              },
-              "renameOutput": false
+              }
             },
             {
               "conditions": {
@@ -825,8 +803,7 @@
                   }
                 ],
                 "combinator": "and"
-              },
-              "renameOutput": false
+              }
             },
             {
               "conditions": {
@@ -848,8 +825,7 @@
                   }
                 ],
                 "combinator": "and"
-              },
-              "renameOutput": false
+              }
             },
             {
               "conditions": {
@@ -871,8 +847,7 @@
                   }
                 ],
                 "combinator": "and"
-              },
-              "renameOutput": false
+              }
             },
             {
               "conditions": {
@@ -894,8 +869,7 @@
                   }
                 ],
                 "combinator": "and"
-              },
-              "renameOutput": false
+              }
             }
           ]
         },
@@ -906,13 +880,12 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3.2,
       "position": [
-        550,
-        300
+        560,
+        304
       ]
     },
     {
       "parameters": {
-        "mode": "rules",
         "rules": {
           "values": [
             {
@@ -935,12 +908,10 @@
                   }
                 ],
                 "combinator": "and"
-              },
-              "renameOutput": false
+              }
             }
           ]
         },
-        "looseTypeValidation": false,
         "options": {}
       },
       "id": "26a15069-f48f-49b9-a600-7d0bba52c866",
@@ -948,196 +919,138 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3.4,
       "position": [
-        850,
-        120
+        864,
+        128
       ]
     },
     {
       "parameters": {
-        "curlImport": "",
         "method": "POST",
         "url": "https://unnichat.com.br/a/start/hm7WGulBrQ3A3DzJ6lL3",
-        "authentication": "none",
-        "provideSslCertificates": false,
-        "sendQuery": false,
-        "sendHeaders": false,
         "sendBody": true,
-        "contentType": "json",
         "specifyBody": "json",
         "jsonBody": "={\n  \"id\": \"{{ $json.id || Math.floor(Math.random() * 1000000).toString() }}\",\n  \"data\": {\n    \"number\": \"{{ $('Webhook').item.json.body.data.buyer.checkout_phone }}\",\n    \"tag\": \"global\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
-        "options": {},
-        "infoMessage": ""
+        "options": {}
       },
       "id": "3ffa714f-5703-4ecd-86da-fe6d1dfe475e",
       "name": "Unnichat - Espera de pago",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        1150,
-        -60
+        1152,
+        -64
       ]
     },
     {
       "parameters": {
-        "curlImport": "",
         "method": "POST",
         "url": "https://unnichat.com.br/a/start/hMldjDF0BrtOJ3TBVyPW",
-        "authentication": "none",
-        "provideSslCertificates": false,
-        "sendQuery": false,
-        "sendHeaders": false,
         "sendBody": true,
-        "contentType": "json",
         "specifyBody": "json",
         "jsonBody": "={\n  \"id\": \"{{ $json.id || Math.floor(Math.random() * 1000000).toString() }}\",\n  \"data\": {\n    \"number\": \"{{ $('Webhook').item.json.body.data.buyer.checkout_phone }}\",\n    \"tag\": \"global\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
-        "options": {},
-        "infoMessage": ""
+        "options": {}
       },
       "id": "cd33ab3b-3e26-4a3a-b8ce-6709a60c81b0",
       "name": "Unnichat - Compra aprobada",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        1150,
-        100
+        1152,
+        112
       ]
     },
     {
       "parameters": {
-        "curlImport": "",
         "method": "POST",
         "url": "https://unnichat.com.br/a/start/XlmODiRH3rqZSTDdomid",
-        "authentication": "none",
-        "provideSslCertificates": false,
-        "sendQuery": false,
-        "sendHeaders": false,
         "sendBody": true,
-        "contentType": "json",
         "specifyBody": "json",
         "jsonBody": "={\n  \"id\": \"{{ $json.id || Math.floor(Math.random() * 1000000).toString() }}\",\n  \"data\": {\n    \"number\": \"{{ $('Webhook').item.json.body.data.buyer.checkout_phone }}\",\n    \"tag\": \"global\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
-        "options": {},
-        "infoMessage": ""
+        "options": {}
       },
       "id": "9f9a3925-2714-4e41-8144-5f24818fc693",
       "name": "Unnichat - Compra cancelada",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        1150,
-        260
+        1152,
+        272
       ]
     },
     {
       "parameters": {
-        "curlImport": "",
         "method": "POST",
         "url": "https://unnichat.com.br/a/start/0Dmm1wB74kGoTFMVttyB",
-        "authentication": "none",
-        "provideSslCertificates": false,
-        "sendQuery": false,
-        "sendHeaders": false,
         "sendBody": true,
-        "contentType": "json",
         "specifyBody": "json",
         "jsonBody": "={\n  \"id\": \"{{ $json.id || Math.floor(Math.random() * 1000000).toString() }}\",\n  \"data\": {\n    \"number\": \"{{ $('Webhook').item.json.body.data.buyer.phone }}\",\n    \"tag\": \"global\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
-        "options": {},
-        "infoMessage": ""
+        "options": {}
       },
       "id": "15b59226-07a9-4605-b571-5a449d5afe43",
       "name": "Unnichat - Abandono de carrito",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        1150,
-        420
+        1152,
+        432
       ]
     },
     {
       "parameters": {
-        "curlImport": "",
         "method": "POST",
         "url": "https://unnichat.com.br/a/start/WrPEV344a2iGy950nLAj",
-        "authentication": "none",
-        "provideSslCertificates": false,
-        "sendQuery": false,
-        "sendHeaders": false,
         "sendBody": true,
-        "contentType": "json",
         "specifyBody": "json",
         "jsonBody": "={\n  \"id\": \"{{ $json.id || Math.floor(Math.random() * 1000000).toString() }}\",\n  \"data\": {\n    \"number\": \"{{ $('Webhook').item.json.body.data.buyer.checkout_phone }}\",\n    \"tag\": \"global\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
-        "options": {},
-        "infoMessage": ""
+        "options": {}
       },
       "id": "630acf29-1848-442b-86a9-f8e415289333",
       "name": "Unnichat - Pago atrasado",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        1150,
-        580
+        1152,
+        592
       ]
     },
     {
       "parameters": {
-        "curlImport": "",
         "method": "POST",
         "url": "https://unnichat.com.br/a/start/3tgKJ3rCA9irfeJQDXBU",
-        "authentication": "none",
-        "provideSslCertificates": false,
-        "sendQuery": false,
-        "sendHeaders": false,
         "sendBody": true,
-        "contentType": "json",
         "specifyBody": "json",
         "jsonBody": "={\n  \"id\": \"{{ $json.id || Math.floor(Math.random() * 1000000).toString() }}\",\n  \"data\": {\n    \"number\": \"{{ $('Webhook').item.json.body.data.buyer.checkout_phone }}\",\n    \"tag\": \"global\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
-        "options": {},
-        "infoMessage": ""
+        "options": {}
       },
       "id": "83732b23-35fb-42bf-8e88-cf6cadd19df2",
       "name": "Unnichat - Solicitud de reembolso",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        1150,
-        740
+        1152,
+        752
       ]
     },
     {
       "parameters": {
-        "curlImport": "",
         "method": "POST",
         "url": "https://unnichat.com.br/a/start/TyOl0viybisLEebl7Kxu",
-        "authentication": "none",
-        "provideSslCertificates": false,
-        "sendQuery": false,
-        "sendHeaders": false,
         "sendBody": true,
-        "contentType": "json",
         "specifyBody": "json",
         "jsonBody": "={\n  \"id\": \"{{ $json.id || Math.floor(Math.random() * 1000000).toString() }}\",\n  \"data\": {\n    \"number\": \"{{ $('Webhook').item.json.body.data.buyer.checkout_phone }}\",\n    \"tag\": \"global\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
-        "options": {},
-        "infoMessage": ""
+        "options": {}
       },
       "id": "9098a0df-ec7d-4352-850f-fd72e7f815f0",
       "name": "Unnichat - Reembolso procesado",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        1150,
-        900
+        1152,
+        912
       ]
     },
     {
-      "id": "0c839f01-87c9-4aa6-90da-416e7dcc953e",
-      "name": "Producto BF Superoferta",
-      "type": "n8n-nodes-base.switch",
-      "typeVersion": 3.2,
-      "position": [
-        250,
-        300
-      ],
       "parameters": {
-        "mode": "rules",
         "rules": {
           "values": [
             {
@@ -1169,22 +1082,64 @@
                   }
                 ],
                 "combinator": "or"
-              },
-              "renameOutput": false
+              }
             }
           ]
         },
         "looseTypeValidation": true,
         "options": {}
-      }
+      },
+      "id": "0c839f01-87c9-4aa6-90da-416e7dcc953e",
+      "name": "Producto BF Superoferta",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        256,
+        304
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.flodesk.com/v1/subscribers",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"email\": \"{{ $('Webhook').item.json.body.data.buyer.email }}\",\n  \"first_name\": \"{{ $('Webhook').item.json.body.data.buyer.first_name }}\",\n  \"last_name\": \"{{ $('Webhook').item.json.body.data.buyer.last_name }}\",\n  \"segment_ids\": [\"6aeb5ff675536c02f65165e1\"]\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1440,
+        -128
+      ],
+      "id": "9558750f-8592-4cc7-bd65-6f93fe798fb4",
+      "name": "Flodesk - Compradores BF 2026",
+      "retryOnFail": false,
+      "maxTries": 5,
+      "waitBetweenTries": 5000,
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "hSaP4d59L4OoJOce",
+          "name": "Flodesk Alex"
+        },
+        "httpBasicAuth": {
+          "id": "QvDqcChg1nnswrDt",
+          "name": "FLODESK ALEX"
+        }
+      },
+      "onError": "continueRegularOutput"
     }
   ],
-  "pinData": null,
+  "pinData": {},
   "repo_name": "backupn8n",
   "repo_owner": "infoandresrendoncol",
   "repo_path": "backup/",
   "settings": {
-    "executionOrder": "v1"
+    "executionOrder": "v1",
+    "binaryMode": "separate"
   },
   "shared": [
     {
@@ -1198,6 +1153,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2026-10-27T18:33:09.498Z",
-  "versionId": "be5ded52-7ed3-460a-8cbb-7ef93f54416e"
+  "updatedAt": "2026-11-09T12:43:59.768Z",
+  "versionId": "e064f793-4c95-47a4-a88a-223e756480f4"
 }
