@@ -1,0 +1,1072 @@
+{
+  "active": true,
+  "activeVersion": {
+    "updatedAt": "2026-11-10T19:14:25.000Z",
+    "createdAt": "2026-11-10T19:03:11.070Z",
+    "versionId": "5ecb5771-ba4c-475a-92e8-21ff4ae0287b",
+    "workflowId": "f922dFUJX7iOHL5L",
+    "nodes": [
+      {
+        "parameters": {
+          "httpMethod": "POST",
+          "path": "checkout-biofamilias-bf-herbal",
+          "options": {}
+        },
+        "name": "Webhook",
+        "type": "n8n-nodes-base.webhook",
+        "typeVersion": 2.1,
+        "position": [
+          0,
+          304
+        ],
+        "webhookId": "a2394d7a-331a-40ca-9661-f8e7bc6f7dcb",
+        "id": "f0e83832-9057-42c6-83d2-4c242db859db"
+      },
+      {
+        "parameters": {
+          "rules": {
+            "values": [
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 2
+                  },
+                  "conditions": [
+                    {
+                      "id": "70dd031f-aa47-41a8-b0f1-d4ddfa905d83",
+                      "leftValue": "={{ $('Webhook').item.json.body.event }}",
+                      "rightValue": "PURCHASE_BILLET_PRINTED",
+                      "operator": {
+                        "type": "string",
+                        "operation": "equals"
+                      }
+                    }
+                  ],
+                  "combinator": "and"
+                }
+              },
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 2
+                  },
+                  "conditions": [
+                    {
+                      "id": "8adc6dd9-3476-4c82-8bcf-a59fcbb4bd3a",
+                      "leftValue": "={{ $('Webhook').item.json.body.event }}",
+                      "rightValue": "PURCHASE_COMPLETE",
+                      "operator": {
+                        "type": "string",
+                        "operation": "equals"
+                      }
+                    }
+                  ],
+                  "combinator": "and"
+                }
+              },
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 2
+                  },
+                  "conditions": [
+                    {
+                      "id": "02cea948-a3fd-4891-984e-28d2f418ab86",
+                      "leftValue": "={{ $('Webhook').item.json.body.event }}",
+                      "rightValue": "PURCHASE_APPROVED",
+                      "operator": {
+                        "type": "string",
+                        "operation": "equals"
+                      }
+                    }
+                  ],
+                  "combinator": "and"
+                }
+              },
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 2
+                  },
+                  "conditions": [
+                    {
+                      "id": "56e3cffb-1d4f-491b-997e-1b52c64639ef",
+                      "leftValue": "={{ $('Webhook').item.json.body.event }}",
+                      "rightValue": "PURCHASE_CANCELED",
+                      "operator": {
+                        "type": "string",
+                        "operation": "equals"
+                      }
+                    }
+                  ],
+                  "combinator": "and"
+                }
+              },
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 2
+                  },
+                  "conditions": [
+                    {
+                      "id": "4a0c1e62-ca54-473f-9949-15596ecb99d0",
+                      "leftValue": "={{ $('Webhook').item.json.body.event }}",
+                      "rightValue": "PURCHASE_OUT_OF_SHOPPING_CART",
+                      "operator": {
+                        "type": "string",
+                        "operation": "equals"
+                      }
+                    }
+                  ],
+                  "combinator": "and"
+                }
+              },
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 2
+                  },
+                  "conditions": [
+                    {
+                      "id": "fc8212a7-d331-4541-ad99-e7c38587c94e",
+                      "leftValue": "={{ $('Webhook').item.json.body.event }}",
+                      "rightValue": "PURCHASE_DELAYED",
+                      "operator": {
+                        "type": "string",
+                        "operation": "equals"
+                      }
+                    }
+                  ],
+                  "combinator": "and"
+                }
+              },
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 2
+                  },
+                  "conditions": [
+                    {
+                      "id": "ddfadc16-f4ba-4ef6-b3ea-2ad70f5819cd",
+                      "leftValue": "={{ $('Webhook').item.json.body.event }}",
+                      "rightValue": "PURCHASE_PROTEST",
+                      "operator": {
+                        "type": "string",
+                        "operation": "equals"
+                      }
+                    }
+                  ],
+                  "combinator": "and"
+                }
+              },
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 2
+                  },
+                  "conditions": [
+                    {
+                      "id": "f0452d9c-1c8b-4a10-8e23-3b23442deda9",
+                      "leftValue": "={{ $('Webhook').item.json.body.event }}",
+                      "rightValue": "PURCHASE_REFUNDED",
+                      "operator": {
+                        "type": "string",
+                        "operation": "equals"
+                      }
+                    }
+                  ],
+                  "combinator": "and"
+                }
+              }
+            ]
+          },
+          "options": {}
+        },
+        "name": "Evento Checkout - BF Herbal",
+        "type": "n8n-nodes-base.switch",
+        "typeVersion": 3.2,
+        "position": [
+          250,
+          304
+        ],
+        "id": "70690cce-e063-4f67-aeed-d02562446c94"
+      },
+      {
+        "parameters": {
+          "rules": {
+            "values": [
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 3
+                  },
+                  "conditions": [
+                    {
+                      "id": "2cd6978e-22d1-4180-b7de-ba1b4fafd82e",
+                      "leftValue": "={{ $('Webhook').item.json.body.data.purchase.recurrence_number ?? 1 }}",
+                      "rightValue": 1,
+                      "operator": {
+                        "type": "number",
+                        "operation": "equals"
+                      }
+                    }
+                  ],
+                  "combinator": "and"
+                }
+              }
+            ]
+          },
+          "options": {}
+        },
+        "name": "Primera cuota",
+        "type": "n8n-nodes-base.switch",
+        "typeVersion": 3.4,
+        "position": [
+          864,
+          128
+        ],
+        "id": "e3717901-d66b-4cf1-8cfa-3a2eb21a5645"
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "https://unnichat.com.br/a/start/kNb8gLG8mo8VjTDFaC6Z",
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "={\n  \"id\": \"{{ $json.id || Math.floor(Math.random() * 1000000).toString() }}\",\n  \"data\": {\n    \"number\": \"{{ $('Webhook').item.json.body.data.buyer.checkout_phone }}\",\n    \"tag\": \"global\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
+          "options": {}
+        },
+        "name": "Unnichat - Espera de pago",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          1152,
+          -64
+        ],
+        "id": "37626799-8685-47ae-9a04-b7a5be2a8645"
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "https://unnichat.com.br/a/start/nkeH9oDPifl4kiYo0DxV",
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "={\n  \"id\": \"{{ $json.id || Math.floor(Math.random() * 1000000).toString() }}\",\n  \"data\": {\n    \"number\": \"{{ $('Webhook').item.json.body.data.buyer.checkout_phone }}\",\n    \"tag\": \"global\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
+          "options": {}
+        },
+        "name": "Unnichat - Compra aprobada",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          1152,
+          112
+        ],
+        "id": "1aa8508b-11b2-4f83-94df-a829cc776966"
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "https://unnichat.com.br/a/start/SB7eP9oNQj1SqF407EVU",
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "={\n  \"id\": \"{{ $json.id || Math.floor(Math.random() * 1000000).toString() }}\",\n  \"data\": {\n    \"number\": \"{{ $('Webhook').item.json.body.data.buyer.checkout_phone }}\",\n    \"tag\": \"global\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
+          "options": {}
+        },
+        "name": "Unnichat - Compra cancelada",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          1152,
+          272
+        ],
+        "id": "2090386a-1196-4033-8530-152fe695ec6c"
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "https://unnichat.com.br/a/start/4mTbycqQC4rLoC9uQIEU",
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "={\n  \"id\": \"{{ $json.id || Math.floor(Math.random() * 1000000).toString() }}\",\n  \"data\": {\n    \"number\": \"{{ $('Webhook').item.json.body.data.buyer.phone }}\",\n    \"tag\": \"global\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
+          "options": {}
+        },
+        "name": "Unnichat - Abandono de carrito",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          1152,
+          432
+        ],
+        "id": "cbd578f4-ae69-42ca-ac61-47909bfc478e"
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "https://unnichat.com.br/a/start/FH8ziqZuNbCxZEAuuejn",
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "={\n  \"id\": \"{{ $json.id || Math.floor(Math.random() * 1000000).toString() }}\",\n  \"data\": {\n    \"number\": \"{{ $('Webhook').item.json.body.data.buyer.checkout_phone }}\",\n    \"tag\": \"global\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
+          "options": {}
+        },
+        "name": "Unnichat - Pago atrasado",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          1152,
+          592
+        ],
+        "id": "9ebb3f4c-78e3-477c-a9d0-f18d360b5ebd"
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "https://unnichat.com.br/a/start/cFt3QA4EYN0aufMzsa5P",
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "={\n  \"id\": \"{{ $json.id || Math.floor(Math.random() * 1000000).toString() }}\",\n  \"data\": {\n    \"number\": \"{{ $('Webhook').item.json.body.data.buyer.checkout_phone }}\",\n    \"tag\": \"global\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
+          "options": {}
+        },
+        "name": "Unnichat - Solicitud de reembolso",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          1152,
+          752
+        ],
+        "id": "ee8d9d91-3c15-4e00-a328-923d54d38709"
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "https://unnichat.com.br/a/start/GUBYPZ1qluMRHka87pQd",
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "={\n  \"id\": \"{{ $json.id || Math.floor(Math.random() * 1000000).toString() }}\",\n  \"data\": {\n    \"number\": \"{{ $('Webhook').item.json.body.data.buyer.checkout_phone }}\",\n    \"tag\": \"global\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
+          "options": {}
+        },
+        "name": "Unnichat - Reembolso procesado",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          1152,
+          912
+        ],
+        "id": "b69384b2-c4f4-4cf4-997c-41f350333209"
+      },
+      {
+        "id": "3453f499-166b-4a6c-a6d5-1b4e3d2ef4f4",
+        "name": "ActiveCampaign - Crear o actualizar contacto",
+        "type": "n8n-nodes-base.activeCampaign",
+        "typeVersion": 1,
+        "position": [
+          1152,
+          -248
+        ],
+        "parameters": {
+          "resource": "contact",
+          "operation": "create",
+          "email": "={{ $('Webhook').item.json.body.data.buyer.email }}",
+          "updateIfExists": true,
+          "additionalFields": {}
+        },
+        "credentials": {
+          "activeCampaignApi": {
+            "id": "cD8HXjLCEpMAfwTo",
+            "name": "ActiveCampaign Biofamilias"
+          }
+        }
+      },
+      {
+        "id": "b95cd72c-c820-47d0-b7d1-333101878ebe",
+        "name": "ActiveCampaign - Compradores BF Herbal",
+        "type": "n8n-nodes-base.activeCampaign",
+        "typeVersion": 1,
+        "position": [
+          1402,
+          -248
+        ],
+        "parameters": {
+          "resource": "contactList",
+          "operation": "add",
+          "listId": 115,
+          "contactId": "={{ $json.id }}"
+        },
+        "credentials": {
+          "activeCampaignApi": {
+            "id": "cD8HXjLCEpMAfwTo",
+            "name": "ActiveCampaign Biofamilias"
+          }
+        }
+      }
+    ],
+    "connections": {
+      "Webhook": {
+        "main": [
+          [
+            {
+              "node": "Evento Checkout - BF Herbal",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Evento Checkout - BF Herbal": {
+        "main": [
+          [
+            {
+              "node": "Unnichat - Espera de pago",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [],
+          [
+            {
+              "node": "Primera cuota",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Unnichat - Compra cancelada",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Unnichat - Abandono de carrito",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Unnichat - Pago atrasado",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Unnichat - Solicitud de reembolso",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Unnichat - Reembolso procesado",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Primera cuota": {
+        "main": [
+          [
+            {
+              "node": "Unnichat - Compra aprobada",
+              "type": "main",
+              "index": 0
+            },
+            {
+              "node": "ActiveCampaign - Crear o actualizar contacto",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "ActiveCampaign - Crear o actualizar contacto": {
+        "main": [
+          [
+            {
+              "node": "ActiveCampaign - Compradores BF Herbal",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "nodeGroups": [],
+    "authors": "BE Online",
+    "name": "Version 5ecb5771",
+    "description": "",
+    "autosaved": false
+  },
+  "activeVersionId": "5ecb5771-ba4c-475a-92e8-21ff4ae0287b",
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Evento Checkout - BF Herbal",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Evento Checkout - BF Herbal": {
+      "main": [
+        [
+          {
+            "node": "Unnichat - Espera de pago",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [],
+        [
+          {
+            "node": "Primera cuota",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Unnichat - Compra cancelada",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Unnichat - Abandono de carrito",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Unnichat - Pago atrasado",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Unnichat - Solicitud de reembolso",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Unnichat - Reembolso procesado",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Primera cuota": {
+      "main": [
+        [
+          {
+            "node": "Unnichat - Compra aprobada",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "ActiveCampaign - Crear o actualizar contacto",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "ActiveCampaign - Crear o actualizar contacto": {
+      "main": [
+        [
+          {
+            "node": "ActiveCampaign - Compradores BF Herbal",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2026-11-10T19:02:55.830Z",
+  "id": "f922dFUJX7iOHL5L",
+  "isArchived": false,
+  "meta": null,
+  "name": "BioFamilias - Eventos Checkout - BF Herbal",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "checkout-biofamilias-bf-herbal",
+        "options": {}
+      },
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        304
+      ],
+      "webhookId": "a2394d7a-331a-40ca-9661-f8e7bc6f7dcb",
+      "id": "f0e83832-9057-42c6-83d2-4c242db859db"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "70dd031f-aa47-41a8-b0f1-d4ddfa905d83",
+                    "leftValue": "={{ $('Webhook').item.json.body.event }}",
+                    "rightValue": "PURCHASE_BILLET_PRINTED",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "8adc6dd9-3476-4c82-8bcf-a59fcbb4bd3a",
+                    "leftValue": "={{ $('Webhook').item.json.body.event }}",
+                    "rightValue": "PURCHASE_COMPLETE",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "02cea948-a3fd-4891-984e-28d2f418ab86",
+                    "leftValue": "={{ $('Webhook').item.json.body.event }}",
+                    "rightValue": "PURCHASE_APPROVED",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "56e3cffb-1d4f-491b-997e-1b52c64639ef",
+                    "leftValue": "={{ $('Webhook').item.json.body.event }}",
+                    "rightValue": "PURCHASE_CANCELED",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "4a0c1e62-ca54-473f-9949-15596ecb99d0",
+                    "leftValue": "={{ $('Webhook').item.json.body.event }}",
+                    "rightValue": "PURCHASE_OUT_OF_SHOPPING_CART",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "fc8212a7-d331-4541-ad99-e7c38587c94e",
+                    "leftValue": "={{ $('Webhook').item.json.body.event }}",
+                    "rightValue": "PURCHASE_DELAYED",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "ddfadc16-f4ba-4ef6-b3ea-2ad70f5819cd",
+                    "leftValue": "={{ $('Webhook').item.json.body.event }}",
+                    "rightValue": "PURCHASE_PROTEST",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "f0452d9c-1c8b-4a10-8e23-3b23442deda9",
+                    "leftValue": "={{ $('Webhook').item.json.body.event }}",
+                    "rightValue": "PURCHASE_REFUNDED",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "name": "Evento Checkout - BF Herbal",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        250,
+        304
+      ],
+      "id": "70690cce-e063-4f67-aeed-d02562446c94"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "2cd6978e-22d1-4180-b7de-ba1b4fafd82e",
+                    "leftValue": "={{ $('Webhook').item.json.body.data.purchase.recurrence_number ?? 1 }}",
+                    "rightValue": 1,
+                    "operator": {
+                      "type": "number",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "name": "Primera cuota",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        864,
+        128
+      ],
+      "id": "e3717901-d66b-4cf1-8cfa-3a2eb21a5645"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://unnichat.com.br/a/start/kNb8gLG8mo8VjTDFaC6Z",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"id\": \"{{ $json.id || Math.floor(Math.random() * 1000000).toString() }}\",\n  \"data\": {\n    \"number\": \"{{ $('Webhook').item.json.body.data.buyer.checkout_phone }}\",\n    \"tag\": \"global\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
+        "options": {}
+      },
+      "name": "Unnichat - Espera de pago",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1152,
+        -64
+      ],
+      "id": "37626799-8685-47ae-9a04-b7a5be2a8645"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://unnichat.com.br/a/start/nkeH9oDPifl4kiYo0DxV",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"id\": \"{{ $json.id || Math.floor(Math.random() * 1000000).toString() }}\",\n  \"data\": {\n    \"number\": \"{{ $('Webhook').item.json.body.data.buyer.checkout_phone }}\",\n    \"tag\": \"global\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
+        "options": {}
+      },
+      "name": "Unnichat - Compra aprobada",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1152,
+        112
+      ],
+      "id": "1aa8508b-11b2-4f83-94df-a829cc776966"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://unnichat.com.br/a/start/SB7eP9oNQj1SqF407EVU",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"id\": \"{{ $json.id || Math.floor(Math.random() * 1000000).toString() }}\",\n  \"data\": {\n    \"number\": \"{{ $('Webhook').item.json.body.data.buyer.checkout_phone }}\",\n    \"tag\": \"global\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
+        "options": {}
+      },
+      "name": "Unnichat - Compra cancelada",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1152,
+        272
+      ],
+      "id": "2090386a-1196-4033-8530-152fe695ec6c"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://unnichat.com.br/a/start/4mTbycqQC4rLoC9uQIEU",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"id\": \"{{ $json.id || Math.floor(Math.random() * 1000000).toString() }}\",\n  \"data\": {\n    \"number\": \"{{ $('Webhook').item.json.body.data.buyer.phone }}\",\n    \"tag\": \"global\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
+        "options": {}
+      },
+      "name": "Unnichat - Abandono de carrito",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1152,
+        432
+      ],
+      "id": "cbd578f4-ae69-42ca-ac61-47909bfc478e"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://unnichat.com.br/a/start/FH8ziqZuNbCxZEAuuejn",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"id\": \"{{ $json.id || Math.floor(Math.random() * 1000000).toString() }}\",\n  \"data\": {\n    \"number\": \"{{ $('Webhook').item.json.body.data.buyer.checkout_phone }}\",\n    \"tag\": \"global\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
+        "options": {}
+      },
+      "name": "Unnichat - Pago atrasado",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1152,
+        592
+      ],
+      "id": "9ebb3f4c-78e3-477c-a9d0-f18d360b5ebd"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://unnichat.com.br/a/start/cFt3QA4EYN0aufMzsa5P",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"id\": \"{{ $json.id || Math.floor(Math.random() * 1000000).toString() }}\",\n  \"data\": {\n    \"number\": \"{{ $('Webhook').item.json.body.data.buyer.checkout_phone }}\",\n    \"tag\": \"global\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
+        "options": {}
+      },
+      "name": "Unnichat - Solicitud de reembolso",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1152,
+        752
+      ],
+      "id": "ee8d9d91-3c15-4e00-a328-923d54d38709"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://unnichat.com.br/a/start/GUBYPZ1qluMRHka87pQd",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"id\": \"{{ $json.id || Math.floor(Math.random() * 1000000).toString() }}\",\n  \"data\": {\n    \"number\": \"{{ $('Webhook').item.json.body.data.buyer.checkout_phone }}\",\n    \"tag\": \"global\",\n    \"createdAt\": \"{{ new Date().toISOString() }}\"\n  },\n  \"version\": \"1.0.0\"\n}",
+        "options": {}
+      },
+      "name": "Unnichat - Reembolso procesado",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1152,
+        912
+      ],
+      "id": "b69384b2-c4f4-4cf4-997c-41f350333209"
+    },
+    {
+      "id": "3453f499-166b-4a6c-a6d5-1b4e3d2ef4f4",
+      "name": "ActiveCampaign - Crear o actualizar contacto",
+      "type": "n8n-nodes-base.activeCampaign",
+      "typeVersion": 1,
+      "position": [
+        1152,
+        -248
+      ],
+      "parameters": {
+        "resource": "contact",
+        "operation": "create",
+        "email": "={{ $('Webhook').item.json.body.data.buyer.email }}",
+        "updateIfExists": true,
+        "additionalFields": {}
+      },
+      "credentials": {
+        "activeCampaignApi": {
+          "id": "cD8HXjLCEpMAfwTo",
+          "name": "ActiveCampaign Biofamilias"
+        }
+      }
+    },
+    {
+      "id": "b95cd72c-c820-47d0-b7d1-333101878ebe",
+      "name": "ActiveCampaign - Compradores BF Herbal",
+      "type": "n8n-nodes-base.activeCampaign",
+      "typeVersion": 1,
+      "position": [
+        1402,
+        -248
+      ],
+      "parameters": {
+        "resource": "contactList",
+        "operation": "add",
+        "listId": 115,
+        "contactId": "={{ $json.id }}"
+      },
+      "credentials": {
+        "activeCampaignApi": {
+          "id": "cD8HXjLCEpMAfwTo",
+          "name": "ActiveCampaign Biofamilias"
+        }
+      }
+    }
+  ],
+  "pinData": null,
+  "repo_name": "backupn8n",
+  "repo_owner": "infoandresrendoncol",
+  "repo_path": "backup/",
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "shared": [
+    {
+      "updatedAt": "2026-11-10T19:02:55.839Z",
+      "createdAt": "2026-11-10T19:02:55.839Z",
+      "role": "workflow:owner",
+      "workflowId": "f922dFUJX7iOHL5L",
+      "projectId": "4KmSbENK2cGxsjaf"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2026-11-10T19:03:11.069Z",
+  "versionId": "5ecb5771-ba4c-475a-92e8-21ff4ae0287b"
+}
